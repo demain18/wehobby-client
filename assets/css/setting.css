@@ -1,0 +1,87 @@
+#wrap {
+    max-width: 600px;
+/*    padding-top: 50px;*/
+    display: flex;
+}
+
+
+
+/* SNB */
+
+#wrap .snb-wrap {
+/*    flex-basis: 200px;*/
+    min-width: 150px;
+    font-size: 18px;
+    font-weight: bold;
+/*    border: 1px solid blue;*/
+    padding-right: 15px;
+}
+
+#wrap .snb-wrap .snb-btn {
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+#wrap .snb-wrap .snb-btn:hover {
+    background-color: #ececec;
+}
+
+
+
+/* Content */
+
+#wrap .content-wrap {
+    width: 100%;
+/*    border: 1px solid blue;*/
+/*        box-sizing: border-box;*/
+}
+
+#wrap .content-wrap .content-title {
+    line-height: 0px;
+    margin-bottom: 20px;
+}
+
+#wrap .content-wrap .content-sub {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+
+
+/* Content Forms */
+
+#wrap .content-wrap .form .img-profile {
+    width: 120px;
+    height: 120px;
+    background-color: #ececec;
+    border-radius: 10%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

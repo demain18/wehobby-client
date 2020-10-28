@@ -1,0 +1,101 @@
+#wrap {
+/*    border: 1px solid gray;*/
+    margin-top: 0px;
+}
+
+
+
+/* Filter Section */
+
+#wrap .sel-filter {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #cecece;
+}
+
+#wrap .sel-filter .bread-crumb {
+    font-size: 14px;
+}
+
+#wrap .sel-filter .bread-crumb span {
+    cursor: pointer;
+}
+
+#wrap .sel-filter h2 {
+    margin: 10px 0px 30px 0px;
+}
+
+#wrap .sel-filter .filter {
+    display: flex;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+#wrap .sel-filter .filter div {
+/*    border: 1px solid blue;*/
+}
+
+#wrap .sel-filter .filter .header {
+    flex-basis: 100px;
+    font-weight: bold;
+}
+
+#wrap .sel-filter .filter .content {
+    width: 100%;
+}
+
+#wrap .sel-filter .filter .content span {
+    display: inline-block;
+    border-right: 1px solid #cecece;
+    padding-right: 10px;
+    padding-left: 5px;
+    margin-bottom: 10px;
+}
+
+#wrap .sel-filter .filter .content span:first-child {
+    padding-left: 0px;
+}
+
+#wrap .sel-filter .filter .content span:last-child {
+    padding-right: 0px;
+    border-right: 0px;
+}
+
+#wrap .sel-filter .filter .content span.active {
+    font-weight: bold;
+}
+
+#wrap .sel-filter button.button {
+    width: 100px;
+}
+
+
+
+/* Content Section */
+
+#wrap .wrap-split {
+    display: flex;
+/*    padding-top: 10px;*/
+}
+
+#wrap .wrap-split .sel-content {
+    width: 100%;
+}
+
+#wrap .wrap-split .sel-snb {
+    flex-basis: 240px;
+    min-height: 350px;
+    background-color: #cecece;
+    margin-top: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

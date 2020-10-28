@@ -1,0 +1,25 @@
+@media (max-width: 769px) {
+    #wrap {
+        padding: 0px 10px;
+    }
+}
+
+
+
+@media (max-width: 575px) {
+    #wrap {
+        flex-wrap: wrap;
+    }
+
+    #wrap .snb-wrap {
+        width: 100%;
+        padding: 30px 15px;;
+    }
+
+    #wrap .snb-wrap .snb-btn {
+        padding: 10px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.1s;
+    }
+}

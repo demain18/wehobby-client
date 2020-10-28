@@ -1,0 +1,24 @@
+@media (max-width: 769px) {
+    #wrap {
+        padding: 0px 10px;
+    }
+}
+
+
+@media (max-width: 575px) {
+    #wrap .info-wrap {
+        flex-wrap: wrap;
+    }
+
+    #wrap .info-wrap .img-profile {
+        min-width: 200px;
+        height: 200px;
+        margin: 0 auto;
+    }
+
+    #wrap .info-wrap .table-wrap {
+        width: 100%;
+        padding-left: 0px;
+        margin-top: 50px;
+    }
+}

@@ -1,0 +1,90 @@
+@media (max-width: 769px) {
+
+    /* Tablet, Laptop */
+    #wrap {
+        padding: 0px 10px;
+    }
+
+    #wrap .section-2 {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #wrap .section .snb {
+        width: 100%;
+        margin: 0px 0px;
+        margin-top: 50px;
+    }
+}
+
+
+
+@media (max-width: 575px) {
+
+    /* Banner */
+    #banner .wrap .form {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0px 10px;
+    }
+
+    #banner .wrap .form h1 {
+        margin-right: 0px;
+        width: 100%;
+        text-align: center;
+    }
+
+    #banner .wrap .form button {
+        width: 60px;
+        /*        margin-left: 0px;*/
+    }
+
+
+    /* List items */
+    #wrap .section .list .item {
+        width: 50%;
+    }
+
+
+    /* Category */
+    #wrap .section .category {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #wrap .section .category .list {
+        width: 33.3%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #wrap .section .category .list-famous {
+        width: 100%;
+        margin-top: 15px;
+        flex-wrap: wrap;
+    }
+    
+    #wrap .section .category .list-famous .list-famous-flex {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    #wrap .section .category .list-famous .list-famous-flex .smlist {
+        width: 50%;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

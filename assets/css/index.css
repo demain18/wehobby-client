@@ -1,0 +1,290 @@
+#banner {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    margin-top: 40px;
+/*    background-color: #b4b4b4;*/
+}
+
+#banner .banner-img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 300px;
+    background-image: url('../img/banner_4.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.6);
+/*    filter: grayscale(0.5)*/
+}
+
+#banner .wrap {
+    max-width: 600px;
+    margin: 0 auto;
+/*    border: 1px solid gray;*/
+/*    font-size: 16px;*/
+    position: relative;
+    z-index: 0;
+}
+
+#banner .wrap .form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 50px;
+}
+
+#banner .wrap .form h1 {
+    margin-right: -10px;
+    width: 130px;
+    color: white;
+    cursor: default;
+}
+
+#banner .wrap .form .form-input {
+    display: flex;
+    width: 100%;
+}
+
+#banner .wrap .form input {
+    width: 100%;
+    position: relative;
+}
+
+#banner .wrap .form button {
+    width: 60px;
+    margin-left: 5px;
+}
+
+#banner .wrap .form .icon-search {
+    font-size: 30px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+#banner .wrap .content {
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    position: relative;
+    top: 100px;
+}
+
+
+
+/* Wrap Category */
+
+#wrap .section { /* Section 클래스는 매번 새로 만드는게 좋을둣. 이펙트가 계속 새로 들어가는데 이거 매우 나쁜현상임 */
+    margin-top: 50px; 
+/*    border: 1px solid #b5b5b5;*/
+}
+
+#wrap .section-2 {
+    display: flex;
+}
+
+#wrap .section-2 .section-wrap {
+    width: 100%;
+}
+
+#wrap .section .list-header {
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    padding: 0px 10px;*/
+/*    margin-bottom: 8px;*/
+}
+
+#wrap .section .list-header-line {
+    border-bottom: 2px solid #cecece;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+}
+
+#wrap .section .list-header .title {
+/*    float: right;*/
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#wrap .section .list-header .btn-more {
+    float: right;
+    position: relative;
+    top: 2px;
+/*    line-height: 30px;*/
+}
+
+#wrap .section .list {
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#wrap .section .list .item {
+    width: 25%;
+    box-sizing: border-box;
+    padding: 0px 10px 15px 10px;
+/*    background-color: #e2e2e2;*/
+}
+
+#wrap .section .list .item .img {
+    background-image: url("../img/ex.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 170px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#wrap .section .list .item p {
+    margin-top: 5px;
+}
+
+#wrap .section .category {
+    display: flex;
+}
+
+#wrap .section .category .list-wrap .list {
+    /* max-height: 150px; */
+    /* border: 1px solid gray; */
+}
+
+#wrap .section .category .list-wrap .list a.item {
+    /* width: 100%;
+    display: inline-block;
+    padding: 0px;
+    margin-bottom: 5px;
+    border: 1px solid blue; */
+}
+
+#wrap .section .category .list-wrap {
+    flex-basis: 1200px;
+    display: flex;
+/*    border: 1px solid blue;*/
+    flex-wrap: wrap;
+}
+
+#wrap .section .category .list-wrap .list {
+    width: 33.3%!important;
+    margin-bottom: 10px;
+}
+
+#wrap .section .category .list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+/*
+    border: 1px solid gray;
+    box-sizing: border-box;
+*/
+}
+
+#wrap .section .category .list-famous {
+    width: 100%;
+}
+
+#wrap .section .category .list-famous .smlist { 
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#wrap .section .category .list-famous .smlist .content .title {
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+
+#wrap .section .category .list p {
+    line-height: 22px;
+    margin-top: 0px;
+    padding: 0px;
+    min-width: 100px;
+/*    border: 1px solid gray;*/
+}
+
+#wrap .section .category .list .title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#wrap .section .category .list .sub {
+    font-size: 14px;
+    height: 25px;
+    position: relative;
+    top: -2px;
+    margin-bottom: 3px;
+}
+
+#wrap .section .category .list .item {
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+#wrap .section .category .list .item:hover {
+    color: #cecece;
+}
+
+
+
+/* Wrap Article */
+
+#wrap .section .list-new {
+    margin-top: 50px;
+    
+}
+
+#wrap .section .article-new {
+    display: flex;
+    flex-wrap: wrap;
+/*    max-height: 30px;*/
+}
+
+
+
+/* Wrap Ad */
+
+#wrap .section .snb {
+    min-width: 240px;
+    height: 370px;
+    margin-left: 18px;
+}
+
+#wrap .section .snb .ad {
+    width: 100%;
+    height: 370px;
+/*    border: 1px solid #cecece;*/
+    background-image: url("../img/unnamed.png");
+    background-size:contain;
+    background-position: center;
+/*    text-align: center;*/
+    border: 1px solid #cecece;
+    border-radius: 3px;
+/*    border: 3px solid blue;*/
+    margin-bottom: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

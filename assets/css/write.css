@@ -1,0 +1,36 @@
+#wrap {
+    padding-top: 50px;
+    max-width: 600px;
+}
+
+#wrap .form-upload {}
+
+#wrap .img-preview-wrap {
+    display: flex;
+    margin-top: 10px;
+}
+
+#wrap .img-preview-wrap .img-preview {
+    width: 80px;
+    height: 80px;
+    background-color: #d8d8d8;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+#wrap .form-textarea {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+#wrap .form-textarea textarea.size-maintxt {
+    width: 99%;
+/*    padding-right: -50px;*/
+    min-height: 200px;
+    resize: none;
+/*    font-size: 16px;*/
+}
+
+#wrap input.btn {
+    width: 60px;
+}

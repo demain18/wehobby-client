@@ -1,0 +1,19 @@
+@media (max-width: 769px) {
+    #wrap {
+        padding: 0px 10px;
+    }
+}
+
+
+
+@media (max-width: 575px) {
+    #wrap .wrap-split {
+        display: flex;
+        flex-wrap: wrap-reverse;
+    }
+
+    #wrap .wrap-split .sel-snb {
+        flex-basis: 100%;
+        min-height: 200px;
+    }
+}
