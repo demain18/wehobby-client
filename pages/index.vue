@@ -1,7 +1,7 @@
 <template>
   <div>
     <Gnb />
-
+    <!-- <GnbMobile /> -->
     <div id="banner">
       <div class="banner-img"></div>
       <div class="wrap">
@@ -68,6 +68,7 @@
                 <p class="item"><nuxt-link to="" class="item">식당/카페</nuxt-link></p>
                 <p class="item"><nuxt-link to="" class="item">여행</nuxt-link></p>
                 <p class="item"><nuxt-link to="" class="item">스포츠</nuxt-link></p>
+                <p class="item"><nuxt-link to="" class="item">미팅</nuxt-link></p>
                 <p class="item"><nuxt-link to="" class="item">밴드/음악</nuxt-link></p>
                 <p class="item"><nuxt-link to="" class="item">게임</nuxt-link></p>
                 <p class="item"><nuxt-link to="" class="item">애니메이션</nuxt-link></p>
@@ -90,7 +91,7 @@
                 <p class="item"><nuxt-link to="" class="item">요리</nuxt-link></p>
                 <p class="item"><nuxt-link to="" class="item">음악/댄스</nuxt-link></p>
                 <p class="item"><nuxt-link to="" class="item">스포츠</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">컴퓨터</nuxt-link></p>
+                <p class="item"><nuxt-link to="" class="item">컴퓨터/IT</nuxt-link></p>
                 <p class="item"><nuxt-link to="" class="item">엔터테인먼트</nuxt-link></p>
               </div>
               <div class="list">

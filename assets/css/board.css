@@ -1,6 +1,7 @@
 #wrap {
 /*    border: 1px solid gray;*/
-    margin-top: 0px;
+    margin-top: 40px!important; /* Header Height */
+    padding-top: 10px!important; /* Wrap Breadcrumbs Distance */
 }
 
 
@@ -20,14 +21,19 @@
     cursor: pointer;
 }
 
+#wrap .sel-filter .bread-crumb .v-icon {
+    position: relative;
+    top: -1px;
+}
+
 #wrap .sel-filter h2 {
-    margin: 10px 0px 30px 0px;
+    margin: 20px 0px 20px 0px;
 }
 
 #wrap .sel-filter .filter {
     display: flex;
     font-size: 14px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 #wrap .sel-filter .filter div {
@@ -82,9 +88,18 @@
 }
 
 #wrap .wrap-split .sel-snb {
-    flex-basis: 240px;
+    /* flex-basis: 310px; */
+    min-width: 240px;
     min-height: 350px;
     background-color: #cecece;
+    margin-top: 10px;
+}
+
+
+/* SNB */
+
+#wrap .snb {
+    min-width: 240px;
     margin-top: 10px;
 }
 

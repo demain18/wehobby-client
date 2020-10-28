@@ -22,6 +22,7 @@
 @media (max-width: 575px) {
 
     /* Banner */
+
     #banner .wrap .form {
         display: flex;
         flex-wrap: wrap;
@@ -29,14 +30,21 @@
     }
 
     #banner .wrap .form h1 {
-        margin-right: 0px;
         width: 100%;
+        margin-right: 0px;
+        margin-bottom: 15px;
+        font-size: 30px;
         text-align: center;
     }
 
-    #banner .wrap .form button {
-        width: 60px;
-        /*        margin-left: 0px;*/
+    #banner .wrap .content {
+        font-size: 28px;
+        text-align: center;
+        color: white;
+        position: relative;
+        top: 100px;
+
+        top: 70px;
     }
 
 

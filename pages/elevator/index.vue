@@ -3,6 +3,7 @@
     <h1>This is elevator page.</h1>
     <ul class="list">
       <li><nuxt-link to="/">Main</nuxt-link></li>
+      <li><nuxt-link to="/board">Board</nuxt-link></li>
       <li><nuxt-link to="/test">Test</nuxt-link></li>
     </ul>
   </div>
