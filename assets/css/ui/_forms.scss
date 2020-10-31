@@ -1,0 +1,45 @@
+#wrap input {
+  /*    Example Test Form*/
+  width: 100%;
+  border: 1px solid #afafaf;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+#wrap .form {
+  margin-bottom: 15px;
+}
+
+#wrap .form-flex-full {
+  width: 100%;
+}
+
+#wrap .form .label {
+  color: #717171;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+#wrap .form input.size-sm {
+  max-width: 120px;
+}
+
+#wrap .form input.size-m {
+  max-width: 200px;
+}
+
+#wrap .form input.size-half {
+  //    max-width: 100px;
+}
+
+#wrap .form-flex {
+  display: flex;
+}
+
+#wrap .form-flex .form {
+  margin-right: 20px;
+}
+
+#wrap .form-flex .form:last-child {
+  margin-right: 0px;
+}

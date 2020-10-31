@@ -5,6 +5,7 @@
     #wrap {
         flex-wrap: wrap;
         padding: 0px 10px;
+        padding-top: 10px;
     }
 
     #wrap .profile-wrap {
@@ -30,6 +31,7 @@
 }
 
 @media (max-width: 575px) {
+
     #wrap .content-wrap .img-wrap {
         width: 50%;
         height: 180px;

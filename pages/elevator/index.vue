@@ -4,6 +4,7 @@
     <ul class="list">
       <li><nuxt-link to="/">Main</nuxt-link></li>
       <li><nuxt-link to="/board">Board</nuxt-link></li>
+      <li><nuxt-link to="/post">Post</nuxt-link></li>
       <li><nuxt-link to="/test">Test</nuxt-link></li>
     </ul>
   </div>

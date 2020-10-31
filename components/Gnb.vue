@@ -1,11 +1,26 @@
 <template>
-  <div id="gnb">
+  <div id="gnb" data-app>
     <div class="wrap">
 
       <div class="pc">
         <nuxt-link class="item lft logo" to="/">동네친구</nuxt-link>
         <nuxt-link class="item lft" to="">도시선택</nuxt-link>
-        <nuxt-link class="item lft" to="/elevator">[elevator]</nuxt-link>
+
+        <!-- <nuxt-link class="item lft" to="/elevator">[elevator]</nuxt-link> -->
+        <v-menu open-on-hover middle offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn elevation="2" class="item lft" style="margin-top: 5px;" v-bind="attrs" v-on="on">
+              elevator
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item v-for="(item, index) in items" :key="index">
+              <!-- <v-list-item-title>{{ item.url }}</v-list-item-title> -->
+              <nuxt-link :to="item.url">{{ item.title }}</nuxt-link>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+
         <span class="item mid">
           <nuxt-link class="" to="">회원모집</nuxt-link>
           <nuxt-link class="" to="">중고물품</nuxt-link>
@@ -16,10 +31,8 @@
 
       <div class="mobile">
         <v-app-bar-nav-icon class="icon-left-menu" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <!-- <v-icon color="darken-1" class="icon-left-menu">
-          mdi-menu
-        </v-icon> -->
         <nuxt-link class="item mid logo" to="/">동네친구</nuxt-link>
+        
       </div>
 
     </div>
@@ -28,16 +41,26 @@
 
 <script>
   export default {
-    // data: () => ({
-    //   drawer: false,
-    //   group: null,
-    // }),
-
-    // watch: {
-    //   group() {
-    //     this.drawer = false
-    //   },
-    // },
+    data: () => ({
+      items: [
+        {
+          title: '메인',
+          url: '/'
+        },
+        {
+          title: '게시판',
+          url: '/board'
+        },
+        {
+          title: '게시물',
+          url: '/post'
+        },
+        {
+          title: '실험실',
+          url: '/test'
+        },
+      ],
+    }),
   }
 
 </script>
@@ -45,25 +68,13 @@
 <style lang="scss">
   @import '~assets/css/common.scss';
 
-  @media (max-width: 769px) {
-    #gnb .pc {
-      display: none;
-    }
-
-    #gnb .mobile {
-      display: block;
-    }
-
-    #gnb .wrap .mid {
-      margin-left: -35px;
-    }
-
-    #gnb .wrap .icon-left-menu {
-      line-height: 40px;
-      margin-top: 3px;
-    }
+  .v-list-item {
+    min-height: 30px!important;
+    padding: 3px 10px!important;
   }
 
-  @media (max-width: 575px) {}
-
+  .v-list-item a {
+    // border: 1px solid blue;
+    width: 100%;
+  }
 </style>

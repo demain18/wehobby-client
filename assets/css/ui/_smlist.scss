@@ -1,0 +1,27 @@
+.smlist {
+  width: 50%;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-bottom: 10px;
+}
+
+.smlist .img {
+  height: 50px;
+  min-width: 50px;
+  background-image: url("~assets/img/ex.jpg");
+  background-size: cover;
+  border-radius: 3px;
+  margin-right: 8px;
+}
+
+.smlist .content {
+  width: 100%;
+}
+
+.smlist .content p {
+  font-size: 14px;
+}
+
+.smlist .content .title {
+  font-weight: bold;
+}

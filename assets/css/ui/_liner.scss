@@ -1,0 +1,25 @@
+#wrap .list-header {
+  /*    display: flex;*/
+  /*    flex-direction: row;*/
+  /*    padding: 0px 10px;*/
+  /*    margin-bottom: 8px;*/
+}
+
+#wrap .list-header-line {
+  border-bottom: 2px solid #cecece;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+
+#wrap .list-header .title {
+  /*    float: right;*/
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#wrap .list-header .btn-more {
+  float: right;
+  position: relative;
+  top: 2px;
+  /*    line-height: 30px;*/
+}

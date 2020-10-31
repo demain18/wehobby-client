@@ -1,0 +1,102 @@
+#gnb {
+  background-color: #ffffff;
+  border-bottom: 1px solid rgb(233, 233, 233);
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 1;
+}
+
+#gnb .pc {
+  display: block;
+}
+
+#gnb .mobile {
+  display: none;
+}
+
+#gnb .wrap {
+  position: relative;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0px 15px;
+  font-size: 14px;
+}
+
+#gnb .wrap .item {
+  line-height: 50px;
+  position: relative;
+  top: 2px;
+  cursor: pointer;
+}
+
+#gnb .wrap .lft {
+  float: left;
+  margin-right: 10px;
+}
+
+#gnb .wrap .mid {
+  // width: 500px;
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  margin-left: -85px;
+  // border: 1px solid blue;
+}
+
+#gnb .wrap .rgt {
+  float: right;
+  margin-left: 10px;
+}
+
+#gnb .wrap .logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#gnb .wrap .mid a {
+  margin-right: 10px;
+}
+
+#gnb .wrap .mid a:last-child {
+  margin-right: 0px;
+}
+
+#gnb .wrap .user-icon {
+  width: 30px;
+  height: 30px;
+  background-color: $border;
+  border-radius: 100px;
+  position: relative;
+  top: 10px;
+  cursor: pointer;
+}
+
+
+// Relative
+@media (max-width: 769px) {
+  #gnb {
+    height: 50px;
+  }
+
+  #gnb .pc {
+    display: none;
+  }
+
+  #gnb .mobile {
+    display: block;
+  }
+
+  #gnb .wrap .mid {
+    margin-left: -35px;
+    line-height: 50px;
+  }
+
+  #gnb .wrap .icon-left-menu {
+    margin-top: 8px;
+    position: relative;
+
+  }
+}
+
+@media (max-width: 575px) {}

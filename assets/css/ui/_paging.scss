@@ -1,0 +1,27 @@
+
+.paging-wrap {
+  margin-top: 30px;
+  display: flex;
+  //    border: 1px solid blue;
+  //    padding-bottom: -5px;
+}
+
+.paging-wrap .count {
+  display: flex;
+}
+
+.paging-wrap .count div {
+  //    border: 1px solid blue;
+  padding: 0px 10px;
+  //    line-height: 50px;
+  //    text-align: center;
+  height: 17px;
+  border-right: 1px solid $gray2;
+  cursor: pointer;
+}
+
+.paging-wrap .count div:last-child {
+  border-right: 0px;
+}
+
+.paging-wrap .exten {}

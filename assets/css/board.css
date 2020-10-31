@@ -1,6 +1,6 @@
 #wrap {
 /*    border: 1px solid gray;*/
-    margin-top: 40px!important; /* Header Height */
+    margin-top: 50px!important; /* Header Height */
     padding-top: 10px!important; /* Wrap Breadcrumbs Distance */
 }
 
@@ -11,19 +11,6 @@
 #wrap .sel-filter {
     padding-bottom: 20px;
     border-bottom: 2px solid #cecece;
-}
-
-#wrap .sel-filter .bread-crumb {
-    font-size: 14px;
-}
-
-#wrap .sel-filter .bread-crumb span {
-    cursor: pointer;
-}
-
-#wrap .sel-filter .bread-crumb .v-icon {
-    position: relative;
-    top: -1px;
 }
 
 #wrap .sel-filter h2 {

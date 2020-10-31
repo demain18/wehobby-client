@@ -1,0 +1,19 @@
+#wrap .snb {
+  min-width: 240px;
+  height: 370px;
+  margin-left: 18px;
+}
+
+#wrap .snb .ad {
+  width: 100%;
+  height: 370px;
+  /*    border: 1px solid #cecece;*/
+  background-image: url("~assets/img/unnamed.png");
+  background-size: contain;
+  background-position: center;
+  /*    text-align: center;*/
+  border: 1px solid #cecece;
+  border-radius: 3px;
+  /*    border: 3px solid blue;*/
+  margin-bottom: 50px;
+}
