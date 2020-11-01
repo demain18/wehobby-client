@@ -2,11 +2,11 @@
   <div>
     <div id="gnb" data-app>
       <div class="wrap">
-        <GnbPc/>
-        <GnbMobile/>
+        <GnbPc />
+        <GnbMobile />
       </div>
     </div>
-    <GnbNavi/>
+    <GnbNavi />
 
     <div id="banner">
       <div class="banner-img"></div>
