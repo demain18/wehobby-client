@@ -1,7 +1,13 @@
 <template>
   <div>
-    <Gnb />
-    <!-- <GnbMobile /> -->
+    <div id="gnb" data-app>
+      <div class="wrap">
+        <GnbPc/>
+        <GnbMobile/>
+      </div>
+    </div>
+    <GnbNavi/>
+
     <div id="banner">
       <div class="banner-img"></div>
       <div class="wrap">
@@ -65,45 +71,99 @@
               <div class="list">
                 <p class="title">회원 모집</p>
                 <p class="sub">00건</p>
-                <p class="item"><nuxt-link to="" class="item">식당/카페</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">여행</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">스포츠</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">미팅</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">밴드/음악</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">게임</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">애니메이션</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">기타</nuxt-link></p>
+                <p class="item">
+                  <nuxt-link to="" class="item">식당/카페</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">여행</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">스포츠</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">미팅</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">밴드/음악</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">게임</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">애니메이션</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">기타</nuxt-link>
+                </p>
               </div>
               <div class="list">
                 <p class="title">아르바이트</p>
                 <p class="sub">00건</p>
-                <p class="item"><nuxt-link to="" class="item">외식/음료</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">유통/판매</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">서비스</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">고객상담/영업</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">생산/건설</nuxt-link></p>
+                <p class="item">
+                  <nuxt-link to="" class="item">외식/음료</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">유통/판매</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">서비스</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">고객상담/영업</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">생산/건설</nuxt-link>
+                </p>
               </div>
               <div class="list">
                 <p class="title">재능교환/판매</p>
                 <p class="sub">00건</p>
-                <p class="item"><nuxt-link to="" class="item">외국어</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">수험</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">요리</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">음악/댄스</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">스포츠</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">컴퓨터/IT</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">엔터테인먼트</nuxt-link></p>
+                <p class="item">
+                  <nuxt-link to="" class="item">외국어</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">수험</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">요리</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">음악/댄스</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">스포츠</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">컴퓨터/IT</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">엔터테인먼트</nuxt-link>
+                </p>
               </div>
               <div class="list">
                 <p class="title">이벤트</p>
                 <p class="sub">00건</p>
-                <p class="item"><nuxt-link to="" class="item">지역/축제</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">전시회</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">파티</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">세미나</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">콘서트/쇼</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">캠페인</nuxt-link></p>
-                <p class="item"><nuxt-link to="" class="item">기타</nuxt-link></p>
+                <p class="item">
+                  <nuxt-link to="" class="item">지역/축제</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">전시회</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">파티</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">세미나</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">콘서트/쇼</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">캠페인</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">기타</nuxt-link>
+                </p>
               </div>
             </div>
             <div class="list list-famous">

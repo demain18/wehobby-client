@@ -1,77 +1,80 @@
 <template>
-  <v-card class="mx-auto overflow-hidden" height="400" width="344">
-    <v-system-bar color="deep-purple darken-3"></v-system-bar>
+  <div id="container">
+    <h1>Testing Lab</h1>
+    <ul>
+      <li v-for="item in todos" v-bind:key="item.id"> 
+        
+        <input 
+          type="checkbox" 
+          :checked="item.done"
+          @change="toggle(item)" 
+        />
 
-    <v-app-bar color="deep-purple accent-4" dark prominent>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <span :class="{done: item.done}">
+          {{item.title}}
+        </span> 
 
-      <v-toolbar-title>My files</v-toolbar-title>
+        <button @click="remove(item)">
+        지우기
+        </button> 
 
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-filter</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-navigation-drawer v-model="drawer" absolute bottom temporary>
-      <v-list nav dense>
-        <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
-          <v-list-item>
-            <v-list-item-title>Foo</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Buzz</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-card-text>
-      The navigation drawer will appear from the bottom on smaller size screens.
-    </v-card-text>
-  </v-card>
+      </li>
+    </ul>
+    <p> 
+      <input 
+        type="text" 
+        placeholder="할 일을 적으셈" 
+        v-model="todoTitle" 
+        @keyup.enter="addTodo" 
+      /> 
+      <button @click="addTodo">입력</button>
+    </p>
+  </div>
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      drawer: false,
-      group: null,
-    }),
+  import {
+    mapMutations
+  } from 'vuex'
 
-    watch: {
-      group() {
-        this.drawer = false
-      },
+  export default {
+    data: function () {
+      return {
+        todoTitle: ''
+      };
     },
+    computed: {
+      todos() {
+        return this.$store.state.todo.list;
+      }
+    },
+    methods: {
+      addTodo() {
+        this.$store.commit('todo/add', this.todoTitle);
+        this.todoTitle = '';
+      },
+      ...mapMutations({
+        toggle: 'todo/toggle',
+        remove: 'todo/remove'
+      })
+    }
+
   }
 
 </script>
 
 <style>
-  .container {
-    max-width: 700px;
+  #container {
+    max-width: 800px;
     margin: 0 auto;
-    padding-top: 50px;
-    color: rgb(66, 66, 66);
+    padding: 50px 20px;
+    color: #3a3a3a;
+  }
+
+  #container h1 {
+    border-bottom: 2px solid #8e99ff;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
   }
 
 </style>

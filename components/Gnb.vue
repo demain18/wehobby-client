@@ -10,7 +10,7 @@
         <v-menu open-on-hover middle offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn elevation="2" class="item lft" style="margin-top: 5px;" v-bind="attrs" v-on="on">
-              elevator
+              바로가기
             </v-btn>
           </template>
           <v-list>
