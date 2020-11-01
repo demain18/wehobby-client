@@ -46,9 +46,23 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title style="margin-left: 8px">테스트사용자</v-list-item-title>
+          <v-list-item-title style="margin-left: 8px">백산</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list dense>
+        <v-list-item v-for="item in userItem" :key="item.title" link>
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title style="margin-left: 8px">{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
 
       <v-divider></v-divider>
 
@@ -59,7 +73,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title style="margin-left: 8px">{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -76,13 +90,40 @@
     },
     data: () => ({
       // drawer: false,
-      items: [{
-          title: 'Home',
-          icon: 'mdi-view-dashboard'
+      userItem: [
+        {
+          title: '도시선택',
+          icon: 'mdi-domain'
         },
         {
-          title: 'About',
-          icon: 'mdi-forum'
+          title: '로그아웃',
+          icon: 'mdi-exit-to-app'
+        },
+        {
+          title: '설정',
+          icon: 'mdi-cog'
+        },
+      ],
+      items: [
+        {
+          title: '회원모집',
+          icon: 'mdi-account-multiple'
+        },
+        {
+          title: '중고물품',
+          icon: 'mdi-basket'
+        },
+        {
+          title: '아르바이트',
+          icon: 'mdi-smart-card'
+        },
+        {
+          title: '재능교환/판매',
+          icon: 'mdi-book-open-variant'
+        },
+        {
+          title: '이벤트',
+          icon: 'mdi-calendar'
         },
       ],
     }),
