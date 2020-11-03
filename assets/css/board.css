@@ -57,8 +57,25 @@
     font-weight: bold;
 }
 
+#wrap .sel-filter .filter .content span.disable {
+    color: #cfcfcf!important;
+    /* color: blue; */
+    /* font-size: 30px; */
+}
+
+/* #wrap .sel-filter .filter .content i.count {
+    font-size: 12px;
+} */
+
 #wrap .sel-filter button.button {
     width: 100px;
+}
+
+
+/* Paging Vutify Prop */
+.paging-wrap-vuetify {
+    float: left;
+    margin-top: 15px;
 }
 
 
@@ -78,7 +95,7 @@
     /* flex-basis: 310px; */
     min-width: 240px;
     min-height: 350px;
-    background-color: #cecece;
+    background-color: #ececec;
     margin-top: 10px;
 }
 

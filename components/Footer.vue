@@ -1,0 +1,33 @@
+<template>
+  <div id="footer">
+    <div class="btn-wrap">
+      <v-btn text rounded>
+        Home
+      </v-btn>
+      <v-btn text rounded>
+        About Us
+      </v-btn>
+      <v-btn text rounded>
+        Team
+      </v-btn>
+      <v-btn text rounded>
+        Contact Us
+      </v-btn>
+    </div>
+    <div>
+      <p>2020 - <strong>Infinia Software</strong></p>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+
+  }
+
+</script>
+
+<style lang="scss">
+  @import '~assets/css/common.scss';
+
+</style>

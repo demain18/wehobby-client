@@ -1,7 +1,12 @@
 <template>
   <div>
-    <Gnb />
-    <!-- <GnbMobile /> -->
+    <div id="gnb" data-app>
+      <div class="wrap">
+        <GnbPc />
+        <GnbMobile />
+      </div>
+    </div>
+    <GnbNavi />
 
     <div id="wrap">
       <div class="content-wrap">
@@ -14,7 +19,7 @@
           <v-icon small>mdi-chevron-right</v-icon>
           <nuxt-link to="">같이 코인노래방 갈분 모집합니다! 텐션보장!</nuxt-link>
         </p>
-        <h1>같이 코인노래방 갈분 모집합니다! 텐션 보장!</h1>
+        <h1 class="title">같이 코인노래방 갈분 모집합니다! 텐션 보장!</h1>
         <div class="images">
           <div class="img-wrap">
             <div class="img" style="background-image: url('../assets/img/ex_01.jpg')"></div>
@@ -41,29 +46,48 @@
           와 같은 곡들이 제 메인곡 입니다. 잘부탁드리겠습니다!
         </div>
         <div class="comment-wrap">
-          <input type="text" class="comment-form" placeholder="댓글을 작성해주세요">
-          <!-- <button class="button" class="comment-submit">
-            작성
-          </button> -->
+
+          <!-- <input type="text" class="comment-form" placeholder="댓글을 작성해주세요">
           <v-btn depressed class="btn-comment">
             작성
-          </v-btn>
-          <div class="list">
-            <div class="list-header">
-              <span class="title">댓글 1개</span>
-            </div>
-            <div class="list-header-line"></div>
-            <div class="item">
-              <div class="header"></div>
-              <div class="main">
-                <p><strong>사용자1</strong> <span class="time">15분 전</span></p>
-                <p>메일 보냈습니다.</p>
-                <v-icon medium class="tooltip">
-                  mdi-dots-horizontal
-                </v-icon>
+          </v-btn> -->
+
+          <!-- <v-col>
+            <v-text-field label="Solo" placeholder="Placeholder" solo></v-text-field>
+          </v-col> -->
+          <!-- <v-text-field depressed label="Solo" placeholder="댓글을 입력하세요.." solo></v-text-field>
+          <v-col cols="10" md="">
+            <v-textarea solo name="input-7-4" label="댓글을 입력하세요.."></v-textarea>
+          </v-col> -->
+          <!-- <v-textarea solo auto-grow rows="1" row-height="15" label="댓글을 입력하세요.." class="comment-input"></v-textarea> -->
+
+            <div class="list">
+              <div class="list-header">
+                <span class="title">댓글 1개</span>
+              </div>
+              <div class="list-header-line"></div>
+              <div class="item">
+                <div class="header"></div>
+                <div class="main">
+                  <p><strong>사용자1</strong> <span class="time">15분 전</span></p>
+                  <p>메일 보냈습니다.</p>
+                  <v-icon medium class="tooltip">
+                    mdi-dots-horizontal
+                  </v-icon>
+                </div>
+              </div>
+              <div class="item">
+                <div class="header"></div>
+                <div class="main">
+                  <p><strong>사용자1</strong> <span class="time">15분 전</span></p>
+                  <p>메일 보냈습니다.</p>
+                  <v-icon medium class="tooltip">
+                    mdi-dots-horizontal
+                  </v-icon>
+                </div>
               </div>
             </div>
-          </div>
+            <v-textarea solo auto-grow rows="1" row-height="15" label="댓글을 입력하세요.." class="comment-input" append-icon="mdi-send"></v-textarea>
         </div>
       </div>
 
@@ -121,7 +145,7 @@
         </div>
       </div>
 
-      <div class="snb-wrap">Adsence Here.</div>
+      <div class="snb-wrap"></div>
     </div>
   </div>
 </template>

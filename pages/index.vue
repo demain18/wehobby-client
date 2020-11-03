@@ -2,11 +2,11 @@
   <div>
     <div id="gnb" data-app>
       <div class="wrap">
-        <GnbPc />
-        <GnbMobile />
+        <GnbPc/>
+        <GnbMobile/>
       </div>
     </div>
-    <GnbNavi />
+    <GnbNavi/>
 
     <div id="banner">
       <div class="banner-img"></div>
@@ -14,12 +14,10 @@
         <div class="form">
           <h1>동네친구</h1>
           <div class="form-input">
-            <!-- <input type="text" placeholder="Search...">
-            <button class="button">
-              검색
-            </button> -->
             <input type="text" class="input-text" placeholder="검색어를 입력하세요">
-            <!-- <v-btn>검색</v-btn> -->
+            <!-- <v-col>
+              <v-text-field label="검색어를 입력하세요" solo></v-text-field>
+            </v-col> -->
             <v-icon color="darken-1" class="icon-search">
               mdi-magnify
             </v-icon>
@@ -33,6 +31,7 @@
     </div>
 
     <div id="wrap">
+      <Dialog/>
       <div class="section">
         <div class="list-header">
           <span class="title">최근 올라온 상품</span>
@@ -72,7 +71,7 @@
                 <p class="title">회원 모집</p>
                 <p class="sub">00건</p>
                 <p class="item">
-                  <nuxt-link to="" class="item">식당/카페</nuxt-link>
+                  <nuxt-link to="" class="item">음식점/카페</nuxt-link>
                 </p>
                 <p class="item">
                   <nuxt-link to="" class="item">여행</nuxt-link>
@@ -88,6 +87,9 @@
                 </p>
                 <p class="item">
                   <nuxt-link to="" class="item">게임</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">영화</nuxt-link>
                 </p>
                 <p class="item">
                   <nuxt-link to="" class="item">애니메이션</nuxt-link>
@@ -232,6 +234,7 @@
         </div>
       </div>
     </div>
+    <Footer/>
   </div>
 </template>
 

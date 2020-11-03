@@ -7,7 +7,7 @@
     <v-menu open-on-hover middle offset-y>
       <template v-slot:activator="{ on, attrs }">
         <v-btn elevation="2" class="item lft" style="margin-top: 5px;" v-bind="attrs" v-on="on">
-          elevator
+          바로가기
         </v-btn>
       </template>
       <v-list>
@@ -30,20 +30,25 @@
 <script>
   export default {
     data: () => ({
-      items: [{
-          title: '메인',
+      items: [
+        {
+          title: '로그인(/auth)',
+          url: '/auth'
+        },
+        {
+          title: '메인(/)',
           url: '/'
         },
         {
-          title: '게시판',
+          title: '게시판(/board)',
           url: '/board'
         },
         {
-          title: '게시물',
+          title: '게시물(/post)',
           url: '/post'
         },
         {
-          title: '실험실',
+          title: '실험실(/test)',
           url: '/test'
         },
       ],
