@@ -97,6 +97,16 @@
     min-height: 350px;
     background-color: #ececec;
     margin-top: 10px;
+    margin-left: 10px;
+}
+
+
+/* Search */
+
+.search-wrap .search-form {
+    width: 350px;
+    /* max-height: 40px!important; */
+    margin-top: 20px;
 }
 
 
@@ -105,6 +115,7 @@
 #wrap .snb {
     min-width: 240px;
     margin-top: 10px;
+    margin-left: 10px;
 }
 
 

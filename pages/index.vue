@@ -1,12 +1,7 @@
 <template>
   <div>
-    <div id="gnb" data-app>
-      <div class="wrap">
-        <GnbPc/>
-        <GnbMobile/>
-      </div>
-    </div>
-    <GnbNavi/>
+    <Gnb/>
+    <!-- <Dialog/> -->
 
     <div id="banner">
       <div class="banner-img"></div>
@@ -31,7 +26,6 @@
     </div>
 
     <div id="wrap">
-      <Dialog/>
       <div class="section">
         <div class="list-header">
           <span class="title">최근 올라온 상품</span>
@@ -41,21 +35,23 @@
         <div class="list">
 
           <div class="item">
-            <div class="img"></div>
+            <!-- <div class="img"></div> -->
+            <img src="~assets/img/ex.jpg" class="img">
             <p>시부야 여행 가이드 · 2시간 전</p>
           </div>
           <div class="item">
-            <div class="img"></div>
-            <p>시부야 여행 가이드 · 2시간 전</p>
+            <img src="~assets/img/ex_01.jpg" class="img">
+            <p>밀리시타 시이카 특전 · 15분 전</p>
           </div>
           <div class="item">
-            <div class="img"></div>
-            <p>시부야 여행 가이드 · 2시간 전</p>
+            <img src="~assets/img/banner_2.jpg" class="img">
+            <p>일러스트레이터 UDX · 2분전</p>
           </div>
           <div class="item">
-            <div class="img"></div>
-            <p>시부야 여행 가이드 · 2시간 전</p>
+            <img src="~assets/img/banner_3.jpg" class="img">
+            <p>일러스트레이터 Elites22· 1일전</p>
           </div>
+
         </div>
       </div>
       <div class="section section-2">
@@ -71,6 +67,9 @@
                 <p class="title">회원 모집</p>
                 <p class="sub">00건</p>
                 <p class="item">
+                  <nuxt-link to="" class="item">친구</nuxt-link>
+                </p>
+                <p class="item">
                   <nuxt-link to="" class="item">음식점/카페</nuxt-link>
                 </p>
                 <p class="item">
@@ -78,9 +77,6 @@
                 </p>
                 <p class="item">
                   <nuxt-link to="" class="item">스포츠</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">미팅</nuxt-link>
                 </p>
                 <p class="item">
                   <nuxt-link to="" class="item">밴드/음악</nuxt-link>
@@ -93,6 +89,37 @@
                 </p>
                 <p class="item">
                   <nuxt-link to="" class="item">애니메이션</nuxt-link>
+                </p>
+              </div>
+              <div class="list">
+                <p class="title">중고 물품</p>
+                <p class="sub">00건</p>
+                <p class="item">
+                  <nuxt-link to="" class="item">여성의류</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">남성의류</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">패션잡화</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">뷰티/미용</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">스포츠/레저</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">디지털/가전</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">문구/가구/식품</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">차량/오토바이</nuxt-link>
+                </p>
+                <p class="item">
+                  <nuxt-link to="" class="item">상품권</nuxt-link>
                 </p>
                 <p class="item">
                   <nuxt-link to="" class="item">기타</nuxt-link>
@@ -172,21 +199,22 @@
               <p class="title">전국의 인기 게시물</p>
               <div class="list-famous-flex">
                 <div class="smlist">
-                  <div class="img"></div>
+                  <!-- <div class="img"></div> -->
+                  <img src="~assets/img/ex.jpg" class="img">
                   <div class="content">
                     <p class="title">노원역 카페 탐방</p>
                     <p class="txt">노원역, 20세 초반 희망</p>
                   </div>
                 </div>
                 <div class="smlist">
-                  <div class="img"></div>
+                  <img src="~assets/img/ex.jpg" class="img">
                   <div class="content">
                     <p class="title">노원역 카페 탐방</p>
                     <p class="txt">노원역, 20세 초반 희망</p>
                   </div>
                 </div>
                 <div class="smlist">
-                  <div class="img"></div>
+                  <img src="~assets/img/ex.jpg" class="img">
                   <div class="content">
                     <p class="title">노원역 카페 탐방</p>
                     <p class="txt">노원역, 20세 초반 희망</p>
@@ -202,21 +230,21 @@
           <div class="list-header-line" style="margin-bottom: 10px"></div>
           <div class="article-new">
             <div class="smlist">
-              <div class="img"></div>
+              <img src="~assets/img/ex.jpg" class="img">
               <div class="content">
                 <p class="title">노원역 카페 탐방</p>
                 <p class="txt">노원역, 20세 초반 희망</p>
               </div>
             </div>
             <div class="smlist">
-              <div class="img"></div>
+              <img src="~assets/img/ex.jpg" class="img">
               <div class="content">
                 <p class="title">노원역 카페 탐방</p>
                 <p class="txt">노원역, 20세 초반 희망</p>
               </div>
             </div>
             <div class="smlist">
-              <div class="img"></div>
+              <img src="~assets/img/ex.jpg" class="img">
               <div class="content">
                 <p class="title">노원역 카페 탐방</p>
                 <p class="txt">노원역, 20세 초반 희망</p>

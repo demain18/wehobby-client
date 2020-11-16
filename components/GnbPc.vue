@@ -48,6 +48,10 @@
           url: '/post'
         },
         {
+          title: '프로필(/profile)',
+          url: '/profile'
+        },
+        {
           title: '실험실(/test)',
           url: '/test'
         },
@@ -67,7 +71,7 @@
 
   .v-list-item a {
     // border: 1px solid blue;
-    width: 100%;
+    // width: 100%;
   }
 
 </style>

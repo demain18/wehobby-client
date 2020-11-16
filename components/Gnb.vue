@@ -1,12 +1,11 @@
 <template>
-  <div id="gnb" data-app>
+  <!-- <div id="gnb" data-app>
     <div class="wrap">
 
       <div class="pc">
         <nuxt-link class="item lft logo" to="/">동네친구</nuxt-link>
         <nuxt-link class="item lft" to="">도시선택</nuxt-link>
 
-        <!-- <nuxt-link class="item lft" to="/elevator">[elevator]</nuxt-link> -->
         <v-menu open-on-hover middle offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn elevation="2" class="item lft" style="margin-top: 5px;" v-bind="attrs" v-on="on">
@@ -15,7 +14,6 @@
           </template>
           <v-list>
             <v-list-item v-for="(item, index) in items" :key="index">
-              <!-- <v-list-item-title>{{ item.url }}</v-list-item-title> -->
               <nuxt-link :to="item.url">{{ item.title }}</nuxt-link>
             </v-list-item>
           </v-list>
@@ -36,45 +34,26 @@
       </div>
 
     </div>
+  </div> -->
+  <div>
+    <div id="gnb" data-app>
+      <div class="wrap">
+        <GnbPc />
+        <GnbMobile />
+      </div>
+    </div>
+    <GnbNavi />
   </div>
 </template>
 
 <script>
   export default {
-    data: () => ({
-      items: [
-        {
-          title: '메인',
-          url: '/'
-        },
-        {
-          title: '게시판',
-          url: '/board'
-        },
-        {
-          title: '게시물',
-          url: '/post'
-        },
-        {
-          title: '실험실',
-          url: '/test'
-        },
-      ],
-    }),
+    data: () => ({}),
   }
 
 </script>
 
 <style lang="scss">
-  @import '~assets/css/common.scss';
+  // @import '~assets/css/common.scss';
 
-  .v-list-item {
-    min-height: 30px!important;
-    padding: 3px 10px!important;
-  }
-
-  .v-list-item a {
-    // border: 1px solid blue;
-    width: 100%;
-  }
 </style>

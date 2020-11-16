@@ -5,6 +5,7 @@
 /*    border: 1px solid gray;*/
     padding-top: 10px;
     margin-top: 50px!important;
+    height: 2000px;
 }
 
 
@@ -35,15 +36,18 @@
     width: 33.3%;
     height: 150px;
 /*    background-color: #eaeaea;*/
-    padding: 5px;
+    padding: 3px;
     box-sizing: border-box;
 }
 
-#wrap .content-wrap .img-wrap .img {
+#wrap .content-wrap .img-wrap img {
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
+
+    /* background-size: cover;
+    background-position: center; */
+    object-fit: cover;
+
     border: 1px solid #ececec;
     border-radius: 5px;
     cursor: pointer;
@@ -113,6 +117,7 @@
 #wrap .content-wrap .comment-wrap .list .item .main {
     position: relative;
     width: 100%;
+    /* border: 1px solid blue; */
 }
 
 #wrap .content-wrap .comment-wrap .list .item .main p {
@@ -132,6 +137,36 @@
     top: -1px;
     cursor: pointer;
     /* border: 1px solid gray; */
+    color: #535353;
+}
+
+#wrap .content-wrap .comment-wrap .list .item .main .tooltip-btn {
+    height: 10px!important;
+    position: absolute;
+    right: 0px;
+    top: -7px;
+    color: #535353;
+    /* border: 1px solid blue; */
+
+    padding: 0!important;
+    margin: 0!important;
+}
+
+#wrap .content-wrap .comment-wrap .list .item .main .icon-comment {
+    color: #535353!important;
+}
+
+#wrap .content-wrap .addition-wrap {
+    display: flex;
+}
+
+#wrap .content-wrap .addition-wrap .btn {
+    margin-right: 8px;
+}
+
+#wrap .content-wrap .addition-wrap .icon {
+    position: relative;
+    top: -2px;
 }
 
 

@@ -7,9 +7,8 @@
 
 .smlist .img {
   height: 50px;
-  min-width: 50px;
-  background-image: url("~assets/img/ex.jpg");
-  background-size: cover;
+  width: 50px;
+  object-fit: cover;
   border-radius: 3px;
   margin-right: 8px;
 }

@@ -15,7 +15,7 @@
       </v-btn>
     </div>
     <div>
-      <p>2020 - <strong>Infinia Software</strong></p>
+      <p>2020 - <strong>Infinia</strong></p>
     </div>
   </div>
 </template>

@@ -1,10 +1,10 @@
 .article-list {
   border-bottom: 1px solid #cecece;
-  margin-right: 10px;
+  // margin-right: 10px;
   min-height: 100px;
   display: flex;
-  padding: 10px;
-  padding-left: 0px;
+  padding: 10px 0px;
+  // padding-left: 0px;
   box-sizing: border-box;
 }
 
@@ -14,10 +14,9 @@
 }
 
 .article-list .img-repre {
-  min-width: 80px;
+  width: 80px;
   height: 80px;
-  //    height: 100%;
-  background-color: $border;
+  object-fit: cover;
   border-radius: 5px;
 }
 

@@ -1,47 +1,51 @@
 <template>
   <div>
-    <div id="gnb" data-app>
-      <div class="wrap">
-        <GnbPc />
-        <GnbMobile />
-      </div>
-    </div>
-    <GnbNavi />
-
+    <Gnb />
     <div id="wrap">
       <div class="sel-filter">
-        <p class="bread-crumb">
-          <nuxt-link to="">동네친구</nuxt-link>
-          <v-icon small>mdi-chevron-right</v-icon>
-          <nuxt-link to="">회원 모집</nuxt-link>
-          <v-icon small>mdi-chevron-right</v-icon>
-          <nuxt-link to="">서울특별시의 회원 모집</nuxt-link>
-          <v-icon small>mdi-chevron-right</v-icon>
-          <nuxt-link to="">노원구의 회원 모집</nuxt-link>
-          <!-- 시구 군, 역, 장르 순서로 breadcrumb dept가 달라짐 -->
-        </p>
+        <BreadCrumb />
         <h2>
-          서울특별시의 친구 회원 모집(25,100)
+          노원구의 친구 회원 모집(8,100)
         </h2>
         <div class="filter">
           <div class="header">시구 군</div>
           <div class="content">
-            <span><nuxt-link to="">전체(19,220)</nuxt-link></span>
-            <span class="active"><nuxt-link to="">노원구(8,100)</nuxt-link></span>
-            <span><nuxt-link to="">광진구(5,331)</nuxt-link></span>
+            <span>
+              <nuxt-link to="">전체(19,220)</nuxt-link>
+            </span>
+            <span class="active">
+              <nuxt-link to="">노원구(8,100)</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">광진구(5,331)</nuxt-link>
+            </span>
             <span class="disable">은평구(0)</span>
           </div>
         </div>
         <div class="filter">
           <div class="header">역</div>
           <div class="content">
-            <span class="active"><nuxt-link to="">전체</nuxt-link></span>
-            <span><nuxt-link to="">마들역</nuxt-link></span>
-            <span><nuxt-link to="">노원역</nuxt-link></span>
-            <span><nuxt-link to="">중계역</nuxt-link></span>
-            <span><nuxt-link to="">하계역</nuxt-link></span>
-            <span><nuxt-link to="">공릉역</nuxt-link></span>
-            <span><nuxt-link to="">태릉입구역</nuxt-link></span>
+            <span class="active">
+              <nuxt-link to="">전체</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">마들역</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">노원역</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">중계역</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">하계역</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">공릉역</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">태릉입구역</nuxt-link>
+            </span>
           </div>
         </div>
         <div class="filter">
@@ -52,17 +56,37 @@
             <span>채팅</span>
             <span>스포츠</span>
             <span>기타</span> -->
-            <span class="active"><nuxt-link to="">선택안함</nuxt-link></span>
-            <span><nuxt-link to="">음식점/카페</nuxt-link></span>
-            <span><nuxt-link to="">여행</nuxt-link></span>
-            <span><nuxt-link to="">스포츠</nuxt-link></span>
-            <span><nuxt-link to="">미팅</nuxt-link></span>
-            <span><nuxt-link to="">밴드/음악</nuxt-link></span>
-            <span><nuxt-link to="">게임</nuxt-link></span>
-            <span><nuxt-link to="">영화</nuxt-link></span>
-            <span><nuxt-link to="">애니메이션</nuxt-link></span>
-            <span><nuxt-link to="">기타</nuxt-link></span>
-            
+            <span class="active">
+              <nuxt-link to="">선택안함</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">음식점/카페</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">여행</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">스포츠</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">미팅</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">밴드/음악</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">게임</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">영화</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">애니메이션</nuxt-link>
+            </span>
+            <span>
+              <nuxt-link to="">기타</nuxt-link>
+            </span>
+
           </div>
         </div>
         <!--
@@ -88,7 +112,8 @@
         <div class="sel-content">
           <div class="article-wrap">
             <div class="article-list">
-              <div class="img-repre"></div>
+              <!-- <div class="img-repre"></div> -->
+              <img src="~assets/img/ex.jpg" class="img-repre">
               <div class="content">
                 <p class="title">테스트 전용 글 입니다.</p>
                 <p class="info"><span>노원역</span> · 20~30세 · 성별무관 · 흡연가능</p>
@@ -97,7 +122,7 @@
               </div>
             </div>
             <div class="article-list">
-              <div class="img-repre"></div>
+              <img src="~assets/img/ex.jpg" class="img-repre">
               <div class="content">
                 <p class="title">테스트 전용 글 입니다.</p>
                 <p class="info"><span>노원역</span> · 20~30세 · 성별무관 · 흡연가능</p>
@@ -114,7 +139,13 @@
             </div>
             <div class="exten">...100</div>
           </div>
-          
+          <div class="search-wrap">
+            <div class="search-form">
+              <v-text-field solo label="검색어를 입력하세요" append-icon="mdi-magnify"></v-text-field>
+            </div>
+            
+          </div>
+
           <!-- <div class="paging-wrap-vuetify">
             <div class="text-center">
               <v-pagination
@@ -127,6 +158,7 @@
         <div class="sel-snb"></div>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 

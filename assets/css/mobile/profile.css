@@ -1,6 +1,7 @@
 @media (max-width: 769px) {
     #wrap {
         padding: 0px 10px;
+        padding-top: 40px;
     }
 }
 
@@ -19,6 +20,10 @@
     #wrap .info-wrap .table-wrap {
         width: 100%;
         padding-left: 0px;
+        margin-top: 50px;
+    }
+
+    #wrap .posts-wrap {
         margin-top: 50px;
     }
 }

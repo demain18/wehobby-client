@@ -1,5 +1,6 @@
 #wrap {
-    padding-top: 30px;
+    margin-top: 50px!important; /* Header Height */
+    padding-top: 70px;
 }
 
 
