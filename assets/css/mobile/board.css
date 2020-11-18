@@ -15,5 +15,7 @@
     #wrap .wrap-split .sel-snb {
         flex-basis: 100%;
         min-height: 200px;
+        margin-top: 20px;
+        margin-left: 0px;
     }
 }
