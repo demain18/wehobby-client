@@ -1,7 +1,7 @@
 <template>
   <div>
     <Gnb/>
-    <DialogSlider/>
+    <!-- <DialogSlide/> -->
     <!-- <DialogReport/> -->
     <div id="wrap">
       <div class="content-wrap">
@@ -56,10 +56,13 @@
             <div class="list-header-line"></div>
 
             <div class="item">
-              <div class="header"></div>
+              <!-- <div class="header"></div> -->
+              <v-avatar class="header">
+                <img src="https://pm1.narvii.com/6246/a4b5f80439148013b035523b4ba9ca60651be412_00.jpg" class="present">
+              </v-avatar>
               <div class="main">
                 <p><strong>사와무라 에리리</strong> <span class="time">15분 전</span></p>
-                <p>메일 보냈습니다.</p>
+                <p>기재하신 메일 주소로 연락드렸습니다.</p>
                 <v-menu left offset-y>
                   <template v-slot:activator="{ on, attrs }">
                     <v-icon medium v-bind="attrs" v-on="on" class="tooltip-btn">mdi-dots-horizontal</v-icon>
@@ -75,10 +78,12 @@
             </div>
 
             <div class="item">
-              <div class="header"></div>
+              <v-avatar class="header">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6VxXRj91RIbra4w3-BiPV-TdoJ1xSJ-JS1A&usqp=CAU" class="present">
+              </v-avatar>
               <div class="main">
                 <p><strong>카토 메구미</strong> <span class="time">1시간 전</span></p>
-                <p>메일 보냈습니다.</p>
+                <p>메일 보냈습니다~</p>
                 <v-menu left offset-y>
                   <template v-slot:activator="{ on, attrs }">
                     <v-icon medium v-bind="attrs" v-on="on" class="tooltip-btn">mdi-dots-horizontal</v-icon>
@@ -99,9 +104,15 @@
         </div>
         <div class="addition-wrap">
           <!-- <v-icon small class="icon">mdi-bell</v-icon> -->
-          <nuxt-link to="" class="btn"><v-icon small class="icon">mdi-bell</v-icon>신고하기</nuxt-link>
-          <nuxt-link to="" class="btn"><v-icon small class="icon">mdi-pencil</v-icon>수정하기</nuxt-link>
-          <nuxt-link to="" class="btn"><v-icon small class="icon">mdi-delete</v-icon>삭제하기</nuxt-link>
+          <nuxt-link to="" class="btn">
+            <v-icon small class="icon">mdi-bell</v-icon>신고하기
+          </nuxt-link>
+          <nuxt-link to="" class="btn">
+            <v-icon small class="icon">mdi-pencil</v-icon>수정하기
+          </nuxt-link>
+          <nuxt-link to="" class="btn">
+            <v-icon small class="icon">mdi-delete</v-icon>삭제하기
+          </nuxt-link>
         </div>
       </div>
 
@@ -147,7 +158,10 @@
           작성자에게 메일로 문의
         </v-btn>
         <div class="profile">
-          <div class="header"></div>
+          <!-- <div class="header"></div> -->
+          <v-avatar rounded class="header">
+            <img src="https://sparklejunserver.web.app/img/profile.jpeg" class="present">
+          </v-avatar>
           <div class="content">
             <p><strong>백산(인증됨)</strong></p>
             <p>남자</p>

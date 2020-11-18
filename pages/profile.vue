@@ -3,7 +3,10 @@
     <Gnb />
     <div id="wrap">
       <div class="info-wrap">
-        <div class="img-profile"></div>
+        <!-- <div class="img-profile"></div> -->
+        <v-avatar class="img-profile">
+          <img src="https://sparklejunserver.web.app/img/profile.jpeg" class="present">
+        </v-avatar>
         <div class="table-wrap">
           <div class="table">
             <div class="header">닉네임</div>

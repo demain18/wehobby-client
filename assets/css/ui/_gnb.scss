@@ -63,9 +63,9 @@
 }
 
 #gnb .wrap .user-icon {
-  width: 30px;
-  height: 30px;
-  background-color: $border;
+  width: 30px!important;
+  height: 30px!important;
+  // background-color: $border;
   border-radius: 100px;
   position: relative;
   top: 10px;

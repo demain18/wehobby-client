@@ -15,10 +15,16 @@
 }
 
 #wrap .info-wrap .img-profile {
-    min-width: 150px;
-    height: 150px;
-    background-color: #ececec;
+    min-width: 150px!important;
+    height: 150px!important;
+    /* background-color: #ececec; */
     border-radius: 10%;
+}
+
+#wrap .info-wrap .img-profile .present {
+    object-fit: contain;
+    width: 100%;
+    /* border: 1px solid blue; */
 }
 
 #wrap .info-wrap .table-wrap {

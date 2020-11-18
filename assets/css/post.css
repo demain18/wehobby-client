@@ -114,6 +114,10 @@
     margin-right: 8px;
 }
 
+#wrap .content-wrap .comment-wrap .list .item .header img.present {
+    object-fit: contain;
+}
+
 #wrap .content-wrap .comment-wrap .list .item .main {
     position: relative;
     width: 100%;
@@ -126,7 +130,7 @@
 
 #wrap .content-wrap .comment-wrap .list .item .main .time {
     color: #8d8d8d;
-    margin-left: 5px;
+    margin-left: 2px;
 }
 
 #wrap .content-wrap .comment-wrap .list .item .main .tooltip {
@@ -206,10 +210,14 @@
 }
 
 #wrap .profile-wrap .profile .header {
-    width: 70px;
-    height: 70px;
+    width: 70px!important;
+    height: 70px!important;
     background-color: #ececec;
     border-radius: 100%;
+}
+
+#wrap .profile-wrap .profile .header .present {
+    object-fit: contain;
 }
 
 #wrap .profile-wrap .profile .content {

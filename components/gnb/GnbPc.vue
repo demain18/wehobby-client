@@ -23,7 +23,10 @@
       <nuxt-link class="" to="">중고물품</nuxt-link>
       <nuxt-link class="" to="">알바모집</nuxt-link>
     </span>
-    <span class="item rgt user-icon"></span>
+    <!-- <span class="item rgt user-icon"></span> -->
+    <v-avatar class="item rgt user-icon">
+      <img src="https://sparklejunserver.web.app/img/profile.jpeg" class="">
+    </v-avatar>
   </div>
 </template>
 

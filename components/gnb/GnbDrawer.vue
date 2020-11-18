@@ -55,6 +55,7 @@
   } from "vuex";
 
   export default {
+    name: "GnbDrawer",
     computed: {
       // isActive() {
       //   return this.$store.state.gnb.drawer
@@ -120,7 +121,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     display: flex;
