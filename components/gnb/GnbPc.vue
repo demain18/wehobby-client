@@ -47,6 +47,10 @@
           url: '/board'
         },
         {
+          title: '글 작성(/write)',
+          url: '/write'
+        },
+        {
           title: '게시물(/post)',
           url: '/post'
         },

@@ -64,11 +64,16 @@
         </div>
         <div class="paging-wrap">
           <div class="count">
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
+            <v-btn icon><v-icon>mdi-chevron-double-left</v-icon></v-btn>
+            <v-btn icon><v-icon>mdi-chevron-left</v-icon></v-btn>
+            <v-btn icon>10</v-btn>
+            <v-btn icon>11</v-btn>
+            <v-btn icon disabled>12</v-btn>
+            <v-btn icon>13</v-btn>
+            <v-btn icon>14</v-btn>
+            <v-btn icon><v-icon>mdi-chevron-right</v-icon></v-btn>
+            <v-btn icon><v-icon>mdi-chevron-double-right</v-icon></v-btn>
           </div>
-          <div class="exten">...100</div>
         </div>
       </div>
     </div>

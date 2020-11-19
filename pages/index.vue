@@ -1,7 +1,7 @@
 <template>
   <div>
     <Gnb/>
-    <!-- <Dialog/> -->
+    <!-- <DialogCity/> -->
 
     <div id="banner">
       <div class="banner-img"></div>
@@ -267,15 +267,9 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import Vuetify from 'vuetify'
-
   export default {
-    mounted() {
-      Vue.use(Vuetify);
-    }
-  }
 
+  }
 </script>
 
 <style scoped lang="scss">

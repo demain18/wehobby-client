@@ -1,6 +1,9 @@
 #wrap {
     padding-top: 50px;
-    max-width: 600px;
+    max-width: 600px!important;
+    /* border: 1px solid #ececec; */
+    margin-top: 60px!important; /* Header Height */
+    padding-top: 10px!important;
 }
 
 #wrap .form-upload {}
@@ -33,4 +36,52 @@
 
 #wrap input.btn {
     width: 60px;
+}
+
+
+/* Vueity */
+
+#wrap .form-fixed-1 {
+    width: 100px!important;
+}
+
+#wrap .v-input__slot {
+    height: 350px!important;
+}
+
+#wrap .preview-grid {
+    /* margin-bottom: 30px; */
+    /* display: flex;
+    flex-direction: row; */
+}
+
+#wrap .preview-grid .preview {
+    height: 80px;
+    width: 80px;
+    /* border: 1px solid blue; */
+    /* background-color: ; */
+    position: relative;
+    margin-right: 15px;
+    float: left;
+}
+
+#wrap .preview-grid .preview img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    object-fit: fill;
+}
+
+#wrap .preview-grid .preview .btn-close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    /* color: blue!important; */
+    z-index: 1;
+}
+
+#wrap .textarea {
+    /* clear: both!important; */
+    margin-top: 30px;
+    margin-bottom: -10px;
 }

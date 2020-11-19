@@ -132,13 +132,6 @@
             </div>
           </div>
           <div class="paging-wrap">
-            <!-- <div class="count">
-              <div>1</div>
-              <div>2</div>
-              <div>3</div>
-            </div>
-            <div class="exten">...100</div> -->
-
             <div class="count">
               <v-btn icon><v-icon>mdi-chevron-double-left</v-icon></v-btn>
               <v-btn icon><v-icon>mdi-chevron-left</v-icon></v-btn>

@@ -3,6 +3,8 @@
     <Gnb/>
     <!-- <DialogSlide/> -->
     <!-- <DialogReport/> -->
+    <!-- <DialogContact/> -->
+
     <div id="wrap">
       <div class="content-wrap">
         <BreadCrumb />
@@ -51,7 +53,7 @@
 
           <div class="list">
             <div class="list-header">
-              <span class="title">댓글 1개</span>
+              <span class="title">댓글 2개</span>
             </div>
             <div class="list-header-line"></div>
 
@@ -155,7 +157,7 @@
           작성자에게 메일로 문의
         </button> -->
         <v-btn depressed class="btn-main-color">
-          작성자에게 메일로 문의
+          작성자에게 연락하기
         </v-btn>
         <div class="profile">
           <!-- <div class="header"></div> -->
