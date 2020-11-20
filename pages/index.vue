@@ -257,7 +257,7 @@
           <div class="ad"></div>
           <div class="list-header">
             <span class="title">공지사항</span>
-            <span class="btn-more">더보기</span>
+            <!-- <span class="btn-more">더보기</span> -->
           </div>
           <div class="list-header-line"></div>
           <div class="content">

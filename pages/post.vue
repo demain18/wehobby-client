@@ -4,6 +4,7 @@
     <!-- <DialogSlide/> -->
     <!-- <DialogReport/> -->
     <!-- <DialogContact/> -->
+    <DialogShare/>
 
     <div id="wrap">
       <div class="content-wrap">

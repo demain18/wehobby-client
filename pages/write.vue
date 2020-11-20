@@ -57,7 +57,7 @@
         <!-- <v-text-field label="제목"></v-text-field> -->
         <v-row>
           <v-col><v-text-field label="도시*"></v-text-field></v-col>
-          <v-col><v-text-field label="구"></v-text-field></v-col>
+          <v-col><v-text-field label="구*"></v-text-field></v-col>
           <v-col><v-text-field label="역"></v-text-field></v-col>
         </v-row>
         <v-row>
