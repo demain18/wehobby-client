@@ -54,18 +54,17 @@
       <input type="button" value="작성" class="btn"> -->
 
       <div>
-        <v-text-field label="제목"></v-text-field>
-
-        <!-- <h3>옵션그룹 1</h3> -->
+        <!-- <v-text-field label="제목"></v-text-field> -->
         <v-row>
-          <v-col><v-text-field label="도시"></v-text-field></v-col>
+          <v-col><v-text-field label="도시*"></v-text-field></v-col>
           <v-col><v-text-field label="구"></v-text-field></v-col>
           <v-col><v-text-field label="역"></v-text-field></v-col>
         </v-row>
         <v-row>
-          <v-col class="form-fixed-1"><v-text-field label="카테고리"></v-text-field></v-col>
+          <v-col class="form-fixed-1"><v-text-field label="카테고리*"></v-text-field></v-col>
           <v-col><v-text-field label="장르"></v-text-field></v-col>
         </v-row>
+        <v-text-field label="제목*"></v-text-field>
         <v-row>
           <v-col><v-text-field label="옵션1"></v-text-field></v-col>
           <v-col><v-text-field label="옵션2"></v-text-field></v-col>

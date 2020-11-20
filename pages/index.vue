@@ -202,7 +202,8 @@
                   <!-- <div class="img"></div> -->
                   <img src="~assets/img/ex.jpg" class="img">
                   <div class="content">
-                    <p class="title">노원역 카페 탐방</p>
+                    <!-- <p class="title">노원역 카페 탐방</p> -->
+                    <nuxt-link to="" class="title">테스트 글 입니다</nuxt-link>
                     <p class="txt">노원역, 20세 초반 희망</p>
                   </div>
                 </div>
