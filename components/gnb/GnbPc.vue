@@ -43,6 +43,10 @@
           url: '/'
         },
         {
+          title: '공지(/article)',
+          url: '/article'
+        },
+        {
           title: '게시판(/board)',
           url: '/board'
         },

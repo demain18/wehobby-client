@@ -105,7 +105,9 @@
             append-icon="mdi-send"></v-textarea>
         </div>
         <div class="addition-wrap">
-          <!-- <v-icon small class="icon">mdi-bell</v-icon> -->
+          <nuxt-link to="" class="btn">
+            <v-icon small class="icon">mdi-share-variant</v-icon>공유하기
+          </nuxt-link>
           <nuxt-link to="" class="btn">
             <v-icon small class="icon">mdi-bell</v-icon>신고하기
           </nuxt-link>

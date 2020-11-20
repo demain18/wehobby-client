@@ -77,8 +77,12 @@
 
 /* Wrap Category */
 
+#wrap {
+    /* margin-bottom: 50px!important; */
+}
+
 #wrap .section { /* Section 클래스는 매번 새로 만드는게 좋을둣. 이펙트가 계속 새로 들어가는데 이거 매우 나쁜현상임 */
-    margin-top: 50px; 
+    margin-top: 50px;
 /*    border: 1px solid #b5b5b5;*/
 }
 
@@ -224,7 +228,21 @@
 
 
 
-/* Wrap Ad */
+/* Wrap Snb Article */
+
+#wrap .snb .content p {
+    line-height: 25px;
+}
+
+#wrap .snb .content ul {
+    margin-left: 20px;
+}
+
+#wrap .snb .content li {
+    max-width: 240px;
+    line-height: 25px;
+}
+
 
 
 

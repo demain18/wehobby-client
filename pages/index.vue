@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Gnb/>
+    <Gnb />
     <!-- <DialogCity/> -->
 
     <div id="banner">
@@ -210,14 +210,14 @@
                 <div class="smlist">
                   <img src="~assets/img/ex.jpg" class="img">
                   <div class="content">
-                    <p class="title">노원역 카페 탐방</p>
+                    <nuxt-link to="" class="title">테스트 글 입니다</nuxt-link>
                     <p class="txt">노원역, 20세 초반 희망</p>
                   </div>
                 </div>
                 <div class="smlist">
                   <img src="~assets/img/ex.jpg" class="img">
                   <div class="content">
-                    <p class="title">노원역 카페 탐방</p>
+                    <nuxt-link to="" class="title">테스트 글 입니다</nuxt-link>
                     <p class="txt">노원역, 20세 초반 희망</p>
                   </div>
                 </div>
@@ -233,21 +233,21 @@
             <div class="smlist">
               <img src="~assets/img/ex.jpg" class="img">
               <div class="content">
-                <p class="title">노원역 카페 탐방</p>
+                <nuxt-link to="" class="title">테스트 글 입니다</nuxt-link>
                 <p class="txt">노원역, 20세 초반 희망</p>
               </div>
             </div>
             <div class="smlist">
               <img src="~assets/img/ex.jpg" class="img">
               <div class="content">
-                <p class="title">노원역 카페 탐방</p>
+                <nuxt-link to="" class="title">테스트 글 입니다</nuxt-link>
                 <p class="txt">노원역, 20세 초반 희망</p>
               </div>
             </div>
             <div class="smlist">
               <img src="~assets/img/ex.jpg" class="img">
               <div class="content">
-                <p class="title">노원역 카페 탐방</p>
+                <nuxt-link to="" class="title">테스트 글 입니다</nuxt-link>
                 <p class="txt">노원역, 20세 초반 희망</p>
               </div>
             </div>
@@ -260,17 +260,33 @@
             <span class="btn-more">더보기</span>
           </div>
           <div class="list-header-line"></div>
+          <div class="content">
+            <!-- <p>
+              <nuxt-link to="">이 글은 공지사항입니다.</nuxt-link>
+            </p>
+            <p>
+              <nuxt-link to="">이 글은 공지사항입니다.</nuxt-link>
+            </p> -->
+
+            <ul>
+              <li>
+                <nuxt-link to="">이 글은 공지사항입니다.이 글은 공지사항입니다.</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link to="">이 글은 공지사항입니다.</nuxt-link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
 <script>
-  export default {
+  export default {}
 
-  }
 </script>
 
 <style scoped lang="scss">
