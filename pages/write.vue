@@ -133,7 +133,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '~assets/css/common.scss';
+  // @import '~assets/css/common.scss';
   @import '~assets/css/write.css';
   @import '~assets/css/mobile/write.css';
 

@@ -177,7 +177,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '~assets/css/common.scss';
+  // @import '~assets/css/common.scss';
   @import '~assets/css/board.css';
   @import '~assets/css/mobile/board.css';
 

@@ -29,23 +29,13 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import Vuetify from 'vuetify'
-
-  export default {
-    data: () => ({
-      // empty
-    }),
-    mounted() {
-      Vue.use(Vuetify);
-    }
-  }
+  export default {}
 
 </script>
 
 <style scoped lang="scss">
-  @import '~assets/css/common.scss';
+  // @import '~assets/css/common.scss';
   @import '~assets/css/auth.css';
-  // @import '~assets/css/mobile/board.css';
+  @import '~assets/css/mobile/board.css';
 
 </style>

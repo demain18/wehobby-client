@@ -280,7 +280,7 @@
         </div>
       </div>
     </div>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 
@@ -290,7 +290,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '~assets/css/common.scss';
+  // @import '~assets/css/common.scss';
   @import '~assets/css/index.css';
   @import '~assets/css/mobile/index.css';
 

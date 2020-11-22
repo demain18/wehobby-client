@@ -73,7 +73,7 @@
 </script>
 
 <style lang="scss">
-  @import '~assets/css/common.scss';
+  // @import '~assets/css/common.scss';
 
   .v-list-item {
     min-height: 30px !important;

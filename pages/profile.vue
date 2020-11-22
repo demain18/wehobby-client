@@ -87,7 +87,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import '~assets/css/common.scss';
+  // @import '~assets/css/common.scss';
   @import '~assets/css/profile.css';
   @import '~assets/css/mobile/profile.css';
 
