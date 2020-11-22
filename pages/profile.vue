@@ -82,20 +82,7 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import Vuetify from 'vuetify'
-
-  export default {
-    data: () => ({
-      // empty
-      bgImg: [
-        '~assets/img/ex_01.jpg'
-      ]
-    }),
-    mounted() {
-      Vue.use(Vuetify);
-    }
-  }
+  export default {}
 
 </script>
 

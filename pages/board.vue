@@ -168,17 +168,10 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import Vuetify from 'vuetify'
-
   export default {
     data: () => ({
-      // empty
-      // page: 35
-    }),
-    mounted() {
-      Vue.use(Vuetify);
-    }
+      
+    })
   }
 
 </script>

@@ -4,7 +4,7 @@
     <!-- <DialogSlide/> -->
     <!-- <DialogReport/> -->
     <!-- <DialogContact/> -->
-    <DialogShare/>
+    <!-- <DialogShare/> -->
 
     <div id="wrap">
       <div class="content-wrap">
@@ -190,20 +190,16 @@
 
   export default {
     data: () => ({
-      // empty
       bgImg: [
         '~assets/img/ex_01.jpg'
       ]
-    }),
-    mounted() {
-      Vue.use(Vuetify);
-    }
+    })
   }
 
 </script>
 
 <style scoped lang="scss">
-  @import '~assets/css/common.scss';
+  // @import '~assets/css/common.scss';
   @import '~assets/css/post.css';
   @import '~assets/css/mobile/post.css';
 
