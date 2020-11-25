@@ -11,9 +11,14 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item v-for="(item, index) in items" :key="index">
+        <v-list-item v-for="(item, index) in list" :key="index">
           <!-- <v-list-item-title>{{ item.url }}</v-list-item-title> -->
-          <nuxt-link :to="item.url">{{ item.title }}</nuxt-link>
+          <nuxt-link :to="item.url">
+            {{ item.title }}
+            (
+            {{ item.url }}
+            )
+          </nuxt-link>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -31,11 +36,22 @@
 </template>
 
 <script>
+  /*
+    서버 모듈인 fs는 사용할 수 없음
+  */
+
   export default {
+    created() {
+      this.$router.options.routes.forEach(route => {
+        this.list.push({
+          title: route.name,
+          url: route.path
+        })
+      })
+    },
     data: () => ({
-      items: [
-        {
-          title: '로그인(/auth)',
+      items: [{
+          title: '계정(/auth)',
           url: '/auth'
         },
         {
@@ -67,22 +83,21 @@
           url: '/test'
         },
       ],
+      list: [] // route list here
     }),
+    mounted() {
+      // this.list.sort(function(a, b) {
+      //     return a.title < b.title ? -1 : a.title > b.title ? 1 : 0;
+      // });
+    }
   }
 
 </script>
 
 <style lang="scss">
-  // @import '~assets/css/common.scss';
-
   .v-list-item {
     min-height: 30px !important;
     padding: 3px 10px !important;
-  }
-
-  .v-list-item a {
-    // border: 1px solid blue;
-    // width: 100%;
   }
 
 </style>
