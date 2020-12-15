@@ -56,27 +56,44 @@
       <div>
         <!-- <v-text-field label="제목"></v-text-field> -->
         <v-row>
-          <v-col><v-text-field label="도시*"></v-text-field></v-col>
-          <v-col><v-text-field label="구*"></v-text-field></v-col>
-          <v-col><v-text-field label="역"></v-text-field></v-col>
+          <v-col>
+            <v-text-field label="도시*"></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field label="구*"></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field label="역"></v-text-field>
+          </v-col>
         </v-row>
         <v-row>
-          <v-col class="form-fixed-1"><v-text-field label="카테고리*"></v-text-field></v-col>
-          <v-col><v-text-field label="장르"></v-text-field></v-col>
+
+        <!-- <v-col>
+          <v-select v-model="select.area" :items="lists.area" label="지역*" required></v-select>
+        </v-col> -->
+        <v-col>
+          <v-select v-model="select.category" :items="lists.category" label="카테고리*" required></v-select>
+        </v-col>
+        <v-col>
+          <v-text-field label="장르"></v-text-field>
+        </v-col>
+
         </v-row>
         <v-text-field label="제목*"></v-text-field>
         <v-row>
-          <v-col><v-text-field label="옵션1"></v-text-field></v-col>
-          <v-col><v-text-field label="옵션2"></v-text-field></v-col>
-          <v-col><v-text-field label="옵션3"></v-text-field></v-col>
+          <v-col>
+            <v-text-field label="옵션1"></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field label="옵션2"></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field label="옵션3"></v-text-field>
+          </v-col>
         </v-row>
         <v-row>
           <v-col>
-          <v-file-input
-            small-chips
-            multiple
-            label="이미지 업로드"
-          ></v-file-input>
+            <v-file-input small-chips multiple label="이미지 업로드"></v-file-input>
           </v-col>
         </v-row>
         <div class="preview-grid">
@@ -99,13 +116,9 @@
           </div>
         </div>
         <div style="clear: both;"></div>
-        <v-textarea
-          solo
-          label="이곳에 본문을 작성해주세요"
-          class="textarea"
-        ></v-textarea>
+        <v-textarea solo label="이곳에 본문을 작성해주세요" rows="7" class="textarea"></v-textarea>
 
-      <!-- <v-btn depressed>
+        <!-- <v-btn depressed>
           취소
         </v-btn> -->
         <v-btn depressed class="btn-main-color">
@@ -126,7 +139,22 @@
 
   export default {
     data: () => ({
-      // empty
+      select: {
+        area: null,
+        category: null
+      },
+      lists: {
+        area: [
+          'area1',
+          'area2',
+          'area3'
+        ],
+        category: [
+          '회원모집',
+          '중고물품',
+          '알바모집'
+        ]
+      }
     }),
   }
 

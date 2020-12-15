@@ -90,6 +90,9 @@
                 <p class="item">
                   <nuxt-link to="" class="item">애니메이션</nuxt-link>
                 </p>
+                <!-- <p class="item">
+                  <nuxt-link to="" class="item">기타</nuxt-link>
+                </p> -->
               </div>
               <div class="list">
                 <p class="title">중고 물품</p>

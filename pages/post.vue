@@ -95,7 +95,7 @@
                     <v-list-item>
                       <nuxt-link to="">프로필 보기</nuxt-link>
                       <nuxt-link to="">신고하기</nuxt-link>
-                    </v-list-item>
+                    </v-list-item> 
                   </v-list>
                 </v-menu>
               </div>

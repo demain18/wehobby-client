@@ -30,7 +30,7 @@
     </span>
     <!-- <span class="item rgt user-icon"></span> -->
     <v-avatar class="item rgt user-icon">
-      <img src="https://sparklejunserver.web.app/img/profile.jpeg" class="">
+      <img src="~assets/img/repre_1.jpg" class="">
     </v-avatar>
   </div>
 </template>
@@ -50,39 +50,6 @@
       })
     },
     data: () => ({
-      items: [{
-          title: '계정(/auth)',
-          url: '/auth'
-        },
-        {
-          title: '메인(/)',
-          url: '/'
-        },
-        {
-          title: '공지(/article)',
-          url: '/article'
-        },
-        {
-          title: '게시판(/board)',
-          url: '/board'
-        },
-        {
-          title: '글 작성(/write)',
-          url: '/write'
-        },
-        {
-          title: '게시물(/post)',
-          url: '/post'
-        },
-        {
-          title: '프로필(/profile)',
-          url: '/profile'
-        },
-        {
-          title: '실험실(/test)',
-          url: '/test'
-        },
-      ],
       list: [] // route list here
     }),
     mounted() {

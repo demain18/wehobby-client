@@ -1,0 +1,25 @@
+/* SNB */
+#wrap .snb-wrap {
+  /*    flex-basis: 200px;*/
+      min-width: 170px;
+      font-size: 18px;
+      font-weight: bold;
+  /*    border: 1px solid blue;*/
+      padding-right: 15px;
+  }
+  
+  #wrap .snb-wrap .snb-btn {
+      padding: 10px 15px;
+      margin-bottom: 3px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.1s;
+  }
+  
+  #wrap .snb-wrap .active {
+      background-color: #ececec!important;
+  }
+  
+  #wrap .snb-wrap .snb-btn:hover {
+      background-color: #ececec;
+  }

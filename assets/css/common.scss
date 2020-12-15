@@ -59,6 +59,10 @@ a:hover {
   color: #cecece !important;
 }
 
+a.actionDisabled:hover {
+  color: $def !important;
+}
+
 input.input-text {
   height: 40px;
   background-color: #ffffff;
@@ -87,6 +91,9 @@ button.btn-main-color {
 
 // Snb
 @import "ui/snb";
+
+// Setting Snb
+@import "ui/settingSnb";
 
 // Forms
 @import "ui/forms";
