@@ -72,7 +72,7 @@
           <v-select v-model="select.area" :items="lists.area" label="지역*" required></v-select>
         </v-col> -->
         <v-col>
-          <v-select v-model="select.category" :items="lists.category" label="카테고리*" required></v-select>
+          <v-select v-model="select.category" :items="lists.category" attach label="카테고리*" required></v-select>
         </v-col>
         <v-col>
           <v-text-field label="장르"></v-text-field>

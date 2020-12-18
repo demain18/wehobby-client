@@ -2,7 +2,7 @@
   <div>
     <Gnb />
     <div id="wrap">
-      <SettingSnb/>
+      <SettingSnb />
       <div class="content-wrap">
         <h1 class="content-title">계정 설정</h1>
         <p class="content-sub">프로필에서 보여줄 정보를 수정하세요</p>
@@ -27,18 +27,18 @@
             <v-text-field v-model="select.option" label="로그인 옵션"></v-text-field>
           </v-col>
         </v-row>
-        <v-row style="margin-bottom: 0px;">
+
+        <v-btn depressed :disabled="!submitAble">
+          변경
+        </v-btn>
+        <v-row>
           <v-col>
-            <!-- <v-text-field v-model="select.accountDisable" label="회원탈퇴"></v-text-field> -->
-            <v-btn depressed v-model="select.accountDisable">
+            <v-btn depressed v-model="select.accountDisable" class="btn-warn">
               회원탈퇴
             </v-btn>
           </v-col>
         </v-row>
 
-        <v-btn depressed :disabled="!submitAble">
-          변경
-        </v-btn>
       </div>
     </div>
     <Footer />
@@ -65,4 +65,5 @@
 <style scoped lang="scss">
   @import '~assets/css/setting.css';
   @import '~assets/css/mobile/setting.css';
+
 </style>

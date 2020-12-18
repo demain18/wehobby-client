@@ -48,12 +48,14 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="select.age" placeholder="비공개" label="나이"></v-text-field>
+            <!-- <v-text-field v-model="select.age" placeholder="비공개" label="출생년도"></v-text-field> -->
+            <v-select v-model="select.age" :items="list.age" attach label="출생년도"></v-select>
           </v-col>
         </v-row>
         <v-row>
           <v-col>
             <v-text-field v-model="select.job" placeholder="비공개" label="직업"></v-text-field>
+            <!-- <v-select :items="list." filled label="Filled style"></v-select> -->
           </v-col>
         </v-row>
 
@@ -79,9 +81,18 @@
   </div>
 </template>
 
-<script>
+<script defer>
   // 변경사항 있을경우 변경 버튼 primary로 변경
   export default {
+    created() {
+      // console.log('the test');
+      let age = 0;
+      for (let i=1950; i<=2020; i++) {
+        this.list.age[age] = i;
+        age++;
+      }
+      this.list.age.reverse();
+    },
     data: () => ({
       submitAble: false,
       select: {
@@ -95,12 +106,13 @@
         job: '대학생/기타리스트',
         sex: '남자'
       },
-      lists: {
+      list: {
         sex: [
           '남성',
           '여성',
           '밝히지 않음'
-        ]
+        ],
+        age: []
       }
     })
   }
@@ -114,4 +126,5 @@
   #wrap .content-wrap .content-sub {
     padding-bottom: 15px;
   }
+
 </style>
