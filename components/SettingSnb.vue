@@ -5,7 +5,7 @@
       class="snb-btn" 
       v-for="(item, index) in menuList" 
       :key="index" 
-      v-bind:class="{ active: isActive }"
+      v-bind:class="{ active: item.isActive }"
     >
       <h2><nuxt-link :to="item.url" class="actionDisabled">{{ item.title }}</nuxt-link></h2>
     </div> -->
@@ -14,7 +14,7 @@
       v-for="(item, index) in menuList" 
       :key="index" 
     >
-    <div class="snb-btn" v-bind:class="{ active: isActive }">
+    <div class="snb-btn" v-bind:class="{ active: item.isActive }">
       <h2>
         {{ item.title }}
       </h2>
@@ -56,10 +56,21 @@
           isActive: false
         }
       ],
+      urlList: []
     }),
     mounted() {
-      let arr = this.menuList;
-      console.log('menulist count: '+arr.lenght);
+      let menuList = this.menuList;
+      let arr = [];
+      for (let i = 0; i < menuList.length; i++) {
+        if (menuList[i].url == this.slug) {
+          menuList[i].isActive = true;
+        }
+        // arr[i] = menuList[i].url;
+      }
+      this.urlList = arr;
+      // var arr2 = arr.filter(function (n) {
+      //   return n % 5 == 0;
+      // });
     }
   }
 
