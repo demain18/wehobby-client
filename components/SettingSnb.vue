@@ -47,7 +47,7 @@
         },
         {
           title: '광고 신청',
-          url: '/setting/adsence',
+          url: '/setting/ad',
           isActive: false
         },
         {

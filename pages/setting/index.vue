@@ -20,11 +20,6 @@
             <v-text-field v-model="select.name" label="이름" disabled></v-text-field>
           </v-col>
         </v-row>
-        <v-row>
-          <v-col>
-            <v-text-field v-model="select.email" label="이메일" disabled></v-text-field>
-          </v-col>
-        </v-row>
 
         <v-row>
           <v-col class="form">
@@ -42,7 +37,8 @@
         </v-row>
 
         <v-row>
-          <v-col>
+          <v-col class="form">
+            <p class="label" style="margin-bottom: 15px;">소개</p>
             <v-textarea solo v-model="select.bio" label="이곳에 본문을 작성해주세요" rows="4" class="textarea"></v-textarea>
           </v-col>
         </v-row>
@@ -59,15 +55,20 @@
           </v-col>
         </v-row>
 
-        <!-- <v-alert dense text type="success">
-          I'm a dense alert with the <strong>text</strong> prop and a <strong>type</strong> of success
-        </v-alert> -->
-
         <v-row class="ele-last">
           <v-col>
-            <v-text-field v-model="select.sex" placeholder="비공개" label="성별"></v-text-field>
+            <v-select v-model="select.sex" :items="list.sex" attach label="성별"></v-select>
           </v-col>
         </v-row>
+
+        <!-- <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="primary" v-bind="attrs" v-on="on">
+              mdi-home
+            </v-icon>
+          </template>
+          <span>Tooltip</span>
+        </v-tooltip> -->
 
         <v-btn depressed :disabled="!submitAble">
           변경
@@ -87,7 +88,7 @@
     created() {
       // console.log('the test');
       let age = 0;
-      for (let i=1950; i<=2020; i++) {
+      for (let i = 1950; i <= 2020; i++) {
         this.list.age[age] = i;
         age++;
       }
@@ -99,18 +100,17 @@
         image: null,
         nick: '백산',
         name: '김명준',
-        email: '100mountain@gmail.com',
         userVertify: true,
         bio: '화려한것들과 공부하는것을 좋아하는, 약간은 모순된 취미성향을 가지고 있는 사람입니다. 비슷한 취미를 가진 분들끼리 만나 즐거운 시간을 보냈으면 합니다!',
-        age: 20,
-        job: '대학생/기타리스트',
-        sex: '남자'
+        age: 2001,
+        job: '보컬리스트/밴드',
+        sex: '남성'
       },
       list: {
         sex: [
           '남성',
           '여성',
-          '밝히지 않음'
+          '비공개'
         ],
         age: []
       }

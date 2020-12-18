@@ -66,14 +66,6 @@
 
 /* Register */
 
-#form a.highlight {
-  color: #4267B2 !important;
-}
-
-#form a.highlight:hover {
-  color: #97abd4 !important;
-}
-
 #form .sub {
   margin-bottom: 23px;
 }

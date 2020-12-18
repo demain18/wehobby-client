@@ -28,10 +28,6 @@
   max-width: 200px;
 }
 
-#wrap .form input.size-half {
-  //    max-width: 100px;
-}
-
 #wrap .form-flex {
   display: flex;
 }
@@ -42,4 +38,11 @@
 
 #wrap .form-flex .form:last-child {
   margin-right: 0px;
+}
+
+
+// avator
+#wrap .avator-facebook {
+  background-color: #4267B2!important;
+  color: white!important;
 }
