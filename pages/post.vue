@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Gnb/>
+    <Gnb />
     <!-- <DialogSlide/> -->
     <!-- <DialogReport/> -->
     <!-- <DialogContact/> -->
@@ -59,14 +59,13 @@
             <div class="list-header-line"></div>
 
             <div class="item">
-              <!-- <div class="header"></div> -->
               <v-avatar class="header">
                 <img src="https://pm1.narvii.com/6246/a4b5f80439148013b035523b4ba9ca60651be412_00.jpg" class="present">
               </v-avatar>
               <div class="main">
                 <p><strong>사와무라 에리리</strong> <span class="time">15분 전</span></p>
                 <p>기재하신 메일 주소로 연락드렸습니다.</p>
-                <v-menu left offset-y>
+                <v-menu attach left offset-y>
                   <template v-slot:activator="{ on, attrs }">
                     <v-icon medium v-bind="attrs" v-on="on" class="tooltip-btn">mdi-dots-horizontal</v-icon>
                   </template>
@@ -82,7 +81,9 @@
 
             <div class="item">
               <v-avatar class="header">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6VxXRj91RIbra4w3-BiPV-TdoJ1xSJ-JS1A&usqp=CAU" class="present">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6VxXRj91RIbra4w3-BiPV-TdoJ1xSJ-JS1A&usqp=CAU"
+                  class="present">
               </v-avatar>
               <div class="main">
                 <p><strong>카토 메구미</strong> <span class="time">1시간 전</span></p>
@@ -95,7 +96,7 @@
                     <v-list-item>
                       <nuxt-link to="">프로필 보기</nuxt-link>
                       <nuxt-link to="">신고하기</nuxt-link>
-                    </v-list-item> 
+                    </v-list-item>
                   </v-list>
                 </v-menu>
               </div>

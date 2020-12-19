@@ -5,8 +5,8 @@
       <SettingSnb />
       <div class="content-wrap">
         <h1 class="content-title">광고 신청</h1>
-        <p class="content-sub">포인트를 충전하고 게시물을 더욱 많은 사람에게 노출시키세요</p>
-        <p><nuxt-link to="" class="highlight">결제방식 및 법률</nuxt-link></p>
+        <p class="content-sub">아직 준비중인 기능입니다</p>
+        <!-- <p><nuxt-link to="" class="highlight">결제방식 및 법률</nuxt-link></p>
 
         <v-row>
           <v-col>
@@ -16,7 +16,7 @@
 
         <v-btn depressed :disabled="!submitAble">
           변경
-        </v-btn>
+        </v-btn> -->
 
       </div>
     </div>

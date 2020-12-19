@@ -5,13 +5,13 @@
       <div class="sel-filter">
         <BreadCrumb />
         <h2>
-          노원구의 친구 회원 모집(8,100)
+          노원구의 회원 모집(8,100)
         </h2>
         <div class="filter">
           <div class="header">시구 군</div>
           <div class="content">
             <span>
-              <nuxt-link to="">전체(19,220)</nuxt-link>
+              <nuxt-link to="">서울특별시 전체(19,220)</nuxt-link>
             </span>
             <span class="active">
               <nuxt-link to="">노원구(8,100)</nuxt-link>
@@ -26,7 +26,7 @@
           <div class="header">역</div>
           <div class="content">
             <span class="active">
-              <nuxt-link to="">전체</nuxt-link>
+              <nuxt-link to="">선택안함</nuxt-link>
             </span>
             <span>
               <nuxt-link to="">마들역</nuxt-link>
@@ -57,7 +57,7 @@
             <span>스포츠</span>
             <span>기타</span> -->
             <span class="active">
-              <nuxt-link to="">선택안함</nuxt-link>
+              <nuxt-link to="">회원모집 전체</nuxt-link>
             </span>
             <span>
               <nuxt-link to="">음식점/카페</nuxt-link>
