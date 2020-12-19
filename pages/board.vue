@@ -89,21 +89,6 @@
 
           </div>
         </div>
-        <!--
-        <table>
-            <tr>
-                <td class="header">시구 군</td>
-                <td class="content">
-                    <span>노원구</span>
-                    <span>강북구</span>
-                    <span>강남구</span>
-                </td>
-            </tr>
-        </table>
--->
-        <!-- <button class="button">
-          게시물 작성
-        </button> -->
         <v-btn depressed class="btn-main-color">
           게시물 작성
         </v-btn>
@@ -112,7 +97,6 @@
         <div class="sel-content">
           <div class="article-wrap">
             <div class="article-list">
-              <!-- <div class="img-repre"></div> -->
               <img src="~assets/img/ex.jpg" class="img-repre">
               <div class="content">
                 <p class="title">테스트 전용 글 입니다.</p>
@@ -131,6 +115,7 @@
               </div>
             </div>
           </div>
+
           <div class="paging-wrap">
             <div class="count">
               <v-btn icon><v-icon>mdi-chevron-double-left</v-icon></v-btn>
@@ -144,21 +129,12 @@
               <v-btn icon><v-icon>mdi-chevron-double-right</v-icon></v-btn>
             </div>
           </div>
+
           <div class="search-wrap">
             <div class="search-form">
               <v-text-field solo label="검색어를 입력하세요" append-icon="mdi-magnify"></v-text-field>
             </div>
-
           </div>
-
-          <!-- <div class="paging-wrap-vuetify">
-            <div class="text-center">
-              <v-pagination
-                v-model="page"
-                :length="10"
-              ></v-pagination>
-            </div>
-          </div> -->
         </div>
         <div class="sel-snb"></div>
       </div>
@@ -170,7 +146,11 @@
 <script>
   export default {
     data: () => ({
-      
+      page: {
+        fir: 0,
+        last: 15,
+        now: 12
+      }
     })
   }
 

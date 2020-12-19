@@ -37,21 +37,6 @@
           와 같은 곡들이 제 메인곡 입니다. 잘부탁드리겠습니다!
         </div>
         <div class="comment-wrap">
-
-          <!-- <input type="text" class="comment-form" placeholder="댓글을 작성해주세요">
-          <v-btn depressed class="btn-comment">
-            작성
-          </v-btn> -->
-
-          <!-- <v-col>
-            <v-text-field label="Solo" placeholder="Placeholder" solo></v-text-field>
-          </v-col> -->
-          <!-- <v-text-field depressed label="Solo" placeholder="댓글을 입력하세요.." solo></v-text-field>
-          <v-col cols="10" md="">
-            <v-textarea solo name="input-7-4" label="댓글을 입력하세요.."></v-textarea>
-          </v-col> -->
-          <!-- <v-textarea solo auto-grow rows="1" row-height="15" label="댓글을 입력하세요.." class="comment-input"></v-textarea> -->
-
           <div class="list">
             <div class="list-header">
               <span class="title">댓글 2개</span>
@@ -88,7 +73,7 @@
               <div class="main">
                 <p><strong>카토 메구미</strong> <span class="time">1시간 전</span></p>
                 <p>메일 보냈습니다~</p>
-                <v-menu left offset-y>
+                <v-menu attach left offset-y>
                   <template v-slot:activator="{ on, attrs }">
                     <v-icon medium v-bind="attrs" v-on="on" class="tooltip-btn">mdi-dots-horizontal</v-icon>
                   </template>
