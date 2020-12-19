@@ -10,7 +10,7 @@
   display: flex;
 }
 
-.paging-wrap .count div {
+.paging-wrap .count div.btn {
   //    border: 1px solid blue;
   padding: 0px 10px;
   //    line-height: 50px;
@@ -20,7 +20,7 @@
   cursor: pointer;
 }
 
-.paging-wrap .count div:last-child {
+.paging-wrap .count div.btn:last-child {
   border-right: 0px;
 }
 
