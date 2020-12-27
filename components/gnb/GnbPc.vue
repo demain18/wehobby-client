@@ -24,9 +24,11 @@
     </v-menu>
 
     <span class="item mid">
-      <nuxt-link class="" to="">회원 모집</nuxt-link>
+      <nuxt-link class="active" to="">회원 모집</nuxt-link>
       <nuxt-link class="" to="">중고 물품</nuxt-link>
       <nuxt-link class="" to="">아르바이트</nuxt-link>
+      <nuxt-link class="" to="">재능교환/판매</nuxt-link>
+      <nuxt-link class="" to="">이벤트</nuxt-link>
     </span>
     <!-- <span class="item rgt user-icon"></span> -->
     <v-avatar class="item rgt user-icon">
@@ -50,7 +52,7 @@
       })
     },
     data: () => ({
-      list: [] // route list here
+      list: [], // route list here
     }),
     mounted() {
       // this.list.sort(function(a, b) {

@@ -38,7 +38,7 @@
       </div>
       <div class="posts-wrap">
          <div class="list-header">
-            <span class="title">게시물 목록</span>
+            <span class="title">작성한 게시물</span>
             <!-- <span class="btn-more">더보기</span> -->
           </div>
           <div class="list-header-line"></div>

@@ -36,12 +36,10 @@
 }
 
 #gnb .wrap .mid {
-  // width: 500px;
   display: inline-block;
   position: absolute;
   left: 50%;
-  margin-left: -100px;
-  // border: 1px solid blue;
+  margin-left: -240px;
 }
 
 #gnb .wrap .rgt {
@@ -55,7 +53,21 @@
 }
 
 #gnb .wrap .mid a {
-  margin-right: 10px;
+  // margin-right: 15px;
+  font-weight: bold;
+  padding: 15px 15px!important;
+  // border: 1px solid blue;
+}
+
+#gnb .wrap .mid .active {
+  padding-bottom: 14px!important;
+  border-bottom: 2px solid $main3;
+  color: $main3;
+  // padding-bottom: 20px;
+}
+
+#gnb .wrap .mid .active:hover {
+  color: $main3!important;
 }
 
 #gnb .wrap .mid a:last-child {

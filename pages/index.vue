@@ -64,7 +64,7 @@
           <div class="category">
             <div class="list-wrap">
               <div class="list">
-                <p class="title">회원 모집</p>
+                <p class="title"><nuxt-link to="">회원 모집</nuxt-link></p>
                 <p class="sub">00건</p>
                 <p class="item">
                   <nuxt-link to="" class="item">친구</nuxt-link>
@@ -95,7 +95,7 @@
                 </p> -->
               </div>
               <div class="list">
-                <p class="title">중고 물품</p>
+                <p class="title"><nuxt-link to="">중고 물품</nuxt-link></p>
                 <p class="sub">00건</p>
                 <p class="item">
                   <nuxt-link to="" class="item">여성의류</nuxt-link>
@@ -129,7 +129,7 @@
                 </p>
               </div>
               <div class="list">
-                <p class="title">아르바이트</p>
+                <p class="title"><nuxt-link to="">아르바이트</nuxt-link></p>
                 <p class="sub">00건</p>
                 <p class="item">
                   <nuxt-link to="" class="item">외식/음료</nuxt-link>
@@ -148,7 +148,7 @@
                 </p>
               </div>
               <div class="list">
-                <p class="title">재능교환/판매</p>
+                <p class="title"><nuxt-link to="">재능교환/판매</nuxt-link></p>
                 <p class="sub">00건</p>
                 <p class="item">
                   <nuxt-link to="" class="item">외국어</nuxt-link>
@@ -173,7 +173,7 @@
                 </p>
               </div>
               <div class="list">
-                <p class="title">이벤트</p>
+                <p class="title"><nuxt-link to="">이벤트</nuxt-link></p>
                 <p class="sub">00건</p>
                 <p class="item">
                   <nuxt-link to="" class="item">지역/축제</nuxt-link>

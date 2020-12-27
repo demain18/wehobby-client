@@ -55,7 +55,7 @@
 
 #wrap .sel-filter .filter .content span.active a {
     font-weight: bold;
-    cursor: auto;
+    /* cursor: auto; */
     /* color: rgb(226, 0, 0)!important; */
 }
 
@@ -111,10 +111,9 @@
 
 .search-wrap .search-form {
     width: 350px;
-    /* max-height: 40px!important; */
     margin-top: 20px;
+    /* border: 1px solid blue; */
 }
-
 
 /* SNB */
 
