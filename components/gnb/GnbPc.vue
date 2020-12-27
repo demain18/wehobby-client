@@ -30,10 +30,36 @@
       <nuxt-link class="" to="">재능교환/판매</nuxt-link>
       <nuxt-link class="" to="">이벤트</nuxt-link>
     </span>
-    <!-- <span class="item rgt user-icon"></span> -->
-    <v-avatar class="item rgt user-icon">
+
+    <!-- <v-avatar class="item rgt user-icon">
       <img src="~assets/img/repre_1.jpg" class="">
-    </v-avatar>
+    </v-avatar> -->
+
+    <v-menu left offset-y>
+      <template v-slot:activator="{ on, attrs }">
+        <!-- <v-btn elevation="2" class="item lft" style="margin-top: 5px;" v-bind="attrs" v-on="on">
+          바로가기
+        </v-btn> -->
+        <v-avatar class="item rgt user-icon" v-bind="attrs" v-on="on">
+          <img src="~assets/img/repre_1.jpg" class="">
+        </v-avatar>
+      </template>
+      <v-list>
+          <v-list-item>
+            <nuxt-link to="/profile">내 프로필 보기</nuxt-link>
+          </v-list-item>
+          <v-list-item>
+            <nuxt-link to="">도시 선택</nuxt-link>
+          </v-list-item>
+          <v-list-item>
+            <nuxt-link to="/setting">설정</nuxt-link>
+          </v-list-item>
+          <v-list-item>
+            <nuxt-link to="">로그아웃</nuxt-link>
+          </v-list-item>
+      </v-list>
+    </v-menu>
+    
   </div>
 </template>
 

@@ -11,6 +11,9 @@
           <p class="label">대표 이미지</p>
           <img src="~assets/img/repre_1.jpg" class="img-profile">
         </div>
+        <v-btn elevation="2" style="margin-top: -10px; margin-bottom: 15px;">
+          대표 이미지 변경
+        </v-btn>
 
         <v-row>
           <v-col>

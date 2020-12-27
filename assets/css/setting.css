@@ -1,6 +1,6 @@
 #wrap {
     max-width: 600px;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     padding-top: 50px;
     display: flex;
     flex-direction: row;
@@ -45,7 +45,6 @@
 
 
 /* Components */
-
 #wrap .alert {
   background-color: #4caf50;
   background-color: #e4f5e5;
