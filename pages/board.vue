@@ -158,56 +158,65 @@
       let firEmpty = 0; // 우측 부족한 갯수
       let lastEmpty = 0; // 좌측 부족한 갯수
 
-      for (let i=0; i<length; i++) {
-        if (now>=this.paging.pageBase.fir) { // now값이 fir보다 크면 배열 추가
-          this.paging.pages.push(now);
-          now++;
-        } else {
-          this.paging.pages.push('$');
-          now++;
-          firEmpty++;
+      if (this.paging.pageBase.last <= 4) 
+      {
+        for (let i=0; i<this.paging.pageBase.last; i++) {
+          this.paging.pages.push(i+1);
         }
       }
 
-      this.paging.pages.push(now); // 복구된 now값 배열 추가
+      else 
+      {
+        for (let i=0; i<length; i++) {
+          if (now>=1) { // now값이 fir보다 크면 배열 추가
+            this.paging.pages.push(now);
+            now++;
+          } else {
+            this.paging.pages.push('$');
+            now++;
+            firEmpty++;
+          }
+        }
 
-      for (let i=0; i<length; i++) {
-        if (now<this.paging.pageBase.last) { // now값이 last보다 작으면 배열 추가
+        this.paging.pages.push(now); // 복구된 now값 배열 추가
+
+        for (let i=0; i<length; i++) {
+          if (now<this.paging.pageBase.last) { // now값이 last보다 작으면 배열 추가
+            now++;
+            this.paging.pages.push(now);
+          } else {
+            this.paging.pages.push('#');
+            // now++;
+            lastEmpty++;
+          }
+        }
+
+        // fir, last empty 계산해서 pages배열 앞뒤로 지우고 추가
+        console.log('firEmpty: '+firEmpty+' / lastEmpty: '+lastEmpty+' / now: '+now);
+        for (let i=0; i<firEmpty; i++) {
           now++;
+          this.paging.pages.shift();
           this.paging.pages.push(now);
-        } else {
-          this.paging.pages.push('#');
-          // now++;
-          lastEmpty++;
+        }
+        console.log(now);
+
+        now -= length; // now - 2
+        for (let i=0; i<lastEmpty; i++) {
+          if (this.paging.pageBase.now % 2 == 0) {
+            now -= 1;
+          }
+          now -= 1;
+          this.paging.pages.pop();
+          this.paging.pages.unshift(now);
         }
       }
-
-      // fir, last empty 계산해서 pages배열 앞뒤로 지우고 추가
-      console.log('firEmpty: '+firEmpty+' / lastEmpty: '+lastEmpty);
-      for (let i=0; i<firEmpty; i++) {
-        // if (this.paging.pageBase.last>=firEmpty) {
-        //   break;
-        // }
-        now++;
-        this.paging.pages.shift();
-        this.paging.pages.push(now);
-      }
-
-      now -= 2;
-      for (let i=0; i<lastEmpty; i++) {
-        now -= 1;
-        this.paging.pages.pop();
-        this.paging.pages.unshift(now);
-      }
-
-      // this.paging.pageBase.mid = this.paging.pages[Math.floor(this.paging.count/2)]; // 중간값 계산
     },
     data: () => ({
       paging: {
         count: 5, // 홀수만 가능
         pageBase: {
           fir: 1,
-          last: 5,
+          last: 10,
           now: 5, // 현재 위치한 페이지
         },
         pages: []
