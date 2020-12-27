@@ -8,7 +8,7 @@
         <p class="content-sub">프로필에서 보여줄 정보를 수정하세요</p>
 
         <div class="form form-profile">
-          <p class="label">대표 사진</p>
+          <p class="label">대표 이미지</p>
           <img src="~assets/img/repre_1.jpg" class="img-profile">
         </div>
 

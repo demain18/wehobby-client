@@ -1,7 +1,7 @@
 <template>
   <div class="pc" data-app>
     <nuxt-link class="item lft logo" to="/">동네친구</nuxt-link>
-    <nuxt-link class="item lft" to="">도시선택</nuxt-link>
+    <nuxt-link class="item lft" to="">도시 선택</nuxt-link>
 
     <!-- <nuxt-link class="item lft" to="/elevator">[elevator]</nuxt-link> -->
     <v-menu open-on-hover middle offset-y>
@@ -24,9 +24,9 @@
     </v-menu>
 
     <span class="item mid">
-      <nuxt-link class="" to="">회원모집</nuxt-link>
-      <nuxt-link class="" to="">중고물품</nuxt-link>
-      <nuxt-link class="" to="">알바모집</nuxt-link>
+      <nuxt-link class="" to="">회원 모집</nuxt-link>
+      <nuxt-link class="" to="">중고 물품</nuxt-link>
+      <nuxt-link class="" to="">아르바이트</nuxt-link>
     </span>
     <!-- <span class="item rgt user-icon"></span> -->
     <v-avatar class="item rgt user-icon">

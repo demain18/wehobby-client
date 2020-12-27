@@ -9,7 +9,7 @@
 }
 
 .article-list:last-child {
-  //    border-bottom: 0px;
+  padding-bottom: 20px;
   border-bottom: 2px solid #cecece;
 }
 
@@ -31,6 +31,7 @@
   font-weight: bold;
   cursor: pointer;
   transition: 0.1s;
+  // color: $main3;
 }
 
 .article-list .content .title:hover {

@@ -1,6 +1,7 @@
 $border: #cecece;
 $main: #ff4e54;
 $main2: #ff7b7f;
+$main3: rgb(226, 0, 0);
 $def: #535353; // 밝기 좀 내렸음
 $gray2: #7b7b7b;
 
@@ -49,7 +50,7 @@ button {
 }
 
 a {
-  color: $def !important;
+  color: $def;
   text-decoration: none;
   transition: 0.1s;
   padding: 0px !important;

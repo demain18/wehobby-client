@@ -53,11 +53,17 @@
     border-right: 0px;
 }
 
-#wrap .sel-filter .filter .content span.active {
+#wrap .sel-filter .filter .content span.active a {
     font-weight: bold;
+    cursor: auto;
+    /* color: rgb(226, 0, 0)!important; */
 }
 
-#wrap .sel-filter .filter .content span.disable {
+#wrap .sel-filter .filter .content span.active a:hover {
+    color: #535353!important;
+}
+
+#wrap .sel-filter .filter .content span.disable a {
     color: #cfcfcf!important;
     /* color: blue; */
     /* font-size: 30px; */
@@ -84,7 +90,7 @@
 
 #wrap .wrap-split {
     display: flex;
-/*    padding-top: 10px;*/
+   padding-top: 10px;
 }
 
 #wrap .wrap-split .sel-content {

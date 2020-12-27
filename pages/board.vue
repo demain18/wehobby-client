@@ -19,7 +19,9 @@
             <span>
               <nuxt-link to="">광진구(5,331)</nuxt-link>
             </span>
-            <span class="disable">은평구(0)</span>
+            <span class="disable">
+              <nuxt-link to="">은평구(0)</nuxt-link>
+            </span>
           </div>
         </div>
         <div class="filter">
@@ -121,16 +123,6 @@
               <v-btn icon><v-icon>mdi-chevron-double-left</v-icon></v-btn>
               <v-btn icon><v-icon>mdi-chevron-left</v-icon></v-btn>
 
-              <!-- <v-btn icon>10</v-btn>
-              <v-btn icon>11</v-btn>
-              <v-btn icon disabled>12</v-btn>
-              <v-btn icon>13</v-btn>
-              <v-btn icon>14</v-btn> -->
-
-              <!-- <v-btn icon v-for="(item, index) in paging.pages" v-bind:key="index">
-                {{ item }}
-              </v-btn> -->
-
               <div v-for="(item, index) in paging.pages" v-bind:key="index">
                 <v-btn icon disabled class="btn" v-if="paging.pageBase.now==item">
                   {{ item }}
@@ -166,9 +158,9 @@
       let firEmpty = 0; // 우측 부족한 갯수
       let lastEmpty = 0; // 좌측 부족한 갯수
 
-      for (let i=0; i<length; i++) { // 초반 배열 추가
-        if (now>=this.paging.pageBase.fir) {
-          this.paging.pages.push(now+'$');
+      for (let i=0; i<length; i++) {
+        if (now>=this.paging.pageBase.fir) { // now값이 fir보다 크면 배열 추가
+          this.paging.pages.push(now);
           now++;
         } else {
           this.paging.pages.push('$');
@@ -177,12 +169,12 @@
         }
       }
 
-      this.paging.pages.push(now); // now값 기존 복구
+      this.paging.pages.push(now); // 복구된 now값 배열 추가
 
-      for (let i=0; i<length; i++) { // 후반 배열 추가
-        if (now<this.paging.pageBase.last) {
+      for (let i=0; i<length; i++) {
+        if (now<this.paging.pageBase.last) { // now값이 last보다 작으면 배열 추가
           now++;
-          this.paging.pages.push(now+'#');
+          this.paging.pages.push(now);
         } else {
           this.paging.pages.push('#');
           // now++;
@@ -193,6 +185,9 @@
       // fir, last empty 계산해서 pages배열 앞뒤로 지우고 추가
       console.log('firEmpty: '+firEmpty+' / lastEmpty: '+lastEmpty);
       for (let i=0; i<firEmpty; i++) {
+        // if (this.paging.pageBase.last>=firEmpty) {
+        //   break;
+        // }
         now++;
         this.paging.pages.shift();
         this.paging.pages.push(now);
@@ -205,15 +200,14 @@
         this.paging.pages.unshift(now);
       }
 
-      this.paging.pageBase.mid = this.paging.pages[Math.floor(this.paging.count/2)]; // 중간값 계산
+      // this.paging.pageBase.mid = this.paging.pages[Math.floor(this.paging.count/2)]; // 중간값 계산
     },
     data: () => ({
       paging: {
         count: 5, // 홀수만 가능
         pageBase: {
           fir: 1,
-          last: 15,
-          mid: null, // 짝수 배열에서는 작동안함
+          last: 5,
           now: 5, // 현재 위치한 페이지
         },
         pages: []
