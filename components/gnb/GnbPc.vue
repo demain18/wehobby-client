@@ -3,7 +3,6 @@
     <nuxt-link class="item lft logo" to="/">동네친구</nuxt-link>
     <nuxt-link class="item lft" to="">도시 선택</nuxt-link>
 
-    <!-- <nuxt-link class="item lft" to="/elevator">[elevator]</nuxt-link> -->
     <v-menu open-on-hover middle offset-y>
       <template v-slot:activator="{ on, attrs }">
         <v-btn elevation="2" class="item lft" style="margin-top: 5px;" v-bind="attrs" v-on="on">
@@ -12,7 +11,6 @@
       </template>
       <v-list>
         <v-list-item v-for="(item, index) in list" :key="index">
-          <!-- <v-list-item-title>{{ item.url }}</v-list-item-title> -->
           <nuxt-link :to="item.url">
             {{ item.title }}
             (
@@ -31,15 +29,8 @@
       <nuxt-link class="" to="">이벤트</nuxt-link>
     </span>
 
-    <!-- <v-avatar class="item rgt user-icon">
-      <img src="~assets/img/repre_1.jpg" class="">
-    </v-avatar> -->
-
-    <v-menu left offset-y>
+    <v-menu left offset-y v-if="tokenVertify">
       <template v-slot:activator="{ on, attrs }">
-        <!-- <v-btn elevation="2" class="item lft" style="margin-top: 5px;" v-bind="attrs" v-on="on">
-          바로가기
-        </v-btn> -->
         <v-avatar class="item rgt user-icon" v-bind="attrs" v-on="on">
           <img src="~assets/img/repre_1.jpg" class="">
         </v-avatar>
@@ -59,6 +50,8 @@
           </v-list-item>
       </v-list>
     </v-menu>
+
+    <nuxt-link class="item rgt" to="/auth" v-else>로그인/회원가입</nuxt-link>
     
   </div>
 </template>
@@ -78,12 +71,10 @@
       })
     },
     data: () => ({
+      tokenVertify: false,
       list: [], // route list here
     }),
     mounted() {
-      // this.list.sort(function(a, b) {
-      //     return a.title < b.title ? -1 : a.title > b.title ? 1 : 0;
-      // });
     }
   }
 

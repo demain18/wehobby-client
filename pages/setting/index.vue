@@ -1,6 +1,7 @@
 <template>
   <div>
     <Gnb />
+    <!-- <DialogVertify/> -->
     <div id="wrap">
       <SettingSnb />
       <div class="content-wrap">
@@ -34,7 +35,7 @@
               <v-icon medium class="icon">
                 mdi-check-circle
               </v-icon>
-              본인인증이 완료됬습니다
+              본인 인증이 완료됬습니다
             </div>
           </v-col>
         </v-row>

@@ -49,7 +49,7 @@
         </v-btn>
         <v-row>
           <v-col>
-            <v-btn depressed v-model="select.accountDisable" class="btn-warn">
+            <v-btn depressed v-on:click="authDestroy()">
               회원탈퇴
             </v-btn>
           </v-col>
@@ -64,6 +64,7 @@
 <script>
   // 변경사항 있을경우 변경 버튼 primary로 변경
   export default {
+    created() {},
     data: () => ({
       submitAble: false,
       select: {
@@ -73,7 +74,6 @@
         passwordRe: null,
         lang: '한국어',
         option: null,
-        accountDisable: null,
       },
       list: {
         lang: [
@@ -81,7 +81,20 @@
           'English'
         ]
       }
-    })
+    }),
+    methods: {
+      authDestroy() {
+        let idConfirm;
+        idConfirm = prompt('계정을 삭제하려면 현재 사용중인 아이디을 입력해주세요.', idConfirm);
+        if (idConfirm == this.select.id) {
+          confirm('정말로 계정을 삭제하겠습니까? 삭제된 계정 정보는 다시 복구할 수 없습니다.');
+          confirm('계정이 삭제되었습니다.');
+          window.location.replace('/');
+        } else {
+          confirm('닉네임을 정확히 입력해주세요.');
+        }
+      }
+    },
   }
 
 </script>
