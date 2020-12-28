@@ -10,12 +10,18 @@ $gray2: #7b7b7b;
   src: local("../lib/font/NotoSansKR-Regular.otf");
 }
 
+html {
+  height: 100%;
+}
+
 body {
-  // min-height: 100%;
+  min-height: 100%;
   margin: 0%;
   color: $def;
   font-family: notoKr, sans-serif !important;
   font-size: 16px;
+  position: relative;
+  // border: 1px solid rgba(255, 255, 255, 0);
 }
 
 p {
@@ -97,10 +103,16 @@ button.btn-warn {
 #wrap {
   max-width: 1040px;
   min-height: 500px;
-  // height: 100%!important;
   margin: 0 auto;
   position: relative;
-  padding-bottom: 100px;
+  padding-top: 50px!important;
+  padding-bottom: 200px;
+}
+
+@media (max-width: 769px) {
+  #wrap {
+    padding-bottom: 130px!important;
+  }
 }
 
 // Gnb

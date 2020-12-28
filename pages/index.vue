@@ -283,13 +283,14 @@
         </div>
       </div>
     </div>
-    <!-- <Footer /> -->
+
+    <Footer />
   </div>
 </template>
 
 <script>
   /*
-  html tag 작성순서 : vue attr, vuetify attr, html attr 순서
+  html tag 작성순서 : v-model&vue attr, vuetify attr, html attr 순서
   */
   export default {}
 

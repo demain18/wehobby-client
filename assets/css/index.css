@@ -82,8 +82,12 @@
 }
 
 #wrap .section { /* Section 클래스는 매번 새로 만드는게 좋을둣. 이펙트가 계속 새로 들어가는데 이거 매우 나쁜현상임 */
-    margin-top: 50px;
+    margin-top: 30px;
 /*    border: 1px solid #b5b5b5;*/
+}
+
+#wrap .section:first-child {
+    margin-top: 0px;
 }
 
 #wrap .section-2 {

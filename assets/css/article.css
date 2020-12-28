@@ -1,6 +1,9 @@
 #wrap {
-  /* margin-top: 50px!important; */
-  /* background-color: gray; */
+  
+}
+
+body {
+  background-color: #f7f7f7!important;
 }
 
 #wrap .article-wrap {

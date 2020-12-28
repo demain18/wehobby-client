@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: #f7f7f7;">
+  <div>
     <Gnb />
     <div id="wrap">
       <div class="article-wrap">
@@ -20,7 +20,6 @@
         <div class="content">
           <p>안녕하세요, 서비스를 사용하는데 있어서 유의할 점을 이번 공지글에서 알려드리고자 합니다.</p>
         </div>
-        
       </div>
     </div>
     <Footer />

@@ -1,6 +1,7 @@
 @media (max-width: 769px) {
     #wrap {
         padding: 0px 10px;
+        /* padding-bottom: 150px; */
     }
 }
 
