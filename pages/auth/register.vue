@@ -15,10 +15,11 @@
       </div>
       <!-- <v-checkbox label="this is test"></v-checkbox> -->
       <div class="agree-form">
-        <input type="checkbox" class="check">
+        <!-- <input type="checkbox" class="check"> -->
+        <v-checkbox v-model="check"></v-checkbox>
         <p>
-          <nuxt-link to="" class="highlight">개인정보처리방침</nuxt-link> 및
-          <nuxt-link to="" class="highlight">서비스약관</nuxt-link>에 동의합니다
+          <nuxt-link to="/article/privacy-policy" target="_blank" class="highlight">개인정보 처리방침</nuxt-link> 및
+          <nuxt-link to="/article/terms-of-service" target="_blank" class="highlight">이용약관</nuxt-link>를 숙지했으며 이에 동의합니다
         </p>
       </div>
 
@@ -37,7 +38,11 @@
 </template>
 
 <script>
-  export default {}
+  export default {
+    data: () => ({
+      check: false,
+    })
+  }
 
 </script>
 
@@ -49,4 +54,5 @@
   #form button.submit {
     margin-top: 20px;
   }
+
 </style>
