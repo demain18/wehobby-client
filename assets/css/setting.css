@@ -37,6 +37,15 @@
     margin-bottom: -20px;
 }
 
+#wrap .switch {
+    padding: 0px;
+    padding-left: 5px;
+}
+
+#wrap .switch .switch-btn {
+    margin-top: -5px!important;
+}
+
 
 /* Components */
 #wrap .alert {

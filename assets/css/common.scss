@@ -27,7 +27,7 @@ body {
 p {
   font-size: 16px;
   margin-top: 0px;
-  margin-bottom: 3px;
+  margin-bottom: 3px!important;
 }
 
 h2 {
@@ -57,8 +57,9 @@ button {
 }
 
 a {
-  color: $def;
+  color: $def!important;
   text-decoration: none;
+  // line-height: 10px!important;
   transition: 0.1s;
   padding: 0px !important;
 }
@@ -99,7 +100,11 @@ button.btn-warn {
   font-weight: bold !important;
 }
 
-// Frame
+#wrap .info {
+  background-color: #ffffff00!important;
+  border-color: #ffffff00!important;
+}
+
 #wrap {
   max-width: 1040px;
   min-height: 500px;

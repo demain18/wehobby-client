@@ -5,7 +5,7 @@
 
     <v-menu open-on-hover middle offset-y>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn elevation="2" class="item lft" style="margin-top: 5px;" v-bind="attrs" v-on="on">
+        <v-btn depressed class="item lft" style="margin-top: 5px;" v-bind="attrs" v-on="on">
           바로가기
         </v-btn>
       </template>

@@ -12,7 +12,7 @@
           <p class="label">대표 이미지</p>
           <img src="~assets/img/repre_1.jpg" class="img-profile">
         </div>
-        <v-btn elevation="2" style="margin-top: -10px; margin-bottom: 15px;">
+        <v-btn depressed style="margin-top: -10px; margin-bottom: 15px;">
           대표 이미지 변경
         </v-btn>
 
@@ -65,14 +65,14 @@
           </v-col>
         </v-row>
 
-        <!-- <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="primary" v-bind="attrs" v-on="on">
-              mdi-home
-            </v-icon>
-          </template>
-          <span>Tooltip</span>
-        </v-tooltip> -->
+        <v-row>
+          <v-col>
+            <v-text-field v-model="select.contact.email" label="이메일" placeholder="myEmail@contact.com"></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field v-model="select.contact.email" label="카카오톡" placeholder="카카오톡 아이디를 입력해주세요"></v-text-field>
+          </v-col>
+        </v-row>
 
         <v-btn depressed :disabled="!submitAble">
           변경
@@ -108,7 +108,11 @@
         bio: '화려한것들과 공부하는것을 좋아하는, 약간은 모순된 취미성향을 가지고 있는 사람입니다. 비슷한 취미를 가진 분들끼리 만나 즐거운 시간을 보냈으면 합니다!',
         age: 2001,
         job: '보컬리스트/밴드',
-        sex: '남성'
+        sex: '남성',
+        contact: {
+          email: null,
+          kakaoTalk: null,
+        }
       },
       list: {
         sex: [

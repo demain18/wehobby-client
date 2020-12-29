@@ -44,18 +44,19 @@
           </v-col>
         </v-row>
 
-        <v-row>
+        <v-row style="margin-bottom: -20px;">
           <v-col class="form">
             <p class="label">알림 설정</p>
-            <div class="content">
-              <v-container fluid>
-                <v-switch v-model="select.switch1" inset :label="`Switch 1: ${select.switch1.toString()}`"></v-switch>
+            <div class="content" style="margin-top: 10px;">
+              <v-container fluid class="switch">
+                <v-switch v-model="select.alert.email" inset :label="'이메일로 알림을 받기'" class="switch-btn"></v-switch>
+                <v-switch v-model="select.alert.channel" inset :label="'카카오톡 채널로 알림을 받기'" class="switch-btn"></v-switch>
               </v-container>
             </div>
           </v-col>
         </v-row>
 
-        <v-btn depressed :disabled="!submitAble">
+        <v-btn depressed :disabled="!submitAble" style="margin-top: 10px;">
           변경
         </v-btn>
         <v-row>
@@ -85,7 +86,10 @@
         passwordRe: null,
         lang: '한국어',
         option: null,
-        switch1: true
+        alert: {
+          email: false,
+          channel: false
+        }
       },
       list: {
         lang: [
