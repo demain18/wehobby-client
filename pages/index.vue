@@ -228,7 +228,7 @@
             </div>
           </div>
           <div class="list-header list-new">
-            <span class="title">노원구의 신규 게시물</span>
+            <span class="title">서울특별시의 신규 게시물</span>
             <span class="btn-more">더보기</span>
           </div>
           <div class="list-header-line" style="margin-bottom: 10px"></div>

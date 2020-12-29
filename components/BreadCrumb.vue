@@ -1,6 +1,6 @@
 <template>
   <p class="bread-crumb">
-    <nuxt-link to="">동네친구</nuxt-link>
+    <nuxt-link to="">메인</nuxt-link>
     <v-icon small>mdi-chevron-right</v-icon>
     <nuxt-link to="">회원 모집</nuxt-link>
     <v-icon small>mdi-chevron-right</v-icon>

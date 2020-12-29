@@ -44,6 +44,17 @@
           </v-col>
         </v-row>
 
+        <v-row>
+          <v-col class="form">
+            <p class="label">알림 설정</p>
+            <div class="content">
+              <v-container fluid>
+                <v-switch v-model="select.switch1" inset :label="`Switch 1: ${select.switch1.toString()}`"></v-switch>
+              </v-container>
+            </div>
+          </v-col>
+        </v-row>
+
         <v-btn depressed :disabled="!submitAble">
           변경
         </v-btn>
@@ -74,6 +85,7 @@
         passwordRe: null,
         lang: '한국어',
         option: null,
+        switch1: true
       },
       list: {
         lang: [
@@ -91,7 +103,7 @@
           confirm('계정이 삭제되었습니다.');
           window.location.replace('/');
         } else {
-          confirm('닉네임을 정확히 입력해주세요.');
+          confirm('아이디를 정확히 입력해주세요.');
         }
       }
     },

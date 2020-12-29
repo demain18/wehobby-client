@@ -7,7 +7,6 @@
 }
 
 
-
 /* Content */
 #wrap .content-wrap {
     width: 100%;
@@ -36,10 +35,6 @@
 #wrap .textarea {
     margin-top: -10px;
     margin-bottom: -20px;
-}
-
-#wrap .ele-last {
-    /* margin-bottom: -10px; */
 }
 
 
