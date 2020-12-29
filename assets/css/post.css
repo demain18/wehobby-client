@@ -9,9 +9,7 @@
 }
 
 
-
 /* Content */
-
 #wrap .content-wrap {
 /*    min-width: 480px;*/
 /*    flex-basis: 480px;*/
@@ -29,7 +27,7 @@
 /*    border: 1px solid blue;*/
     display: flex;
     flex-wrap: wrap;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 #wrap .content-wrap .img-wrap {
@@ -174,9 +172,7 @@
 }
 
 
-
 /* Profile */
-
 #wrap .profile-wrap {
 /*    min-width: 240px;*/
     flex-basis: 450px;
@@ -187,6 +183,10 @@
 #wrap .profile-wrap p {
     font-size: 14px;
     line-height: 15px;
+}
+
+#wrap .profile-wrap .info {
+    color: #535353 !important;
 }
 
 #wrap .profile-wrap .table {
@@ -229,15 +229,17 @@
     line-height: 15px;
 }
 
+#wrap .profile-wrap .profile .content .under-line {
+    text-decoration: underline!important;
+}
+
 #wrap .profile-wrap .bio {
     font-size: 14px;
     margin-top: 10px;
 }
 
 
-
 /* SNB */
-
 #wrap .snb-wrap {
 /*    width: 100%;*/
     flex-basis: 450px;

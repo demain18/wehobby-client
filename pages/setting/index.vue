@@ -42,7 +42,7 @@
 
         <v-row>
           <v-col class="form">
-            <p class="label" style="margin-bottom: 15px;">소개</p>
+            <p class="label" style="margin-bottom: 15px!important;">소개</p>
             <v-textarea solo v-model="select.bio" label="이곳에 본문을 작성해주세요" rows="4" class="textarea"></v-textarea>
           </v-col>
         </v-row>
@@ -67,7 +67,7 @@
 
         <v-row>
           <v-col>
-            <v-text-field v-model="select.contact.email" label="이메일" placeholder="myEmail@contact.com"></v-text-field>
+            <v-text-field v-model="select.contact.email" label="이메일" placeholder="example@contact.com"></v-text-field>
           </v-col>
           <v-col>
             <v-text-field v-model="select.contact.email" label="카카오톡" placeholder="카카오톡 아이디를 입력해주세요"></v-text-field>

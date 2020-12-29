@@ -43,5 +43,8 @@
 <style scoped lang="scss">
   @import '~assets/css/setting.css';
   @import '~assets/css/mobile/setting.css';
-
+  
+  #wrap .content-wrap .content-sub {
+    color: #7b7b7b;
+  }
 </style>

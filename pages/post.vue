@@ -108,14 +108,14 @@
       </div>
 
       <div class="profile-wrap">
-        <p>2020년 9월 7일 14:35</p>
-        <p>조회수 : 3,310</p>
+        <p class="info">2020년 9월 7일 14:35</p>
+        <p class="info">조회수 : 3,310</p>
         <div class="table">
           <div class="header">
             장르
           </div>
           <div class="content">
-            친구
+            회원 모집
           </div>
         </div>
         <div class="table">
@@ -123,7 +123,8 @@
             지역
           </div>
           <div class="content">
-            노원구<br />노원역 7호선
+            <nuxt-link to="">노원구</nuxt-link><br/>
+            노원역 7호선
           </div>
         </div>
         <div class="table">
@@ -132,6 +133,14 @@
           </div>
           <div class="content">
             20세 ~ 30세
+          </div>
+        </div>
+        <div class="table">
+          <div class="header">
+            성별
+          </div>
+          <div class="content">
+            무관
           </div>
         </div>
         <div class="table">
