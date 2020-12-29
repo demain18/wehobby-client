@@ -25,6 +25,7 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    // { src: '~plugins/ckeditor', ssr: false }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -33,6 +34,9 @@ export default {
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
     '@nuxtjs/vuetify',
+    // '@ckeditor/ckeditor5-build-classic',
+    // '@ckeditor/ckeditor5-vue'
+    // '@ckeditor/ckeditor5-build-classic'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -42,5 +46,23 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-  }
+  },
+
+  // Vuetify Theme Custom
+  vuetify: {
+    theme: {
+      light: true,
+      themes: {
+        light: {
+          primary: '#ff4e54',
+          secondary: '#424242',
+          accent: '#82B1FF',
+          error: '#FF5252',
+          info: '#2196F3',
+          success: '#4CAF50',
+          warning: '#FFC107',
+        }
+      }
+    }
+  },
 }

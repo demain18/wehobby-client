@@ -88,8 +88,8 @@
             </div>
 
           </div>
-          <v-textarea solo auto-grow clearable rows="1" row-height="15" label="댓글을 입력하세요.." class="comment-input"
-            append-icon="mdi-send"></v-textarea>
+
+          <v-text-field solo label="댓글을 입력하세요" clearable></v-text-field>
         </div>
         <div class="addition-wrap">
           <nuxt-link to="" class="btn">

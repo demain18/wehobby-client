@@ -68,15 +68,15 @@
         </v-row>
         <v-row>
 
-        <!-- <v-col>
+          <!-- <v-col>
           <v-select v-model="select.area" :items="lists.area" label="지역*" required></v-select>
         </v-col> -->
-        <v-col>
-          <v-select v-model="select.category" :items="lists.category" attach label="카테고리*" required></v-select>
-        </v-col>
-        <v-col>
-          <v-text-field label="장르"></v-text-field>
-        </v-col>
+          <v-col>
+            <v-select v-model="select.category" :items="lists.category" attach label="카테고리*" required></v-select>
+          </v-col>
+          <v-col>
+            <v-text-field label="장르"></v-text-field>
+          </v-col>
 
         </v-row>
         <v-text-field label="제목*"></v-text-field>
@@ -105,7 +105,6 @@
               </v-icon>
             </v-btn>
           </div>
-
           <div class="preview">
             <img src="~assets/img/dummy/2.jpg">
             <v-btn fab x-small class="btn-close">
@@ -116,11 +115,9 @@
           </div>
         </div>
         <div style="clear: both;"></div>
+
         <v-textarea solo label="이곳에 본문을 작성해주세요" rows="7" class="textarea"></v-textarea>
 
-        <!-- <v-btn depressed>
-          취소
-        </v-btn> -->
         <v-btn depressed class="btn-main-color">
           등록
         </v-btn>
@@ -134,10 +131,8 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import Vuetify from 'vuetify'
-
   export default {
+    created() {},
     data: () => ({
       select: {
         area: null,
