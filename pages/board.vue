@@ -8,7 +8,7 @@
           노원구의 회원 모집(8,100)
         </h2>
         <div class="filter">
-          <div class="header">시구 군</div>
+          <div class="header">구/군</div>
           <div class="content">
             <span>
               <nuxt-link to="">서울특별시 전체(19,220)</nuxt-link>
