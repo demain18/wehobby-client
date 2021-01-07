@@ -2,7 +2,7 @@
   <div class="text-center">
     <v-dialog v-model="dialog" width="500">
       <v-card>
-        <v-card-title class="headline grey lighten-2">
+        <v-card-title class="headline">
           도시 선택
         </v-card-title>
 

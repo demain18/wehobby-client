@@ -2,7 +2,7 @@
   <div class="text-center">
     <v-dialog v-model="dialog" width="500">
       <v-card>
-        <v-card-title class="headline grey lighten-2">
+        <v-card-title class="headline">
           신고하기
         </v-card-title>
 
@@ -13,9 +13,7 @@
               <v-select :items="item" label="분류" dense></v-select>
             </v-col>
           </v-row>
-          <!-- <v-col class="textarea"> -->
-            <v-textarea solo name="input-7-4" label="이곳에 신고 사유를 작성해주세요."></v-textarea>
-          <!-- </v-col> -->
+          <v-textarea solo name="input-7-4" label="이곳에 신고 사유를 작성해주세요."></v-textarea>
         </v-card-text>
 
         <v-divider></v-divider>

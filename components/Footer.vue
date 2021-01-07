@@ -15,7 +15,8 @@
       </v-btn>
     </div>
     <div>
-      <p>2020 - <strong>Infinia</strong></p>
+      <!-- <p>2020 - <strong>Infinia</strong></p> -->
+      <p>© Infinia, Inc. All rights reserved.</p>
     </div>
   </div>
 </template>

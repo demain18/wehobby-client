@@ -39,6 +39,6 @@
 
 <style scoped lang="scss">
   // @import '~assets/css/common.scss';
-  @import '~assets/css/article.css';
-  @import '~assets/css/mobile/article.css';
+  @import '~assets/css/notice.css';
+  @import '~assets/css/mobile/notice.css';
 </style>

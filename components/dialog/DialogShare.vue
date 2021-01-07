@@ -2,7 +2,7 @@
   <div class="text-center">
     <v-dialog v-model="dialog" width="300">
       <v-card>
-        <v-card-title class="headline grey lighten-2">
+        <v-card-title class="headline">
           공유하기
         </v-card-title>
         <v-card-text>

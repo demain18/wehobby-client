@@ -12,7 +12,7 @@
           <h2>서비스 이용 가이드라인</h2>
           <h3>2020년 11월 20일 14:00</h3> -->
           <p class="title">서비스 이용 가이드라인</p>
-          <p class="time">2020년 11월 20일 14:00</p>
+          <p class="time">2020년 11월 20일</p>
           <!-- <nuxt-link to="" class="btn">
             <v-icon small class="icon">mdi-share-variant</v-icon>공유하기
           </nuxt-link> -->
@@ -37,6 +37,6 @@
 
 <style scoped lang="scss">
   // @import '~assets/css/common.scss';
-  @import '~assets/css/article.css';
-  @import '~assets/css/mobile/article.css';
+  @import '~assets/css/notice.css';
+  @import '~assets/css/mobile/notice.css';
 </style>

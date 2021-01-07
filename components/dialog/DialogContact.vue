@@ -2,12 +2,12 @@
   <div class="text-center">
     <v-dialog v-model="dialog" width="500">
       <v-card>
-        <v-card-title class="headline grey lighten-2">
+        <v-card-title class="headline">
           연락하기
         </v-card-title>
 
         <v-card-text>
-          <p style="margin-bottom: 10px">연락 수단을 선택해주세요.</p>
+          <p style="margin-bottom: 15px!important">연락 수단을 선택해주세요.</p>
           <!-- <ul class="dialog-list">
             <li>
               <nuxt-link to="">메일</nuxt-link>
