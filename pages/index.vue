@@ -11,7 +11,7 @@
           <div class="form-input">
 
             <v-select solo label="카테고리" class="filter"></v-select>
-            <v-text-field solo label="검색어를 입력하세요" append-icon="mdi-magnify"></v-text-field>
+            <v-text-field solo label="함께하고 싶은 취미를 알려주세요" append-icon="mdi-magnify"></v-text-field>
 
           </div>
         </div>

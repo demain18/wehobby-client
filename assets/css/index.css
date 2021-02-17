@@ -20,7 +20,7 @@
 }
 
 #banner .wrap {
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
 /*    border: 1px solid gray;*/
 /*    font-size: 16px;*/
@@ -51,7 +51,8 @@
 }
 
 #banner .wrap .form .form-input .filter {
-    width: 0px;
+    max-width: 130px;
+    /* flex-basis: 100px; */
 }
 
 #banner .wrap .form input {
@@ -114,8 +115,7 @@
 #wrap .section .list .item {
     width: 25%;
     box-sizing: border-box;
-    padding: 0px 10px 0px 10px;
-/*    background-color: #e2e2e2;*/
+    padding: 0px 5px;
 }
 
 #wrap .section .list .item .img {
