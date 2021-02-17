@@ -20,7 +20,7 @@
         <v-row>
 
           <v-col>
-            <v-select :items="lists.category"  :rules="[rules.required]" label="카테고리*" required></v-select>
+            <v-select :items="lists.category" :rules="[rules.required]" label="카테고리*" required></v-select>
           </v-col>
           <v-col>
             <!-- <v-text-field label="장르"></v-text-field> -->
@@ -28,7 +28,7 @@
           </v-col>
 
         </v-row>
-        <v-text-field label="제목*"></v-text-field>
+        <v-text-field :rules="[rules.required]" label="제목*"></v-text-field>
         <v-row>
           <v-col>
             <v-text-field label="옵션1"></v-text-field>

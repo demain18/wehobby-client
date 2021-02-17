@@ -51,6 +51,8 @@
                     <v-list-item>
                       <nuxt-link to="">프로필 보기</nuxt-link>
                       <nuxt-link to="">신고하기</nuxt-link>
+                      <nuxt-link to="">수정하기</nuxt-link>
+                      <nuxt-link to="">삭제하기</nuxt-link>
                     </v-list-item>
                   </v-list>
                 </v-menu>
@@ -74,6 +76,16 @@
                     <v-list-item>
                       <nuxt-link to="">프로필 보기</nuxt-link>
                       <nuxt-link to="">신고하기</nuxt-link>
+                      <nuxt-link to="">수정하기</nuxt-link>
+                      <nuxt-link to="">삭제하기</nuxt-link>
+                      <!-- <nuxt-link v-for="{item, index} in lists.comment" :key="index">
+                        {{ item.msg }}
+                      </nuxt-link> -->
+                      <!-- <tr v-for="item in desserts" :key="item.name">
+                        <td><nuxt-link :to="item.link" class="highlight">{{ item.title }}</nuxt-link></td>
+                        <td>{{ item.views }}</td>
+                        <td>{{ item.comments }}</td>
+                      </tr> -->
                     </v-list-item>
                   </v-list>
                 </v-menu>
@@ -96,6 +108,9 @@
           </nuxt-link>
           <nuxt-link to="" class="btn">
             <v-icon small class="icon">mdi-delete</v-icon>삭제하기
+          </nuxt-link>
+          <nuxt-link to="" class="btn">
+            <v-icon small class="icon">mdi-close-octagon</v-icon>모집 종료하기
           </nuxt-link>
         </div>
       </div>
@@ -165,8 +180,9 @@
           평범하게 대학 다니는 학생입니다, 서점과 백화점을 좋아합니다.
         </div>
       </div>
-
-      <div class="snb-wrap"></div>
+      <div class="snb">
+        <div class="ad"></div>
+      </div>
     </div>
     <Footer />
   </div>
@@ -180,7 +196,17 @@
     data: () => ({
       bgImg: [
         '~assets/img/ex_01.jpg'
-      ]
+      ],
+      lists: {
+        comment: [
+          {msg: '프로필 보기'},
+          {msg: '신고하기'}
+          // '프로필 보기',
+          // '신고하기',
+          // '수정하기',
+          // '삭제하기'
+        ]
+      },
     })
   }
 

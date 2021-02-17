@@ -94,6 +94,7 @@
 
 #wrap .wrap-split .sel-content {
     width: 100%;
+    padding-right: 10px;
 }
 
 #wrap .wrap-split .sel-snb {

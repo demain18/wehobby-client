@@ -19,6 +19,7 @@
 
 #wrap .content-wrap .title {
     margin-top: 15px;
+    /* font-size: 22px!important; */
 }
 
 #wrap .content-wrap .images {
@@ -159,11 +160,12 @@
 }
 
 #wrap .content-wrap .addition-wrap {
-    display: flex;
+    /* display: flex; */
+    float: left;
 }
 
 #wrap .content-wrap .addition-wrap .btn {
-    margin-right: 8px;
+    margin-right: 5px;
 }
 
 #wrap .content-wrap .addition-wrap .icon {

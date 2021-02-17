@@ -1,4 +1,4 @@
-.article-list {
+.article {
   border-bottom: 1px solid #cecece;
   // margin-right: 10px;
   min-height: 100px;
@@ -8,26 +8,26 @@
   box-sizing: border-box;
 }
 
-.article-list:last-child {
+.article:last-child {
   padding-bottom: 20px;
   border-bottom: 2px solid #cecece;
 }
 
-.article-list .img-repre {
+.article .img-repre {
   width: 80px;
   height: 80px;
   object-fit: cover;
   border-radius: 5px;
 }
 
-.article-list .content {
+.article .content {
   width: 100%;
   margin-left: 10px;
   position: relative;
   //    border: 1px solid blue;
 }
 
-.article-list .content .title {
+.article .content .title {
   font-size: 18px!important;
   font-weight: bold;
   line-height: 20px!important;
@@ -35,25 +35,25 @@
   transition: 0.1s;
 }
 
-.article-list .content .title:hover {
+.article .content .title:hover {
   color: #cecece;
 }
 
-.article-list .content .info {
+.article .content .info {
   font-size: 14px;
   color: $gray2;
 }
 
-.article-list .content .info span {
+.article .content .info span {
   font-weight: bold;
   color: $def;
 }
 
-.article-list .content .txt {
+.article .content .txt {
   font-size: 14px;
 }
 
-.article-list .content .time {
+.article .content .time {
   font-size: 14px;
   color: $gray2;
   position: absolute;

@@ -51,19 +51,23 @@
         </div>
         <div class="list-header-line"></div>
         <div class="article-wrap">
-          <div class="article-list">
-            <img src="~assets/img/ex.jpg" class="img-repre">
+          <div class="article">
+            <nuxt-link to="/post" style="height: 80px;"><img src="~assets/img/ex.jpg" class="img-repre"></nuxt-link>
             <div class="content">
-              <p class="title">테스트 전용 글 입니다.</p>
+              <p class="title">
+                <nuxt-link to="/post">테스트 전용 글 입니다.</nuxt-link>
+              </p>
               <p class="info"><span>노원역</span> · 20~30세 · 성별무관 · 흡연가능</p>
               <p class="txt">이 글은 테스트전용 글 입니다. 노원역에서 베타 버전 사용자들의 후기를 수집하고 있습니다. 참여해주시면 감사하겠습니다.</p>
               <span class="time">2시간 전</span>
             </div>
           </div>
-          <div class="article-list">
-            <img src="~assets/img/ex.jpg" class="img-repre">
+          <div class="article">
+            <nuxt-link to="/post" style="height: 80px;"><img src="~assets/img/ex.jpg" class="img-repre"></nuxt-link>
             <div class="content">
-              <p class="title">테스트 전용 글 입니다.</p>
+              <p class="title">
+                <nuxt-link to="/post">테스트 전용 글 입니다.</nuxt-link>
+              </p>
               <p class="info"><span>노원역</span> · 20~30세 · 성별무관 · 흡연가능</p>
               <p class="txt">이 글은 테스트전용 글 입니다. 노원역에서 베타 버전 사용자들의 후기를 수집하고 있습니다. 참여해주시면 감사하겠습니다.</p>
               <span class="time">2시간 전</span>
