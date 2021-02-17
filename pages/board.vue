@@ -143,7 +143,9 @@
             </div>
           </div>
         </div>
-        <div class="sel-snb"></div>
+        <div class="snb">
+          <div class="ad"></div>
+        </div>
       </div>
     </div>
     <Footer />

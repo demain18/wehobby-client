@@ -50,6 +50,10 @@
     width: 100%;
 }
 
+#banner .wrap .form .form-input .filter {
+    width: 0px;
+}
+
 #banner .wrap .form input {
     width: 100%;
     position: relative;
@@ -84,8 +88,7 @@
 }
 
 #wrap .section { /* Section 클래스는 매번 새로 만드는게 좋을둣. 이펙트가 계속 새로 들어가는데 이거 매우 나쁜현상임 */
-    margin-top: 30px;
-/*    border: 1px solid #b5b5b5;*/
+    margin-top: 50px;
 }
 
 #wrap .section:first-child {
@@ -100,8 +103,6 @@
     width: 100%;
 }
 
-
-
 #wrap .section .list {
     width: 100%;
     min-height: 100px;
@@ -113,14 +114,11 @@
 #wrap .section .list .item {
     width: 25%;
     box-sizing: border-box;
-    padding: 0px 10px 15px 10px;
+    padding: 0px 10px 0px 10px;
 /*    background-color: #e2e2e2;*/
 }
 
 #wrap .section .list .item .img {
-    /* background-image: url("../img/ex.jpg");
-    background-size: cover;
-    background-position: center; */
     object-fit: cover;
     width: 100%;
     height: 170px;
@@ -129,7 +127,8 @@
 }
 
 #wrap .section .list .item p {
-    margin-top: 5px;
+    /* margin-top: 0px; */
+    font-size: 14px;
 }
 
 #wrap .section .category {
@@ -137,8 +136,7 @@
 }
 
 #wrap .section .category .list-wrap .list {
-    /* max-height: 150px; */
-    /* border: 1px solid gray; */
+    margin-bottom: 20px!important;
 }
 
 #wrap .section .category .list-wrap .list a.item {
@@ -172,21 +170,6 @@
 */
 }
 
-#wrap .section .category .list-famous {
-    width: 100%;
-}
-
-#wrap .section .category .list-famous .smlist { 
-    width: 100%;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-#wrap .section .category .list-famous .smlist .content .title {
-    font-size: 14px;
-    margin-bottom: 0px;
-}
-
 #wrap .section .category .list p {
     line-height: 22px;
     margin-top: 0px;
@@ -199,6 +182,13 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+#wrap .section .category .list .icon {
+    font-size: 25px;
+    color: #ff4e54;
+    margin-top: -5px;
+}
+
 
 #wrap .section .category .list .sub {
     font-size: 14px;
@@ -215,6 +205,21 @@
 
 #wrap .section .category .list .item:hover {
     color: #cecece;
+}
+
+#wrap .section .category .list-famous {
+    width: 100%;
+}
+
+#wrap .section .category .list-famous .smlist { 
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#wrap .section .category .list-famous .smlist .content .title {
+    font-size: 14px;
+    margin-bottom: 0px;
 }
 
 
@@ -241,7 +246,7 @@
 }
 
 #wrap .snb .content ul {
-    margin-left: 20px;
+    /* margin-left: 20px; */
 }
 
 #wrap .snb .content li {

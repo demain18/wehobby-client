@@ -10,11 +10,7 @@
           <h1>동네친구</h1>
           <div class="form-input">
 
-            <!-- <input type="text" class="input-text" placeholder="검색어를 입력하세요">
-            <v-icon color="darken-1" class="icon-search">
-              mdi-magnify
-            </v-icon> -->
-
+            <v-select solo label="카테고리" class="filter"></v-select>
             <v-text-field solo label="검색어를 입력하세요" append-icon="mdi-magnify"></v-text-field>
 
           </div>
@@ -66,9 +62,12 @@
             <div class="list-wrap">
               <div class="list">
                 <p class="title">
+                  <v-icon class="icon">
+                    mdi-account-group
+                  </v-icon>
                   <nuxt-link to="">회원 모집</nuxt-link>
                 </p>
-                <p class="sub">00건</p>
+                <p class="sub">0건</p>
                 <p class="item">
                   <nuxt-link to="" class="item">친구</nuxt-link>
                 </p>
@@ -99,9 +98,12 @@
               </div>
               <div class="list">
                 <p class="title">
+                  <v-icon class="icon">
+                    mdi-basket
+                  </v-icon>
                   <nuxt-link to="">중고 물품</nuxt-link>
                 </p>
-                <p class="sub">00건</p>
+                <p class="sub">0건</p>
                 <p class="item">
                   <nuxt-link to="" class="item">여성의류</nuxt-link>
                 </p>
@@ -135,9 +137,12 @@
               </div>
               <div class="list">
                 <p class="title">
+                  <v-icon class="icon">
+                    mdi-account-tie
+                  </v-icon>
                   <nuxt-link to="">아르바이트</nuxt-link>
                 </p>
-                <p class="sub">00건</p>
+                <p class="sub">0건</p>
                 <p class="item">
                   <nuxt-link to="" class="item">외식/음료</nuxt-link>
                 </p>
@@ -156,9 +161,12 @@
               </div>
               <div class="list">
                 <p class="title">
+                  <v-icon class="icon">
+                    mdi-book-open-variant
+                  </v-icon>
                   <nuxt-link to="">재능교환/판매</nuxt-link>
                 </p>
-                <p class="sub">00건</p>
+                <p class="sub">0건</p>
                 <p class="item">
                   <nuxt-link to="" class="item">외국어</nuxt-link>
                 </p>
@@ -183,9 +191,12 @@
               </div>
               <div class="list">
                 <p class="title">
+                  <v-icon class="icon">
+                    mdi-calendar
+                  </v-icon>
                   <nuxt-link to="">이벤트</nuxt-link>
                 </p>
-                <p class="sub">00건</p>
+                <p class="sub">0건</p>
                 <p class="item">
                   <nuxt-link to="" class="item">지역/축제</nuxt-link>
                 </p>
@@ -271,17 +282,10 @@
           <div class="ad"></div>
           <div class="list-header">
             <span class="title">공지사항</span>
-            <!-- <span class="btn-more">더보기</span> -->
+            <span class="btn-more">더보기</span>
           </div>
           <div class="list-header-line"></div>
           <div class="content">
-            <!-- <p>
-              <nuxt-link to="">이 글은 공지사항입니다.</nuxt-link>
-            </p>
-            <p>
-              <nuxt-link to="">이 글은 공지사항입니다.</nuxt-link>
-            </p> -->
-
             <ul>
               <li>
                 <nuxt-link to="">이 글은 공지사항입니다.이 글은 공지사항입니다.</nuxt-link>
@@ -300,9 +304,6 @@
 </template>
 
 <script>
-  /*
-  html tag 작성순서 : v-model&vue attr, vuetify attr, html attr 순서
-  */
   export default {}
 
 </script>
