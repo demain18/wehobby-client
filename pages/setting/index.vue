@@ -31,12 +31,25 @@
             <v-btn depressed v-if="select.userVertify == false">
               전화번호로 인증
             </v-btn>
-            <div class="alert" v-else>
+
+            <!-- <div class="alert">
               <v-icon medium class="icon">
                 mdi-check-circle
               </v-icon>
               본인 인증이 완료됬습니다
             </div>
+
+            <v-alert color="blue lighten-5" text-color="blue lighten-1" dense >
+              본인 인증이 완료됬습니다
+            </v-alert> -->
+
+            <v-chip v-else class="icon-vertify" color="blue lighten-5" text-color="blue lighten-1">
+              <v-avatar left>
+                <v-icon>mdi-checkbox-marked-circle</v-icon>
+              </v-avatar>
+              인증됨
+            </v-chip>
+
           </v-col>
         </v-row>
 
@@ -92,7 +105,7 @@
     created() {
       // console.log('the test');
       let age = 0;
-      for (let i = 1950; i <= 2020; i++) {
+      for (let i = 1970; i <= 2020; i++) {
         this.list.age[age] = i;
         age++;
       }

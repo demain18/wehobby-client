@@ -24,7 +24,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="select.passwordRe" type="password" label="비밀번호 변경 재입력"></v-text-field>
+            <v-text-field v-model="select.passwordRe" type="password" label="비밀번호 변경 재확인"></v-text-field>
           </v-col>
         </v-row>
         <v-row>

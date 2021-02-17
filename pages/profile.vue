@@ -32,16 +32,24 @@
           </div>
           <div class="table">
             <div class="header">인증여부</div>
-            <div class="content highlight">인증됨</div>
+            <!-- <div class="content highlight">인증됨</div> -->
+            <div class="content">
+              <v-chip class="icon-vertify" color="blue lighten-5" text-color="blue lighten-1">
+                <v-avatar left>
+                  <v-icon>mdi-checkbox-marked-circle</v-icon>
+                </v-avatar>
+                인증됨
+              </v-chip>
+            </div>
           </div>
         </div>
       </div>
       <div class="posts-wrap">
-         <div class="list-header">
-            <span class="title">작성한 게시물</span>
-            <!-- <span class="btn-more">더보기</span> -->
-          </div>
-          <div class="list-header-line"></div>
+        <div class="list-header">
+          <span class="title">작성한 게시물</span>
+          <!-- <span class="btn-more">더보기</span> -->
+        </div>
+        <div class="list-header-line"></div>
         <div class="article-wrap">
           <div class="article-list">
             <img src="~assets/img/ex.jpg" class="img-repre">
@@ -64,15 +72,23 @@
         </div>
         <div class="paging-wrap">
           <div class="count">
-            <v-btn icon><v-icon>mdi-chevron-double-left</v-icon></v-btn>
-            <v-btn icon><v-icon>mdi-chevron-left</v-icon></v-btn>
+            <v-btn icon>
+              <v-icon>mdi-chevron-double-left</v-icon>
+            </v-btn>
+            <v-btn icon>
+              <v-icon>mdi-chevron-left</v-icon>
+            </v-btn>
             <v-btn icon>10</v-btn>
             <v-btn icon>11</v-btn>
             <v-btn icon disabled>12</v-btn>
             <v-btn icon>13</v-btn>
             <v-btn icon>14</v-btn>
-            <v-btn icon><v-icon>mdi-chevron-right</v-icon></v-btn>
-            <v-btn icon><v-icon>mdi-chevron-double-right</v-icon></v-btn>
+            <v-btn icon>
+              <v-icon>mdi-chevron-right</v-icon>
+            </v-btn>
+            <v-btn icon>
+              <v-icon>mdi-chevron-double-right</v-icon>
+            </v-btn>
           </div>
         </div>
       </div>
@@ -87,7 +103,6 @@
 </script>
 
 <style scoped lang="scss">
-  // @import '~assets/css/common.scss';
   @import '~assets/css/profile.css';
   @import '~assets/css/mobile/profile.css';
 

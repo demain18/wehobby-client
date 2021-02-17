@@ -15,10 +15,12 @@
 }
 
 #wrap .info-wrap .img-profile {
-    min-width: 150px!important;
-    height: 150px!important;
+    min-width: 180px!important;
+    height: 180px!important;
     /* background-color: #ececec; */
+    /* border: 5px solid #ff7b7f; */
     border-radius: 10%;
+    /* box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); */
 }
 
 #wrap .info-wrap .img-profile .present {
@@ -41,6 +43,12 @@
 #wrap .info-wrap .table-wrap .table .header {
     min-width: 70px;
     font-weight: bold;
+}
+
+#wrap .info-wrap .table-wrap .table .content .icon-vertify {
+    /* background-color: #ff7b7f; */
+    position: relative;
+    top: -4px;
 }
 
 #wrap .info-wrap .table-wrap .table .highlight {
