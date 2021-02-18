@@ -304,7 +304,32 @@
 </template>
 
 <script>
-  export default {}
+  import Vue from 'vue';
+  import axios from 'axios';
+  import Vuecookies from 'vue-cookies';
+  Vue.use(Vuecookies);
+
+  export default {
+    data: () => ({
+      tokenPayload: {
+        
+      }
+    }),
+    async fetch() {
+      // try {
+      //   const res = await axios.get(
+      //     '/api/info/category'
+      //   );
+      //   console.log(res.data.result); // reqest result
+      //   console.log(res.data.data); // request data
+      //   this.list = res.data.data;
+      // }
+      // catch (err) { console.log(err); }
+    },
+    mounted() {
+      console.log('Token: '+this.$cookies.get('Token'));
+    },
+  }
 
 </script>
 

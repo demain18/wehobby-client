@@ -63,18 +63,12 @@ export default {
   },
 
   proxy: {
-    // '/api/': {
-    //   target: 'http://localhost:8888/1.0',
-    //   pathRewrite: {'^/api/': ''} 
-    // },
+    '/api/': {
+      target: 'http://localhost:8888/1.0', // Error에 localhos:3000 이라고 나와도 실제로는 8888번 포트로 요청이 가능 중임
+      // pathRewrite: {'^/api/': ''} 
+    },
 
-    '/api/': 'http://localhost:8888/1.0'
-
-    // '/api/': {
-    //   target: 'http://112.150.218.99:8888/1.0',
-    //   pathRewrite: {'^/api/': ''},
-    //   changeOrigin: true
-    // }
+    // '/api/': 'http://localhost:8888/1.0'
   },
 
   // Vuetify Theme Custom
