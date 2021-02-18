@@ -13,10 +13,8 @@
         <v-text-field placeholder="비밀번호 확인" hide-details="" class="input-form" solo flat></v-text-field>
         <v-text-field placeholder="이메일" hide-details="" class="input-form" solo flat></v-text-field>
       </div>
-      <!-- <v-checkbox label="this is test"></v-checkbox> -->
-      <div class="agree-form">
-        <!-- <input type="checkbox" class="check"> -->
-        <v-checkbox v-model="check"></v-checkbox>
+      <div class="form-agree">
+        <v-checkbox v-model="select.check"></v-checkbox>
         <p>
           <nuxt-link to="/article/privacy-policy" target="_blank" class="highlight">개인정보 처리방침</nuxt-link> 및
           <nuxt-link to="/article/terms-of-service" target="_blank" class="highlight">이용약관</nuxt-link>를 숙지했으며 이에 동의합니다
@@ -38,10 +36,28 @@
 </template>
 
 <script>
+  import axios from 'axios'
+  // import axios from '@nuxtjs/axios'
+
   export default {
     data: () => ({
-      check: false,
-    })
+      select: {
+        check: false
+      },
+      list: null
+    }),
+    async fetch() {
+      try {
+        let res = await axios.get(
+          '/api/info/category',
+          {}
+        );
+        console.log('res: '+res.data.result); // reqest result
+        this.list = res.data.data; // request data
+        console.log(this.list);
+      }
+      catch (err) { console.log(err); }
+    }
   }
 
 </script>

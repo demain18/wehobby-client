@@ -1,6 +1,6 @@
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
-  ssr: false,
+  ssr: false, // false -> SPA
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -33,7 +33,9 @@ export default {
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
-    '@nuxtjs/vuetify',
+    // '@nuxtjs/vuetify',
+    // '@nuxtjs/axios'
+
     // '@ckeditor/ckeditor5-build-classic',
     // '@ckeditor/ckeditor5-vue'
     // '@ckeditor/ckeditor5-build-classic'
@@ -41,11 +43,38 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    
+    '@nuxtjs/vuetify',
+    '@nuxtjs/axios'
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+  },
+
+  // Axios Custom
+  // axios: {
+  //   baseURL: 'http://112.150.218.99:8888/1.0/api',
+  //   proxyHeaders: false,
+  //   credentials: false
+  // },
+
+  axios: {
+    proxy: true
+  },
+
+  proxy: {
+    // '/api/': {
+    //   target: 'http://localhost:8888/1.0',
+    //   pathRewrite: {'^/api/': ''} 
+    // },
+
+    '/api/': 'http://localhost:8888/1.0'
+
+    // '/api/': {
+    //   target: 'http://112.150.218.99:8888/1.0',
+    //   pathRewrite: {'^/api/': ''},
+    //   changeOrigin: true
+    // }
   },
 
   // Vuetify Theme Custom
@@ -54,7 +83,7 @@ export default {
       light: true,
       themes: {
         light: {
-          primary: '#ff4e54',
+          primary: '#ff4e54', // proejct main color
           secondary: '#424242',
           accent: '#82B1FF',
           error: '#FF5252',
