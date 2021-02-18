@@ -62,7 +62,7 @@
         console.log(res.data.data); // request data
         this.list = res.data.data;
       }
-      catch (err) { console.log(err); }
+      catch (err) { console.log(err.response.data.message); }
     },
     methods: {
       async formSubmit() {

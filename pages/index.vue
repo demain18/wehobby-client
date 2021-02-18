@@ -60,18 +60,19 @@
           <div class="list-header-line"></div>
           <div class="category">
             <div class="list-wrap">
-              <div class="list">
+              <div class="list" v-for="(categoryItem, index) in category" v-bind:key="index">
                 <p class="title">
                   <v-icon class="icon">
-                    mdi-account-group
+                    <!-- mdi-account-group -->
+                    mdi-{{ icons[index] }}
                   </v-icon>
-                  <nuxt-link to="">회원 모집</nuxt-link>
+                  <nuxt-link :to="'/board?category='+categoryItem.link">{{ categoryItem.name }}</nuxt-link>
                 </p>
                 <p class="sub">0건</p>
-                <p class="item">
-                  <nuxt-link to="" class="item">친구</nuxt-link>
+                <p class="item" v-for="(categoryDetailItem, index) in category[index].detail" v-bind:key="index">
+                  <nuxt-link :to="'/board?category='+categoryItem.link+'?categoryDetail='+categoryDetailItem.link" class="item">{{ categoryDetailItem.name }}</nuxt-link>
                 </p>
-                <p class="item">
+                <!-- <p class="item">
                   <nuxt-link to="" class="item">음식점/카페</nuxt-link>
                 </p>
                 <p class="item">
@@ -91,12 +92,9 @@
                 </p>
                 <p class="item">
                   <nuxt-link to="" class="item">애니메이션</nuxt-link>
-                </p>
-                <!-- <p class="item">
-                  <nuxt-link to="" class="item">기타</nuxt-link>
                 </p> -->
               </div>
-              <div class="list">
+              <!-- <div class="list">
                 <p class="title">
                   <v-icon class="icon">
                     mdi-basket
@@ -218,7 +216,7 @@
                 <p class="item">
                   <nuxt-link to="" class="item">기타</nuxt-link>
                 </p>
-              </div>
+              </div> -->
             </div>
             <div class="list list-famous">
               <p class="title">전국의 인기 게시물</p>
@@ -287,12 +285,12 @@
           <div class="list-header-line"></div>
           <div class="content">
             <ul>
-              <li>
-                <nuxt-link to="">이 글은 공지사항입니다.이 글은 공지사항입니다.</nuxt-link>
+              <li v-for="(noticeItem, index) in notices" v-bind:key="index">
+                <nuxt-link :to="noticeItem.id">{{ noticeItem.title }}</nuxt-link>
               </li>
-              <li>
+              <!-- <li>
                 <nuxt-link to="">이 글은 공지사항입니다.</nuxt-link>
-              </li>
+              </li> -->
             </ul>
           </div>
         </div>
@@ -311,20 +309,34 @@
 
   export default {
     data: () => ({
-      tokenPayload: {
-        
-      }
+      icons: {
+        0: 'account-group',
+        1: 'basket',
+        2: 'account-tie',
+        3: 'book-open-variant',
+        4: 'calendar'
+      },
+      category: null,
+      items: null,
+      notices: null
     }),
     async fetch() {
-      // try {
-      //   const res = await axios.get(
-      //     '/api/info/category'
-      //   );
-      //   console.log(res.data.result); // reqest result
-      //   console.log(res.data.data); // request data
-      //   this.list = res.data.data;
-      // }
-      // catch (err) { console.log(err); }
+      // category read
+      try {
+        const res = await axios.get('/api/info/category');
+        this.category = res.data.data;
+      }
+      catch (err) { console.log(err.response.data.message); }
+
+      // notice read
+      try {
+        const res = await axios.get('/api/notice/list/read');
+        this.notices = res.data.data;
+      }
+      catch (err) { console.log(err.response.data.message); }
+    },
+    methods: {
+
     },
     mounted() {
       console.log('Token: '+this.$cookies.get('Token'));
