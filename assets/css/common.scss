@@ -25,6 +25,10 @@ body {
   // border: 1px solid rgba(255, 255, 255, 0);
 }
 
+[v-cloak] {
+  display: none!important;
+}
+
 p {
   font-size: 16px;
   margin-top: 0px;

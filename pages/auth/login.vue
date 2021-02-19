@@ -31,7 +31,6 @@
         pw: 'guest',
       }
     }),
-    created() {}, // $el($route, $cookies 등) 사용 불가함
     mounted() {
       // console.log('Token: '+this.$cookies.get('Token'));
     },
@@ -43,20 +42,45 @@
               "pw": this.form.pw
             }
           );
-          console.log(res.data.result);
-          console.log(res.data.data);
-          this.token = res.data.data.token; // generated token
-          if (this.$cookies.isKey('Token')) {
-            this.$cookies.remove('Token');
-            this.$cookies.set('Token', this.token, '7d');
+          this.token = res.data.data.token;
+
+          if (this.$cookies.isKey('token')) {
+            this.$cookies.remove('token');
+            this.$cookies.set('token', this.token, '7d');
           } else {
-            this.$cookies.set('Token', this.token, '7d');
+            this.$cookies.set('token', this.token, '7d');
           }
           this.$router.push('/');
         }
         catch (err) {
-          alert(err.response.data.message);
+          alert(err.response.data.message); // can not find data나오면 err만 출력
         }
+
+        // try {
+        //   const profileRes = await axios.post('/api/profile/read', 
+        //   {}, 
+        //   {
+        //     headers: {
+        //       token: this.token
+        //     }
+        //   });
+        //   // let userArr = {
+        //   //   key: profileRes.data.data.key,
+        //   //   nickname: profileRes.data.data.nickname,
+        //   //   img: profileRes.data.data.imgRepre,
+        //   // }
+        //   if (this.$cookies.isKey('user')) {
+        //     this.$cookies.remove('user');
+        //     this.$cookies.set('user', profileRes, '7d');
+        //   } else {
+        //     this.$cookies.set('user', profileRes, '7d');
+        //   }
+        //   console.log(profileRes);
+        //   // this.$router.push('/');
+        // }
+        // catch (err) {
+        //   console.log(err);
+        // }
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Gnb />
-    <!-- <DialogCity/> -->
+    <!-- <DialogCity/> --> <!-- 전페이지 공통이라 GnbPc에 들어가있음 -->
 
     <div id="banner">
       <div class="banner-img"></div>
@@ -60,163 +60,20 @@
           <div class="list-header-line"></div>
           <div class="category">
             <div class="list-wrap">
+
               <div class="list" v-for="(categoryItem, index) in category" v-bind:key="index">
                 <p class="title">
                   <v-icon class="icon">
-                    <!-- mdi-account-group -->
                     mdi-{{ icons[index] }}
                   </v-icon>
-                  <nuxt-link :to="'/board?category='+categoryItem.link">{{ categoryItem.name }}</nuxt-link>
+                  <nuxt-link :to="'/board?category='+categoryItem.key">{{ categoryItem.name }}</nuxt-link>
                 </p>
                 <p class="sub">0건</p>
                 <p class="item" v-for="(categoryDetailItem, index) in category[index].detail" v-bind:key="index">
-                  <nuxt-link :to="'/board?category='+categoryItem.link+'?categoryDetail='+categoryDetailItem.link" class="item">{{ categoryDetailItem.name }}</nuxt-link>
-                </p>
-                <!-- <p class="item">
-                  <nuxt-link to="" class="item">음식점/카페</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">여행</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">스포츠</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">밴드/음악</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">게임</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">영화</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">애니메이션</nuxt-link>
-                </p> -->
-              </div>
-              <!-- <div class="list">
-                <p class="title">
-                  <v-icon class="icon">
-                    mdi-basket
-                  </v-icon>
-                  <nuxt-link to="">중고 물품</nuxt-link>
-                </p>
-                <p class="sub">0건</p>
-                <p class="item">
-                  <nuxt-link to="" class="item">여성의류</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">남성의류</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">패션잡화</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">뷰티/미용</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">스포츠/레저</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">디지털/가전</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">문구/가구/식품</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">차량/오토바이</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">상품권</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">기타</nuxt-link>
+                  <nuxt-link :to="'/board?category='+categoryItem.key+'&genre='+categoryDetailItem.key" class="item">{{ categoryDetailItem.name }}</nuxt-link>
                 </p>
               </div>
-              <div class="list">
-                <p class="title">
-                  <v-icon class="icon">
-                    mdi-account-tie
-                  </v-icon>
-                  <nuxt-link to="">아르바이트</nuxt-link>
-                </p>
-                <p class="sub">0건</p>
-                <p class="item">
-                  <nuxt-link to="" class="item">외식/음료</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">유통/판매</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">서비스</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">고객상담/영업</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">생산/건설</nuxt-link>
-                </p>
-              </div>
-              <div class="list">
-                <p class="title">
-                  <v-icon class="icon">
-                    mdi-book-open-variant
-                  </v-icon>
-                  <nuxt-link to="">재능교환/판매</nuxt-link>
-                </p>
-                <p class="sub">0건</p>
-                <p class="item">
-                  <nuxt-link to="" class="item">외국어</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">수험</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">요리</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">음악/댄스</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">스포츠</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">컴퓨터/IT</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">엔터테인먼트</nuxt-link>
-                </p>
-              </div>
-              <div class="list">
-                <p class="title">
-                  <v-icon class="icon">
-                    mdi-calendar
-                  </v-icon>
-                  <nuxt-link to="">이벤트</nuxt-link>
-                </p>
-                <p class="sub">0건</p>
-                <p class="item">
-                  <nuxt-link to="" class="item">지역/축제</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">전시회</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">파티</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">세미나</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">콘서트/쇼</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">캠페인</nuxt-link>
-                </p>
-                <p class="item">
-                  <nuxt-link to="" class="item">기타</nuxt-link>
-                </p>
-              </div> -->
+
             </div>
             <div class="list list-famous">
               <p class="title">전국의 인기 게시물</p>
@@ -286,7 +143,7 @@
           <div class="content">
             <ul>
               <li v-for="(noticeItem, index) in notices" v-bind:key="index">
-                <nuxt-link :to="noticeItem.id">{{ noticeItem.title }}</nuxt-link>
+                <nuxt-link :to="'/notice?id='+noticeItem.id">{{ noticeItem.title }}</nuxt-link>
               </li>
               <!-- <li>
                 <nuxt-link to="">이 글은 공지사항입니다.</nuxt-link>
@@ -317,16 +174,19 @@
         4: 'calendar'
       },
       category: null,
+      categoryCount: null,
       items: null,
       notices: null
     }),
-    async fetch() {
+    async mounted() {
       // category read
       try {
         const res = await axios.get('/api/info/category');
         this.category = res.data.data;
       }
-      catch (err) { console.log(err.response.data.message); }
+      catch (err) { console.log(err, err.response.data.message); }
+
+      // category post count - 미구현
 
       // notice read
       try {
@@ -338,9 +198,9 @@
     methods: {
 
     },
-    mounted() {
-      console.log('Token: '+this.$cookies.get('Token'));
-    },
+    // mounted() {
+    //   // console.log('Token: '+this.$cookies.get('Token'));
+    // },
   }
 
 </script>

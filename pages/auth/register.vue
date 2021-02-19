@@ -53,17 +53,17 @@
       },
       list: null
     }),
-    async fetch() { // fetch는 페이지가 로드될때 한번 실행된다
-      try {
-        const res = await axios.get(
-          '/api/info/category'
-        );
-        console.log(res.data.result); // reqest result
-        console.log(res.data.data); // request data
-        this.list = res.data.data;
-      }
-      catch (err) { console.log(err.response.data.message); }
-    },
+    // async mounted() {
+    //   try {
+    //     const res = await axios.get(
+    //       '/api/info/category'
+    //     );
+    //     console.log(res.data.result); // reqest result
+    //     console.log(res.data.data); // request data
+    //     this.list = res.data.data;
+    //   }
+    //   catch (err) { console.log(err.response.data.message); }
+    // },
     methods: {
       async formSubmit() {
         try {
@@ -84,11 +84,11 @@
           console.log(res.data.result);
           console.log(res.data.data);
           this.token = res.data.data.token; // generated token
-          if (this.$cookies.isKey('Token')) {
-            this.$cookies.remove('Token');
-            this.$cookies.set('Token', this.token, '7d');
+          if (this.$cookies.isKey('token')) {
+            this.$cookies.remove('token');
+            this.$cookies.set('token', this.token, '7d');
           } else {
-            this.$cookies.set('Token', this.token, '7d');
+            this.$cookies.set('token', this.token, '7d');
           }
           this.$router.push('/');
         }

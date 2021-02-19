@@ -59,9 +59,6 @@
   export default {
     name: "GnbDrawer",
     computed: {
-      // isActive() {
-      //   return this.$store.state.gnb.drawer
-      // },
       ...mapGetters({
         isActive: 'gnb/getToggleDrawer'
       }),
