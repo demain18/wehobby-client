@@ -2,7 +2,9 @@
   <div class="pc" data-app>
     <DialogCity/>
     <nuxt-link class="item lft logo" to="/">동네친구</nuxt-link>
-    <span class="item lft span-a-tag" v-on:click="toggleCityDialog">도시 선택</span>
+    <span v-if="city == null" v-on:click="toggleCityDialog" class="item lft span-a-tag">도시 선택</span>
+    <span v-if="city != null"  v-on:click="toggleCityDialog" class="item lft span-a-tag">{{ city[0].name }}</span>
+    <!-- <span v-else v-on:click="toggleCityDialog" class="item lft span-a-tag">도시 선택</span> -->
 
     <v-menu open-on-hover middle offset-y>
       <template v-slot:activator="{ on, attrs }">
@@ -41,7 +43,8 @@
           <img src="~assets/img/repre_1.jpg" class="">
         </v-avatar>
       </template>
-      <v-list>
+
+      <!-- <v-list>
         <v-list-item>
           <nuxt-link to="/profile">내 프로필 보기</nuxt-link>
         </v-list-item>
@@ -51,7 +54,34 @@
         <v-list-item>
           <nuxt-link to="">로그아웃</nuxt-link>
         </v-list-item>
-      </v-list>
+      </v-list> -->
+
+      <v-list dense>
+      <!-- <v-subheader>REPORTS</v-subheader> -->
+      <v-list-item-group color="primary">
+        <v-list-item to="/profile">
+          <v-list-item-content>
+            <v-list-item-title class="title">{{ user.nickname }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item to="/profile">
+          <v-list-item-content>
+            <v-list-item-title>내 프로필 보기</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item to="/setting">
+          <v-list-item-content>
+            <v-list-item-title>설정</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item to="/">
+          <v-list-item-content>
+            <v-list-item-title>로그아웃</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-item-group>
+    </v-list>
+
     </v-menu>
 
     <nuxt-link v-else-if="token.verify == false" to="/auth" class="item rgt">로그인/회원가입</nuxt-link>
@@ -70,23 +100,26 @@
       token: {
         verify: null,
       },
-      user: {
-        // visible: false,
-      },
+      user: null ,
+      city: 'test',
+      cityItems: [],
       routeItems: [],
     }),
     async mounted() {
+      // user update
+      this.user = this.$cookies.get('user');
+
       // check cookies
-      // console.log(this.$cookies.keys());
       let cookies = {
         token: this.$cookies.get('token'),
-        city: this.$cookies.get('city')
+        city: this.$cookies.get('city'),
+        user: this.$cookies.get('user')
       }
+      console.log($cookies.keys());
       console.log(cookies);
 
       // token verify
       if (this.$cookies.isKey('token')) {
-        // console.log('token: '+this.$cookies.get('token'));
         try {
           const res = await axios.post('/api/auth/verify',
             {},
@@ -96,8 +129,6 @@
               }
             }
           );
-          // console.log(res.data.result);
-
           if (res.data.result == true) {
             this.token.verify = true;
           }
@@ -111,7 +142,25 @@
         this.token.verify = false;
       }
 
-      // route list
+      // citys read
+      if (this.$cookies.get('city') != null) {
+        try {
+          const res = await axios.get('/api/info/citys');
+          this.cityItems = res.data.data.citys;
+          this.cityItems.unshift({
+            key: 0,
+            name: '선택안함(대한민국 전체)'
+          });
+          this.city = this.cityItems.filter(
+            (ele) => {
+              return ele.key == parseInt(this.$cookies.get('city'));
+            }
+          );
+        }
+        catch (err) { console.log(err.response.data.message); }
+      }
+
+      // route list dev
       this.$router.options.routes.forEach(route => {
         this.routeItems.push({
           title: route.name,

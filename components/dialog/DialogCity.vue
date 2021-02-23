@@ -71,7 +71,8 @@
         } else {
           this.$cookies.set('city', this.select, '30d');
         }
-        this.$router.push('/');
+        // this.$router.push('/');
+        window.location.href = "/";
       },
     },
   }

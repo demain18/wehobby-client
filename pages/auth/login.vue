@@ -38,10 +38,9 @@
       async formSubmit() {
         try {
           const res = await axios.post('/api/auth/login', {
-              "id": this.form.id,
-              "pw": this.form.pw
-            }
-          );
+            "id": this.form.id,
+            "pw": this.form.pw
+          });
           this.token = res.data.data.token;
 
           if (this.$cookies.isKey('token')) {
@@ -50,37 +49,38 @@
           } else {
             this.$cookies.set('token', this.token, '7d');
           }
-          this.$router.push('/');
-        }
-        catch (err) {
+
+          try {
+            const profileRes = await axios.post('/api/profile/read', 
+            {}, 
+            {
+              headers: {
+                token: this.$cookies.get('token'),
+              }
+            });
+            let userData = {
+              key: parseInt(profileRes.data.data.key),
+              nickname: profileRes.data.data.nickname,
+              image: profileRes.data.data.imgRepre,
+            }
+            if (this.$cookies.isKey('user')) {
+              this.$cookies.remove('user');
+              this.$cookies.set('user', userData, '30d');
+            } else {
+              this.$cookies.set('user', userData, '30d');
+            }
+            console.log(profileRes);
+            // this.$router.push('/');
+          }
+          catch (err) {
+            console.log(err.response.data.message);
+          }
+
+          window.location.href = "/";
+        } catch (err) {
           alert(err.response.data.message); // can not find data나오면 err만 출력
         }
 
-        // try {
-        //   const profileRes = await axios.post('/api/profile/read', 
-        //   {}, 
-        //   {
-        //     headers: {
-        //       token: this.token
-        //     }
-        //   });
-        //   // let userArr = {
-        //   //   key: profileRes.data.data.key,
-        //   //   nickname: profileRes.data.data.nickname,
-        //   //   img: profileRes.data.data.imgRepre,
-        //   // }
-        //   if (this.$cookies.isKey('user')) {
-        //     this.$cookies.remove('user');
-        //     this.$cookies.set('user', profileRes, '7d');
-        //   } else {
-        //     this.$cookies.set('user', profileRes, '7d');
-        //   }
-        //   console.log(profileRes);
-        //   // this.$router.push('/');
-        // }
-        // catch (err) {
-        //   console.log(err);
-        // }
       }
     }
   }
@@ -95,4 +95,5 @@
   #form button.submit {
     margin-top: 20px;
   }
+
 </style>
