@@ -115,8 +115,8 @@
         city: this.$cookies.get('city'),
         user: this.$cookies.get('user')
       }
-      console.log($cookies.keys());
-      console.log(cookies);
+      // console.log($cookies.keys());
+      // console.log(cookies);
 
       // token verify
       if (this.$cookies.isKey('token')) {

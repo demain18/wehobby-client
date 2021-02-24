@@ -68,7 +68,7 @@
                   </v-icon>
                   <nuxt-link :to="'/board?category='+categoryItem.key">{{ categoryItem.name }}</nuxt-link>
                 </p>
-                <p class="sub">0건</p>
+                <p class="sub">{{ categoryCount[index] }}건</p>
                 <p class="item" v-for="(categoryDetailItem, index) in category[index].detail" v-bind:key="index">
                   <nuxt-link :to="'/board?category='+categoryItem.key+'&genre='+categoryDetailItem.key" class="item">{{ categoryDetailItem.name }}</nuxt-link>
                 </p>
@@ -174,9 +174,10 @@
         4: 'calendar'
       },
       category: null,
-      categoryCount: null,
+      categoryCount: [],
       items: null,
-      notices: null
+      notices: null,
+      count: 1275002
     }),
     async mounted() {
       // category read

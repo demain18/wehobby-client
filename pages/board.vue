@@ -5,92 +5,43 @@
       <div class="sel-filter">
         <BreadCrumb />
         <h2>
-          노원구의 회원 모집(8,100)
+          서울특별시의 회원 모집({{ this.city.count }})
         </h2>
+
         <div class="filter">
           <div class="header">구/군</div>
           <div class="content">
-            <span>
-              <nuxt-link to="">서울특별시 전체(19,220)</nuxt-link>
+            <span v-bind:class="{active: undefined==(param.area)}">
+              <a v-on:click="pageLink('area', null)">{{ this.city.name }} 전체({{ this.city.count }})</a>
             </span>
-            <span class="active">
-              <nuxt-link to="">노원구(8,100)</nuxt-link>
-            </span>
-            <span>
-              <nuxt-link to="">광진구(5,331)</nuxt-link>
-            </span>
-            <span class="disable">
-              <nuxt-link to="">은평구(0)</nuxt-link>
+            <span v-for="(item, index) in filterItems.citysArea" v-bind:key="index" v-bind:class="{active: index==(param.area-1)}">
+              <a v-on:click="pageLink('area', (index+1))">{{ item.name }}({{ item.count }})</a>
             </span>
           </div>
         </div>
         <div class="filter">
           <div class="header">역</div>
           <div class="content">
-            <span class="active">
-              <nuxt-link to="">선택안함</nuxt-link>
+            <span  v-bind:class="{active: undefined==(param.subway)}">
+              <a v-on:click="pageLink('subway', null)">선택안함</a>
             </span>
-            <span>
-              <nuxt-link to="">마들역</nuxt-link>
-            </span>
-            <span>
-              <nuxt-link to="">노원역</nuxt-link>
-            </span>
-            <span>
-              <nuxt-link to="">중계역</nuxt-link>
-            </span>
-            <span>
-              <nuxt-link to="">하계역</nuxt-link>
-            </span>
-            <span>
-              <nuxt-link to="">공릉역</nuxt-link>
-            </span>
-            <span>
-              <nuxt-link to="">태릉입구역</nuxt-link>
+            <span v-for="(item, index) in filterItems.citysSubway" v-bind:key="index"  v-bind:class="{active: index==(param.subway-1)}">
+              <a v-on:click="pageLink('subway', (index+1))">{{ item.name }}역({{ item.count }})</a>
             </span>
           </div>
         </div>
         <div class="filter">
           <div class="header">장르</div>
           <div class="content">
-            <!-- <span class="active">전체</span>
-            <span>친구</span>
-            <span>채팅</span>
-            <span>스포츠</span>
-            <span>기타</span> -->
-            <span class="active">
-              <nuxt-link to="">회원모집 전체</nuxt-link>
+            <span  v-bind:class="{active: undefined==(param.genre)}">
+              <a v-on:click="pageLink('genre', null)">선택안함</a>
             </span>
-            <span>
-              <nuxt-link to="">음식점/카페</nuxt-link>
+            <span v-for="(item, index) in filterItems.categoryDetail" v-bind:key="index"  v-bind:class="{active: index==(param.genre-1)}">
+              <a v-on:click="pageLink('genre', (index+1))">{{ item.name }}({{ item.count }})</a>
             </span>
-            <span>
-              <nuxt-link to="">여행</nuxt-link>
-            </span>
-            <span>
-              <nuxt-link to="">스포츠</nuxt-link>
-            </span>
-            <span>
-              <nuxt-link to="">미팅</nuxt-link>
-            </span>
-            <span>
-              <nuxt-link to="">밴드/음악</nuxt-link>
-            </span>
-            <span>
-              <nuxt-link to="">게임</nuxt-link>
-            </span>
-            <span>
-              <nuxt-link to="">영화</nuxt-link>
-            </span>
-            <span>
-              <nuxt-link to="">애니메이션</nuxt-link>
-            </span>
-            <span>
-              <nuxt-link to="">기타</nuxt-link>
-            </span>
-
           </div>
         </div>
+
         <v-btn depressed class="btn-main-color">
           게시물 작성
         </v-btn>
@@ -98,7 +49,19 @@
       <div class="wrap-split">
         <div class="sel-content">
           <div class="article-wrap">
-            <div class="article">
+
+            <div class="article" v-for="(item, index) in postItems" v-bind:key="index">
+            <nuxt-link to="/post" style="height: 80px;"><img src="~assets/img/ex.jpg" class="img-repre"></nuxt-link>
+              <div class="content">
+                <p class="title"><nuxt-link to="/post">{{ item.title }}</nuxt-link></p>
+                <p class="info">
+                  <span>{{ filterItems.citysArea[(item.area-1)].name }}</span> · {{ item.options[0] }} · {{ item.options[1] }} · {{ item.options[2] }}
+                </p>
+                <p class="txt">{{ item.desc }}..</p>
+                <span class="time" v-text="agoCalc(item.date, item.time)+' 전'"></span>
+              </div>
+            </div>
+            <!-- <div class="article">
             <nuxt-link to="/post" style="height: 80px;"><img src="~assets/img/ex.jpg" class="img-repre"></nuxt-link>
               <div class="content">
                 <p class="title"><nuxt-link to="/post">테스트 전용 글 입니다.</nuxt-link></p>
@@ -106,16 +69,7 @@
                 <p class="txt">이 글은 테스트전용 글 입니다. 노원역에서 베타 버전 사용자들의 후기를 수집하고 있습니다. 참여해주시면 감사하겠습니다.</p>
                 <span class="time">2시간 전</span>
               </div>
-            </div>
-            <div class="article">
-            <nuxt-link to="/post" style="height: 80px;"><img src="~assets/img/ex.jpg" class="img-repre"></nuxt-link>
-              <div class="content">
-                <p class="title"><nuxt-link to="/post">테스트 전용 글 입니다.</nuxt-link></p>
-                <p class="info"><span>노원역</span> · 20~30세 · 성별무관 · 흡연가능</p>
-                <p class="txt">이 글은 테스트전용 글 입니다. 노원역에서 베타 버전 사용자들의 후기를 수집하고 있습니다. 참여해주시면 감사하겠습니다.</p>
-                <span class="time">2시간 전</span>
-              </div>
-            </div>
+            </div> -->
           </div>
 
           <Pagination />
@@ -136,80 +90,171 @@
 </template>
 
 <script>
-// import pagination from '../../../../작업품:예제/demo-board-nuxt/pages/components/pagination.vue'
+  import Vue from 'vue';
+  import axios from 'axios';
+  import Vuecookies from 'vue-cookies';
+  import moment from 'moment';
+  Vue.use(Vuecookies);
+
   export default {
-  // components: { pagination },
-    // created() {
-    //   /*
-    //   나중에 fir도 지울 것
-    //   */
-    //   let length = (this.paging.count-1)/2; // 양방향 갯수
-    //   let now = this.paging.pageBase.now-length; // 시작점 설정
-    //   let firEmpty = 0; // 우측 부족한 갯수
-    //   let lastEmpty = 0; // 좌측 부족한 갯수
+    created() {
+      this.param = {
+        category: parseInt(this.$route.query.category),
+        // city: parseInt(this.$cookies.get('city')), // 고정값
+        area: this.$route.query.area,
+        subway: this.$route.query.subway,
+        genre: this.$route.query.genre, // categoryDetail
+        keyword: this.$route.query.keyword,
+        page: this.$route.query.page,
+      }
+    },
+    data: () => ({
+      city: [],
+      param: [],
+      filterItems: [],
+      postItems: []
+    }),
+    async mounted() {
+      // filter read
+      try {
+        const filterRes = await axios.get('/api/info/filter', {
+          params: {
+            city: this.$cookies.get('city'),
+            category: this.param.category
+          }
+        });
+        this.filterItems = filterRes.data.data;
+      }
+      catch (err) { console.log(err.response.data.message); }
 
-    //   if (this.paging.pageBase.last <= 4) 
-    //   {
-    //     for (let i=0; i<this.paging.pageBase.last; i++) {
-    //       this.paging.pages.push(i+1);
-    //     }
-    //   }
-    //   else 
-    //   {
-    //     for (let i=0; i<length; i++) {
-    //       if (now>=1) { // now값이 fir보다 크면 배열 추가
-    //         this.paging.pages.push(now);
-    //         now++;
-    //       } else {
-    //         this.paging.pages.push('$');
-    //         now++;
-    //         firEmpty++;
-    //       }
-    //     }
-    //     this.paging.pages.push(now); // 복구된 now값 배열 추가
-    //     for (let i=0; i<length; i++) {
-    //       if (now<this.paging.pageBase.last) { // now값이 last보다 작으면 배열 추가
-    //         now++;
-    //         this.paging.pages.push(now);
-    //       } else {
-    //         this.paging.pages.push('#');
-    //         // now++;
-    //         lastEmpty++;
-    //       }
-    //     }
+      // city name read
+      let findCityName = (arr) => {
+        return arr.key == this.$cookies.get('city');
+      }
+      try {
+        const citysRes = await axios.get('/api/info/citys');
+        let cityCount = 0;
+        for (let i = 0; i < this.filterItems.citysArea.length; i++) {
+          cityCount += this.filterItems.citysArea[i].count;
+        }
+        this.city = {
+          name: citysRes.data.data.citys.find(findCityName).name,
+          count: cityCount
+        }
+      }
+      catch (err) { console.log(err); }
 
-    //     // fir, last empty 계산해서 pages배열 앞뒤로 지우고 추가
-    //     // console.log('firEmpty: '+firEmpty+' / lastEmpty: '+lastEmpty+' / now: '+now);
-    //     for (let i=0; i<firEmpty; i++) {
-    //       now++;
-    //       this.paging.pages.shift();
-    //       this.paging.pages.push(now);
-    //     }
-    //     now -= length;
-    //     for (let i=0; i<lastEmpty; i++) {
-    //       if (this.paging.pageBase.now % 2 == 0) {
-    //         now -= 1;
-    //       }
-    //       now -= 1;
-    //       this.paging.pages.pop();
-    //       this.paging.pages.unshift(now);
-    //     }
-    //   }
-    // },
-    // data: () => ({
-    //   paging: {
-    //     count: 5, // 홀수만 가능
-    //     pageBase: {
-    //       fir: 1, // 1 고정
-    //       last: 10, // 총 페이지 갯수
-    //       now: 1, // 현재 페이지 위치
-    //     },
-    //     pages: []
-    //   }
-    // }),
-    // mounted() {
-      
-    // }
+      // post list read
+      try {
+        const postListRes = await axios.get('/api/board/read', {
+          params: {
+            category: this.param.category,
+            city: this.$cookies.get('city'),
+            area: this.param.area,
+            subway: this.param.subway,
+            categoryDetail: this.param.genre,
+            keyword: this.param.keyword,
+            page: this.param.page
+          }
+        });
+        // console.log(postListRes.data.data);
+        this.postItems = postListRes.data.data;
+      }
+      catch (err) { console.log(err); }
+
+      // agoCalc
+      // agoCalc(null, this.postItems[0].time);
+    },
+    methods: {
+      async pageLink(ele, key) {
+        this.param[ele] = key;
+        if (key == null) {
+          this.param[ele] = undefined;
+        }
+
+        let paramData = [];
+        for (let [key, val] of Object.entries(this.param)) {
+          if (val != undefined) {
+            paramData.push(
+              {
+                key: key,
+                val: val
+              }
+            );
+          }
+        }
+        let paramString = '/board?';
+        for (let i = 0; i < paramData.length; i++) {
+          paramString += paramData[i].key+'='+paramData[i].val+'&';
+        }
+        paramString = paramString.slice(0, -1);
+        this.$router.push(paramString);
+      },
+      agoCalc(date, time) {
+        let timeNow = {
+          year: parseInt(moment().format('YYYY')),
+          month: parseInt(moment().format('MM')),
+          day: parseInt(moment().format('DD')),
+          hour: parseInt(moment().format('hh')),
+          minute: parseInt(moment().format('mm'))
+        }
+        let dateSplit = date.split('-');
+        let timeSplit = time.split(':');
+        time = {
+          year: parseInt(dateSplit[0]),
+          month: parseInt(dateSplit[1]),
+          day: parseInt(dateSplit[2]),
+          hour: parseInt(timeSplit[0]),
+          minute: parseInt(timeSplit[1])
+        }
+
+        let timeGap = [];
+        // if (timeNow.hour == time.hour) {
+        //   timeGap = {
+        //     type: '분',
+        //     val: timeNow.minute-time.minute
+        //   }
+        // } else {
+        //   timeGap = {
+        //     type: '시간',
+        //     val: timeNow.hour-time.hour
+        //   }
+        // }
+
+        if (timeNow.year > time.year) {
+          timeGap = {
+            type: '년',
+            val: timeNow.year-time.year
+          }
+        }
+        else if (timeNow.month > time.month) {
+          timeGap = {
+            type: '개월',
+            val: timeNow.month-time.month
+          }
+        }
+        else if (timeNow.day > time.day) {
+          timeGap = {
+            type: '일',
+            val: timeNow.day-time.day
+          }
+        }
+        else if (timeNow.hour >= time.hour) {
+          timeGap = {
+            type: '시간',
+            val: timeNow.hour-time.hour
+          }
+        }
+
+        return timeGap.val+timeGap.type;
+      }
+    },
+    watch: {
+      $route(to, form) {
+        console.log(to);
+        // postItems 업데이트
+      },
+    }
   }
 
 </script>
