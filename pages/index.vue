@@ -10,8 +10,8 @@
           <h1>동네친구</h1>
           <div class="form-input">
 
-            <v-select solo label="카테고리" class="filter"></v-select>
-            <v-text-field solo label="함께하고 싶은 취미를 알려주세요" append-icon="mdi-magnify"></v-text-field>
+            <v-select :items="category" item-text="name" item-value="key" v-model="select.keywordCategory" solo label="카테고리" class="filter"></v-select>
+            <v-text-field v-model="keyword" v-on:keyup.enter="keywordSearch()" solo label="함께하고 싶은 취미를 알려주세요" append-icon="mdi-magnify"></v-text-field>
 
           </div>
         </div>
@@ -176,7 +176,11 @@
       category: [],
       categoryCount: [],
       items: [],
-      notices: []
+      notices: [],
+      select: {
+        keywordCategory: null
+      },
+      keyword: null
     }),
     async mounted() {
       // category read
@@ -214,7 +218,18 @@
       catch (err) { console.log(err.response.data.message); }
     },
     methods: {
+      keywordSearch() {
+        if (this.select.keywordCategory == null) {
+          alert('카테고리를 선택해주세요.')
+        }
+        else if(this.keyword == null) {
+          alert('검색어를 작성해주세요.')
+        }
+        else {
+          this.$router.push('/board?category='+this.select.keywordCategory+'&keyword='+this.keyword);
 
+        }
+      }
     },
     // mounted() {
     //   // console.log('Token: '+this.$cookies.get('Token'));

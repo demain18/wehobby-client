@@ -51,9 +51,9 @@
           <div class="article-wrap">
 
             <div class="article" v-for="(item, index) in postItems" v-bind:key="index">
-            <nuxt-link to="/post" style="height: 80px;"><img src="~assets/img/ex.jpg" class="img-repre"></nuxt-link>
+            <nuxt-link :to="'/post?id='+item.key" style="height: 80px;"><img src="~assets/img/ex.jpg" class="img-repre"></nuxt-link>
               <div class="content">
-                <p class="title"><nuxt-link to="/post">{{ item.title }}</nuxt-link></p>
+                <p class="title"><nuxt-link :to="'/post?id='+item.key">{{ item.title }}</nuxt-link></p>
                 <p class="info">
                   <span>{{ filterItems.citysArea[(item.area-1)].name }}</span> · {{ item.options[0] }} · {{ item.options[1] }} · {{ item.options[2] }}
                 </p>
@@ -76,7 +76,7 @@
 
           <div class="search-wrap">
             <div class="search-form">
-              <v-text-field solo label="검색어를 입력하세요" append-icon="mdi-magnify"></v-text-field>
+              <v-text-field v-model="param.keyword" v-on:keyup.enter="pageLink('keyword', param.keyword)" solo label="검색어를 입력하세요" append-icon="mdi-magnify"></v-text-field>
             </div>
           </div>
         </div>
@@ -225,10 +225,22 @@
             val: timeNow.day-time.day
           }
         }
-        else if (timeNow.hour >= time.hour) {
+        else if (timeNow.hour > time.hour) {
           timeGap = {
             type: '시간',
             val: timeNow.hour-time.hour
+          }
+        }
+        else if (timeNow.minute > time.minute) {
+          timeGap = {
+            type: '분',
+            val: timeNow.minute-time.minute
+          }
+        }
+        else {
+          timeGap = {
+            type: '금',
+            val: '방'
           }
         }
 
@@ -256,6 +268,9 @@
         }
         catch (err) { console.log(err.response.data.message); }
       },
+      // keywordSearch() {
+      //   this.param.keyword = 
+      // }
     }
   }
 

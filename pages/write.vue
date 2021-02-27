@@ -6,25 +6,25 @@
         <v-row>
           <v-col>
             <!-- <v-text-field :rules="[rules.required]" label="시/구*"></v-text-field> -->
-            <v-select :items="lists.city" :rules="[rules.required]" label="시/구*" ></v-select>
+            <v-select :items="list.city" :rules="[rules.required]" label="시/구*" ></v-select>
           </v-col>
           <v-col>
             <!-- <v-text-field label="구/군*"></v-text-field> -->
-            <v-select :items="lists.area" label="구/군" ></v-select>
+            <v-select :items="list.area" label="구/군" ></v-select>
           </v-col>
           <v-col>
             <!-- <v-text-field label="지하철 역"></v-text-field> -->
-            <v-select :items="lists.subway" label="지하철역" ></v-select>
+            <v-select :items="list.subway" label="지하철역" ></v-select>
           </v-col>
         </v-row>
         <v-row>
 
           <v-col>
-            <v-select :items="lists.category" :rules="[rules.required]" label="카테고리*" required></v-select>
+            <v-select :items="list.category" :rules="[rules.required]" label="카테고리*" required></v-select>
           </v-col>
           <v-col>
             <!-- <v-text-field label="장르"></v-text-field> -->
-            <v-select :items="lists.categoryDetail" label="장르" required></v-select>
+            <v-select :items="list.categoryDetail" label="장르" required></v-select>
           </v-col>
 
         </v-row>
@@ -102,7 +102,7 @@
       rules: {
         required: value => !!value || '비워둘 수 없는 항목입니다.',
       },
-      lists: {
+      list: {
         city: [
           'ex1) 서울특별시',
           'ex2) 대구광역시',
