@@ -115,7 +115,7 @@
       postItems: []
     }),
     async mounted() {
-      // filter read
+      // filter list, count read
       try {
         const filterRes = await axios.get('/api/info/filter', {
           params: {
@@ -133,13 +133,13 @@
       }
       try {
         const citysRes = await axios.get('/api/info/citys');
-        let cityCount = 0;
+        let areaCountHap = 0;
         for (let i = 0; i < this.filterItems.citysArea.length; i++) {
-          cityCount += this.filterItems.citysArea[i].count;
+          areaCountHap += this.filterItems.citysArea[i].count;
         }
         this.city = {
-          name: citysRes.data.data.citys.find(findCityName).name,
-          count: cityCount
+          name: citysRes.data.data.citys.find(findCityName).name, // city 목록에서 현재 위치한 도시의 이름 색적
+          count: areaCountHap
         }
       }
       catch (err) { console.log(err); }
@@ -161,9 +161,6 @@
         this.postItems = postListRes.data.data;
       }
       catch (err) { console.log(err); }
-
-      // agoCalc
-      // agoCalc(null, this.postItems[0].time);
     },
     methods: {
       async pageLink(ele, key) {
@@ -209,17 +206,6 @@
         }
 
         let timeGap = [];
-        // if (timeNow.hour == time.hour) {
-        //   timeGap = {
-        //     type: '분',
-        //     val: timeNow.minute-time.minute
-        //   }
-        // } else {
-        //   timeGap = {
-        //     type: '시간',
-        //     val: timeNow.hour-time.hour
-        //   }
-        // }
 
         if (timeNow.year > time.year) {
           timeGap = {
@@ -250,9 +236,25 @@
       }
     },
     watch: {
-      $route(to, form) {
+      async $route(to, form) {
         console.log(to);
         // postItems 업데이트
+        try {
+          const postListRes = await axios.get('/api/board/read', {
+            params: {
+              category: this.param.category,
+              city: this.$cookies.get('city'),
+              area: this.param.area,
+              subway: this.param.subway,
+              categoryDetail: this.param.genre,
+              keyword: this.param.keyword,
+              page: this.param.page
+            }
+          });
+          this.postItems = postListRes.data.data;
+          console.log(postListRes);
+        }
+        catch (err) { console.log(err.response.data.message); }
       },
     }
   }

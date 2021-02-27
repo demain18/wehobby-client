@@ -55,7 +55,7 @@
         <div class="section-wrap">
           <div class="list-header">
             <span class="title">카테고리</span>
-            <span class="btn-more">더보기</span>
+            <!-- <span class="btn-more">더보기</span> -->
           </div>
           <div class="list-header-line"></div>
           <div class="category">
@@ -70,7 +70,7 @@
                 </p>
                 <p class="sub">{{ categoryCount[index] }}건</p>
                 <p class="item" v-for="(categoryDetailItem, index) in category[index].detail" v-bind:key="index">
-                  <nuxt-link :to="'/board?category='+categoryItem.key+'&genre='+categoryDetailItem.key" class="item">{{ categoryDetailItem.name }}</nuxt-link>
+                  <nuxt-link :to="'/board?category='+categoryItem.key+'&genre='+(index+1)" class="item">{{ categoryDetailItem.name }}</nuxt-link>
                 </p>
               </div>
 
@@ -137,7 +137,7 @@
           <div class="ad"></div>
           <div class="list-header">
             <span class="title">공지사항</span>
-            <span class="btn-more">더보기</span>
+            <!-- <span class="btn-more">더보기</span> -->
           </div>
           <div class="list-header-line"></div>
           <div class="content">
@@ -173,11 +173,10 @@
         3: 'book-open-variant',
         4: 'calendar'
       },
-      category: null,
+      category: [],
       categoryCount: [],
-      items: null,
-      notices: null,
-      count: 1275002
+      items: [],
+      notices: []
     }),
     async mounted() {
       // category read
@@ -187,7 +186,25 @@
       }
       catch (err) { console.log(err, err.response.data.message); }
 
-      // category post count - 미구현
+      // category post count
+      for (let i = 0; i < this.category.length; i++) {
+        try {
+          const filterRes = await axios.get('/api/info/filter', {
+            params: {
+              city: this.$cookies.get('city'),
+              category: this.category[i].key
+            }
+          });
+
+          // let postCount = 0;
+          // for (let x = 0; x < filterRes.data.data.categoryDetail.length; x++) {
+          //   postCount += filterRes.data.data.categoryDetail[x].count;
+          // }
+          // this.categoryCount[i] = postCount;
+          this.categoryCount[i] = filterRes.data.data.countAll;
+        }
+        catch (err) { console.log(err); }
+      }
 
       // notice read
       try {
