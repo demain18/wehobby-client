@@ -5,10 +5,10 @@
       <div class="sel-filter">
         <BreadCrumb />
         <h2 v-if="param.keyword != undefined">
-          검색어 "{{ this.param.keyword }}"의 검색결과
+          검색어 "{{ this.param.keyword }}"의 검색결과({{ this.keywordCount }})
         </h2>
         <h2 v-else>
-          서울특별시의 회원 모집({{ this.city.count }})
+          서울특별시의 회원 모집({{ this.filterItems.countAll }})
         </h2>
 
         <div class="filter">
@@ -106,7 +106,7 @@
       param: [],
       filterItems: [],
       postItems: [],
-      // keywordCount: null
+      keywordCount: null
     }),
     async mounted() {
       // filter list, count read
@@ -121,7 +121,7 @@
       }
       catch (err) { console.log(err.response.data.message); }
 
-      // city name read
+      // city name, count read
       let findCityName = (arr) => {
         return arr.key == this.$cookies.get('city');
       }
@@ -155,7 +155,7 @@
               page: this.param.page
             }
           });
-          // this.keywordCount = postListRes.data.data.count;
+          this.keywordCount = postListRes.data.data.count;
           this.postItems = postListRes.data.data.postItems;
         }
         catch (err) { console.log(err); }
