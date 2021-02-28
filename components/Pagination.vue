@@ -26,7 +26,7 @@
   Vue.use(Vuecookies);
 
   export default {
-    created() {
+    async created() {
       this.param = {
         category: this.$route.query.category,
         area: this.$route.query.area,
@@ -35,6 +35,25 @@
         keyword: this.$route.query.keyword,
         page: this.$route.query.page,
       }
+
+      try {
+        const pageRes = await axios.get('/api/board/read', {
+          params: {
+            category: this.param.category,
+            city: this.$cookies.get('city'),
+            area: this.param.area,
+            subway: this.param.subway,
+            categoryDetail: this.param.genre,
+            keyword: this.param.keyword,
+            page: this.param.page
+          }
+        });
+        this.paging.pageBase.last = (Math.ceil(pageRes.data.data.count/10));
+        // console.log(this.paging.pageBase.last)
+      }
+      catch (err) { console.log(err); }
+
+      this.pagingCalc();
     },
     data: () => ({
       param: [],
@@ -50,43 +69,34 @@
     }),
     async mounted() {
       // page now read
-      if (this.$route.query.page != undefined) {
+      if (this.$route.query.page == undefined) {
+        this.paging.pageBase.now = 1;
+      } else {
         this.paging.pageBase.now = parseInt(this.$route.query.page);
       }
 
-      // page last read - 이거 필터말고 모델수정한 글목록으로 가져와야지 유동적으로 변경됨
-      try {
-        const filterRes = await axios.get('/api/board/read', {
-          params: {
-            category: this.param.category,
-            city: this.$cookies.get('city'),
-            area: this.param.area,
-            subway: this.param.subway,
-            categoryDetail: this.param.genre,
-            keyword: this.param.keyword,
-            page: this.param.page
-          }
-        });
-        this.paging.pageBase.last = Math.ceil(filterRes.data.data.count/10);
-      }
-      catch (err) { console.log(err); }
+      // page last read
+      // this.lastPageRead();
+      // try {
+      //   const filterRes = await axios.get('/api/board/read', {
+      //     params: {
+      //       category: this.param.category,
+      //       city: this.$cookies.get('city'),
+      //       area: this.param.area,
+      //       subway: this.param.subway,
+      //       categoryDetail: this.param.genre,
+      //       keyword: this.param.keyword,
+      //       page: this.param.page
+      //     }
+      //   });
+      //   this.paging.pageBase.last = Math.ceil(filterRes.data.data.count/10);
+      // }
+      // catch (err) { console.log(err); }
 
       // paging calc func
-      this.pagingCalc();
+      // this.pagingCalc();
     },
     methods: {
-      // async lastPageRead() {
-      //   try {
-      //     const filterRes = await axios.get('/api/info/filter', {
-      //       params: {
-      //         city: this.$cookies.get('city'),
-      //         category: this.$route.query.category
-      //       }
-      //     });
-      //     this.paging.pageBase.last = Math.ceil(filterRes.data.data.countAll/10); // board list 총 갯수로 나눗셈
-      //   }
-      //   catch (err) { console.log(err); }
-      // },
       async pageLink(ele, key) {
         this.param[ele] = key;
         if (key == null) {
@@ -169,7 +179,8 @@
       }
     },
     watch: {
-      $route(to, form) {
+      async $route(to, form) {
+        // console.log(to);
         this.param = {
           category: this.$route.query.category,
           area: this.$route.query.area,
@@ -178,6 +189,31 @@
           keyword: this.$route.query.keyword,
           page: this.$route.query.page,
         }
+
+        if (this.$route.query.page == undefined) {
+          this.paging.pageBase.now = 1;
+        } else {
+          this.paging.pageBase.now = parseInt(this.$route.query.page);
+        }
+
+        this.paging.pages = [];
+        try {
+          const pageRes = await axios.get('/api/board/read', {
+            params: {
+              category: this.param.category,
+              city: this.$cookies.get('city'),
+              area: this.param.area,
+              subway: this.param.subway,
+              categoryDetail: this.param.genre,
+              keyword: this.param.keyword,
+              page: this.param.page
+            }
+          });
+          this.paging.pageBase.last = (Math.ceil(pageRes.data.data.count/10));
+        }
+        catch (err) { console.log(err); }
+
+        this.pagingCalc();
       }
     }
   }

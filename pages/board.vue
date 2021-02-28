@@ -105,7 +105,8 @@
       city: [],
       param: [],
       filterItems: [],
-      postItems: []
+      postItems: [],
+      // keywordCount: null
     }),
     async mounted() {
       // filter list, count read
@@ -138,32 +139,39 @@
       catch (err) { console.log(err); }
 
       // post list read
-      try {
-        const postListRes = await axios.get('/api/board/read', {
-          params: {
-            category: this.param.category,
-            city: this.$cookies.get('city'),
-            area: this.param.area,
-            subway: this.param.subway,
-            categoryDetail: this.param.genre,
-            keyword: this.param.keyword,
-            page: this.param.page
-          }
-        });
-        // console.log(postListRes.data.data);
-        this.postItems = postListRes.data.data;
-      }
-      catch (err) { console.log(err); }
+      this.postListRead();
     },
     methods: {
+      async postListRead() {
+        try {
+          const postListRes = await axios.get('/api/board/read', {
+            params: {
+              category: this.param.category,
+              city: this.$cookies.get('city'),
+              area: this.param.area,
+              subway: this.param.subway,
+              categoryDetail: this.param.genre,
+              keyword: this.param.keyword,
+              page: this.param.page
+            }
+          });
+          // this.keywordCount = postListRes.data.data.count;
+          this.postItems = postListRes.data.data.postItems;
+        }
+        catch (err) { console.log(err); }
+      },
       async pageLink(ele, key) {
         this.param[ele] = key;
         if (key == null) {
           this.param[ele] = undefined;
         }
 
+        this.param.page = undefined;
         let paramData = [];
         for (let [key, val] of Object.entries(this.param)) {
+          // if (key == 'page') { // 데이터가 나오지 않는 이유는 버튼 이벤트보다 param watch가 더 먼저 실행되기 때문임
+            
+          // }
           if (val != undefined) {
             paramData.push(
               {
@@ -173,6 +181,7 @@
             );
           }
         }
+
         let paramString = '/board?';
         for (let i = 0; i < paramData.length; i++) {
           paramString += paramData[i].key+'='+paramData[i].val+'&';
@@ -244,26 +253,8 @@
       async $route(to, form) {
         console.log(to);
         // postItems 업데이트
-        try {
-          const postListRes = await axios.get('/api/board/read', {
-            params: {
-              category: this.param.category,
-              city: this.$cookies.get('city'),
-              area: this.param.area,
-              subway: this.param.subway,
-              categoryDetail: this.param.genre,
-              keyword: this.param.keyword,
-              page: this.param.page
-            }
-          });
-          this.postItems = postListRes.data.data;
-          console.log(postListRes);
-        }
-        catch (err) { console.log(err.response.data.message); }
-      },
-      // keywordSearch() {
-      //   this.param.keyword = 
-      // }
+        this.postListRead();
+      }
     }
   }
 
