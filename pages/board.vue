@@ -4,7 +4,10 @@
     <div id="wrap">
       <div class="sel-filter">
         <BreadCrumb />
-        <h2>
+        <h2 v-if="param.keyword != undefined">
+          검색어 "{{ this.param.keyword }}"의 검색결과
+        </h2>
+        <h2 v-else>
           서울특별시의 회원 모집({{ this.city.count }})
         </h2>
 
@@ -61,19 +64,9 @@
                 <span class="time" v-text="agoCalc(item.date, item.time)+' 전'"></span>
               </div>
             </div>
-            <!-- <div class="article">
-            <nuxt-link to="/post" style="height: 80px;"><img src="~assets/img/ex.jpg" class="img-repre"></nuxt-link>
-              <div class="content">
-                <p class="title"><nuxt-link to="/post">테스트 전용 글 입니다.</nuxt-link></p>
-                <p class="info"><span>노원역</span> · 20~30세 · 성별무관 · 흡연가능</p>
-                <p class="txt">이 글은 테스트전용 글 입니다. 노원역에서 베타 버전 사용자들의 후기를 수집하고 있습니다. 참여해주시면 감사하겠습니다.</p>
-                <span class="time">2시간 전</span>
-              </div>
-            </div> -->
+            
           </div>
-
           <Pagination />
-
           <div class="search-wrap">
             <div class="search-form">
               <v-text-field v-model="param.keyword" v-on:keyup.enter="pageLink('keyword', param.keyword)" solo label="검색어를 입력하세요" append-icon="mdi-magnify"></v-text-field>
@@ -139,7 +132,7 @@
         }
         this.city = {
           name: citysRes.data.data.citys.find(findCityName).name, // city 목록에서 현재 위치한 도시의 이름 색적
-          count: areaCountHap
+          count: areaCountHap // 도시기준 모든 구,군의 글 갯수 합
         }
       }
       catch (err) { console.log(err); }
