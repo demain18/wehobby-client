@@ -1,8 +1,8 @@
 <template>
   <div class="paging-wrap">
     <div class="count">
-      <v-btn icon><v-icon class="elevator-btn">mdi-chevron-double-left</v-icon></v-btn>
-      <v-btn icon><v-icon class="elevator-btn">mdi-chevron-left</v-icon></v-btn>
+      <v-btn icon v-on:click="pageLink('page', 1)"><v-icon class="elevator-btn">mdi-chevron-double-left</v-icon></v-btn>
+      <v-btn icon v-if="paging.pageBase.now != 1" v-on:click="pageLink('page', paging.pageBase.now-1)"><v-icon class="elevator-btn">mdi-chevron-left</v-icon></v-btn>
 
       <div v-for="(item, index) in paging.pages" v-bind:key="index">
         <v-btn icon disabled class="btn" v-if="paging.pageBase.now==item">
@@ -13,8 +13,8 @@
         </v-btn>
       </div>
 
-      <v-btn icon><v-icon class="elevator-btn">mdi-chevron-right</v-icon></v-btn>
-      <v-btn icon><v-icon class="elevator-btn">mdi-chevron-double-right</v-icon></v-btn>
+      <v-btn icon v-if="paging.pageBase.now != paging.pageBase.last" v-on:click="pageLink('page', paging.pageBase.now+1)"><v-icon class="elevator-btn">mdi-chevron-right</v-icon></v-btn>
+      <v-btn icon v-on:click="pageLink('page', paging.pageBase.last)"><v-icon class="elevator-btn">mdi-chevron-double-right</v-icon></v-btn>
     </div>
           </div>
 </template>

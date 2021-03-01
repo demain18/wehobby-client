@@ -9,7 +9,9 @@
     <div id="wrap">
       <div class="content-wrap">
         <BreadCrumb />
-        <h1 class="title">같이 코인노래방 갈분 모집합니다! 텐션 보장!</h1>
+        <h1 class="title">
+          {{ data.content.title }}
+        </h1>
         <div class="images">
           <div class="img-wrap">
             <!-- <div class="img" :style="{ backgroundImage: `url(${bgImg[0]})` }"></div> -->
@@ -26,8 +28,7 @@
           </div>
         </div>
         <div class="content">
-          <p>노원역 코인노래방 가서 노래부를 사람 모집합니다~ 발라드, 랩, 팝송 전부 상관 없습니다! 주로 20 대쪽으로 오셨으면 좋겠고 흡연 여부는 상관 없습니다.<p/><br/>
-          <p>저는 락발라드를 주로 부르며 아이돌 노래도 좋아합니다. 제일 자신있는 곡은 버즈의 가시입니다. 잘부탁드리겠습니다!<p/>
+          {{ data.content.desc }}
         </div>
         <div class="comment-wrap">
           <div class="list">
@@ -78,14 +79,6 @@
                       <nuxt-link to="">신고하기</nuxt-link>
                       <nuxt-link to="">수정하기</nuxt-link>
                       <nuxt-link to="">삭제하기</nuxt-link>
-                      <!-- <nuxt-link v-for="{item, index} in lists.comment" :key="index">
-                        {{ item.msg }}
-                      </nuxt-link> -->
-                      <!-- <tr v-for="item in desserts" :key="item.name">
-                        <td><nuxt-link :to="item.link" class="highlight">{{ item.title }}</nuxt-link></td>
-                        <td>{{ item.views }}</td>
-                        <td>{{ item.comments }}</td>
-                      </tr> -->
                     </v-list-item>
                   </v-list>
                 </v-menu>
@@ -116,14 +109,20 @@
       </div>
 
       <div class="profile-wrap">
-        <p class="info">2020년 9월 7일 14:35</p>
-        <p class="info">조회수 : 3,310</p>
+        <p class="info">
+          <!-- 2020년 9월 7일 14:35 -->
+          {{ data.header.date }}
+          {{ data.header.time }}
+          <!-- <span v-if="data.header" v-text="data.header.date"></span>
+          <span v-if="data.header" v-text="data.header.time"></span> -->
+        </p>
+        <p class="info" v-if="data.header">조회수 : {{ data.header.view }}</p>
         <div class="table">
           <div class="header">
             장르
           </div>
           <div class="content">
-            회원 모집
+            {{ header.genre }}
           </div>
         </div>
         <div class="table">
@@ -131,19 +130,20 @@
             지역
           </div>
           <div class="content">
-            <nuxt-link to="">노원구</nuxt-link><br/>
-            노원역 7호선
+            <nuxt-link to="">{{ header.area }}</nuxt-link><br/>
+            {{ header.subway }}
           </div>
         </div>
-        <div class="table">
+
+        <div class="table" v-for="(item, index) in data.header.options" :key="index">
           <div class="header">
-            모집나이
+            {{ item.header }}
           </div>
           <div class="content">
-            20세 ~ 30세
+            {{ item.content }}
           </div>
         </div>
-        <div class="table">
+        <!-- <div class="table">
           <div class="header">
             성별
           </div>
@@ -158,7 +158,7 @@
           <div class="content">
             상관없음
           </div>
-        </div>
+        </div> -->
         <!-- <button class="button" class="send">
           작성자에게 메일로 문의
         </button> -->
@@ -189,25 +189,90 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import Vuetify from 'vuetify'
+  import Vue from 'vue';
+  import axios from 'axios';
+  import Vuecookies from 'vue-cookies';
+  Vue.use(Vuecookies);
 
   export default {
+    created() {
+      // this.param = this.$route.params.index;
+      this.param = this.$route.params.id;
+    },
     data: () => ({
-      bgImg: [
-        '~assets/img/ex_01.jpg'
-      ],
-      lists: {
-        comment: [
-          {msg: '프로필 보기'},
-          {msg: '신고하기'}
-          // '프로필 보기',
-          // '신고하기',
-          // '수정하기',
-          // '삭제하기'
-        ]
+      param: null,
+      // object와 array가 혼합된 오브젝트 배열의 경우 각각의 api 데이터 타입에 대응하는 형태를 사용해야함
+      // array에서 object로 직접 접속하는건 불가능한듯?
+      data: {
+        comments: [],
+        content: {},
+        header: {},
+        images: []
       },
-    })
+      header: {
+        genre: '-',
+        area: '-',
+        subway: '-'
+      },
+      // filterItems: [],
+      // cityItems: []
+    }),
+    async mounted() {
+      // post read
+      try {
+        const postRes = await axios.get('/api/post/read', {
+          params: {
+            id: this.param
+          }
+        });
+        this.data = postRes.data.data;
+        // console.log(this.data)
+      }
+      catch (err) { console.log(err); }
+
+      // genre read
+      try {
+        const filterRes = await axios.get('/api/info/category');
+        let filterItems = filterRes.data.data;
+
+        if (this.data.header.category != 0) {
+          let genreObj = filterItems.filter(item => {
+            return item.key == this.data.header.category;
+          })
+          genreObj = genreObj[0].detail.filter(item => {
+            return item.key == this.data.header.categoryDetail
+          });
+          this.header.genre = genreObj[0].name; 
+        }
+      }
+      catch (err) { console.log(err); }
+
+      // area, subway read
+      try {
+        const cityRes = await axios.get('/api/info/citys/detail', {
+          params: {
+            city: parseInt(this.$cookies.get('city'))
+          }
+        });
+        let cityItems = cityRes.data.data;
+
+        if (this.data.header.districtRegion != 0) {
+          let areaObj = cityItems.area.filter(item => {
+            return item.key == this.data.header.districtRegion;
+          });
+          this.header.area = areaObj[0].name;
+        }
+
+        if (this.data.header.subway != 0) {
+          let subwayObj = cityItems.subways.filter(item => {
+            return item.key == this.data.header.subway;
+          });
+          this.header.subway = subwayObj[0].name+'역';
+        }
+      }
+      catch (err) { console.log(err); }
+
+    }
   }
 
 </script>

@@ -6,7 +6,7 @@
         <v-row>
           <v-col>
             <!-- <v-text-field :rules="[rules.required]" label="시/구*"></v-text-field> -->
-            <v-select :items="list.city" :rules="[rules.required]" label="시/구*" ></v-select>
+            <v-select :items="list.city" :rules="[rules.required]" label="시/도*" ></v-select>
           </v-col>
           <v-col>
             <!-- <v-text-field label="구/군*"></v-text-field> -->

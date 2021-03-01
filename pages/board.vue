@@ -5,17 +5,17 @@
       <div class="sel-filter">
         <BreadCrumb />
         <h2 v-if="param.keyword != undefined">
-          검색어 "{{ this.param.keyword }}"의 검색결과({{ this.keywordCount }})
+          검색어 "{{ param.keyword }}"의 검색결과({{ keywordCount }})
         </h2>
         <h2 v-else>
-          서울특별시의 회원 모집({{ this.filterItems.countAll }})
+          {{ city.name }}의 회원 모집({{ filterItems.countAll }})
         </h2>
 
         <div class="filter">
           <div class="header">구/군</div>
           <div class="content">
             <span v-bind:class="{active: undefined==(param.area)}">
-              <a v-on:click="pageLink('area', null)">{{ this.city.name }} 전체({{ this.city.count }})</a>
+              <a v-on:click="pageLink('area', null)">{{ city.name }} 전체({{ city.count }})</a>
             </span>
             <span v-for="(item, index) in filterItems.citysArea" v-bind:key="index" v-bind:class="{active: index==(param.area-1)}">
               <a v-on:click="pageLink('area', (index+1))">{{ item.name }}({{ item.count }})</a>
@@ -54,9 +54,9 @@
           <div class="article-wrap">
 
             <div class="article" v-for="(item, index) in postItems" v-bind:key="index">
-            <nuxt-link :to="'/post?id='+item.key" style="height: 80px;"><img src="~assets/img/ex.jpg" class="img-repre"></nuxt-link>
+            <nuxt-link :to="'/post/'+item.key" style="height: 80px;"><img src="~assets/img/placeholder1.jpg" class="img-repre"></nuxt-link>
               <div class="content">
-                <p class="title"><nuxt-link :to="'/post?id='+item.key">{{ item.title }}</nuxt-link></p>
+                <p class="title"><nuxt-link :to="'/post/'+item.key">{{ item.title }}</nuxt-link></p>
                 <p class="info">
                   <span>{{ filterItems.citysArea[(item.area-1)].name }}</span> · {{ item.options[0] }} · {{ item.options[1] }} · {{ item.options[2] }}
                 </p>

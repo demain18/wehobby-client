@@ -61,6 +61,7 @@
           <div class="category">
             <div class="list-wrap">
 
+              <!-- <h1 v-text="category[0].detail[0].name"></h1> -->
               <div class="list" v-for="(categoryItem, index) in category" v-bind:key="index">
                 <p class="title">
                   <v-icon class="icon">
@@ -188,7 +189,7 @@
         const res = await axios.get('/api/info/category');
         this.category = res.data.data;
       }
-      catch (err) { console.log(err, err.response.data.message); }
+      catch (err) { console.log(err.response.data.message); }
 
       // category post count
       for (let i = 0; i < this.category.length; i++) {
@@ -199,12 +200,6 @@
               category: this.category[i].key
             }
           });
-
-          // let postCount = 0;
-          // for (let x = 0; x < filterRes.data.data.categoryDetail.length; x++) {
-          //   postCount += filterRes.data.data.categoryDetail[x].count;
-          // }
-          // this.categoryCount[i] = postCount;
           this.categoryCount[i] = filterRes.data.data.countAll;
         }
         catch (err) { console.log(err); }
@@ -216,6 +211,8 @@
         this.notices = res.data.data;
       }
       catch (err) { console.log(err.response.data.message); }
+
+      console.log('대분류1/소분류1 : '+this.category[0].detail[0].name)
     },
     methods: {
       keywordSearch() {

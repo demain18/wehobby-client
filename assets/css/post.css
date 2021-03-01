@@ -57,7 +57,7 @@
     margin-bottom: 30px;
 /*    border: 1px solid blue;*/
     width: 100%;
-    min-height: 150px;
+    /* min-height: 150px; */
 }
 
 #wrap .content-wrap .comment-wrap {
