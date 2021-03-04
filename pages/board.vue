@@ -54,11 +54,11 @@
           <div class="article-wrap">
 
             <div class="article" v-for="(item, index) in postItems" v-bind:key="index">
-            <nuxt-link :to="'/post/'+item.key" style="height: 80px;"><img src="~assets/img/placeholder1.jpg" class="img-repre"></nuxt-link>
+              <nuxt-link :to="'/post/'+item.key" style="height: 80px;"><img src="~assets/img/placeholder1.jpg" class="img-repre"></nuxt-link>
               <div class="content">
                 <p class="title"><nuxt-link :to="'/post/'+item.key">{{ item.title }}</nuxt-link></p>
                 <p class="info">
-                  <span>{{ filterItems.citysArea[(item.area-1)].name }}</span> · {{ item.options[0] }} · {{ item.options[1] }} · {{ item.options[2] }}
+                  <span>{{ findCityName(index) }}</span> · {{ item.options[0] }} · {{ item.options[1] }} · {{ item.options[2] }}
                 </p>
                 <p class="txt">{{ item.desc }}..</p>
                 <span class="time" v-text="agoCalc(item.date, item.time)+' 전'"></span>
@@ -92,7 +92,7 @@
   export default {
     created() {
       this.param = {
-        category: parseInt(this.$route.query.category),
+        category: this.$route.query.category,
         // city: parseInt(this.$cookies.get('city')), // 고정값
         area: this.$route.query.area,
         subway: this.$route.query.subway,
@@ -109,7 +109,7 @@
       keywordCount: null
     }),
     async mounted() {
-      // filter list, count read
+      // filter read
       try {
         const filterRes = await axios.get('/api/info/filter', {
           params: {
@@ -142,15 +142,37 @@
       this.postListRead();
     },
     methods: {
+      findKey(filterItem, index) {
+        if (index == undefined) {
+          return index;
+        } else {
+          index -= 1;
+          if (filterItem == 'area') {
+            console.log(this.filterItems.citysArea[index].key);
+            return this.filterItems.citysArea[index].key;
+          } else if (filterItem == 'subway') {
+            return this.filterItems.citysSubway[index].key;
+          } else if (filterItem == 'genre') {
+            console.log(this.filterItems.categoryDetail[index].key);
+            return this.filterItems.categoryDetail[index].key;
+          }
+        }
+      },
+      findCityName(index) {
+        let cityObj = this.filterItems.citysArea.filter(item => {
+          return item.key == this.postItems[index].area;
+        });
+        return cityObj[0].name;
+      },
       async postListRead() {
         try {
           const postListRes = await axios.get('/api/board/read', {
             params: {
               category: this.param.category,
               city: this.$cookies.get('city'),
-              area: this.param.area,
-              subway: this.param.subway,
-              categoryDetail: this.param.genre,
+              area: this.findKey('area', this.param.area),
+              subway: this.findKey('subway', this.param.subway),
+              categoryDetail: this.findKey('genre', this.param.genre),
               keyword: this.param.keyword,
               page: this.param.page
             }

@@ -143,25 +143,7 @@
             {{ item.content }}
           </div>
         </div>
-        <!-- <div class="table">
-          <div class="header">
-            성별
-          </div>
-          <div class="content">
-            무관
-          </div>
-        </div>
-        <div class="table">
-          <div class="header">
-            흡연
-          </div>
-          <div class="content">
-            상관없음
-          </div>
-        </div> -->
-        <!-- <button class="button" class="send">
-          작성자에게 메일로 문의
-        </button> -->
+
         <v-btn depressed class="btn-main-color">
           작성자에게 연락하기
         </v-btn>
@@ -171,13 +153,13 @@
             <img src="https://sparklejunserver.web.app/img/profile.jpeg" class="present">
           </v-avatar>
           <div class="content">
-            <p><strong>백산(인증됨)</strong></p>
-            <p>남자</p>
+            <p><strong>{{ uploader.nickname }}</strong></p>
+            <p>{{ uploader.sex }}</p>
             <p>게시물 : 3개</p>
           </div>
         </div>
         <div class="bio">
-          평범하게 대학 다니는 학생입니다, 서점과 백화점을 좋아합니다.
+          {{ uploader.bio }}
         </div>
       </div>
       <div class="snb">
@@ -212,10 +194,9 @@
       header: {
         genre: '-',
         area: '-',
-        subway: '-'
+        subway: '-',
       },
-      // filterItems: [],
-      // cityItems: []
+      uploader: {}
     }),
     async mounted() {
       // post read
@@ -226,14 +207,16 @@
           }
         });
         this.data = postRes.data.data;
+        this.uploader = this.data.header.uploader;
         // console.log(this.data)
       }
       catch (err) { console.log(err); }
 
-      // genre read
+      // genre name read
       try {
         const filterRes = await axios.get('/api/info/category');
         let filterItems = filterRes.data.data;
+        console.log(filterItems)
 
         if (this.data.header.category != 0) {
           let genreObj = filterItems.filter(item => {
@@ -247,7 +230,7 @@
       }
       catch (err) { console.log(err); }
 
-      // area, subway read
+      // area, subway name read
       try {
         const cityRes = await axios.get('/api/info/citys/detail', {
           params: {
@@ -271,7 +254,6 @@
         }
       }
       catch (err) { console.log(err); }
-
     }
   }
 

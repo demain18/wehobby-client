@@ -211,8 +211,6 @@
         this.notices = res.data.data;
       }
       catch (err) { console.log(err.response.data.message); }
-
-      console.log('대분류1/소분류1 : '+this.category[0].detail[0].name)
     },
     methods: {
       keywordSearch() {
