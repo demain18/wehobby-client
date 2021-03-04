@@ -97,6 +97,13 @@
     /* padding-bottom: 25px; */
 }
 
+#wrap .content-wrap .comment-wrap .placeholder-comment {
+    font-size: 14px;
+    color: #8d8d8d;
+    margin-bottom: 20px!important;
+}
+
+
 #wrap .content-wrap .comment-wrap .list .item {
 /*    border: 1px solid blue;*/
     display: flex;
@@ -223,7 +230,7 @@
 }
 
 #wrap .profile-wrap .profile .content {
-    margin-top: 10px;
+    margin-top: 5px;
     margin-left: 10px;
 }
 

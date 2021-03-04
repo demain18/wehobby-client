@@ -46,6 +46,7 @@
         </div>
 
         <v-btn depressed class="btn-main-color">
+          <v-icon left>mdi-lead-pencil</v-icon>
           게시물 작성
         </v-btn>
       </div>

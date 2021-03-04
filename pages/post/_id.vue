@@ -13,19 +13,11 @@
           {{ data.content.title }}
         </h1>
         <div class="images">
+
           <div class="img-wrap">
-            <!-- <div class="img" :style="{ backgroundImage: `url(${bgImg[0]})` }"></div> -->
-            <img src="~assets/img/dummy/1.jpg">
+            <img src="~assets/img/placeholder1.jpg">
           </div>
-          <div class="img-wrap">
-            <img src="~assets/img/dummy/2.jpg">
-          </div>
-          <div class="img-wrap">
-            <img src="~assets/img/dummy/3.jpg">
-          </div>
-          <div class="img-wrap">
-            <img src="~assets/img/dummy/4.jpg">
-          </div>
+
         </div>
         <div class="content">
           {{ data.content.desc }}
@@ -33,52 +25,32 @@
         <div class="comment-wrap">
           <div class="list">
             <div class="list-header">
-              <span class="title">댓글 2개</span>
+              <span class="title">댓글 {{ data.comments.length }}개</span>
             </div>
             <div class="list-header-line"></div>
 
-            <div class="item">
-              <v-avatar class="header">
-                <img src="https://pm1.narvii.com/6246/a4b5f80439148013b035523b4ba9ca60651be412_00.jpg" class="present">
-              </v-avatar>
-              <div class="main">
-                <p><strong>사와무라 에리리</strong> <span class="time">15분 전</span></p>
-                <p>기재하신 메일 주소로 연락드렸습니다.</p>
-                <v-menu attach left offset-y>
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-icon medium v-bind="attrs" v-on="on" class="tooltip-btn">mdi-dots-horizontal</v-icon>
-                  </template>
-                  <v-list>
-                    <v-list-item>
-                      <nuxt-link to="">프로필 보기</nuxt-link>
-                      <nuxt-link to="">신고하기</nuxt-link>
-                      <nuxt-link to="">수정하기</nuxt-link>
-                      <nuxt-link to="">삭제하기</nuxt-link>
-                    </v-list-item>
-                  </v-list>
-                </v-menu>
-              </div>
-            </div>
+            <p v-if="data.comments.length == 0" class="placeholder-comment">아직 작성된 댓글이 없습니다, 가장 먼저 댓글을 작성해보세요.</p>
 
-            <div class="item">
+            <div class="item" v-for="(item, index) in data.comments" :key="index">
               <v-avatar class="header">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6VxXRj91RIbra4w3-BiPV-TdoJ1xSJ-JS1A&usqp=CAU"
-                  class="present">
+                <img src="~assets/img/placeholder1.jpg" class="present">
               </v-avatar>
               <div class="main">
-                <p><strong>카토 메구미</strong> <span class="time">1시간 전</span></p>
-                <p>메일 보냈습니다~</p>
+                <p>
+                  <nuxt-link :to="'/profile/'+item.uploader.key"><strong>{{ item.uploader.nickname }}</strong></nuxt-link>
+                  <!-- <span class="time">15분 전</span> -->
+                </p>
+                <p>{{ item.desc }}</p>
                 <v-menu attach left offset-y>
                   <template v-slot:activator="{ on, attrs }">
                     <v-icon medium v-bind="attrs" v-on="on" class="tooltip-btn">mdi-dots-horizontal</v-icon>
                   </template>
                   <v-list>
-                    <v-list-item>
-                      <nuxt-link to="">프로필 보기</nuxt-link>
+                    <v-list-item style="width: 90px">
+                      <nuxt-link :to="'/profile/'+item.uploader.key">프로필 보기</nuxt-link>
                       <nuxt-link to="">신고하기</nuxt-link>
-                      <nuxt-link to="">수정하기</nuxt-link>
-                      <nuxt-link to="">삭제하기</nuxt-link>
+                      <nuxt-link v-if="userKey == item.uploader.key" to="">수정하기</nuxt-link>
+                      <nuxt-link v-if="userKey == item.uploader.key" to="">삭제하기</nuxt-link>
                     </v-list-item>
                   </v-list>
                 </v-menu>
@@ -96,13 +68,13 @@
           <nuxt-link to="" class="btn">
             <v-icon small class="icon">mdi-bell</v-icon>신고하기
           </nuxt-link>
-          <nuxt-link to="" class="btn">
+          <nuxt-link v-if="userKey == postUploaderKey" to="" class="btn">
             <v-icon small class="icon">mdi-pencil</v-icon>수정하기
           </nuxt-link>
-          <nuxt-link to="" class="btn">
+          <nuxt-link v-if="userKey == postUploaderKey" to="" class="btn">
             <v-icon small class="icon">mdi-delete</v-icon>삭제하기
           </nuxt-link>
-          <nuxt-link to="" class="btn">
+          <nuxt-link v-if="userKey == postUploaderKey" to="" class="btn">
             <v-icon small class="icon">mdi-close-octagon</v-icon>모집 종료하기
           </nuxt-link>
         </div>
@@ -143,17 +115,26 @@
             {{ item.content }}
           </div>
         </div>
-
-        <v-btn depressed class="btn-main-color">
+        
+        <v-btn v-if="contactsIsEmpty == true" disabled>
+          게시물 작성자가 아직 연락처를<br/> 추가하지 않았습니다
+        </v-btn>
+        <v-btn v-else-if="data.header.contacts == false" disabled>
+          모집 종료된 게시물입니다
+        </v-btn>
+        <v-btn v-else depressed class="btn-main-color">
           작성자에게 연락하기
         </v-btn>
+
         <div class="profile">
           <!-- <div class="header"></div> -->
           <v-avatar rounded class="header">
-            <img src="https://sparklejunserver.web.app/img/profile.jpeg" class="present">
+            <img src="~assets/img/placeholder1.jpg" class="present">
           </v-avatar>
           <div class="content">
-            <p><strong>{{ uploader.nickname }}</strong></p>
+            <nuxt-link :to="'/profile/'+postUploaderKey">
+              <h4><strong>{{ uploader.nickname }}</strong></h4>
+            </nuxt-link>
             <p>{{ uploader.sex }}</p>
             <p>게시물 : 3개</p>
           </div>
@@ -183,8 +164,6 @@
     },
     data: () => ({
       param: null,
-      // object와 array가 혼합된 오브젝트 배열의 경우 각각의 api 데이터 타입에 대응하는 형태를 사용해야함
-      // array에서 object로 직접 접속하는건 불가능한듯?
       data: {
         comments: [],
         content: {},
@@ -196,7 +175,10 @@
         area: '-',
         subway: '-',
       },
-      uploader: {}
+      uploader: {},
+      postUploaderKey: null,
+      contactsIsEmpty: false,
+      userKey: null,
     }),
     async mounted() {
       // post read
@@ -206,9 +188,15 @@
             id: this.param
           }
         });
+        
         this.data = postRes.data.data;
         this.uploader = this.data.header.uploader;
-        // console.log(this.data)
+        this.postUploaderKey = postRes.data.data.header.uploader.key;
+        let contactsArr = postRes.data.data.header.contacts;
+
+        if (contactsArr.length == 0) {
+          this.contactsIsEmpty = true;
+        }
       }
       catch (err) { console.log(err); }
 
@@ -216,7 +204,7 @@
       try {
         const filterRes = await axios.get('/api/info/category');
         let filterItems = filterRes.data.data;
-        console.log(filterItems)
+        // console.log(filterItems)
 
         if (this.data.header.category != 0) {
           let genreObj = filterItems.filter(item => {
@@ -254,6 +242,18 @@
         }
       }
       catch (err) { console.log(err); }
+
+      let userCookie = this.$cookies.get('user');
+      this.userKey = userCookie.key;
+    },
+    methods: {
+      uploaderVerify(contentKey) {
+        if (contentKey == this.uploader.key) {
+          return true;
+        } else {
+          return false;
+        }
+      }
     }
   }
 
