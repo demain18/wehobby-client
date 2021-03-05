@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-dialog v-model="dialog" @click:outside="toggleDialog" width="400">
+    <v-dialog v-model="dialog" @click:outside="toggleDialog()" width="400">
       <v-card>
         <v-card-title class="headline">
           도시 선택
@@ -21,7 +21,7 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="toggleDialog">
+          <v-btn color="primary" text @click="toggleDialog()">
             확인
           </v-btn>
         </v-card-actions>
@@ -40,7 +40,7 @@
   export default {
     computed: { // watch속성이 있어 값이 유동적으로 변화함
       dialog() {
-        return this.$store.state.dialog.dialogActive;
+        return this.$store.state.dialog.cityDialogActive;
       }
     },
     data: () => ({
@@ -64,7 +64,7 @@
     },
     methods: {
       toggleDialog() {
-        this.$store.commit('dialog/toggleDialogActive');
+        this.$store.commit('dialog/toggleCityDialogActive');
         if (this.$cookies.isKey('city')) {
           this.$cookies.remove('city');
           this.$cookies.set('city', this.select, '30d');

@@ -2,9 +2,9 @@
   <div>
     <Gnb />
     <!-- <DialogSlide/> -->
-    <!-- <DialogReport/> -->
-    <!-- <DialogContact/> -->
-    <!-- <DialogShare/> -->
+    <DialogShare/>
+    <DialogReport/>
+    <DialogContact/>
 
     <div id="wrap">
       <div class="content-wrap">
@@ -48,7 +48,7 @@
                   <v-list>
                     <v-list-item style="width: 90px">
                       <nuxt-link :to="'/profile/'+item.uploader.key">프로필 보기</nuxt-link>
-                      <nuxt-link to="">신고하기</nuxt-link>
+                      <a @click="toggleDialogReport('comment', item.key)">신고하기</a>
                       <nuxt-link v-if="userKey == item.uploader.key" to="">수정하기</nuxt-link>
                       <nuxt-link v-if="userKey == item.uploader.key" to="">삭제하기</nuxt-link>
                     </v-list-item>
@@ -62,12 +62,12 @@
           <v-text-field solo label="댓글을 입력하세요" clearable></v-text-field>
         </div>
         <div class="addition-wrap">
-          <nuxt-link to="" class="btn">
+          <a @click="toggleDialog('Share')" class="btn">
             <v-icon small class="icon">mdi-share-variant</v-icon>공유하기
-          </nuxt-link>
-          <nuxt-link to="" class="btn">
+          </a>
+          <a @click="toggleDialogReport('post', param)" class="btn">
             <v-icon small class="icon">mdi-bell</v-icon>신고하기
-          </nuxt-link>
+          </a>
           <nuxt-link v-if="userKey == postUploaderKey" to="" class="btn">
             <v-icon small class="icon">mdi-pencil</v-icon>수정하기
           </nuxt-link>
@@ -247,12 +247,18 @@
       this.userKey = userCookie.key;
     },
     methods: {
-      uploaderVerify(contentKey) {
-        if (contentKey == this.uploader.key) {
-          return true;
-        } else {
-          return false;
-        }
+      toggleDialog(dialogName) {
+        this.$store.commit('dialog/toggle'+dialogName+'DialogActive');
+      },
+      toggleDialogReport(contentName, contentId) {
+        this.$store.commit('dialog/setDataReport', {
+          tableName: contentName,
+          tableId: contentId
+        });
+        this.$store.commit('dialog/toggleReportDialogActive');
+      },
+      recruitQuit() {
+        
       }
     }
   }

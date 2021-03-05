@@ -45,7 +45,8 @@ export default {
   modules: [
     '@nuxtjs/vuetify',
     '@nuxtjs/axios',
-    'moment'
+    'moment',
+    'vue-social-sharing/nuxt'
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

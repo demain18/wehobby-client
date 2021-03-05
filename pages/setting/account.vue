@@ -61,7 +61,7 @@
         </v-btn>
         <v-row>
           <v-col>
-            <v-btn depressed v-on:click="authDestroy()">
+            <v-btn color="primary" text @click="authDestroy()">
               회원탈퇴
             </v-btn>
           </v-col>

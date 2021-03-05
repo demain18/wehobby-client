@@ -19,7 +19,9 @@
     "nuxt": "^2.14.6",
     "nuxt-sass-resources-loader": "^2.0.5",
     "sass-loader": "^10.0.4",
+    "vue-clipboard2": "^0.3.1",
     "vue-cookies": "^1.7.4",
+    "vue-social-sharing": "^3.0.5",
     "vuetify": "^2.3.21"
   },
   "devDependencies": {
