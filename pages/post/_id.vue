@@ -122,7 +122,7 @@
         <v-btn v-else-if="data.header.contacts == false" disabled>
           모집 종료된 게시물입니다
         </v-btn>
-        <v-btn v-else depressed class="btn-main-color">
+        <v-btn v-else depressed class="btn-main-color" @click="toggleDialogContact()">
           작성자에게 연락하기
         </v-btn>
 
@@ -178,6 +178,7 @@
       uploader: {},
       postUploaderKey: null,
       contactsIsEmpty: false,
+      contacts: {},
       userKey: null,
     }),
     async mounted() {
@@ -197,6 +198,22 @@
         if (contactsArr.length == 0) {
           this.contactsIsEmpty = true;
         }
+        let mailObj = contactsArr.filter(item => {
+          return item.type == 'mail';
+        });
+        let kakaoObj = contactsArr.filter(item => {
+          return item.type == 'kakao';
+        });
+        if (mailObj.length != 0) {
+          this.contacts.mail = mailObj[0].desc;
+        } else {
+          this.contacts.mail = false;
+        }
+        if (kakaoObj.length != 0) {
+          this.contacts.kakao = kakaoObj[0].desc;
+        } else {
+          this.contacts.kakao = false;
+        }
       }
       catch (err) { console.log(err); }
 
@@ -204,7 +221,6 @@
       try {
         const filterRes = await axios.get('/api/info/category');
         let filterItems = filterRes.data.data;
-        // console.log(filterItems)
 
         if (this.data.header.category != 0) {
           let genreObj = filterItems.filter(item => {
@@ -243,6 +259,7 @@
       }
       catch (err) { console.log(err); }
 
+      // user key read
       let userCookie = this.$cookies.get('user');
       this.userKey = userCookie.key;
     },
@@ -256,6 +273,13 @@
           tableId: contentId
         });
         this.$store.commit('dialog/toggleReportDialogActive');
+      },
+      toggleDialogContact() {
+        this.$store.commit('dialog/setDataContact', {
+          mail: this.contacts.mail,
+          kakao: this.contacts.kakao
+        });
+        this.$store.commit('dialog/toggleContactDialogActive');
       },
       recruitQuit() {
         

@@ -2,18 +2,23 @@ export const state = () => ({ // set state
   cityDialogActive: false,
   shareDialogActive: false,
   reportDialogActive: false,
+  contactDialogActive: false,
   data: {
     report: {
       tableName: null,
       tableId: null
+    },
+    contact: {
+      mail: false,
+      kakao: false
     }
   }
 })
 
 export const getters = { // get state
-  setReportDialogData: (state) => {
-    return state.cityDialogActive;
-  }
+  // setReportDialogData: (state) => {
+  //   return state.cityDialogActive;
+  // }
 }
 
 export const mutations = { // update state
@@ -26,9 +31,15 @@ export const mutations = { // update state
   toggleReportDialogActive: (state) => {
     state.reportDialogActive = !state.reportDialogActive;
   },
+  toggleContactDialogActive: (state) => {
+    state.contactDialogActive = !state.contactDialogActive;
+  },
   setDataReport: (state, content) => {
     state.data.report.tableName = content.tableName;
     state.data.report.tableId = content.tableId;
-    // state.reportDialogActive = !state.reportDialogActive;
+  },
+  setDataContact: (state, content) => {
+    state.data.contact.mail = content.mail;
+    state.data.contact.kakao = content.kakao;
   },
 }
