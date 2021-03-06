@@ -33,7 +33,7 @@
 
             <div class="item" v-for="(item, index) in data.comments" :key="index">
               <v-avatar class="header">
-                <img src="~assets/img/placeholder1.jpg" class="present">
+                <img src="~assets/img/repre_1.jpg" class="present">
               </v-avatar>
               <div class="main">
                 <p>
@@ -74,9 +74,17 @@
           <nuxt-link v-if="userKey == postUploaderKey" to="" class="btn">
             <v-icon small class="icon">mdi-delete</v-icon>삭제하기
           </nuxt-link>
-          <nuxt-link v-if="userKey == postUploaderKey" to="" class="btn">
-            <v-icon small class="icon">mdi-close-octagon</v-icon>모집 종료하기
-          </nuxt-link>
+
+          <span v-if="userKey == postUploaderKey">
+            <span v-if="contactsIsEmpty == true"></span>
+            <a v-else-if="data.header.contacts == false" @click="recruitQuit()" class="btn">
+              <v-icon small class="icon">mdi-reload</v-icon>모집 재개하기
+            </a>
+            <a v-else @click="recruitQuit()" class="btn">
+              <v-icon small class="icon">mdi-close-octagon</v-icon>모집 종료하기
+            </a>
+          </span>
+
         </div>
       </div>
 
@@ -106,7 +114,6 @@
             {{ header.subway }}
           </div>
         </div>
-
         <div class="table" v-for="(item, index) in data.header.options" :key="index">
           <div class="header">
             {{ item.header }}
@@ -115,7 +122,6 @@
             {{ item.content }}
           </div>
         </div>
-        
         <v-btn v-if="contactsIsEmpty == true" disabled>
           게시물 작성자가 아직 연락처를<br/> 추가하지 않았습니다
         </v-btn>
@@ -129,7 +135,7 @@
         <div class="profile">
           <!-- <div class="header"></div> -->
           <v-avatar rounded class="header">
-            <img src="~assets/img/placeholder1.jpg" class="present">
+            <img src="~assets/img/repre_1.jpg" class="present">
           </v-avatar>
           <div class="content">
             <nuxt-link :to="'/profile/'+postUploaderKey">
@@ -262,6 +268,9 @@
       // user key read
       let userCookie = this.$cookies.get('user');
       this.userKey = userCookie.key;
+
+      // breadcrumb update
+      this.breadCrumbUpdate();
     },
     methods: {
       toggleDialog(dialogName) {
@@ -281,8 +290,24 @@
         });
         this.$store.commit('dialog/toggleContactDialogActive');
       },
-      recruitQuit() {
-        
+      async recruitQuit() {
+        try {
+          const res = await axios.post('/api/post/terminate/recruit', {
+            id: this.param
+          },
+          {headers: {token: this.$cookies.get('token')}});
+          
+          window.location.href = "/post/"+this.param;
+        }
+        catch (err) { console.log(err); }
+      },
+      breadCrumbUpdate() {
+        this.$store.commit('urls/setList', {
+          category: this.$store.state.urls.list.category,
+          city: this.$store.state.urls.list.city,
+          area: this.$store.state.urls.list.area,
+          post: { key: this.$route.params.id, name: this.data.content.title }
+        });
       }
     }
   }

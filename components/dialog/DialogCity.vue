@@ -21,8 +21,11 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="toggleDialog()">
-            확인
+          <v-btn text @click="toggleDialog()">
+            닫기
+          </v-btn>
+          <v-btn color="primary" text @click="cityCookieUpdate()">
+            변경
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -65,15 +68,16 @@
     methods: {
       toggleDialog() {
         this.$store.commit('dialog/toggleCityDialogActive');
+      },
+      cityCookieUpdate() {
         if (this.$cookies.isKey('city')) {
           this.$cookies.remove('city');
           this.$cookies.set('city', this.select, '30d');
         } else {
           this.$cookies.set('city', this.select, '30d');
         }
-        // this.$router.push('/');
         window.location.href = "/";
-      },
+      }
     },
   }
 </script>

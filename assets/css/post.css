@@ -221,12 +221,13 @@
 #wrap .profile-wrap .profile .header {
     width: 70px!important;
     height: 70px!important;
-    /* background-color: #ececec; */
+    border-radius: 100%!important;
+    background-color: #ececec;
 }
 
 #wrap .profile-wrap .profile .header .present {
     object-fit: contain;
-    border-radius: 100%;
+    /* border-radius: 100%; */
 }
 
 #wrap .profile-wrap .profile .content {

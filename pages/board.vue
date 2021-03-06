@@ -107,6 +107,7 @@
       param: [],
       filterItems: [],
       postItems: [],
+      categoryName: null, 
       keywordCount: null
     }),
     async mounted() {
@@ -139,8 +140,13 @@
       }
       catch (err) { console.log(err); }
 
+      // category name raed
+
       // post list read
       this.postListRead();
+
+      // breadcrumb update
+      this.breadCrumbUpdate();
     },
     methods: {
       findKey(filterItem, index) {
@@ -149,13 +155,27 @@
         } else {
           index -= 1;
           if (filterItem == 'area') {
-            console.log(this.filterItems.citysArea[index].key);
+            // console.log(this.filterItems.citysArea[index].key);
             return this.filterItems.citysArea[index].key;
           } else if (filterItem == 'subway') {
             return this.filterItems.citysSubway[index].key;
           } else if (filterItem == 'genre') {
-            console.log(this.filterItems.categoryDetail[index].key);
+            // console.log(this.filterItems.categoryDetail[index].key);
             return this.filterItems.categoryDetail[index].key;
+          }
+        }
+      },
+      findName(filterItem, index) {
+        if (index == undefined) {
+          return index;
+        } else {
+          index -= 1;
+          if (filterItem == 'area') {
+            return this.filterItems.citysArea[index].name;
+          } else if (filterItem == 'subway') {
+            return this.filterItems.citysSubway[index].name;
+          } else if (filterItem == 'genre') {
+            return this.filterItems.categoryDetail[index].name;
           }
         }
       },
@@ -270,13 +290,32 @@
         }
 
         return timeGap.val+timeGap.type;
+      },
+      async breadCrumbUpdate() {
+        try {
+          const res = await axios.get('/api/info/category');
+          let categoryList = res.data.data;
+          let categoryObj = categoryList.filter(item => {
+            return item.key == this.param.category;
+          });
+
+          this.$store.commit('urls/setList', {
+            category: { key: this.param.category, name: categoryObj[0].name},
+            city: { key: this.$cookies.get('city'), name: this.city.name },
+            area: { key: this.param.area, name: this.findName('area', this.param.area)},
+            post: { key: undefined, name: undefined}
+          });
+        }
+        catch (err) { console.log(err); }
       }
     },
     watch: {
       async $route(to, form) {
         console.log(to);
-        // postItems 업데이트
+        // postItems update
         this.postListRead();
+        // breadcrumb vuex update
+        this.breadCrumbUpdate();
       }
     }
   }
