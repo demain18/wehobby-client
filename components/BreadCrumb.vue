@@ -1,32 +1,26 @@
 <template>
   <p class="bread-crumb">
-    <nuxt-link to="">메인</nuxt-link>
+    <nuxt-link to="/">메인</nuxt-link>
 
-    <!-- <span v-for="(item, index) in list" v-bind:key="index">
-      <v-icon small>mdi-chevron-right</v-icon>
-      <nuxt-link to="">{{ index }}({{ item }})</nuxt-link>
-    </span>
-
-    <br/> -->
-
+    <!-- 회원 모집 -->
     <span v-if="list.category.key != null">
       <v-icon small>mdi-chevron-right</v-icon>
-      <nuxt-link to="">{{ list.category.name }}</nuxt-link>
+      <a @click="pageLink('/board?category='+list.category.key)">{{ list.category.name }}</a>
     </span>
-
+    <!-- 서울특별시의 회원 모집 -->
     <span v-if="list.city.key != null">
       <v-icon small>mdi-chevron-right</v-icon>
-      <nuxt-link to="">{{ list.city.name }}의 {{ list.category.name }}</nuxt-link>
+      <a @click="pageLink('/board?category='+list.category.key)">{{ list.city.name }}의 {{ list.category.name }}</a>
     </span>
-
+    <!-- 노원구의 회원 모집 -->
     <span v-if="list.area.key != null">
       <v-icon small>mdi-chevron-right</v-icon>
-      <nuxt-link to="">{{ list.area.name }}의 {{ list.category.name }}</nuxt-link>
+      <a @click="pageLink('/board?category='+list.category.key+'&area='+list.area.key)">{{ list.area.name }}의 {{ list.category.name }}</a>
     </span>
-
+    <!-- 글 이름 -->
     <span v-if="list.post.key != null">
       <v-icon small>mdi-chevron-right</v-icon>
-      <nuxt-link to="">{{ list.post.name }}</nuxt-link>
+      <a>{{ list.post.name }}</a>
     </span>
     <!-- <nuxt-link to="">회원 모집</nuxt-link>
     <v-icon small>mdi-chevron-right</v-icon>
@@ -68,13 +62,9 @@
       catch (err) { console.log(err); }
     },
     methods: {
-      // findObjName(index) {
-      //   let obj = this.filterItems.citysArea.filter(item => {
-      //     return item.key == this.list.area;
-      //   });
-      //   console.log(obj)
-      //   this.nameList.area = obj[0].name;
-      // },
+      pageLink(url) {
+        window.location.href = url;
+      }
     }
   }
 </script>

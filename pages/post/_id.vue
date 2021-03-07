@@ -189,39 +189,7 @@
     }),
     async mounted() {
       // post read
-      try {
-        const postRes = await axios.get('/api/post/read', {
-          params: {
-            id: this.param
-          }
-        });
-        
-        this.data = postRes.data.data;
-        this.uploader = this.data.header.uploader;
-        this.postUploaderKey = postRes.data.data.header.uploader.key;
-        let contactsArr = postRes.data.data.header.contacts;
-
-        if (contactsArr.length == 0) {
-          this.contactsIsEmpty = true;
-        }
-        let mailObj = contactsArr.filter(item => {
-          return item.type == 'mail';
-        });
-        let kakaoObj = contactsArr.filter(item => {
-          return item.type == 'kakao';
-        });
-        if (mailObj.length != 0) {
-          this.contacts.mail = mailObj[0].desc;
-        } else {
-          this.contacts.mail = false;
-        }
-        if (kakaoObj.length != 0) {
-          this.contacts.kakao = kakaoObj[0].desc;
-        } else {
-          this.contacts.kakao = false;
-        }
-      }
-      catch (err) { console.log(err); }
+      this.postRead();
 
       // genre name read
       try {
@@ -273,6 +241,41 @@
       this.breadCrumbUpdate();
     },
     methods: {
+      async postRead() {
+        try {
+          const postRes = await axios.get('/api/post/read', {
+            params: {
+              id: this.param
+            }
+          });
+          
+          this.data = postRes.data.data;
+          this.uploader = this.data.header.uploader;
+          this.postUploaderKey = postRes.data.data.header.uploader.key;
+          let contactsArr = postRes.data.data.header.contacts;
+
+          if (contactsArr.length == 0) {
+            this.contactsIsEmpty = true;
+          }
+          let mailObj = contactsArr.filter(item => {
+            return item.type == 'mail';
+          });
+          let kakaoObj = contactsArr.filter(item => {
+            return item.type == 'kakao';
+          });
+          if (mailObj.length != 0) {
+            this.contacts.mail = mailObj[0].desc;
+          } else {
+            this.contacts.mail = false;
+          }
+          if (kakaoObj.length != 0) {
+            this.contacts.kakao = kakaoObj[0].desc;
+          } else {
+            this.contacts.kakao = false;
+          }
+        }
+        catch (err) { console.log(err); }
+      },
       toggleDialog(dialogName) {
         this.$store.commit('dialog/toggle'+dialogName+'DialogActive');
       },
@@ -297,11 +300,45 @@
           },
           {headers: {token: this.$cookies.get('token')}});
           
-          window.location.href = "/post/"+this.param;
+          if (this.data.header.contacts == false) {
+            this.data.header.contacts = true;
+          } else {
+            this.data.header.contacts = false;
+          }
+
+          // window.location.href = "/post/"+this.param;
         }
         catch (err) { console.log(err); }
       },
       breadCrumbUpdate() {
+        // let categoryData = {}
+        // let cityData = {}
+        // try {
+        //   const res = await axios.get('/api/info/category');
+        //   categoryData = res.data.data;
+        //   let categoryObj = categoryData.filter(item => {
+        //     return item.key == this.data.header.category;
+        //   });
+        //   categoryData = {
+        //     key: categoryObj[0].key,
+        //     name: categoryObj[0].name
+        //   }
+        // }
+        // catch (err) { console.log(err.response.data.message); }
+
+        // try {
+        //   const res = await axios.get('/api/info/citys');
+        //   cityData = res.data.data.citys;
+        //   let cityObj = cityData.filter(item => {
+        //     return item.key == this.data.header.city;
+        //   });
+        //   cityData = {
+        //     key: cityObj[0].key,
+        //     name: cityObj[0].name
+        //   }
+        // }
+        // catch (err) { console.log(err.response.data.message); }
+        
         this.$store.commit('urls/setList', {
           category: this.$store.state.urls.list.category,
           city: this.$store.state.urls.list.city,
