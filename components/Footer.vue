@@ -2,16 +2,16 @@
   <div id="footer">
     <div class="btn-wrap">
       <v-btn text rounded>
-        Home
+        홈
       </v-btn>
       <v-btn text rounded>
-        About Us
+        회사 정보
       </v-btn>
-      <v-btn text rounded>
+      <!-- <v-btn text rounded>
         Team
-      </v-btn>
+      </v-btn> -->
       <v-btn text rounded>
-        Contact Us
+        연락하기
       </v-btn>
     </div>
     <div>
