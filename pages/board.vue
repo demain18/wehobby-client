@@ -45,10 +45,12 @@
           </div>
         </div>
 
-        <v-btn depressed class="btn-main-color">
-          <v-icon left>mdi-lead-pencil</v-icon>
-          게시물 작성
-        </v-btn>
+        <nuxt-link to="/write">
+          <v-btn depressed class="btn-main-color">
+            <v-icon left>mdi-lead-pencil</v-icon>
+            게시물 작성
+          </v-btn>
+        </nuxt-link>
       </div>
       <div class="wrap-split">
         <div class="sel-content">
@@ -180,10 +182,14 @@
         }
       },
       findCityName(index) {
-        let cityObj = this.filterItems.citysArea.filter(item => {
-          return item.key == this.postItems[index].area;
-        });
-        return cityObj[0].name;
+        if (this.postItems[index].area == 0) {
+          return null;
+        } else {
+          let cityObj = this.filterItems.citysArea.filter(item => {
+            return item.key == this.postItems[index].area;
+          });
+          return cityObj[0].name;
+        }
       },
       async postListRead() {
         try {

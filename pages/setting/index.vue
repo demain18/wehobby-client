@@ -83,7 +83,7 @@
             <v-text-field v-model="select.contact.email" label="이메일" placeholder="example@contact.com"></v-text-field>
           </v-col>
           <v-col>
-            <v-text-field v-model="select.contact.email" label="카카오톡" placeholder="카카오톡 아이디를 입력해주세요"></v-text-field>
+            <v-text-field v-model="select.contact.email" label="카카오톡" placeholder="exampleId" hint="오픈채팅방 링크도 사용가능" persistent-hint></v-text-field>
           </v-col>
         </v-row>
 
