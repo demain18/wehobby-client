@@ -2,8 +2,9 @@
   <div class="pc" data-app>
     <DialogCity/>
     <nuxt-link class="item lft logo" to="/">동네친구</nuxt-link>
+    <span v-if="city != null"  v-on:click="toggleCityDialog()" class="item lft span-a-tag">{{ city }}</span>
     <span v-if="city == null" v-on:click="toggleCityDialog()" class="item lft span-a-tag">도시 선택</span>
-    <span v-if="city != null"  v-on:click="toggleCityDialog()" class="item lft span-a-tag">{{ city[0].name }}</span>
+    <!-- <span v-if="city != null"  v-on:click="toggleCityDialog()" class="item lft span-a-tag">{{ city }}</span> -->
     <!-- <span v-else v-on:click="toggleCityDialog" class="item lft span-a-tag">도시 선택</span> -->
 
     <v-menu open-on-hover middle offset-y>
@@ -25,11 +26,11 @@
     </v-menu>
 
     <span class="item mid">
-      <nuxt-link class="active" to="">회원 모집</nuxt-link>
-      <nuxt-link class="" to="">중고 물품</nuxt-link>
-      <nuxt-link class="" to="">아르바이트</nuxt-link>
-      <nuxt-link class="" to="">재능교환/판매</nuxt-link>
-      <nuxt-link class="" to="">이벤트</nuxt-link>
+      <a @click="pageLink(1)" v-bind:class="{active: routeList[1]}">회원 모집</a>
+      <a @click="pageLink(2)" v-bind:class="{active: routeList[2]}">중고 물품</a>
+      <a @click="pageLink(3)" v-bind:class="{active: routeList[3]}">아르바이트</a>
+      <a @click="pageLink(4)" v-bind:class="{active: routeList[4]}">재능교환/판매</a>
+      <a @click="pageLink(5)" v-bind:class="{active: routeList[5]}">이벤트</a>
     </span>
 
     <!-- <v-avatar v-if="token.verify != true" class="item rgt user-icon" v-bind="attrs" v-on="on">
@@ -44,19 +45,7 @@
         </v-avatar>
       </template>
 
-      <!-- <v-list>
-        <v-list-item>
-          <nuxt-link to="/profile">내 프로필 보기</nuxt-link>
-        </v-list-item>
-        <v-list-item>
-          <nuxt-link to="/setting">설정</nuxt-link>
-        </v-list-item>
-        <v-list-item>
-          <nuxt-link to="">로그아웃</nuxt-link>
-        </v-list-item>
-      </v-list> -->
-
-      <v-list dense>
+    <v-list dense>
       <!-- <v-subheader>REPORTS</v-subheader> -->
       <v-list-item-group color="primary">
         <v-list-item to="/profile">
@@ -101,34 +90,40 @@
         verify: null,
       },
       user: null ,
-      city: 'test',
+      city: null,
       cityItems: [],
       routeItems: [],
+      routeList: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+      ]
     }),
     async mounted() {
       // user update
       this.user = this.$cookies.get('user');
 
       // check cookies
-      let cookies = {
-        token: this.$cookies.get('token'),
-        city: this.$cookies.get('city'),
-        user: this.$cookies.get('user')
-      }
-      // console.log($cookies.keys());
-      // console.log(cookies);
+      // let cookies = {
+      //   token: this.$cookies.get('token'),
+      //   city: this.$cookies.get('city'),
+      //   user: this.$cookies.get('user')
+      // }
+
+      // param read
+      this.routeList[this.$route.query.category] = this.$route.query.category;
 
       // token verify
       if (this.$cookies.isKey('token')) {
         try {
-          const res = await axios.post('/api/auth/verify',
-            {},
-            {
-              headers: {
-                token: this.$cookies.get('token'),
-              }
+          const res = await axios.post('/api/auth/verify',{},{
+            headers: {
+              token: this.$cookies.get('token'),
             }
-          );
+          });
           if (res.data.result == true) {
             this.token.verify = true;
           }
@@ -151,11 +146,7 @@
             key: 0,
             name: '선택안함(대한민국 전체)'
           });
-          this.city = this.cityItems.filter(
-            (ele) => {
-              return ele.key == parseInt(this.$cookies.get('city'));
-            }
-          );
+          this.city = this.cityItems.find(obj => obj.key == this.$cookies.get('city')).name;
         }
         catch (err) { console.log(err.response.data.message); }
       }
@@ -171,6 +162,9 @@
     methods: {
       toggleCityDialog() {
         this.$store.commit('dialog/toggleCityDialogActive');
+      },
+      pageLink(route) {
+        window.location.href = "/board?category="+route;
       }
     }
   }

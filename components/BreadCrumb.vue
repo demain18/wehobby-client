@@ -22,13 +22,7 @@
       <v-icon small>mdi-chevron-right</v-icon>
       <a>{{ list.post.name }}</a>
     </span>
-    <!-- <nuxt-link to="">회원 모집</nuxt-link>
-    <v-icon small>mdi-chevron-right</v-icon>
-    <nuxt-link to="">서울특별시의 회원 모집</nuxt-link>
-    <v-icon small>mdi-chevron-right</v-icon>
-    <nuxt-link to="">노원구의 회원 모집</nuxt-link>
-    <v-icon small>mdi-chevron-right</v-icon>
-    <nuxt-link to="">노원역에서 같이 점심먹을 분 구합니다</nuxt-link> -->
+
   </p>
 </template>
 
@@ -57,7 +51,6 @@
           }
         });
         this.filterItems = filterRes.data.data;
-        // this.findObjName();
       }
       catch (err) { console.log(err); }
     },

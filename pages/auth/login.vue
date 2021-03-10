@@ -69,14 +69,13 @@
             } else {
               this.$cookies.set('user', userData, '30d');
             }
-            console.log(profileRes);
+            // console.log(profileRes);
             // this.$router.push('/');
+            window.location.href = "/";
           }
           catch (err) {
             console.log(err.response.data.message);
           }
-
-          window.location.href = "/";
         } catch (err) {
           alert(err.response.data.message); // can not find data나오면 err만 출력
         }

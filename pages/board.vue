@@ -5,17 +5,17 @@
       <div class="sel-filter">
         <BreadCrumb />
         <h2 v-if="param.keyword != undefined">
-          검색어 "{{ param.keyword }}"의 검색결과({{ keywordCount }})
+          검색어 '{{ param.keyword }}'의 검색결과({{ keywordCount }})
         </h2>
         <h2 v-else>
-          {{ city.name }}의 회원 모집({{ filterItems.countAll }})
+          {{ cityName }}의 {{ categoryName }}({{ filterItems.countAll }})
         </h2>
 
         <div class="filter">
           <div class="header">구/군</div>
           <div class="content">
             <span v-bind:class="{active: undefined==(param.area)}">
-              <a v-on:click="pageLink('area', null)">{{ city.name }} 전체({{ city.count }})</a>
+              <a v-on:click="pageLink('area', null)">{{ cityName }} 전체({{ filterItems.countAll }})</a>
             </span>
             <span v-for="(item, index) in filterItems.citysArea" v-bind:key="index" v-bind:class="{active: index==(param.area-1)}">
               <a v-on:click="pageLink('area', (index+1))">{{ item.name }}({{ item.count }})</a>
@@ -61,7 +61,7 @@
               <div class="content">
                 <p class="title"><nuxt-link :to="'/post/'+item.key">{{ item.title }}</nuxt-link></p>
                 <p class="info">
-                  <span>{{ findCityName(index) }}</span> · {{ item.options[0] }} · {{ item.options[1] }} · {{ item.options[2] }}
+                  <span>{{ findPostAreaName(index) }}</span> · {{ item.options[0] }} · {{ item.options[1] }} · {{ item.options[2] }}
                 </p>
                 <p class="txt">{{ item.desc }}..</p>
                 <span class="time" v-text="agoCalc(item.date, item.time)+' 전'"></span>
@@ -105,11 +105,12 @@
       }
     },
     data: () => ({
-      city: [],
+      cityName: null,
+      // city: [],
       param: [],
       filterItems: [],
       postItems: [],
-      categoryName: null, 
+      categoryName: null,
       keywordCount: null
     }),
     async mounted() {
@@ -125,30 +126,26 @@
       }
       catch (err) { console.log(err.response.data.message); }
 
-      // city name, count read
-      let findCityName = (arr) => {
-        return arr.key == this.$cookies.get('city');
-      }
+      // city name read
       try {
         const citysRes = await axios.get('/api/info/citys');
-        let areaCountHap = 0;
-        for (let i = 0; i < this.filterItems.citysArea.length; i++) {
-          areaCountHap += this.filterItems.citysArea[i].count;
-        }
-        this.city = {
-          name: citysRes.data.data.citys.find(findCityName).name, // city 목록에서 현재 위치한 도시의 이름 색적
-          count: areaCountHap // 도시기준 모든 구,군의 글 갯수 합
-        }
+        this.cityName = citysRes.data.data.citys.find(ele => ele.key == this.$cookies.get('city')).name;
       }
       catch (err) { console.log(err); }
 
-      // category name raed
-
       // post list read
       this.postListRead();
-
       // breadcrumb update
       this.breadCrumbUpdate();
+    },
+    watch: {
+      async $route(to, form) {
+        console.log(to); // 왜 req가 두번 나가지? 한번 나가는거랑 차이가 있나?
+        // postItems update
+        this.postListRead();
+        // breadcrumb update
+        this.breadCrumbUpdate();
+      }
     },
     methods: {
       findKey(filterItem, index) {
@@ -181,14 +178,15 @@
           }
         }
       },
-      findCityName(index) {
+      findPostAreaName(index) {
         if (this.postItems[index].area == 0) {
           return null;
         } else {
-          let cityObj = this.filterItems.citysArea.filter(item => {
-            return item.key == this.postItems[index].area;
-          });
-          return cityObj[0].name;
+          // let cityObj = this.filterItems.citysArea.filter(item => {
+          //   return item.key == this.postItems[index].area;
+          // });
+          // return cityObj[0].name;
+          return this.filterItems.citysArea.find(ele => ele.key == this.postItems[index].area).name;
         }
       },
       async postListRead() {
@@ -295,28 +293,21 @@
       async breadCrumbUpdate() {
         try {
           const res = await axios.get('/api/info/category');
-          let categoryList = res.data.data;
-          let categoryObj = categoryList.filter(item => {
-            return item.key == this.param.category;
-          });
+          // let categoryList = res.data.data;
+          // let categoryObj = categoryList.filter(item => {
+          //   return item.key == this.param.category;
+          // });
+          // this.categoryName = categoryObj[0].name;
+          this.categoryName = res.data.data.find(ele => ele.key == this.param.category).name;
 
           this.$store.commit('urls/setList', {
-            category: { key: this.param.category, name: categoryObj[0].name},
-            city: { key: this.$cookies.get('city'), name: this.city.name },
+            category: { key: this.param.category, name: this.categoryName},
+            city: { key: this.$cookies.get('city'), name: this.cityName },
             area: { key: this.param.area, name: this.findName('area', this.param.area)},
             post: { key: undefined, name: undefined}
           });
         }
         catch (err) { console.log(err); }
-      }
-    },
-    watch: {
-      async $route(to, form) {
-        console.log(to);
-        // postItems update
-        this.postListRead();
-        // breadcrumb vuex update
-        this.breadCrumbUpdate();
       }
     }
   }
