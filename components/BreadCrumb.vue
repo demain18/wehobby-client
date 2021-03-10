@@ -64,6 +64,7 @@
     methods: {
       pageLink(url) {
         window.location.href = url;
+        // this.$router.push(url)
       }
     }
   }

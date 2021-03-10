@@ -214,13 +214,9 @@
         if (key == null) {
           this.param[ele] = undefined;
         }
-
         this.param.page = undefined;
         let paramData = [];
         for (let [key, val] of Object.entries(this.param)) {
-          // if (key == 'page') { // 데이터가 나오지 않는 이유는 버튼 이벤트보다 param watch가 더 먼저 실행되기 때문임
-            
-          // }
           if (val != undefined) {
             paramData.push(
               {
@@ -230,7 +226,6 @@
             );
           }
         }
-
         let paramString = '/board?';
         for (let i = 0; i < paramData.length; i++) {
           paramString += paramData[i].key+'='+paramData[i].val+'&';
