@@ -79,10 +79,15 @@
               desc: this.select.desc
             },
             {headers: {token: this.$cookies.get('token')}});
-            // console.log(res.data);
+
+            alert('신고가 접수되었습니다. 해당 신고에 대한 조치는 정기공지를 확인해주세요.');
+            this.select = {
+              type: null,
+              desc: null
+            }
+            this.toggleDialog();
           }
           catch (err) { console.log(err); }
-          this.toggleDialog();
         }
       },
     }
