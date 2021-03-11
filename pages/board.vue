@@ -5,7 +5,7 @@
       <div class="sel-filter">
         <BreadCrumb />
         <h2 v-if="param.keyword != undefined">
-          검색어 '{{ param.keyword }}'의 검색결과({{ keywordCount }})
+          "{{ param.keyword }}"의 검색결과({{ keywordCount }})
         </h2>
         <h2 v-else>
           {{ cityName }}의 {{ categoryName }}({{ filterItems.countAll }})
@@ -61,11 +61,10 @@
               <div class="content">
                 <p class="title"><nuxt-link :to="'/post/'+item.key">{{ item.title }}</nuxt-link></p>
                 <p class="info">
-                  <!-- <span class="bold">{{ findPostAreaName(index) }}</span>  -->
-                  <span class="bold">{{ item.options[0] }}</span>
-                  <span> · {{ item.options[1] }}</span>
-                  <span> · {{ item.options[2] }}</span>
-                  <span> · {{ item.options[3] }}</span>
+                  <span v-if="item.options[0] != ''" class="bold">{{ item.options[0] }}</span><span v-if="item.options[0] != '' && item.options[1] != ''"> · </span>
+                  <span v-if="item.options[1] != ''">{{ item.options[1] }}</span><span v-if="item.options[2] != ''"> · </span>
+                  <span v-if="item.options[2] != ''">{{ item.options[2] }}</span><span v-if="item.options[3] != ''"> · </span>
+                  <span v-if="item.options[3] != ''">{{ item.options[3] }}</span>
                 </p>
                 <p class="txt" v-html="wrapReplace(item.desc)">..</p>
                 <span class="time" v-text="agoCalc(item.date, item.time)+' 전'"></span>
@@ -158,12 +157,10 @@
         } else {
           index -= 1;
           if (filterItem == 'area') {
-            // console.log(this.filterItems.citysArea[index].key);
             return this.filterItems.citysArea[index].key;
           } else if (filterItem == 'subway') {
             return this.filterItems.citysSubway[index].key;
           } else if (filterItem == 'genre') {
-            // console.log(this.filterItems.categoryDetail[index].key);
             return this.filterItems.categoryDetail[index].key;
           }
         }
@@ -182,7 +179,7 @@
           }
         }
       },
-      findPostAreaName(index) {
+      findAreaName(index) {
         if (this.postItems[index].area == 0) {
           return '';
         } else {
@@ -207,9 +204,16 @@
 
           // area into options
           for (let i=0; i<this.postItems.length; i++) {
-            this.postItems[i].options.unshift(this.findPostAreaName(i));
-            // options bold select
-            if (this.param.category == 1) {
+            this.postItems[i].options.unshift(this.findAreaName(i));
+            // options sort
+            if (this.param.category == 2) {
+              this.postItems[i].options = {
+                0: this.thousandComma(this.postItems[i].options[1]),
+                1: this.postItems[i].options[0],
+                2: this.postItems[i].options[2],
+                3: this.postItems[i].options[3],
+              }
+            } else { // 1, 3, 4, 5
               this.postItems[i].options = {
                 0: this.postItems[i].options[0],
                 1: this.postItems[i].options[1],
@@ -326,6 +330,9 @@
       wrapReplace(content) {
         let desc = String(content);
         return desc.split('\\n').join(' ')+'..';
+      },
+      thousandComma(content) {
+        return content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       }
     }
   }

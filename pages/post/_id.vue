@@ -113,14 +113,16 @@
             {{ header.subway }}
           </div>
         </div>
+
         <div class="table" v-for="(item, index) in data.header.options" :key="index">
           <div class="header">
             {{ item.header }}
           </div>
-          <div class="content" v-text="optionContentRead(item.content)">
-            <!-- {{ item.content }} -->
-          </div>
+          <div v-if="data.header.category == 2" v-text="optionContentRead(thousandComma(item.content))" class="content"></div>
+          <div v-else-if="data.header.category == 3 || data.header.category == 4 || data.header.category == 5" v-text="optionContentRead(standardTerm(item.content, index))" class="content"></div>
+          <div v-else v-text="optionContentRead(item.content)" class="content"></div>
         </div>
+
         <v-btn v-if="contactsIsEmpty == true" disabled>
           게시물 작성자가 아직 연락처를<br/> 추가하지 않았습니다
         </v-btn>
@@ -312,7 +314,20 @@
         } else {
           return content;
         }
-      }
+      },
+      thousandComma(content) {
+        return content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      },
+      standardTerm(content, index) {
+        console.log(content)
+        if (index==1) {
+          return content+'/월';
+        } else if(index==2) {
+          return content+'/일';
+        } else {
+          return content;
+        }
+      },
     }
   }
 
