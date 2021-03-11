@@ -47,6 +47,7 @@ export default {
     '@nuxtjs/axios',
     'moment',
     'vue-social-sharing/nuxt'
+    // vue cookies는 불러오지도 않았는데 어떻게 되는지 모르겠다
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
@@ -73,7 +74,7 @@ export default {
     // '/api/': 'http://localhost:8888/1.0'
   },
 
-  // Vuetify Theme Custom
+  // Vuetify theme color custom
   vuetify: {
     theme: {
       light: true,

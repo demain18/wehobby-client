@@ -62,6 +62,7 @@
         <div style="clear: both;"></div>
 
         <v-textarea v-model="select.desc" solo label="이곳에 본문을 작성해주세요" rows="7" class="textarea"></v-textarea>
+        <!-- <ckeditor :editor="ckeditor.editor" v-model="ckeditor.editorData" :config="ckeditor.editorConfig"></ckeditor> -->
 
         <v-btn :disabled="select.submitAble == false" @click="postWriteSubmit()" depressed class="btn-main-color">
           등록
@@ -79,11 +80,17 @@
   import Vue from 'vue';
   import axios from 'axios';
   import Vuecookies from 'vue-cookies';
+  // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   Vue.use(Vuecookies);
 
   export default {
     created() {},
     data: () => ({
+      // ckeditor: {
+      //   editor: ClassicEditor,
+      //   editorData: '<p>Content of the editor.</p>',
+      //   editorConfig: {},
+      // },
       select: {
         city: null,
         area: null,
@@ -240,6 +247,37 @@
       }
       catch (err) { console.log(err); }
     },
+    watch: {
+      'select.city'(to, from) {
+        this.cityDataRead();
+        this.select.area = null;
+        this.select.subway = null;
+      },
+      'select.category'(to, from) {
+        this.list.categoryDetail = this.list.category[to-1].detail;
+        this.select.options = [
+          this.list.options[this.select.category-1][0].name,
+          this.list.options[this.select.category-1][1].name,
+          this.list.options[this.select.category-1][2].name,
+        ]
+        this.select.genre = null;
+        this.select.optionData = [
+          null,
+          null,
+          null
+        ];
+      },
+      select: {
+        deep: true,
+        handler() {
+          if (this.select.city != null && this.select.category != null && this.select.title != null && this.select.title != '') {
+            this.select.submitAble = true;
+          } else {
+            this.select.submitAble = false;
+        }
+        }
+      }
+    },
     methods: {
       async cityDataRead() {
         try {
@@ -284,45 +322,6 @@
         }
       }
     },
-    watch: {
-      'select.city'(to, from) {
-        this.cityDataRead();
-        this.select.area = null;
-        this.select.subway = null;
-      },
-      'select.category'(to, from) {
-        this.list.categoryDetail = this.list.category[to-1].detail;
-        this.select.options = [
-          this.list.options[this.select.category-1][0].name,
-          this.list.options[this.select.category-1][1].name,
-          this.list.options[this.select.category-1][2].name,
-        ]
-        this.select.genre = null;
-        this.select.optionData = [
-          null,
-          null,
-          null
-        ];
-      },
-      // 'select'(to, from) {
-      //   console.log(to)
-      //   if (this.select.city != null || this.select.category != null || this.select.title != null) {
-      //     this.select.submit = true;
-      //   } else {
-      //     this.select.submit = false;
-      //   }
-      // },
-      select: {
-        deep: true,
-        handler() {
-          if (this.select.city != null && this.select.category != null && this.select.title != null && this.select.title != '') {
-            this.select.submitAble = true;
-          } else {
-            this.select.submitAble = false;
-        }
-        }
-      }
-    }
   }
 
 </script>

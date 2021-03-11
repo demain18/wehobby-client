@@ -85,6 +85,11 @@
   Vue.use(Vuecookies);
 
   export default {
+    computed: {
+      list() {
+        return this.$store.state.urls.list;
+      }
+    },
     data: () => ({
       token: {
         verify: null,
@@ -114,7 +119,13 @@
       // }
 
       // param read
-      this.routeList[this.$route.query.category] = this.$route.query.category;
+      // console.log(this.list.category.key)
+      // if (this.$route.query.category == undefined) {
+      //   this.routeList[this.list.category.key] = true;
+      // } else {
+      //   this.routeList[this.$route.query.category] = true;
+      // }
+      this.routeList[this.$route.query.category] = true;
 
       // token verify
       if (this.$cookies.isKey('token')) {

@@ -61,9 +61,13 @@
               <div class="content">
                 <p class="title"><nuxt-link :to="'/post/'+item.key">{{ item.title }}</nuxt-link></p>
                 <p class="info">
-                  <span>{{ findPostAreaName(index) }}</span> · {{ item.options[0] }} · {{ item.options[1] }} · {{ item.options[2] }}
+                  <!-- <span class="bold">{{ findPostAreaName(index) }}</span>  -->
+                  <span class="bold">{{ item.options[0] }}</span>
+                  <span> · {{ item.options[1] }}</span>
+                  <span> · {{ item.options[2] }}</span>
+                  <span> · {{ item.options[3] }}</span>
                 </p>
-                <p class="txt">{{ item.desc }}..</p>
+                <p class="txt" v-html="wrapReplace(item.desc)">..</p>
                 <span class="time" v-text="agoCalc(item.date, item.time)+' 전'"></span>
               </div>
             </div>
@@ -180,12 +184,8 @@
       },
       findPostAreaName(index) {
         if (this.postItems[index].area == 0) {
-          return null;
+          return '';
         } else {
-          // let cityObj = this.filterItems.citysArea.filter(item => {
-          //   return item.key == this.postItems[index].area;
-          // });
-          // return cityObj[0].name;
           return this.filterItems.citysArea.find(ele => ele.key == this.postItems[index].area).name;
         }
       },
@@ -204,6 +204,20 @@
           });
           this.keywordCount = postListRes.data.data.count;
           this.postItems = postListRes.data.data.postItems;
+
+          // area into options
+          for (let i=0; i<this.postItems.length; i++) {
+            this.postItems[i].options.unshift(this.findPostAreaName(i));
+            // options bold select
+            if (this.param.category == 1) {
+              this.postItems[i].options = {
+                0: this.postItems[i].options[0],
+                1: this.postItems[i].options[1],
+                2: this.postItems[i].options[2],
+                3: this.postItems[i].options[3],
+              }
+            }
+          }
         }
         catch (err) { console.log(err); }
       },
@@ -308,6 +322,10 @@
           });
         }
         catch (err) { console.log(err); }
+      },
+      wrapReplace(content) {
+        let desc = String(content);
+        return desc.split('\\n').join(' ')+'..';
       }
     }
   }

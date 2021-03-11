@@ -13,15 +13,14 @@
           {{ data.content.title }}
         </h1>
         <div class="images">
-
           <div class="img-wrap">
             <img src="~assets/img/placeholder1.jpg">
           </div>
+        </div>
+        <div class="content" v-html="wrapReplace(data.content.desc)">
+          <!-- {{ data.content.desc }} -->
+        </div>
 
-        </div>
-        <div class="content">
-          {{ data.content.desc }}
-        </div>
         <div class="comment-wrap">
           <div class="list">
             <div class="list-header">
@@ -56,7 +55,6 @@
                 </v-menu>
               </div>
             </div>
-
           </div>
 
           <v-text-field solo label="댓글을 입력하세요" clearable></v-text-field>
@@ -88,6 +86,7 @@
         </div>
       </div>
 
+
       <div class="profile-wrap">
         <p class="info">
           <!-- 2020년 9월 7일 14:35 -->
@@ -118,8 +117,8 @@
           <div class="header">
             {{ item.header }}
           </div>
-          <div class="content">
-            {{ item.content }}
+          <div class="content" v-text="optionContentRead(item.content)">
+            <!-- {{ item.content }} -->
           </div>
         </div>
         <v-btn v-if="contactsIsEmpty == true" disabled>
@@ -195,15 +194,9 @@
       try {
         const filterRes = await axios.get('/api/info/category');
         let filterItems = filterRes.data.data;
-
-        if (this.data.header.category != 0) {
-          let genreObj = filterItems.filter(item => {
-            return item.key == this.data.header.category;
-          })
-          genreObj = genreObj[0].detail.filter(item => {
-            return item.key == this.data.header.categoryDetail
-          });
-          this.header.genre = genreObj[0].name; 
+        if (this.data.header.categoryDetail != 0) {
+          let genreObj = filterItems.find(obj => obj.key == this.data.header.category).detail;
+          this.header.genre = genreObj.find(obj => obj.key == this.data.header.categoryDetail).name;
         }
       }
       catch (err) { console.log(err); }
@@ -215,20 +208,13 @@
             city: parseInt(this.$cookies.get('city'))
           }
         });
+
         let cityItems = cityRes.data.data;
-
         if (this.data.header.districtRegion != 0) {
-          let areaObj = cityItems.area.filter(item => {
-            return item.key == this.data.header.districtRegion;
-          });
-          this.header.area = areaObj[0].name;
+          this.header.area = cityItems.area.find(obj => obj.key == this.data.header.districtRegion).name;
         }
-
         if (this.data.header.subway != 0) {
-          let subwayObj = cityItems.subways.filter(item => {
-            return item.key == this.data.header.subway;
-          });
-          this.header.subway = subwayObj[0].name+'역';
+          this.header.subway = cityItems.subways.find(obj => obj.key == this.data.header.subway).name+'역';
         }
       }
       catch (err) { console.log(err); }
@@ -305,46 +291,27 @@
           } else {
             this.data.header.contacts = false;
           }
-
-          // window.location.href = "/post/"+this.param;
         }
         catch (err) { console.log(err); }
       },
       breadCrumbUpdate() {
-        // let categoryData = {}
-        // let cityData = {}
-        // try {
-        //   const res = await axios.get('/api/info/category');
-        //   categoryData = res.data.data;
-        //   let categoryObj = categoryData.filter(item => {
-        //     return item.key == this.data.header.category;
-        //   });
-        //   categoryData = {
-        //     key: categoryObj[0].key,
-        //     name: categoryObj[0].name
-        //   }
-        // }
-        // catch (err) { console.log(err.response.data.message); }
-
-        // try {
-        //   const res = await axios.get('/api/info/citys');
-        //   cityData = res.data.data.citys;
-        //   let cityObj = cityData.filter(item => {
-        //     return item.key == this.data.header.city;
-        //   });
-        //   cityData = {
-        //     key: cityObj[0].key,
-        //     name: cityObj[0].name
-        //   }
-        // }
-        // catch (err) { console.log(err.response.data.message); }
-        
         this.$store.commit('urls/setList', {
           category: this.$store.state.urls.list.category,
           city: this.$store.state.urls.list.city,
           area: this.$store.state.urls.list.area,
           post: { key: this.$route.params.id, name: this.data.content.title }
         });
+      },
+      wrapReplace(content) {
+        let desc = String(content);
+        return desc.split('\\n').join('<br />');
+      },
+      optionContentRead(content) {
+        if (content == '') {
+          return '-';
+        } else {
+          return content;
+        }
       }
     }
   }
