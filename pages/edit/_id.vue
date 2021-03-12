@@ -41,14 +41,11 @@
           </v-col>
         </v-row>
 
-        <!-- <v-text-field v-model="select.title" :rules="[rules.required]" label="제목*"></v-text-field> -->
-
         <v-row>
           <v-col>
             <v-file-input v-model="select.upload" small-chips multiple hint="jpg, png 형식이며 파일 크기가 5mb를 넘지 않는 이미지만 업로드 가능합니다" persistent-hint placeholder="이미지 업로드"></v-file-input>
           </v-col>
         </v-row>
-
         <div class="preview-grid">
           <!-- <div class="preview">
             <img src="~assets/img/dummy/1.jpg">
@@ -62,14 +59,11 @@
         <div style="clear: both;"></div>
 
         <vue-editor v-model="select.desc" :editor-toolbar="customToolbar" class="textarea" />
-        <!-- <v-textarea v-model="select.desc" solo label="이곳에 본문을 작성해주세요" rows="7" class="textarea"></v-textarea> -->
+        <!-- <v-textarea type="text" v-model="select.desc" solo label="이곳에 본문을 작성해주세요" rows="7" class="textarea"></v-textarea> -->
 
-        <v-btn :disabled="select.submitAble == false" @click="postWriteSubmit()" depressed class="btn-main-color">
-          등록
+        <v-btn :disabled="select.submitAble == false" @click="postEditSubmit()" depressed class="btn-main-color">
+          수정
         </v-btn>
-        <!-- <v-btn depressed>
-          취소
-        </v-btn> -->
       </div>
     </div>
     <Footer />
@@ -85,8 +79,11 @@
 
   export default {
     components: { VueEditor },
-    created() {},
+    created() {
+      this.param = this.$route.params.id;
+    },
     data: () => ({
+      param: null,
       customToolbar: [
         ["bold", "italic", "underline"],
         [{ list: "ordered" }, { list: "bullet" }],
@@ -113,13 +110,9 @@
         desc: null,
         submitAble: false,
       },
+      // data: {},
       rules: {
         required: value => !!value || '비워둘 수 없는 항목입니다.',
-        // required(value) {
-        //   if (value == null) {
-        //     return '비워둘 수 없는 항목입니다';
-        //   }
-        // }
       },
       list: {
         city: [],
@@ -247,12 +240,38 @@
         this.list.category = categoryRes.data.data;
       }
       catch (err) { console.log(err); }
+
+      // post raed
+      try {
+        const postRes = await axios.get('/api/post/read', {
+          params: {
+            id: this.param
+          }
+        });
+        // console.log(postRes.data.data)
+        let data = postRes.data.data;
+        this.select.city = data.header.city,
+        this.select.area = data.header.districtRegion;
+        this.select.subway = data.header.subway;
+        this.select.category = data.header.category;
+        this.select.genre = data.header.categoryDetail;
+        this.select.optionData = [
+          data.header.options[0].content,
+          data.header.options[1].content,
+          data.header.options[2].content,
+        ];
+        this.select.title = data.content.title;
+        this.select.desc = data.content.desc;
+      }
+      catch (err) { console.log(err); }
     },
     watch: {
       'select.city'(to, from) {
         this.cityDataRead();
-        this.select.area = null;
-        this.select.subway = null;
+        if (from != null) {
+          this.select.area = null;
+          this.select.subway = null;
+        }
       },
       'select.category'(to, from) {
         this.list.categoryDetail = this.list.category[to-1].detail;
@@ -261,12 +280,14 @@
           this.list.options[this.select.category-1][1].name,
           this.list.options[this.select.category-1][2].name,
         ]
-        this.select.genre = null;
-        this.select.optionData = [
-          null,
-          null,
-          null
-        ];
+        if (from != null) {
+          this.select.genre = null;
+          this.select.optionData = [
+            null,
+            null,
+            null
+          ]; 
+        }
       },
       select: {
         deep: true,
@@ -296,11 +317,16 @@
           return this.list.options[category-1][index].list;
         }
       },
-      async postWriteSubmit() {
+      wrapFormReplace(content) {
+        let desc = String(content);
+        return desc.split('\\n').join('<br/>');
+      },
+      async postEditSubmit() {
         if (this.select.submitAble == true) {
           try {
-            const res = await axios.post('/api/post/insert',
+            await axios.post('/api/post/update',
               {
+                id: this.param,
                 city: this.select.city,
                 district_region: this.select.area,
                 subway: this.select.subway,
@@ -316,8 +342,8 @@
                 token: this.$cookies.get('token'),
               }}
             );
-            console.log(res);
-            this.$router.push('/post/'+res.data.data.postIdKey);
+            // console.log(res);
+            this.$router.push('/post/'+this.param);
           }
           catch (err) { console.log(err); }
         }

@@ -55,9 +55,8 @@
 #wrap .content-wrap .content {
     margin-top: 15px;
     margin-bottom: 30px;
-/*    border: 1px solid blue;*/
     width: 100%;
-    /* min-height: 150px; */
+    white-space: pre-wrap!important;
 }
 
 #wrap .content-wrap .comment-wrap {

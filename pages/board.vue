@@ -329,7 +329,26 @@
       },
       wrapReplace(content) {
         let desc = String(content);
-        return desc.split('\\n').join(' ')+'..';
+        let list = [
+          '<p>',
+          '</p>',
+          '<strong>',
+          '</strong>',
+          '<i>',
+          '</i>',
+          '<stricke>',
+          '</strike>',
+          '<li>',
+          '</li>',
+          '<ul>',
+          '</ul>',
+          '<ol>',
+          '</ol>'
+        ]
+        for (let i = 0; i < list.length; i++) {
+          desc = desc.split(list[i]).join('');
+        }
+        return desc;
       },
       thousandComma(content) {
         return content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

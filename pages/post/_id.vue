@@ -17,7 +17,7 @@
             <img src="~assets/img/placeholder1.jpg">
           </div>
         </div>
-        <div class="content" v-html="wrapReplace(data.content.desc)">
+        <div class="content" v-html="data.content.desc">
           <!-- {{ data.content.desc }} -->
         </div>
 
@@ -66,7 +66,7 @@
           <a @click="toggleDialogReport('post', param)" class="btn">
             <v-icon small class="icon">mdi-bell</v-icon>신고하기
           </a>
-          <nuxt-link v-if="userKey == postUploaderKey" to="" class="btn">
+          <nuxt-link v-if="userKey == postUploaderKey" :to="'/edit/'+param" class="btn">
             <v-icon small class="icon">mdi-pencil</v-icon>수정하기
           </nuxt-link>
           <nuxt-link v-if="userKey == postUploaderKey" to="" class="btn">
@@ -143,7 +143,7 @@
               <h4><strong>{{ uploader.nickname }}</strong></h4>
             </nuxt-link>
             <p>{{ uploader.sex }}</p>
-            <p>게시물 : 3개</p>
+            <p>게시물 : {{ uploader.postCount }}개</p>
           </div>
         </div>
         <div class="bio">
@@ -240,8 +240,10 @@
           this.data = postRes.data.data;
           this.uploader = this.data.header.uploader;
           this.postUploaderKey = postRes.data.data.header.uploader.key;
-          let contactsArr = postRes.data.data.header.contacts;
 
+          this.data.content.desc = this.wrapReplace(this.data.content.desc);
+
+          let contactsArr = postRes.data.data.header.contacts;
           if (contactsArr.length == 0) {
             this.contactsIsEmpty = true;
           }
@@ -306,7 +308,7 @@
       },
       wrapReplace(content) {
         let desc = String(content);
-        return desc.split('\\n').join('<br />');
+        return desc.split('\\n').join('<br>');
       },
       optionContentRead(content) {
         if (content == '') {
@@ -319,7 +321,6 @@
         return content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       },
       standardTerm(content, index) {
-        console.log(content)
         if (index==1) {
           return content+'/월';
         } else if(index==2) {
