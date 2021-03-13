@@ -27,7 +27,6 @@
               <span class="title">댓글 {{ data.comments.length }}개</span>
             </div>
             <div class="list-header-line"></div>
-
             <p v-if="data.comments.length == 0" class="placeholder-comment">아직 작성된 댓글이 없습니다, 가장 먼저 댓글을 작성해보세요.</p>
 
             <div class="item" v-for="(item, index) in data.comments" :key="index">
@@ -39,7 +38,10 @@
                   <nuxt-link :to="'/profile/'+item.uploader.key"><strong>{{ item.uploader.nickname }}</strong></nuxt-link>
                   <!-- <span class="time">15분 전</span> -->
                 </p>
-                <p>{{ item.desc }}</p>
+                <p v-if="select.commentEdit[index] == true">
+                  <v-text-field v-model="select.comment.descEdit" v-on:keyup.enter="commentEdit(index)" solo dense label="" clearable></v-text-field>
+                </p>
+                <p v-else>{{ item.desc }}</p>
                 <v-menu attach left offset-y>
                   <template v-slot:activator="{ on, attrs }">
                     <v-icon medium v-bind="attrs" v-on="on" class="tooltip-btn">mdi-dots-horizontal</v-icon>
@@ -48,8 +50,7 @@
                     <v-list-item style="width: 90px">
                       <nuxt-link :to="'/profile/'+item.uploader.key">프로필 보기</nuxt-link>
                       <a @click="toggleDialogReport('comment', item.key)">신고하기</a>
-                      <!-- <nuxt-link v-if="userKey == item.uploader.key" to="">수정하기</nuxt-link> -->
-                      <a v-if="userKey == item.uploader.key" @click="commentEdit(item.key)">수정하기</a>
+                      <a v-if="userKey == item.uploader.key" @click="commentEditable(index)">수정하기</a>
                       <a v-if="userKey == item.uploader.key" @click="commentDel(item.key)">삭제하기</a>
                     </v-list-item>
                   </v-list>
@@ -68,20 +69,20 @@
           <a @click="toggleDialogReport('post', param)" class="btn">
             <v-icon small class="icon">mdi-bell</v-icon>신고하기
           </a>
-          <nuxt-link v-if="userKey == postUploaderKey" :to="'/edit/'+param" class="btn">
-            <v-icon small class="icon">mdi-pencil</v-icon>수정하기
-          </nuxt-link>
-          <nuxt-link v-if="userKey == postUploaderKey" to="" class="btn">
-            <v-icon small class="icon">mdi-delete</v-icon>삭제하기
-          </nuxt-link>
           <span v-if="userKey == postUploaderKey">
+            <nuxt-link v-if="userKey == postUploaderKey" :to="'/edit/'+param" class="btn">
+              <v-icon small class="icon">mdi-pencil</v-icon>수정하기
+            </nuxt-link>
+            <a v-if="data.header.contacts == false" @click="postDel(param)" class="btn">
+              <v-icon small class="icon">mdi-delete</v-icon>삭제하기
+            </a>
             <span v-if="contactsIsEmpty == true"></span>
-            <a v-else-if="data.header.contacts == false" @click="recruitQuit()" class="btn">
-              <v-icon small class="icon">mdi-reload</v-icon>모집 재개하기
-            </a>
-            <a v-else @click="recruitQuit()" class="btn">
-              <v-icon small class="icon">mdi-close-octagon</v-icon>모집 종료하기
-            </a>
+              <a v-else-if="data.header.contacts == false" @click="recruitQuit()" class="btn">
+                <v-icon small class="icon">mdi-reload</v-icon>모집 재개하기
+              </a>
+              <a v-else @click="recruitQuit()" class="btn">
+                <v-icon small class="icon">mdi-close-octagon</v-icon>모집 종료하기
+              </a>
           </span>
         </div>
       </div>
@@ -184,8 +185,10 @@
       },
       select: {
         comment: {
-          desc: null
-        }
+          desc: null,
+          descEdit: null
+        },
+        commentEdit: []
       },
       uploader: {},
       postUploaderKey: null,
@@ -245,6 +248,7 @@
           this.uploader = this.data.header.uploader;
           this.postUploaderKey = postRes.data.data.header.uploader.key;
 
+          // contacts remap
           let contactsArr = postRes.data.data.header.contacts;
           if (contactsArr.length == 0) {
             this.contactsIsEmpty = true;
@@ -265,6 +269,11 @@
           } else {
             this.contacts.kakao = false;
           }
+
+          // commentEdit
+          for (let i=0; i<this.data.comments.length; i++) {
+            this.select.commentEdit.push(false);
+          }
         }
         catch (err) { console.log(err); }
       },
@@ -283,14 +292,20 @@
         catch (err) { console.log(err); }
       },
       async postDel(postKey) {
-        // try {
-        //   await axios.post('/api/comment/delete', {
-        //     id: commentKey
-        //   },
-        //   {headers: {token: this.$cookies.get('token')}});
-        //   this.postRead();
-        // }
-        // catch (err) { console.log(err); }
+        let confirmRes = confirm('정말 게시물을 삭제하시겠습니까?');
+        if (confirmRes == true) {
+          try {
+            await axios.post('/api/post/delete', {
+              id: this.param
+            },
+            {headers: {token: this.$cookies.get('token')}});
+            this.$router.push('/board?category='+this.data.header.category);
+            return;
+          }
+          catch (err) { console.log(err); }
+        } else {
+          return;
+        }
       },
       async commentSend() {
         if (this.select.comment.desc == null) {
@@ -311,24 +326,22 @@
           catch (err) { console.log(err); }
         }
       },
-      async commentEdit() {
-        // if (this.select.comment.desc == null) {
-        //   alert('댓글은 한 글자 이상 작성해주세요.');
-        //   return;
-        // }
-        // else {
-        //   try {
-        //     await axios.post('/api/comment/insert', {
-        //       id: this.param,
-        //       desc: this.select.comment.desc
-        //     },
-        //     {headers: {token: this.$cookies.get('token')}});
-        //     this.select.comment.desc = null;
-        //     this.postRead();
-        //     return;
-        //   }
-        //   catch (err) { console.log(err); }
-        // }
+      commentEditable(index) {
+        Vue.set(this.select.commentEdit, index, !this.select.commentEdit[index]);
+        this.select.comment.descEdit = this.data.comments[index].desc;
+      },    
+      async commentEdit(index) {
+        console.log('comment edit')
+        try {
+          await axios.post('/api/comment/update', {
+            id: this.data.comments[index].key,
+            desc: this.select.comment.descEdit
+          },
+          {headers: {token: this.$cookies.get('token')}});
+          this.postRead();
+          Vue.set(this.select.commentEdit, index, !this.select.commentEdit[index]);
+        }
+        catch (err) { console.log(err); }
       },
       async commentDel(commentKey) {
         try {
