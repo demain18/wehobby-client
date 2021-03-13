@@ -48,17 +48,19 @@
                     <v-list-item style="width: 90px">
                       <nuxt-link :to="'/profile/'+item.uploader.key">프로필 보기</nuxt-link>
                       <a @click="toggleDialogReport('comment', item.key)">신고하기</a>
-                      <nuxt-link v-if="userKey == item.uploader.key" to="">수정하기</nuxt-link>
-                      <nuxt-link v-if="userKey == item.uploader.key" to="">삭제하기</nuxt-link>
+                      <!-- <nuxt-link v-if="userKey == item.uploader.key" to="">수정하기</nuxt-link> -->
+                      <a v-if="userKey == item.uploader.key" @click="commentEdit(item.key)">수정하기</a>
+                      <a v-if="userKey == item.uploader.key" @click="commentDel(item.key)">삭제하기</a>
                     </v-list-item>
                   </v-list>
                 </v-menu>
               </div>
             </div>
+            
           </div>
-
-          <v-text-field solo label="댓글을 입력하세요" clearable></v-text-field>
+          <v-text-field v-model="select.comment.desc" v-on:keyup.enter="commentSend()" solo label="댓글을 입력하세요" clearable></v-text-field>
         </div>
+
         <div class="addition-wrap">
           <a @click="toggleDialog('Share')" class="btn">
             <v-icon small class="icon">mdi-share-variant</v-icon>공유하기
@@ -72,7 +74,6 @@
           <nuxt-link v-if="userKey == postUploaderKey" to="" class="btn">
             <v-icon small class="icon">mdi-delete</v-icon>삭제하기
           </nuxt-link>
-
           <span v-if="userKey == postUploaderKey">
             <span v-if="contactsIsEmpty == true"></span>
             <a v-else-if="data.header.contacts == false" @click="recruitQuit()" class="btn">
@@ -82,7 +83,6 @@
               <v-icon small class="icon">mdi-close-octagon</v-icon>모집 종료하기
             </a>
           </span>
-
         </div>
       </div>
 
@@ -182,6 +182,11 @@
         area: '-',
         subway: '-',
       },
+      select: {
+        comment: {
+          desc: null
+        }
+      },
       uploader: {},
       postUploaderKey: null,
       contactsIsEmpty: false,
@@ -236,12 +241,9 @@
               id: this.param
             }
           });
-          
           this.data = postRes.data.data;
           this.uploader = this.data.header.uploader;
           this.postUploaderKey = postRes.data.data.header.uploader.key;
-
-          this.data.content.desc = this.wrapReplace(this.data.content.desc);
 
           let contactsArr = postRes.data.data.header.contacts;
           if (contactsArr.length == 0) {
@@ -266,6 +268,78 @@
         }
         catch (err) { console.log(err); }
       },
+      async recruitQuit() {
+        try {
+          await axios.post('/api/post/terminate/recruit', {
+            id: this.param
+          },
+          {headers: {token: this.$cookies.get('token')}});
+          if (this.data.header.contacts == false) {
+            this.data.header.contacts = true;
+          } else {
+            this.data.header.contacts = false;
+          }
+        }
+        catch (err) { console.log(err); }
+      },
+      async postDel(postKey) {
+        // try {
+        //   await axios.post('/api/comment/delete', {
+        //     id: commentKey
+        //   },
+        //   {headers: {token: this.$cookies.get('token')}});
+        //   this.postRead();
+        // }
+        // catch (err) { console.log(err); }
+      },
+      async commentSend() {
+        if (this.select.comment.desc == null) {
+          alert('댓글은 한 글자 이상 작성해주세요.');
+          return;
+        }
+        else {
+          try {
+            await axios.post('/api/comment/insert', {
+              id: this.param,
+              desc: this.select.comment.desc
+            },
+            {headers: {token: this.$cookies.get('token')}});
+            this.select.comment.desc = null;
+            this.postRead();
+            return;
+          }
+          catch (err) { console.log(err); }
+        }
+      },
+      async commentEdit() {
+        // if (this.select.comment.desc == null) {
+        //   alert('댓글은 한 글자 이상 작성해주세요.');
+        //   return;
+        // }
+        // else {
+        //   try {
+        //     await axios.post('/api/comment/insert', {
+        //       id: this.param,
+        //       desc: this.select.comment.desc
+        //     },
+        //     {headers: {token: this.$cookies.get('token')}});
+        //     this.select.comment.desc = null;
+        //     this.postRead();
+        //     return;
+        //   }
+        //   catch (err) { console.log(err); }
+        // }
+      },
+      async commentDel(commentKey) {
+        try {
+          await axios.post('/api/comment/delete', {
+            id: commentKey
+          },
+          {headers: {token: this.$cookies.get('token')}});
+          this.postRead();
+        }
+        catch (err) { console.log(err); }
+      },
       toggleDialog(dialogName) {
         this.$store.commit('dialog/toggle'+dialogName+'DialogActive');
       },
@@ -283,21 +357,6 @@
         });
         this.$store.commit('dialog/toggleContactDialogActive');
       },
-      async recruitQuit() {
-        try {
-          const res = await axios.post('/api/post/terminate/recruit', {
-            id: this.param
-          },
-          {headers: {token: this.$cookies.get('token')}});
-          
-          if (this.data.header.contacts == false) {
-            this.data.header.contacts = true;
-          } else {
-            this.data.header.contacts = false;
-          }
-        }
-        catch (err) { console.log(err); }
-      },
       breadCrumbUpdate() {
         this.$store.commit('urls/setList', {
           category: this.$store.state.urls.list.category,
@@ -305,10 +364,6 @@
           area: this.$store.state.urls.list.area,
           post: { key: this.$route.params.id, name: this.data.content.title }
         });
-      },
-      wrapReplace(content) {
-        let desc = String(content);
-        return desc.split('\\n').join('<br>');
       },
       optionContentRead(content) {
         if (content == '') {
