@@ -24,7 +24,8 @@
 }
 
 #wrap .info-wrap .img-profile .present {
-    object-fit: contain;
+    /* object-fit: contain; */
+    object-fit: cover;
     width: 100%;
     /* border: 1px solid blue; */
 }
@@ -42,7 +43,13 @@
 
 #wrap .info-wrap .table-wrap .table .header {
     min-width: 70px;
+    margin-right: 25px;
     font-weight: bold;
+    text-align: right;
+}
+
+#wrap .info-wrap .table-wrap .table .content {
+    color: #6d6d6d;
 }
 
 #wrap .info-wrap .table-wrap .table .content .icon-vertify {

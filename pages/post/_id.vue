@@ -167,7 +167,6 @@
 
   export default {
     created() {
-      // this.param = this.$route.params.index;
       this.param = this.$route.params.id;
     },
     data: () => ({
@@ -280,11 +279,15 @@
           for (let i=0; i<this.data.comments.length; i++) {
             this.select.commentEdit.push(false);
           }
+
+          if (postRes.data.result == false) {
+            alert('존재하지 않는 게시물입니다.');
+            this.$router.push('/');
+            return;
+          }
         }
         catch (err) { 
           console.log(err);
-          alert('존재하지 않는 게시물입니다.');
-          this.$router.push('/');
         }
       },
       async recruitQuit() {

@@ -48,12 +48,12 @@
     <v-list dense>
       <!-- <v-subheader>REPORTS</v-subheader> -->
       <v-list-item-group color="primary">
-        <v-list-item to="/profile">
+        <v-list-item>
           <v-list-item-content>
             <v-list-item-title class="title">{{ user.nickname }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item to="/profile">
+        <v-list-item :to="'/profile/'+user.key">
           <v-list-item-content>
             <v-list-item-title>내 프로필 보기</v-list-item-title>
           </v-list-item-content>

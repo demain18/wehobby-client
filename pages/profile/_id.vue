@@ -5,41 +5,39 @@
       <div class="info-wrap">
         <!-- <div class="img-profile"></div> -->
         <v-avatar class="img-profile">
-          <img src="https://sparklejunserver.web.app/img/profile.jpeg" class="present">
+          <img src="~assets/img/placeholder1.jpg" class="present">
         </v-avatar>
         <div class="table-wrap">
           <div class="table">
             <div class="header">닉네임</div>
-            <div class="content">백산</div>
+            <div class="content" v-text="nullCheck(data.nick)"></div>
           </div>
           <div class="table">
             <div class="header">소개</div>
-            <div class="content">
-              화려한것들과 공부하는것을 좋아하는, 약간은 모순된 취미성향을 가지고 있는 사람입니다. 비슷한 취미를 가진 분들끼리 만나 즐거운 시간을 보냈으면 합니다!
-            </div>
+            <div class="content" v-text="nullCheck(data.bio)"></div>
           </div>
           <div class="table">
             <div class="header">나이</div>
-            <div class="content">20대 초반</div>
+            <div class="content" v-text="ageCalc(data.age)"></div>
           </div>
           <div class="table">
             <div class="header">직업</div>
-            <div class="content">무대 테크니컬 매니저</div>
+            <div class="content" v-text="nullCheck(data.job)"></div>
           </div>
           <div class="table">
             <div class="header">성별</div>
-            <div class="content">남자</div>
+            <div class="content" v-text="nullCheck(data.sex)"></div>
           </div>
           <div class="table">
             <div class="header">인증여부</div>
-            <!-- <div class="content highlight">인증됨</div> -->
             <div class="content">
-              <v-chip class="icon-vertify" color="blue lighten-5" text-color="blue lighten-1">
+              <v-chip v-if="data.verify" class="icon-vertify" color="blue lighten-5" text-color="blue lighten-1">
                 <v-avatar left>
                   <v-icon>mdi-checkbox-marked-circle</v-icon>
                 </v-avatar>
                 인증됨
               </v-chip>
+              <span v-else>인증안됨</span>
             </div>
           </div>
         </div>
@@ -102,7 +100,61 @@
 </template>
 
 <script>
-  export default {}
+  import Vue from 'vue';
+  import axios from 'axios';
+  import Vuecookies from 'vue-cookies';
+  import moment from 'moment';
+  Vue.use(Vuecookies);
+
+  export default {
+    created() {
+      this.param = this.$route.params.id;
+    },
+    data: () => ({
+      param: null,
+      data: {
+        nick: '-',
+        bio: '-',
+        age: '-',
+        job: '-',
+        sex: '-',
+        verify: false,
+      },
+    }),
+    async mounted() {
+      try {
+        let res = await axios.get('/api/profile/read', {
+          params: {
+            id: this.param
+          }
+        });
+        res = res.data.data;
+        this.data.nick = res.nickname;
+        this.data.bio = res.bio;
+        this.data.age = res.birth;
+        this.data.job = res.job;
+        this.data.sex = res.sex;
+        this.data.verify = res.vertify;
+      } 
+      catch (err) {console.log(err)}
+    },
+    methods: {
+      nullCheck(content) {
+        if (content==null) {
+          return '-';
+        } else {
+          return content;
+        }
+      },
+      ageCalc() {
+        if (this.data.age == null) {
+          return '-';
+        } else {
+          return moment().format('yyyy')-this.data.age+'살';
+        }
+      }
+    }
+  }
 
 </script>
 
