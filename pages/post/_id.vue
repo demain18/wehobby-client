@@ -275,7 +275,11 @@
             this.select.commentEdit.push(false);
           }
         }
-        catch (err) { console.log(err); }
+        catch (err) { 
+          console.log(err);
+          alert('존재하지 않는 게시물입니다.');
+          this.$router.push('/');
+        }
       },
       async recruitQuit() {
         try {
@@ -308,9 +312,10 @@
         }
       },
       async commentSend() {
+        // console.log('send work'); return;
         if (this.select.comment.desc == null) {
           alert('댓글은 한 글자 이상 작성해주세요.');
-          return;
+          // return;
         }
         else {
           try {
@@ -319,9 +324,9 @@
               desc: this.select.comment.desc
             },
             {headers: {token: this.$cookies.get('token')}});
-            this.select.comment.desc = null;
             this.postRead();
-            return;
+            this.select.comment.desc = null;
+            console.log('comment commit')
           }
           catch (err) { console.log(err); }
         }
@@ -331,7 +336,6 @@
         this.select.comment.descEdit = this.data.comments[index].desc;
       },    
       async commentEdit(index) {
-        console.log('comment edit')
         try {
           await axios.post('/api/comment/update', {
             id: this.data.comments[index].key,
