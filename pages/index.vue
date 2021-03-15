@@ -205,6 +205,33 @@
         catch (err) { console.log(err); }
       }
 
+      // category post count for all
+      if (this.$cookies.get('city') == 0) {
+        if (this.$cookies.isKey('postCountAllList')) {
+          this.categoryCount = this.$cookies.get('postCountAllList').split(',');
+        } else {
+          try {
+            const res = await axios.get('/api/info/citys');
+            for (let i = 0; i < res.data.data.citys.length; i++) {
+              for (let x = 0; x < this.category.length; x++) {
+                try {
+                  const filterRes = await axios.get('/api/info/filter', {
+                    params: {
+                      city: i,
+                      category: this.category[x].key
+                    }
+                  });
+                  this.categoryCount[x] += filterRes.data.data.countAll;
+                  this.$cookies.set('postCountAllList', this.categoryCount, '30d');
+                }
+                catch (err) { console.log(err); }
+              }
+            }
+          }
+          catch (err) {console.log(err)}
+        }
+      }
+
       // notice read
       try {
         const res = await axios.get('/api/notice/list/read');
@@ -225,10 +252,7 @@
 
         }
       }
-    },
-    // mounted() {
-    //   // console.log('Token: '+this.$cookies.get('Token'));
-    // },
+    }
   }
 
 </script>

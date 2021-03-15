@@ -58,7 +58,7 @@
         this.items = res.data.data.citys;
         this.items.unshift({
           key: 0,
-          name: '선택안함(대한민국 전체)'
+          name: '선택안함(전국)'
         })
       }
       catch (err) { console.log(err.response.data.message); }

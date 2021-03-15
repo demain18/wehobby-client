@@ -168,7 +168,7 @@
           this.cityItems = res.data.data.citys;
           this.cityItems.unshift({
             key: 0,
-            name: '선택안함(대한민국 전체)'
+            name: '선택안함(전국)'
           });
           this.city = this.cityItems.find(obj => obj.key == this.$cookies.get('city')).name;
         }

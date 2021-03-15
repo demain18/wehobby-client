@@ -11,7 +11,7 @@
           {{ cityName }}의 {{ categoryName }}({{ filterItems.countAll }})
         </h2>
 
-        <div class="filter">
+        <div class="filter" v-if="cityName!='전국'">
           <div class="header">구/군</div>
           <div class="content">
             <span v-bind:class="{active: undefined==(param.area)}">
@@ -22,7 +22,7 @@
             </span>
           </div>
         </div>
-        <div class="filter">
+        <div class="filter" v-if="cityName!='전국'">
           <div class="header">역</div>
           <div class="content">
             <span  v-bind:class="{active: undefined==(param.subway)}">
@@ -62,7 +62,7 @@
               <div class="content">
                 <p class="title"><nuxt-link :to="'/post/'+item.key">{{ item.title }}</nuxt-link></p>
                 <p class="info">
-                  <span v-if="item.options[0] != ''" class="bold">{{ item.options[0] }}</span><span v-if="item.options[0] != '' && item.options[1] != ''"> · </span>
+                  <span v-if="item.options[0] != ''" class="bold" v-text="thousandComma(item.options[0])"></span><span v-if="item.options[0] != '' && item.options[1] != ''"> · </span>
                   <span v-if="item.options[1] != ''">{{ item.options[1] }}</span><span v-if="item.options[2] != ''"> · </span>
                   <span v-if="item.options[2] != ''">{{ item.options[2] }}</span><span v-if="item.options[3] != ''"> · </span>
                   <span v-if="item.options[3] != ''">{{ item.options[3] }}</span>
@@ -131,14 +131,21 @@
       catch (err) { console.log(err.response.data.message); }
 
       // city name read
-      try {
-        const citysRes = await axios.get('/api/info/citys');
-        this.cityName = citysRes.data.data.citys.find(ele => ele.key == this.$cookies.get('city')).name;
+      if (this.$cookies.isKey('city')!=true || this.$cookies.get('city')==0) {
+        this.cityName = '전국';
+      } else {
+        try {
+          const citysRes = await axios.get('/api/info/citys');
+          this.cityName = citysRes.data.data.citys.find(ele => ele.key == this.$cookies.get('city')).name;
+        }
+        catch (err) { console.log(err); }
       }
-      catch (err) { console.log(err); }
 
       // post list read
       this.postListRead();
+
+       // post list read for all
+
       // breadcrumb update
       this.breadCrumbUpdate();
     },
@@ -146,46 +153,12 @@
       async $route(to, form) {
         // postItems update
         this.postListRead();
+
         // breadcrumb update
         this.breadCrumbUpdate();
       }
     },
     methods: {
-      findKey(filterItem, index) {
-        if (index == undefined) {
-          return index;
-        } else {
-          index -= 1;
-          if (filterItem == 'area') {
-            return this.filterItems.citysArea[index].key;
-          } else if (filterItem == 'subway') {
-            return this.filterItems.citysSubway[index].key;
-          } else if (filterItem == 'genre') {
-            return this.filterItems.categoryDetail[index].key;
-          }
-        }
-      },
-      findName(filterItem, index) {
-        if (index == undefined) {
-          return index;
-        } else {
-          index -= 1;
-          if (filterItem == 'area') {
-            return this.filterItems.citysArea[index].name;
-          } else if (filterItem == 'subway') {
-            return this.filterItems.citysSubway[index].name;
-          } else if (filterItem == 'genre') {
-            return this.filterItems.categoryDetail[index].name;
-          }
-        }
-      },
-      findAreaName(index) {
-        if (this.postItems[index].area == 0) {
-          return '';
-        } else {
-          return this.filterItems.citysArea.find(ele => ele.key == this.postItems[index].area).name;
-        }
-      },
       async postListRead() {
         try {
           const postListRes = await axios.get('/api/board/read', {
@@ -260,6 +233,41 @@
           });
         }
         catch (err) { console.log(err); }
+      },
+      findKey(filterItem, index) {
+        if (index == undefined) {
+          return index;
+        } else {
+          index -= 1;
+          if (filterItem == 'area') {
+            return this.filterItems.citysArea[index].key;
+          } else if (filterItem == 'subway') {
+            return this.filterItems.citysSubway[index].key;
+          } else if (filterItem == 'genre') {
+            return this.filterItems.categoryDetail[index].key;
+          }
+        }
+      },
+      findName(filterItem, index) {
+        if (index == undefined) {
+          return index;
+        } else {
+          index -= 1;
+          if (filterItem == 'area') {
+            return this.filterItems.citysArea[index].name;
+          } else if (filterItem == 'subway') {
+            return this.filterItems.citysSubway[index].name;
+          } else if (filterItem == 'genre') {
+            return this.filterItems.categoryDetail[index].name;
+          }
+        }
+      },
+      findAreaName(index) {
+        if (this.postItems[index].area == 0) {
+          return '';
+        } else {
+          return this.filterItems.citysArea.find(ele => ele.key == this.postItems[index].area).name;
+        }
       },
       agoCalc(date, time) {
         let timeNow = {
