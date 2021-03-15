@@ -52,6 +52,7 @@
           </v-btn>
         </nuxt-link>
       </div>
+      <div class="divider-line"></div>
       <div class="wrap-split">
         <div class="sel-content">
           <div class="article-wrap">
@@ -66,7 +67,7 @@
                   <span v-if="item.options[2] != ''">{{ item.options[2] }}</span><span v-if="item.options[3] != ''"> · </span>
                   <span v-if="item.options[3] != ''">{{ item.options[3] }}</span>
                 </p>
-                <p class="txt" v-html="markupReplace(item.desc)">..</p>
+                <p class="txt" v-html="markupReplace(item.desc)"></p>
                 <span class="time" v-text="agoCalc(item.date, item.time)+' 전'"></span>
               </div>
             </div>
@@ -143,7 +144,6 @@
     },
     watch: {
       async $route(to, form) {
-        console.log(to); // 왜 req가 두번 나가지? 한번 나가는거랑 차이가 있나?
         // postItems update
         this.postListRead();
         // breadcrumb update
@@ -205,7 +205,7 @@
           // area into options
           for (let i=0; i<this.postItems.length; i++) {
             this.postItems[i].options.unshift(this.findAreaName(i));
-            // options sort
+            // options sort by category
             if (this.param.category == 2) {
               this.postItems[i].options = {
                 0: this.thousandComma(this.postItems[i].options[1]),

@@ -24,10 +24,13 @@
   width: 100%;
   margin-left: 10px;
   position: relative;
-  //    border: 1px solid blue;
+  // white-space: nowrap;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
 }
 
 .article .content .title {
+  padding-right: 50px;
   font-size: 18px!important;
   font-weight: bold;
   line-height: 20px!important;
@@ -50,7 +53,14 @@
 }
 
 .article .content .txt {
+  // border: 1px solid blue;
+  padding-right: 50px;
+  max-width: 100%;
   font-size: 14px;
+  white-space: nowrap;
+  position: absolute;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .article .content .time {

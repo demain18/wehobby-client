@@ -9,7 +9,7 @@
 /* Filter Section */
 #wrap .sel-filter {
     padding-bottom: 20px;
-    border-bottom: 2px solid #cecece;
+    /* border-bottom: 2px solid #cecece; */
 }
 
 #wrap .sel-filter h2 {
@@ -83,12 +83,15 @@
     margin-top: 15px;
 }
 
-
+#wrap .divider-line {
+    width: 100%;
+    border-bottom: 2px solid #cecece;
+}
 
 /* Content Section */
 
 #wrap .wrap-split {
-    display: flex;
+   display: flex;
    padding-top: 10px;
 }
 
