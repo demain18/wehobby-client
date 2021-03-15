@@ -63,7 +63,7 @@
             <v-list-item-title>설정</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item to="/">
+        <v-list-item @click="logout()">
           <v-list-item-content>
             <v-list-item-title>로그아웃</v-list-item-title>
           </v-list-item-content>
@@ -90,6 +90,14 @@
         return this.$store.state.urls.list;
       }
     },
+    created() {
+      // accessable page block
+      if (this.$cookies.isKey('user')!=true && this.routeAccessDisabledList.find(ele => ele==(this.$route.name.split('-'))[0]) ) {
+        alert('접근할 수 없는 페이지입니다.');
+        window.location.href = "/";
+        return;
+      }
+    },
     data: () => ({
       token: {
         verify: null,
@@ -105,6 +113,11 @@
         false,
         false,
         false,
+      ],
+      routeAccessDisabledList: [
+        'write',
+        'edit',
+        'setting'
       ]
     }),
     async mounted() {
@@ -176,6 +189,11 @@
       },
       pageLink(route) {
         window.location.href = "/board?category="+route;
+      },
+      logout() {
+        this.$cookies.remove('token');
+        this.$cookies.remove('user');
+        window.location.href = "/";
       }
     }
   }

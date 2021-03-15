@@ -66,7 +66,7 @@
                   <span v-if="item.options[2] != ''">{{ item.options[2] }}</span><span v-if="item.options[3] != ''"> · </span>
                   <span v-if="item.options[3] != ''">{{ item.options[3] }}</span>
                 </p>
-                <p class="txt" v-html="wrapReplace(item.desc)">..</p>
+                <p class="txt" v-html="markupReplace(item.desc)">..</p>
                 <span class="time" v-text="agoCalc(item.date, item.time)+' 전'"></span>
               </div>
             </div>
@@ -234,12 +234,10 @@
         let paramData = [];
         for (let [key, val] of Object.entries(this.param)) {
           if (val != undefined) {
-            paramData.push(
-              {
-                key: key,
-                val: val
-              }
-            );
+            paramData.push({
+              key: key,
+              val: val
+            });
           }
         }
         let paramString = '/board?';
@@ -248,6 +246,20 @@
         }
         paramString = paramString.slice(0, -1);
         this.$router.push(paramString);
+      },
+      async breadCrumbUpdate() {
+        try {
+          const res = await axios.get('/api/info/category');
+          this.categoryName = res.data.data.find(ele => ele.key == this.param.category).name;
+
+          this.$store.commit('urls/setList', {
+            category: { key: this.param.category, name: this.categoryName},
+            city: { key: this.$cookies.get('city'), name: this.cityName },
+            area: { key: this.param.area, name: this.findName('area', this.param.area)},
+            post: { key: undefined, name: undefined}
+          });
+        }
+        catch (err) { console.log(err); }
       },
       agoCalc(date, time) {
         let timeNow = {
@@ -268,7 +280,6 @@
         }
 
         let timeGap = [];
-
         if (timeNow.year > time.year) {
           timeGap = {
             type: '년',
@@ -305,29 +316,9 @@
             val: '방'
           }
         }
-
         return timeGap.val+timeGap.type;
       },
-      async breadCrumbUpdate() {
-        try {
-          const res = await axios.get('/api/info/category');
-          // let categoryList = res.data.data;
-          // let categoryObj = categoryList.filter(item => {
-          //   return item.key == this.param.category;
-          // });
-          // this.categoryName = categoryObj[0].name;
-          this.categoryName = res.data.data.find(ele => ele.key == this.param.category).name;
-
-          this.$store.commit('urls/setList', {
-            category: { key: this.param.category, name: this.categoryName},
-            city: { key: this.$cookies.get('city'), name: this.cityName },
-            area: { key: this.param.area, name: this.findName('area', this.param.area)},
-            post: { key: undefined, name: undefined}
-          });
-        }
-        catch (err) { console.log(err); }
-      },
-      wrapReplace(content) {
+      markupReplace(content) {
         let desc = String(content);
         let list = [
           '<p>',

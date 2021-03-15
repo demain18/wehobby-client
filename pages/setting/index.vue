@@ -1,7 +1,7 @@
 <template>
   <div>
     <Gnb />
-    <!-- <DialogVertify/> -->
+    <DialogVerify/>
     <div id="wrap">
       <SettingSnb />
       <div class="content-wrap">

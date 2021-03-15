@@ -230,8 +230,14 @@
       catch (err) { console.log(err); }
 
       // user key read
-      let userCookie = this.$cookies.get('user');
-      this.userKey = userCookie.key;
+      if (this.$cookies.isKey('user')) {
+        let userCookie = this.$cookies.get('user');
+        this.userKey = userCookie.key;
+      } else {
+        this.userKey = null;
+      }
+      // let userCookie = this.$cookies.get('user');
+      // this.userKey = userCookie.key;
 
       // breadcrumb update
       this.breadCrumbUpdate();
@@ -361,6 +367,11 @@
         this.$store.commit('dialog/toggle'+dialogName+'DialogActive');
       },
       toggleDialogReport(contentName, contentId) {
+        if (this.$cookies.isKey('user') != true && this.userKey == null) {
+          alert('신고하기 기능은 로그인 후 사용 가능합니다.');
+          return;
+        }
+
         this.$store.commit('dialog/setDataReport', {
           tableName: contentName,
           tableId: contentId
@@ -368,6 +379,11 @@
         this.$store.commit('dialog/toggleReportDialogActive');
       },
       toggleDialogContact() {
+        if (this.$cookies.isKey('user') != true || this.userKey == null) {
+          alert('작성자에게 연락하기 기능은 로그인 후 사용 가능합니다.');
+          return;
+        }
+
         this.$store.commit('dialog/setDataContact', {
           mail: this.contacts.mail,
           kakao: this.contacts.kakao
