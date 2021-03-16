@@ -73,7 +73,7 @@
             <nuxt-link v-if="userKey == postUploaderKey" :to="'/edit/'+param" class="btn">
               <v-icon small class="icon">mdi-pencil</v-icon>수정하기
             </nuxt-link>
-            <a v-if="data.header.contacts == false" @click="postDel(param)" class="btn">
+            <a @click="postDel(param)" class="btn">
               <v-icon small class="icon">mdi-delete</v-icon>삭제하기
             </a>
             <span v-if="contactsIsEmpty == true"></span>
