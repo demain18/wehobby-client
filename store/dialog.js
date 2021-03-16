@@ -3,6 +3,7 @@ export const state = () => ({ // set state
   shareDialogActive: false,
   reportDialogActive: false,
   contactDialogActive: false,
+  verifyDialogActive: false,
   data: {
     report: {
       tableName: null,
@@ -33,6 +34,9 @@ export const mutations = { // update state
   },
   toggleContactDialogActive: (state) => {
     state.contactDialogActive = !state.contactDialogActive;
+  },
+  toggleVerifyDialogActive: (state) => {
+    state.verifyDialogActive = !state.verifyDialogActive;
   },
   setDataReport: (state, content) => {
     state.data.report.tableName = content.tableName;

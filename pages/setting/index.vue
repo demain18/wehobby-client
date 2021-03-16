@@ -1,7 +1,7 @@
 <template>
   <div>
     <Gnb />
-    <!-- <DialogVerify/> -->
+    <DialogVerify/>
     <div id="wrap">
       <SettingSnb />
       <div class="content-wrap">
@@ -28,28 +28,15 @@
         <v-row>
           <v-col class="form">
             <p class="label">본인 인증</p>
-            <v-btn depressed v-if="select.userVertify == false">
+            <v-btn depressed v-if="select.userVerify == false" @click="toggleDialogContact()">
               전화번호로 인증
             </v-btn>
-
-            <!-- <div class="alert">
-              <v-icon medium class="icon">
-                mdi-check-circle
-              </v-icon>
-              본인 인증이 완료됬습니다
-            </div>
-
-            <v-alert color="blue lighten-5" text-color="blue lighten-1" dense >
-              본인 인증이 완료됬습니다
-            </v-alert> -->
-
             <v-chip v-else class="icon-vertify" color="blue lighten-5" text-color="blue lighten-1">
               <v-avatar left>
                 <v-icon>mdi-checkbox-marked-circle</v-icon>
               </v-avatar>
               인증됨
             </v-chip>
-
           </v-col>
         </v-row>
 
@@ -61,8 +48,8 @@
         </v-row>
         <v-row>
           <v-col>
-            <!-- <v-text-field v-model="select.age" placeholder="비공개" label="출생년도"></v-text-field> -->
-            <v-select v-model="select.age" :items="list.age" attach label="출생년도"></v-select>
+            <!-- <v-text-field v-model="select.birth" placeholder="비공개" label="출생년도"></v-text-field> -->
+            <v-select v-model="select.birth" :items="list.age" attach label="출생년도"></v-select>
           </v-col>
         </v-row>
         <v-row>
@@ -83,11 +70,11 @@
             <v-text-field v-model="select.contact.email" label="이메일" placeholder="example@contact.com"></v-text-field>
           </v-col>
           <v-col>
-            <v-text-field v-model="select.contact.email" label="카카오톡" placeholder="exampleId" hint="오픈채팅방 링크도 사용가능" persistent-hint></v-text-field>
+            <v-text-field v-model="select.contact.kakaoTalk" label="카카오톡" placeholder="example-id"></v-text-field>
           </v-col>
         </v-row>
 
-        <v-btn depressed :disabled="!submitAble">
+        <v-btn @click="profileEditSend()" depressed :disabled="!submitAble">
           변경
         </v-btn>
         <!-- <v-btn depressed>
@@ -99,29 +86,26 @@
   </div>
 </template>
 
-<script defer>
-  // 변경사항 있을경우 변경 버튼 primary로 변경
+<script>
+  import Vue from 'vue';
+  import axios from 'axios';
+  import Vuecookies from 'vue-cookies';
+  Vue.use(Vuecookies);
+
   export default {
-    created() {
-      // console.log('the test');
-      let age = 0;
-      for (let i = 1970; i <= 2020; i++) {
-        this.list.age[age] = i;
-        age++;
-      }
-      this.list.age.reverse();
-    },
+    created() {},
     data: () => ({
       submitAble: false,
+      submitStack: 0,
       select: {
         image: null,
-        nick: '백산',
-        name: '김명준',
-        userVertify: true,
-        bio: '화려한것들과 공부하는것을 좋아하는, 약간은 모순된 취미성향을 가지고 있는 사람입니다. 비슷한 취미를 가진 분들끼리 만나 즐거운 시간을 보냈으면 합니다!',
-        age: 2001,
-        job: '보컬리스트/밴드',
-        sex: '남성',
+        nick: null,
+        name: null,
+        userVerify: true,
+        bio: null,
+        birth: 2001,
+        job: null,
+        sex: null,
         contact: {
           email: null,
           kakaoTalk: null,
@@ -135,7 +119,75 @@
         ],
         age: []
       }
-    })
+    }),
+    async mounted() {
+      // birth list calc
+      let age = 0;
+      for (let i = 1950; i <= 2020; i++) {
+        this.list.age[age] = i;
+        age++;
+      }
+      this.list.age.reverse();
+
+      // profile read
+      this.profileRead();
+    },
+    watch: {
+      select: {
+        deep: true,
+        handler() {
+          this.submitStack++;
+          if (this.submitStack>1) {
+            this.submitAble = true;
+          }
+        }
+      }
+    },
+    methods: {
+      async profileRead() {
+        try {
+          const res = await axios.post('/api/profile/read', {}, {headers: {token: this.$cookies.get('token')}});
+          this.select = {
+            image: null,
+            nick: res.data.data.nickname,
+            name: res.data.data.name,
+            userVerify: res.data.data.vertify,
+            bio: res.data.data.bio,
+            birth: parseInt(res.data.data.birth),
+            job: res.data.data.job,
+            sex: res.data.data.sex,
+            contact: {
+              email: res.data.data.contactMail,
+              kakaoTalk: res.data.data.contactKakao
+            }
+          }
+        }
+        catch (err) { console.log(err); }
+      },
+      async profileEditSend() {
+        try {
+          await axios.post('/api/profile/update', {
+            img_repre: null,
+            nickname: this.select.nick,
+            vertify: this.select.userVerify,
+            bio: this.select.bio,
+            birth: this.select.birth,
+            job: this.select.job,
+            sex: this.select.sex,
+            contact_email: this.select.contact.email,
+            contact_kakao: this.select.contact.kakaoTalk
+          }, 
+          {headers: {token: this.$cookies.get('token')}});
+          this.profileRead();
+          this.submitStack = 0;
+          this.submitAble = false;
+        }
+        catch (err) { console.log(err); }
+      },
+      toggleDialogContact() {
+        this.$store.commit('dialog/toggleVerifyDialogActive');
+      },
+    }
   }
 
 </script>
