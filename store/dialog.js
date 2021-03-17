@@ -16,11 +16,7 @@ export const state = () => ({ // set state
   }
 })
 
-export const getters = { // get state
-  // setReportDialogData: (state) => {
-  //   return state.cityDialogActive;
-  // }
-}
+export const getters = {} // get state
 
 export const mutations = { // update state
   toggleCityDialogActive: (state) => {
@@ -39,11 +35,15 @@ export const mutations = { // update state
     state.verifyDialogActive = !state.verifyDialogActive;
   },
   setDataReport: (state, content) => {
-    state.data.report.tableName = content.tableName;
-    state.data.report.tableId = content.tableId;
+    state.data.report = {
+      tableName: content.tableName,
+      tableId: content.tableId
+    }
   },
   setDataContact: (state, content) => {
-    state.data.contact.mail = content.mail;
-    state.data.contact.kakao = content.kakao;
+    state.data.contact = {
+      mail: content.mail,
+      kakao: content.kakao
+    }
   },
 }

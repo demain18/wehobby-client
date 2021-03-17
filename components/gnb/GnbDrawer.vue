@@ -5,7 +5,7 @@
         <!-- <p>This is drawer</p> -->
         <div class="content">
           <v-avatar>
-            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+            <img src="~assets/img/placeholder1.jpg" alt="John">
           </v-avatar>
           <span class="title">
             백산
@@ -132,7 +132,7 @@
     top: 0px;
     left: 0px;
     display: flex;
-    z-index: 1;
+    z-index: 10!important;
 
     display: none;
     opacity: 0;
@@ -152,7 +152,6 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    z-index: 3;
   }
 
   .drawer-close {

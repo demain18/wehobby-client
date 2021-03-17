@@ -163,9 +163,11 @@
   import Vue from 'vue';
   import axios from 'axios';
   import Vuecookies from 'vue-cookies';
+  import articleMixin from '~/mixins/global.js';
   Vue.use(Vuecookies);
 
   export default {
+    mixins: [articleMixin],
     created() {
       this.param = this.$route.params.id;
     },
@@ -424,9 +426,9 @@
           return content;
         }
       },
-      thousandComma(content) {
-        return content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      },
+      // thousandComma(content) {
+      //   return content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      // },
       standardTerm(content, index) {
         if (index==1) {
           return content+'/월';

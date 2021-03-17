@@ -81,9 +81,11 @@
   import axios from 'axios';
   import Vuecookies from 'vue-cookies';
   import moment from 'moment';
+  import articleMixin from '~/mixins/global.js';
   Vue.use(Vuecookies);
 
   export default {
+    mixins: [articleMixin],
     created() {
       this.param = {
         page: this.$route.query.page,
@@ -126,13 +128,14 @@
             id: this.param.key
           }
         });
-        res = res.data.data;
-        this.data.nick = res.nickname;
-        this.data.bio = res.bio;
-        this.data.age = res.birth;
-        this.data.job = res.job;
-        this.data.sex = res.sex;
-        this.data.verify = res.vertify;
+        this.data = {
+          nick: res.data.data.nickname,
+          bio: res.data.data.bio,
+          age: res.data.data.birth,
+          job: res.data.data.job,
+          sex: res.data.data.sex,
+          verify: res.data.data.vertify,       
+        }
       } 
       catch (err) {console.log(err)}
 
@@ -167,113 +170,113 @@
           return moment().format('yyyy')-this.data.age+'살';
         }
       },
-      // board list module
-      agoCalc(date, time) {
-        let timeNow = {
-          year: parseInt(moment().format('YYYY')),
-          month: parseInt(moment().format('MM')),
-          day: parseInt(moment().format('DD')),
-          hour: parseInt(moment().format('hh')),
-          minute: parseInt(moment().format('mm'))
-        }
-        let dateSplit = date.split('-');
-        let timeSplit = time.split(':');
-        time = {
-          year: parseInt(dateSplit[0]),
-          month: parseInt(dateSplit[1]),
-          day: parseInt(dateSplit[2]),
-          hour: parseInt(timeSplit[0]),
-          minute: parseInt(timeSplit[1])
-        }
+      // // board list module
+      // agoCalc(date, time) {
+      //   let timeNow = {
+      //     year: parseInt(moment().format('YYYY')),
+      //     month: parseInt(moment().format('MM')),
+      //     day: parseInt(moment().format('DD')),
+      //     hour: parseInt(moment().format('hh')),
+      //     minute: parseInt(moment().format('mm'))
+      //   }
+      //   let dateSplit = date.split('-');
+      //   let timeSplit = time.split(':');
+      //   time = {
+      //     year: parseInt(dateSplit[0]),
+      //     month: parseInt(dateSplit[1]),
+      //     day: parseInt(dateSplit[2]),
+      //     hour: parseInt(timeSplit[0]),
+      //     minute: parseInt(timeSplit[1])
+      //   }
 
-        let timeGap = [];
-        if (timeNow.year > time.year) {
-          timeGap = {
-            type: '년',
-            val: timeNow.year-time.year
-          }
-        }
-        else if (timeNow.month > time.month) {
-          timeGap = {
-            type: '개월',
-            val: timeNow.month-time.month
-          }
-        }
-        else if (timeNow.day > time.day) {
-          timeGap = {
-            type: '일',
-            val: timeNow.day-time.day
-          }
-        }
-        else if (timeNow.hour > time.hour) {
-          timeGap = {
-            type: '시간',
-            val: timeNow.hour-time.hour
-          }
-        }
-        else if (timeNow.minute > time.minute) {
-          timeGap = {
-            type: '분',
-            val: timeNow.minute-time.minute
-          }
-        }
-        else {
-          timeGap = {
-            type: '금',
-            val: '방'
-          }
-        }
-        return timeGap.val+timeGap.type;
-      },
-      findName(filterItem, index) {
-        if (index == undefined) {
-          return index;
-        } else {
-          index -= 1;
-          if (filterItem == 'area') {
-            return this.filterItems.citysArea[index].name;
-          } else if (filterItem == 'subway') {
-            return this.filterItems.citysSubway[index].name;
-          } else if (filterItem == 'genre') {
-            return this.filterItems.categoryDetail[index].name;
-          }
-        }
-      },
-      findAreaName(index) {
-        if (this.postData.items[index].area == 0) {
-          return '';
-        } else {
-          console.log(this.postData.items[index])
-          return this.filterItems.citysArea.find(ele => ele.key == this.postData.items[index].area).name;
-        }
-      },
-      markupReplace(content) {
-        let desc = String(content);
-        let list = [
-          '<p>',
-          '</p>',
-          '<strong>',
-          '</strong>',
-          '<i>',
-          '</i>',
-          '<stricke>',
-          '</strike>',
-          '<li>',
-          '</li>',
-          '<ul>',
-          '</ul>',
-          '<ol>',
-          '</ol>'
-        ]
-        for (let i = 0; i < list.length; i++) {
-          desc = desc.split(list[i]).join('');
-        }
-        return desc;
-      },
-      thousandComma(content) {
-        return content;
-        return content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      }
+      //   let timeGap = [];
+      //   if (timeNow.year > time.year) {
+      //     timeGap = {
+      //       type: '년',
+      //       val: timeNow.year-time.year
+      //     }
+      //   }
+      //   else if (timeNow.month > time.month) {
+      //     timeGap = {
+      //       type: '개월',
+      //       val: timeNow.month-time.month
+      //     }
+      //   }
+      //   else if (timeNow.day > time.day) {
+      //     timeGap = {
+      //       type: '일',
+      //       val: timeNow.day-time.day
+      //     }
+      //   }
+      //   else if (timeNow.hour > time.hour) {
+      //     timeGap = {
+      //       type: '시간',
+      //       val: timeNow.hour-time.hour
+      //     }
+      //   }
+      //   else if (timeNow.minute > time.minute) {
+      //     timeGap = {
+      //       type: '분',
+      //       val: timeNow.minute-time.minute
+      //     }
+      //   }
+      //   else {
+      //     timeGap = {
+      //       type: '금',
+      //       val: '방'
+      //     }
+      //   }
+      //   return timeGap.val+timeGap.type;
+      // },
+      // findName(filterItem, index) {
+      //   if (index == undefined) {
+      //     return index;
+      //   } else {
+      //     index -= 1;
+      //     if (filterItem == 'area') {
+      //       return this.filterItems.citysArea[index].name;
+      //     } else if (filterItem == 'subway') {
+      //       return this.filterItems.citysSubway[index].name;
+      //     } else if (filterItem == 'genre') {
+      //       return this.filterItems.categoryDetail[index].name;
+      //     }
+      //   }
+      // },
+      // findAreaName(index) {
+      //   if (this.postData.items[index].area == 0) {
+      //     return '';
+      //   } else {
+      //     console.log(this.postData.items[index])
+      //     return this.filterItems.citysArea.find(ele => ele.key == this.postData.items[index].area).name;
+      //   }
+      // },
+      // markupReplace(content) {
+      //   let desc = String(content);
+      //   let list = [
+      //     '<p>',
+      //     '</p>',
+      //     '<strong>',
+      //     '</strong>',
+      //     '<i>',
+      //     '</i>',
+      //     '<stricke>',
+      //     '</strike>',
+      //     '<li>',
+      //     '</li>',
+      //     '<ul>',
+      //     '</ul>',
+      //     '<ol>',
+      //     '</ol>'
+      //   ]
+      //   for (let i = 0; i < list.length; i++) {
+      //     desc = desc.split(list[i]).join('');
+      //   }
+      //   return desc;
+      // },
+      // thousandComma(content) {
+      //   return content;
+      //   return content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      // }
     }
   }
 
