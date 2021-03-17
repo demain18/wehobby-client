@@ -103,7 +103,7 @@
         name: null,
         userVerify: true,
         bio: null,
-        birth: 2001,
+        birth: null,
         job: null,
         sex: null,
         contact: {
@@ -182,11 +182,11 @@
           this.submitStack = 0;
           this.submitAble = false;
         }
-        catch (err) { console.log(err); }
+        catch (err) { alert(err.response.data.message); }
       },
       toggleDialogContact() {
         this.$store.commit('dialog/toggleVerifyDialogActive');
-      },
+      }
     }
   }
 

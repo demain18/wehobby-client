@@ -18,7 +18,7 @@
 
           <v-row>
             <v-col>
-              <v-text-field v-model="select.code" :disabled="!codeSubmitAble" label="인증 코드를 입력해주세요" :hint="codeTimeout+'초'" :persistent-hint="codeSubmitAble"></v-text-field>
+              <v-text-field v-model="select.code" :disabled="!codeSubmitAble" label="인증번호를 입력해주세요" :hint="codeTimeout+'초'" :persistent-hint="codeSubmitAble"></v-text-field>
             </v-col>
               <v-btn depressed :disabled="!codeSubmitAble" style="margin-top: 25px;">
                 인증번호 확인

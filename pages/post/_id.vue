@@ -199,6 +199,9 @@
       // post read
       this.postRead();
 
+      // post count
+      this.postViewCount();
+
       // genre name read
       try {
         const filterRes = await axios.get('/api/info/category');
@@ -235,8 +238,6 @@
       } else {
         this.userKey = null;
       }
-      // let userCookie = this.$cookies.get('user');
-      // this.userKey = userCookie.key;
 
       // breadcrumb update
       this.breadCrumbUpdate();
@@ -285,6 +286,21 @@
             this.$router.push('/');
             return;
           }
+        }
+        catch (err) { 
+          console.log(err);
+        }
+      },
+      async postViewCount() {
+        try {
+          const res = await axios.get('/api/post/view', {
+            params: {
+              tableId: this.param,
+              action: 'view',
+              ip: window.location.host,
+              token: this.$cookies.get('token'),
+            }
+          });
         }
         catch (err) { 
           console.log(err);

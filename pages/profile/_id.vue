@@ -26,7 +26,10 @@
           </div>
           <div class="table">
             <div class="header">성별</div>
-            <div class="content" v-text="nullCheck(data.sex)"></div>
+            <div class="content">
+              <span v-if="data.sex=='비공개'">-</span>
+              <span v-else v-text="nullCheck(data.sex)"></span>
+            </div>
           </div>
           <div class="table">
             <div class="header">본인인증</div>
@@ -37,7 +40,7 @@
                 </v-avatar>
                 인증됨
               </v-chip>
-              <span v-else>인증안됨</span>
+              <span v-else>미 인증</span>
             </div>
           </div>
         </div>
@@ -141,23 +144,12 @@
         try {
           const postListRes = await axios.get('/api/board/read', {
             params: {
-              // category: this.param.category,
-              // city: this.$cookies.get('city'),
-              // area: this.findKey('area', this.param.area),
-              // subway: this.findKey('subway', this.param.subway),
-              // categoryDetail: this.findKey('genre', this.param.genre),
-              // keyword: this.param.keyword,
               page: this.param.page,
               uploader: this.param.key
             }
           });
           this.postData.count = postListRes.data.data.count;
           this.postData.items = postListRes.data.data.postItems;
-
-          // area into options
-          // for (let i=0; i<this.postData.items.length; i++) {
-          //   this.postData.items[i].options.unshift(this.findAreaName(i));
-          // }
         }
         catch (err) { console.log(err); }
       },
