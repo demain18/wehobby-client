@@ -135,7 +135,7 @@
           </div>
         </div>
         <div class="snb">
-          <div class="ad"></div>
+          <Adsence/>
           <div class="list-header">
             <span class="title">공지사항</span>
             <!-- <span class="btn-more">더보기</span> -->

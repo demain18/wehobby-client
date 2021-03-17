@@ -94,7 +94,8 @@
       // accessable page block
       if (this.$cookies.isKey('user')!=true && this.routeAccessDisabledList.find(ele => ele==(this.$route.name.split('-'))[0]) ) {
         alert('접근할 수 없는 페이지입니다.');
-        window.location.href = "/";
+        // window.location.href = "/";
+        this.$router.push('/');
         return;
       }
     },

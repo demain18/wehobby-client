@@ -152,7 +152,7 @@
         </div>
       </div>
       <div class="snb">
-        <div class="ad"></div>
+        <Adsence/>
       </div>
     </div>
     <Footer />
