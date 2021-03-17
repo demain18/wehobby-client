@@ -2,8 +2,7 @@
   <div>
     <div class="drawer-wrap" :class="{drawerWrapActive:isActive}">
       <div class="drawer">
-        <!-- <p>This is drawer</p> -->
-        <div class="content">
+        <div v-if="token.verify == true" class="content">
           <v-avatar>
             <img src="~assets/img/placeholder1.jpg" alt="John">
           </v-avatar>
@@ -11,13 +10,18 @@
             백산
           </span>
         </div>
+        <p v-else-if="token.verify == false" style="padding: 15px 30px;">
+          <nuxt-link to="/auth">로그인/회원가입</nuxt-link>
+        </p>
+        
 
         <v-divider></v-divider>
 
         <v-list flat>
-          <!-- <v-subheader>REPORTS</v-subheader> -->
           <v-list-item-group color="primary">
-            <v-list-item v-for="(item, i) in itemsOne" :key="i">
+
+            <div v-for="(item, index) in itemsOne" :key="index">
+            <v-list-item v-if="token.verify==true || index==0" :to="item.link">
               <v-list-item-icon>
                 <v-icon v-text="item.icon"></v-icon>
               </v-list-item-icon>
@@ -25,24 +29,27 @@
                 <v-list-item-title v-text="item.text"></v-list-item-title>
               </v-list-item-content>
             </v-list-item>
+            </div>
+
           </v-list-item-group>
         </v-list>
 
         <v-divider></v-divider>
 
         <v-list flat>
-          <!-- <v-subheader>REPORTS</v-subheader> -->
           <v-list-item-group color="primary">
-            <v-list-item v-for="(item, i) in itemsTwo" :key="i" :to="item.link">
-              <!-- <nuxt-link :to="item.link"> -->
-                <v-list-item-icon>
-                  <v-icon v-text="item.icon"></v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title v-text="item.text"></v-list-item-title>
-                </v-list-item-content>
-              <!-- </nuxt-link> -->
+
+            <div v-for="(item, index) in itemsTwo" :key="index">
+            <v-list-item :to="item.link">
+              <v-list-item-icon>
+                <v-icon v-text="item.icon"></v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title v-text="item.text"></v-list-item-title>
+              </v-list-item-content>
             </v-list-item>
+            </div>
+
           </v-list-item-group>
         </v-list>
       </div>
@@ -52,12 +59,15 @@
 </template>
 
 <script>
+  import verifyMixin from '~/mixins/verify.js';
+
   import {
     mapGetters
   } from "vuex";
 
   export default {
     name: "GnbDrawer",
+    mixins: [verifyMixin],
     computed: {
       ...mapGetters({
         isActive: 'gnb/getToggleDrawer'
@@ -71,49 +81,55 @@
     data: () => ({
       // isActive: true,
       selectedItem: 1,
+      token: {
+        verify: null
+      },
       itemsOne: [{
           text: '도시선택',
           icon: 'mdi-domain',
           link: '/',
         },
         {
-          text: '로그아웃',
-          icon: 'mdi-exit-to-app',
-          link: '/',
-        },
-        {
           text: '설정',
           icon: 'mdi-cog',
+          link: '/setting',
+        },
+        {
+          text: '로그아웃',
+          icon: 'mdi-exit-to-app',
           link: '/',
         },
       ],
       itemsTwo: [{
           text: '회원모집',
           icon: 'mdi-account-multiple',
-          link: '/board',
+          link: '/board?category=1',
         },
         {
           text: '중고물품',
           icon: 'mdi-basket',
-          link: '/',
+          link: '/board?category=2',
         },
         {
           text: '아르바이트',
           icon: 'mdi-smart-card',
-          link: '/',
+          link: '/board?category=3',
         },
         {
           text: '재능교환/판매',
           icon: 'mdi-book-open-variant',
-          link: '/',
+          link: '/board?category=4',
         },
         {
           text: '이벤트',
           icon: 'mdi-calendar',
-          link: '/',
+          link: '/board?category=5',
         },
       ]
-    })
+    }),
+    mounted() {
+      this.isVerify();
+    }
   }
 
 </script>
@@ -132,7 +148,7 @@
     top: 0px;
     left: 0px;
     display: flex;
-    z-index: 10!important;
+    z-index: 10 !important;
 
     display: none;
     opacity: 0;

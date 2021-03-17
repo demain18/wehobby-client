@@ -2,9 +2,9 @@ import moment from 'moment';
 
 export default {
   inheritAttrs: false,
-  data: () => {
+  data: () => ({
 
-  },
+  }),
   methods: {
     findKey(filterItem, index) {
       if (index == undefined) {

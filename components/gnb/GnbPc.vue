@@ -4,8 +4,6 @@
     <nuxt-link class="item lft logo" to="/">동네친구</nuxt-link>
     <span v-if="city != null"  v-on:click="toggleCityDialog()" class="item lft span-a-tag">{{ city }}</span>
     <span v-if="city == null" v-on:click="toggleCityDialog()" class="item lft span-a-tag">도시 선택</span>
-    <!-- <span v-if="city != null"  v-on:click="toggleCityDialog()" class="item lft span-a-tag">{{ city }}</span> -->
-    <!-- <span v-else v-on:click="toggleCityDialog" class="item lft span-a-tag">도시 선택</span> -->
 
     <v-menu open-on-hover middle offset-y>
       <template v-slot:activator="{ on, attrs }">
@@ -33,46 +31,37 @@
       <a @click="pageLink(5)" v-bind:class="{active: routeList[5]}">이벤트</a>
     </span>
 
-    <!-- <v-avatar v-if="token.verify != true" class="item rgt user-icon" v-bind="attrs" v-on="on">
-      <img src="~assets/img/repre_1.jpg" class="">
-    </v-avatar> -->
-    <!-- <nuxt-link v-if="token.verify" v-cloak to="/auth" class="item rgt">로그인/회원가입</nuxt-link> -->
-
     <v-menu v-if="token.verify == true" left offset-y>
       <template v-slot:activator="{ on, attrs }">
         <v-avatar class="item rgt user-icon" v-bind="attrs" v-on="on">
           <img src="~assets/img/repre_1.jpg" class="">
         </v-avatar>
       </template>
-
-    <v-list dense>
-      <!-- <v-subheader>REPORTS</v-subheader> -->
-      <v-list-item-group color="primary">
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title class="title">{{ user.nickname }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item :to="'/profile/'+user.key">
-          <v-list-item-content>
-            <v-list-item-title>내 프로필 보기</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item to="/setting">
-          <v-list-item-content>
-            <v-list-item-title>설정</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item @click="logout()">
-          <v-list-item-content>
-            <v-list-item-title>로그아웃</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list-item-group>
-    </v-list>
-
+      <v-list dense>
+        <v-list-item-group color="primary">
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title class="title">{{ user.nickname }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item :to="'/profile/'+user.key">
+            <v-list-item-content>
+              <v-list-item-title>내 프로필 보기</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item to="/setting">
+            <v-list-item-content>
+              <v-list-item-title>설정</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item @click="logout()">
+            <v-list-item-content>
+              <v-list-item-title>로그아웃</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
     </v-menu>
-
     <nuxt-link v-else-if="token.verify == false" to="/auth" class="item rgt">로그인/회원가입</nuxt-link>
 
   </div>
@@ -82,16 +71,18 @@
   import Vue from 'vue';
   import axios from 'axios';
   import Vuecookies from 'vue-cookies';
+  import verifyMixin from '~/mixins/verify.js';
   Vue.use(Vuecookies);
 
   export default {
+    mixins: [verifyMixin],
     computed: {
       list() {
         return this.$store.state.urls.list;
       }
     },
     created() {
-      // accessable page block
+      // access block
       if (this.$cookies.isKey('user')!=true && this.routeAccessDisabledList.find(ele => ele==(this.$route.name.split('-'))[0]) ) {
         alert('접근할 수 없는 페이지입니다.');
         // window.location.href = "/";
@@ -124,43 +115,10 @@
     async mounted() {
       // user update
       this.user = this.$cookies.get('user');
-
-      // check cookies
-      // let cookies = {
-      //   token: this.$cookies.get('token'),
-      //   city: this.$cookies.get('city'),
-      //   user: this.$cookies.get('user')
-      // }
-
-      // param read
-      // console.log(this.list.category.key)
-      // if (this.$route.query.category == undefined) {
-      //   this.routeList[this.list.category.key] = true;
-      // } else {
-      //   this.routeList[this.$route.query.category] = true;
-      // }
       this.routeList[this.$route.query.category] = true;
 
       // token verify
-      if (this.$cookies.isKey('token')) {
-        try {
-          const res = await axios.post('/api/auth/verify',{},{
-            headers: {
-              token: this.$cookies.get('token'),
-            }
-          });
-          if (res.data.result == true) {
-            this.token.verify = true;
-          }
-        }
-        catch (err) { 
-          this.token.verify = false;
-          console.log(err);
-          console.log(err.response.data.message);
-        }
-      } else {
-        this.token.verify = false;
-      }
+      this.isVerify()
 
       // citys read
       if (this.$cookies.get('city') != null) {
