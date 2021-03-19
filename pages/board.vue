@@ -128,16 +128,7 @@
       }
 
       // filter read
-      try {
-        const filterRes = await axios.get('/api/info/filter', {
-          params: {
-            city: this.cityKey,
-            category: this.param.category
-          }
-        });
-        this.filterItems = filterRes.data.data;
-      }
-      catch (err) { console.log(err.response.data.message); }
+      this.filterRead();
 
       // city name read
       if (this.cityKey==0) {
@@ -168,13 +159,41 @@
           keyword: this.$route.query.keyword,
           page: this.$route.query.page,
         }
-        // postItems update
-        this.postListRead();
         // breadcrumb update
         this.breadCrumbUpdate();
+        // filter read
+        this.filterRead();
+        // postItems update
+        this.postListRead();
       }
     },
     methods: {
+      async breadCrumbUpdate() {
+        try {
+          const res = await axios.get('/api/info/category');
+          this.categoryName = res.data.data.find(ele => ele.key == this.param.category).name;
+
+          this.$store.commit('urls/setList', {
+            category: { key: this.param.category, name: this.categoryName},
+            city: { key: this.cityKey, name: this.cityName },
+            area: { key: this.param.area, name: this.findName('area', this.param.area)},
+            post: { key: undefined, name: undefined}
+          });
+        }
+        catch (err) { console.log(err); }
+      },
+      async filterRead() {
+        try {
+          const filterRes = await axios.get('/api/info/filter', {
+            params: {
+              city: this.cityKey,
+              category: this.param.category
+            }
+          });
+          this.filterItems = filterRes.data.data;
+        }
+        catch (err) { console.log(err.response.data.message); }
+      },
       async postListRead() {
         try {
           const postListRes = await axios.get('/api/board/read', {
@@ -236,20 +255,8 @@
         paramString = paramString.slice(0, -1);
         this.$router.push(paramString);
       },
-      async breadCrumbUpdate() {
-        try {
-          const res = await axios.get('/api/info/category');
-          this.categoryName = res.data.data.find(ele => ele.key == this.param.category).name;
-
-          this.$store.commit('urls/setList', {
-            category: { key: this.param.category, name: this.categoryName},
-            city: { key: this.cityKey, name: this.cityName },
-            area: { key: this.param.area, name: this.findName('area', this.param.area)},
-            post: { key: undefined, name: undefined}
-          });
-        }
-        catch (err) { console.log(err); }
-      },
+      
+      
     }
   }
 

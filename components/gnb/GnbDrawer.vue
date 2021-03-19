@@ -10,27 +10,49 @@
             백산
           </span>
         </div>
-        <p v-else-if="token.verify == false" style="padding: 15px 30px;">
+        <p v-else-if="token.verify == false" style="padding: 15px 0px 11px 20px;">
           <nuxt-link to="/auth">로그인/회원가입</nuxt-link>
         </p>
         
-
         <v-divider></v-divider>
 
         <v-list flat>
           <v-list-item-group color="primary">
-
-            <div v-for="(item, index) in itemsOne" :key="index">
-            <v-list-item v-if="token.verify==true || index==0" :to="item.link">
+            <v-list-item @click="toggleCityDialog()">
               <v-list-item-icon>
-                <v-icon v-text="item.icon"></v-icon>
+                <v-icon>mdi-domain</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title v-text="item.text"></v-list-item-title>
+                <v-list-item-title>도시 선택</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
+            
+            <div v-if="token.verify==true">
+              <v-list-item :to="'/profile/'+user.key">
+                <v-list-item-icon>
+                  <v-icon>mdi-account</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>프로필</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item to="/setting">
+                <v-list-item-icon>
+                  <v-icon>mdi-cog</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>설정</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item @click="logout()">
+                <v-list-item-icon>
+                  <v-icon>mdi-exit-to-app</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>로그아웃</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
             </div>
-
           </v-list-item-group>
         </v-list>
 
@@ -39,7 +61,7 @@
         <v-list flat>
           <v-list-item-group color="primary">
 
-            <div v-for="(item, index) in itemsTwo" :key="index">
+            <div v-for="(item, index) in menuList" :key="index">
             <v-list-item :to="item.link">
               <v-list-item-icon>
                 <v-icon v-text="item.icon"></v-icon>
@@ -73,34 +95,14 @@
         isActive: 'gnb/getToggleDrawer'
       }),
     },
-    methods: {
-      toggle() {
-        this.$store.commit('gnb/toggleDrawer')
-      }
-    },
     data: () => ({
       // isActive: true,
       selectedItem: 1,
+      user: {},
       token: {
         verify: null
       },
-      itemsOne: [{
-          text: '도시선택',
-          icon: 'mdi-domain',
-          link: '/',
-        },
-        {
-          text: '설정',
-          icon: 'mdi-cog',
-          link: '/setting',
-        },
-        {
-          text: '로그아웃',
-          icon: 'mdi-exit-to-app',
-          link: '/',
-        },
-      ],
-      itemsTwo: [{
+      menuList: [{
           text: '회원모집',
           icon: 'mdi-account-multiple',
           link: '/board?category=1',
@@ -129,6 +131,20 @@
     }),
     mounted() {
       this.isVerify();
+      this.user = this.$cookies.get('user');
+    },
+    methods: {
+      toggle() {
+        this.$store.commit('gnb/toggleDrawer');
+      },
+      logout() {
+        this.$cookies.remove('token');
+        this.$cookies.remove('user');
+        window.location.href = "/";
+      },
+      toggleCityDialog() {
+        this.$store.commit('dialog/toggleCityDialogActive');
+      },
     }
   }
 
@@ -192,10 +208,6 @@
   .drawer .v-list-item {
     // min-height: 30px !important;
     padding-left: 15px !important;
-  }
-
-  .drawer .v-list-item__content {
-    margin-left: 18px;
   }
 
 </style>
