@@ -117,7 +117,6 @@
     async mounted() {
       // user update
       this.user = this.$cookies.get('user');
-      // this.routeList[this.list.category.key] = true;
 
       // token verify
       this.isVerify()

@@ -35,7 +35,7 @@ export default {
       }
     },
     findAreaName(index) {
-      if (this.postItems[index].area == 0) {
+      if (this.postItems[index].area==0) {
         return '';
       } else {
         return this.filterItems.citysArea.find(ele => ele.key == this.postItems[index].area).name;

@@ -110,6 +110,7 @@
       }
     },
     data: () => ({
+      cityKey: null,
       cityName: null,
       // city: [],
       param: [],
@@ -119,11 +120,18 @@
       keywordCount: null
     }),
     async mounted() {
+      // city key read
+      if (this.$cookies.isKey('city')!=true) {
+        this.cityKey = 0;
+      } else {
+        this.cityKey = this.$cookies.get('city');
+      }
+
       // filter read
       try {
         const filterRes = await axios.get('/api/info/filter', {
           params: {
-            city: this.$cookies.get('city'),
+            city: this.cityKey,
             category: this.param.category
           }
         });
@@ -132,15 +140,17 @@
       catch (err) { console.log(err.response.data.message); }
 
       // city name read
-      if (this.$cookies.isKey('city')!=true || this.$cookies.get('city')==0) {
+      if (this.cityKey==0) {
         this.cityName = '전국';
       } else {
         try {
           const citysRes = await axios.get('/api/info/citys');
-          this.cityName = citysRes.data.data.citys.find(ele => ele.key == this.$cookies.get('city')).name;
+          this.cityName = citysRes.data.data.citys.find(ele => ele.key == this.cityKey).name;
         }
         catch (err) { console.log(err); }
       }
+
+      // console.log(this.cityKey)
 
       // post list read
       this.postListRead();
@@ -170,7 +180,7 @@
           const postListRes = await axios.get('/api/board/read', {
             params: {
               category: this.param.category, // static
-              city: this.$cookies.get('city'), // static
+              city: this.cityKey, // static
               area: this.findKey('area', this.param.area),
               subway: this.findKey('subway', this.param.subway),
               categoryDetail: this.findKey('genre', this.param.genre),
@@ -178,9 +188,8 @@
               page: this.param.page
             }
           });
-          console.log('post list readed')
           this.keywordCount = postListRes.data.data.count;
-          this.postItems = postListRes.data.data.postItems; console.log(this.postItems);
+          this.postItems = postListRes.data.data.postItems;
 
           // area into options
           for (let i=0; i<this.postItems.length; i++) {
@@ -234,7 +243,7 @@
 
           this.$store.commit('urls/setList', {
             category: { key: this.param.category, name: this.categoryName},
-            city: { key: this.$cookies.get('city'), name: this.cityName },
+            city: { key: this.cityKey, name: this.cityName },
             area: { key: this.param.area, name: this.findName('area', this.param.area)},
             post: { key: undefined, name: undefined}
           });

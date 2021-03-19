@@ -72,9 +72,9 @@
       cityCookieUpdate() {
         if (this.$cookies.isKey('city')) {
           this.$cookies.remove('city');
-          this.$cookies.set('city', this.select, '30d');
+          this.$cookies.set('city', this.select, '7d');
         } else {
-          this.$cookies.set('city', this.select, '30d');
+          this.$cookies.set('city', this.select, '7d');
         }
         window.location.href = "/";
       }
