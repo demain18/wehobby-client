@@ -119,8 +119,8 @@
           paramString += paramData[i].key+'='+paramData[i].val+'&';
         }
         paramString = paramString.slice(0, -1);
-        // this.$router.push(paramString);
-        window.location.href = paramString;
+        this.$router.push(paramString);
+        // window.location.href = paramString;
       },
       pagingCalc() {
         let length = (this.paging.count-1)/2; // 양방향 갯수

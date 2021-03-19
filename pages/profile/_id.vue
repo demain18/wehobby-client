@@ -142,6 +142,17 @@
       // post read
       this.postListRead();
     },
+    watch: {
+      async $route(to, form) {
+        // params update
+        this.param = {
+          page: this.$route.query.page,
+          key: this.$route.params.id
+        }
+        // postItems update
+        this.postListRead();
+      }
+    },
     methods: {
       async postListRead() {
         try {

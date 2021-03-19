@@ -1,11 +1,11 @@
 <template>
   <p class="bread-crumb">
+    <!-- 메인 -->
     <nuxt-link to="/">메인</nuxt-link>
-
     <!-- 회원 모집 -->
     <span v-if="list.category.key != null">
       <v-icon small>mdi-chevron-right</v-icon>
-      <a @click="pageLink('/board?category='+list.category.key)">{{ list.category.name }}</a>
+      <a @click="resetCity()">{{ list.category.name }}</a>
     </span>
     <!-- 서울특별시의 회원 모집 -->
     <span v-if="list.city.key != null">
@@ -39,25 +39,23 @@
       }
     },
     data: () => ({
-      filterItems: {},
-      nameList: {}
+
     }),
     async mounted() {
-      try {
-        const filterRes = await axios.get('/api/info/filter', {
-          params: {
-            city: this.$cookies.get('city'),
-            category: this.list.category
-          }
-        });
-        this.filterItems = filterRes.data.data;
-      }
-      catch (err) { console.log(err); }
+
     },
     methods: {
       pageLink(url) {
-        window.location.href = url;
-        // this.$router.push(url)
+        this.$router.push(url)
+      },
+      resetCity() {
+        if (this.$cookies.isKey('city')) {
+          this.$cookies.remove('city');
+          this.$cookies.set('city', 0, '30d');
+        } else {
+          this.$cookies.set('city', 0, '30d');
+        }
+        window.location.href = "/";
       }
     }
   }

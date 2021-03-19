@@ -384,6 +384,30 @@
         }
         catch (err) { console.log(err); }
       },
+      async breadCrumbUpdate() {
+        let categoryName=null; 
+        let cityName=null; 
+
+        // category name read
+        const categoryRes = await axios.get('/api/info/category');
+        categoryName = categoryRes.data.data.find(ele => ele.key == this.data.header.category).name;
+
+        // city name read
+        if (this.$cookies.isKey('city')!=true || this.$cookies.get('city')==0) {
+          cityName = '전국';
+        } 
+        else {
+          const citysRes = await axios.get('/api/info/citys');
+          cityName = citysRes.data.data.citys.find(ele => ele.key == this.data.header.city).name;
+        }
+
+        this.$store.commit('urls/setList', {
+          category: { key: this.data.header.category, name: categoryName  },
+          city: { key: this.data.header.city, name: cityName },
+          area: this.$store.state.urls.list.area,
+          post: { key: this.$route.params.id, name: this.data.content.title }
+        });
+      },
       toggleDialog(dialogName) {
         this.$store.commit('dialog/toggle'+dialogName+'DialogActive');
       },
@@ -410,14 +434,6 @@
           kakao: this.contacts.kakao
         });
         this.$store.commit('dialog/toggleContactDialogActive');
-      },
-      breadCrumbUpdate() {
-        this.$store.commit('urls/setList', {
-          category: this.$store.state.urls.list.category,
-          city: this.$store.state.urls.list.city,
-          area: this.$store.state.urls.list.area,
-          post: { key: this.$route.params.id, name: this.data.content.title }
-        });
       },
       optionContentRead(content) {
         if (content == '') {

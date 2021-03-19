@@ -24,11 +24,11 @@
     </v-menu>
 
     <span class="item mid">
-      <a @click="pageLink(1)" v-bind:class="{active: routeList[1]}">회원 모집</a>
-      <a @click="pageLink(2)" v-bind:class="{active: routeList[2]}">중고 물품</a>
-      <a @click="pageLink(3)" v-bind:class="{active: routeList[3]}">아르바이트</a>
-      <a @click="pageLink(4)" v-bind:class="{active: routeList[4]}">재능교환/판매</a>
-      <a @click="pageLink(5)" v-bind:class="{active: routeList[5]}">이벤트</a>
+      <a @click="pageLink(1)" v-bind:class="{active: list.category.key==1}">회원 모집</a>
+      <a @click="pageLink(2)" v-bind:class="{active: list.category.key==2}">중고 물품</a>
+      <a @click="pageLink(3)" v-bind:class="{active: list.category.key==3}">아르바이트</a>
+      <a @click="pageLink(4)" v-bind:class="{active: list.category.key==4}">재능교환/판매</a>
+      <a @click="pageLink(5)" v-bind:class="{active: list.category.key==5}">이벤트</a>
     </span>
 
     <v-menu v-if="token.verify == true" left offset-y>
@@ -82,10 +82,11 @@
       }
     },
     created() {
-      // access block
+      // menu update
+      this.routeList[this.list.category.key] = true;
+
       if (this.$cookies.isKey('user')!=true && this.routeAccessDisabledList.find(ele => ele==(this.$route.name.split('-'))[0]) ) {
         alert('접근할 수 없는 페이지입니다.');
-        // window.location.href = "/";
         this.$router.push('/');
         return;
       }
@@ -110,17 +111,18 @@
         'write',
         'edit',
         'setting'
-      ]
+      ],
+      // list: {}
     }),
     async mounted() {
       // user update
       this.user = this.$cookies.get('user');
-      this.routeList[this.$route.query.category] = true;
+      // this.routeList[this.list.category.key] = true;
 
       // token verify
       this.isVerify()
 
-      // citys read
+      // city list read
       if (this.$cookies.get('city') != null) {
         try {
           const res = await axios.get('/api/info/citys');
@@ -134,7 +136,7 @@
         catch (err) { console.log(err.response.data.message); }
       }
 
-      // route list dev
+      // route list forDev
       this.$router.options.routes.forEach(route => {
         this.routeItems.push({
           title: route.name,
@@ -142,12 +144,15 @@
         })
       })
     },
-    methods: {
+    // beforeMount() {
+    //   this.list = this.$store.state.urls.list;
+    // },
+    methods: { 
       toggleCityDialog() {
         this.$store.commit('dialog/toggleCityDialogActive');
       },
       pageLink(route) {
-        window.location.href = "/board?category="+route;
+        this.$router.push("/board?category="+route);
       },
       logout() {
         this.$cookies.remove('token');
