@@ -258,24 +258,25 @@
 
           // contacts remap
           let contactsArr = postRes.data.data.header.contacts;
-          if (contactsArr.length == 0) {
+          if (contactsArr.length==0 || (postRes.data.data.header.contacts[0].desc==null && postRes.data.data.header.contacts[1].desc==null)) {
             this.contactsIsEmpty = true;
-          }
-          let mailObj = contactsArr.filter(item => {
-            return item.type == 'mail';
-          });
-          let kakaoObj = contactsArr.filter(item => {
-            return item.type == 'kakao';
-          });
-          if (mailObj.length != 0) {
-            this.contacts.mail = mailObj[0].desc;
           } else {
-            this.contacts.mail = false;
-          }
-          if (kakaoObj.length != 0) {
-            this.contacts.kakao = kakaoObj[0].desc;
-          } else {
-            this.contacts.kakao = false;
+            let mailObj = contactsArr.filter(item => {
+              return item.type == 'mail';
+            });
+            let kakaoObj = contactsArr.filter(item => {
+              return item.type == 'kakao';
+            });
+            if (mailObj.length != 0) {
+              this.contacts.mail = mailObj[0].desc;
+            } else {
+              this.contacts.mail = false;
+            }
+            if (kakaoObj.length != 0) {
+              this.contacts.kakao = kakaoObj[0].desc;
+            } else {
+              this.contacts.kakao = false;
+            }
           }
 
           // commentEdit

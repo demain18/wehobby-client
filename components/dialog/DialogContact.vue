@@ -10,7 +10,7 @@
           <v-row justify="center">
             <v-expansion-panels accordion>
 
-              <v-expansion-panel v-if="contactMail != ''">
+              <v-expansion-panel v-if="contactMail != null">
                 <v-expansion-panel-header>
                   이메일
                   <template v-slot:actions>
@@ -29,7 +29,7 @@
                 </v-expansion-panel-content>
               </v-expansion-panel>
 
-              <v-expansion-panel v-if="contactKakao != ''">
+              <v-expansion-panel v-if="contactKakao != null">
                 <v-expansion-panel-header>
                   카카오톡
                   <template v-slot:actions>
