@@ -81,16 +81,35 @@
             "oauth": null
           }
           );
-          console.log(res.data.result);
-          console.log(res.data.data);
+
           this.token = res.data.data.token; // generated token
           if (this.$cookies.isKey('token')) {
             this.$cookies.remove('token');
-            this.$cookies.set('token', this.token, '7d');
+            this.$cookies.set('token', this.token, '30d');
           } else {
-            this.$cookies.set('token', this.token, '7d');
+            this.$cookies.set('token', this.token, '30d');
           }
-          this.$router.push('/');
+
+          const profileRes = await axios.post('/api/profile/read', 
+          {}, 
+          {
+            headers: {
+              token: this.$cookies.get('token'),
+            }
+          });
+          let userData = {
+            key: parseInt(profileRes.data.data.key),
+            nickname: profileRes.data.data.nickname,
+            image: profileRes.data.data.imgRepre,
+          }
+          if (this.$cookies.isKey('user')) {
+            this.$cookies.remove('user');
+            this.$cookies.set('user', userData, '30d');
+          } else {
+            this.$cookies.set('user', userData, '30d');
+          }
+
+          window.location.href = "/";
         }
         catch (err) {
           alert(err.response.data.message);

@@ -153,11 +153,12 @@
       pageLink(route) {
         this.$router.push("/board?category="+route);
       },
-      logout() {
-        this.$cookies.remove('token');
-        this.$cookies.remove('user');
-        window.location.href = "/";
-      }
+      // logout() {
+      //   this.$cookies.remove('token');
+      //   this.$cookies.remove('user');
+      //   window.location.href = "/";
+      // },
+      
     }
   }
 

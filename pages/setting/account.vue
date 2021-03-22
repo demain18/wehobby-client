@@ -61,7 +61,7 @@
         </v-btn>
         <v-row>
           <v-col>
-            <v-btn color="primary" text @click="authDestroy()">
+            <v-btn color="primary" text @click="authDestroyConfirm()">
               회원탈퇴
             </v-btn>
           </v-col>
@@ -77,9 +77,11 @@
   import Vue from 'vue';
   import axios from 'axios';
   import Vuecookies from 'vue-cookies';
+  // import verifyMixin from '~/mixins/verify.js';
   Vue.use(Vuecookies);
   
   export default {
+    // mixins: [verifyMixin],
     created() {},
     data: () => ({
       submitAble: false,
@@ -150,15 +152,28 @@
         }
         catch (err) { alert(err.response.data.message) }
       },
-      authDestroy() {
-        let idConfirm;
-        idConfirm = prompt('계정을 삭제하려면 회원님의 아이디을 입력해주세요.', idConfirm);
+      async authDestroyConfirm() {
+        let idConfirm = prompt('계정을 삭제하려면 회원님의 아이디을 입력해주세요.', idConfirm);
         if (idConfirm == this.select.id) {
           if (confirm('정말로 계정을 삭제하겠습니까? 삭제된 계정 정보는 다시 복구할 수 없습니다.')) {
             confirm('계정이 삭제되었습니다.');
-            window.location.replace('/');
+            try {
+              await axios.post('/api/auth/delete', {}, {
+                headers: {
+                  token: this.$cookies.get('token'),
+                }}
+              );
+              this.$cookies.remove('token');
+              this.$cookies.remove('user');
+              window.location.replace('/');
+            }
+            catch (err) { console.log(err); }
           }
-        } else {
+        }
+        else if (idConfirm == null) {
+          confirm('취소되었습니다.');
+        }
+        else if (idConfirm != this.select.id) {
           confirm('아이디를 정확히 입력해주세요.');
         }
       }

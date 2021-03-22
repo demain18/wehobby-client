@@ -296,11 +296,12 @@
       },
       async postViewCount() {
         try {
-          const res = await axios.get('/api/post/view', {
+          const ipRes = await axios.get('https://api.ipify.org?format=json');
+          await axios.get('/api/post/view', {
             params: {
               tableId: this.param,
               action: 'view',
-              ip: window.location.host,
+              ip: ipRes.data.ip,
               token: this.$cookies.get('token'),
             }
           });
@@ -340,10 +341,13 @@
         }
       },
       async commentSend() {
-        // console.log('send work'); return;
+        if (this.$cookies.isKey('user') != true || this.userKey == null) {
+          alert('댓글 작성 기능은 로그인 후 사용 가능합니다.');
+          return;
+        }
+
         if (this.select.comment.desc == null) {
           alert('댓글은 한 글자 이상 작성해주세요.');
-          // return;
         }
         else {
           try {
@@ -448,9 +452,9 @@
       // },
       standardTerm(content, index) {
         if (index==1) {
-          return content+'/월';
+          return content+'일/월';
         } else if(index==2) {
-          return content+'/일';
+          return content+'시간/일';
         } else {
           return content;
         }
