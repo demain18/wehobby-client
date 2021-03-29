@@ -11,7 +11,7 @@
           <div class="form-input">
 
             <v-select :items="category" item-text="name" item-value="key" v-model="select.keywordCategory" solo label="카테고리" class="filter"></v-select>
-            <v-text-field v-model="keyword" v-on:keyup.enter="keywordSearch()" solo label="함께하고 싶은 취미를 알려주세요" append-icon="mdi-magnify"></v-text-field>
+            <v-text-field v-model="keyword" v-on:keyup.enter="keywordSearch()" solo :label="select.keywordPlaceholder" append-icon="mdi-magnify"></v-text-field>
 
           </div>
         </div>
@@ -179,7 +179,8 @@
       items: [],
       notices: [],
       select: {
-        keywordCategory: null
+        keywordCategory: 0,
+        keywordPlaceholder: '검색을 위해 카테고리를 선택해주세요'
       },
       keyword: null
     }),
@@ -221,17 +222,38 @@
       }
       catch (err) { console.log(err.response.data.message); }
     },
+    watch: {
+      'select.keywordCategory'(to, from) {
+        if (this.select.keywordCategory==1) {
+          this.select.keywordPlaceholder = '함께하고 싶은 취미를 알려주세요';
+        }
+        else if (this.select.keywordCategory==2) {
+          this.select.keywordPlaceholder = '사거나 팔고싶은 물건을 알려주세요';
+        }
+        else if (this.select.keywordCategory==3) {
+          this.select.keywordPlaceholder = '일하고싶은 직종을 알려주세요';
+        }
+        else if (this.select.keywordCategory==4) {
+          this.select.keywordPlaceholder = '배우고싶은 재능을 알려주세요';
+        }
+        else if (this.select.keywordCategory==5) {
+          this.select.keywordPlaceholder = '참여하고싶은 이벤트를 알려주세요';
+        }
+      }
+    },
     methods: {
       keywordSearch() {
-        if (this.select.keywordCategory == null) {
-          alert('카테고리를 선택해주세요.')
+        // placeholder select
+
+        // search condition
+        if (this.select.keywordCategory==0) {
+          alert('카테고리를 선택해주세요.');
         }
-        else if(this.keyword == null) {
+        else if(this.keyword==null) {
           alert('검색어를 작성해주세요.')
         }
         else {
           this.$router.push('/board?category='+this.select.keywordCategory+'&keyword='+this.keyword);
-
         }
       }
     }
