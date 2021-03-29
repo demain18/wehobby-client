@@ -6,11 +6,11 @@
       <p class="sub">함께 즐기는 취미</p>
 
       <div class="forms">
-        <v-text-field v-model="form.id" placeholder="아이디" hide-details="" class="input-form" solo flat></v-text-field>
-        <v-text-field v-model="form.pw" placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-model="form.id" v-on:keyup.enter="formSubmit()" placeholder="아이디" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-model="form.pw" v-on:keyup.enter="formSubmit()" placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
       </div>
 
-      <v-btn v-on:click="formSubmit" depressed rounded large class="login">
+      <v-btn v-on:click="formSubmit()" depressed rounded large class="login">
         로그인
       </v-btn>
     </div>
@@ -37,6 +37,11 @@
     methods: {
       async formSubmit() {
         try {
+          if (this.form.id=='' || this.form.pw=='') {
+            alert('아이디와 비밀번호를 모두 입력해주세요.');
+            return;
+          }
+
           const res = await axios.post('/api/auth/login', {
             "id": this.form.id,
             "pw": this.form.pw
@@ -70,7 +75,7 @@
           }
           window.location.href = "/";
         } catch (err) {
-          alert(err); // can not find data나오면 err만 출력
+          alert(err.response.data.message); // can not find data나오면 err만 출력
         }
 
       }

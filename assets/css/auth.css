@@ -11,7 +11,7 @@
 }
 
 #form {
-  width: 380px;
+  width: 400px;
   /* height: 400px; */
   background-color: rgba(255, 255, 255, 0.85);
   /* background-color: #ffffff; */
@@ -25,7 +25,7 @@
   top: 35%;
   left: 50%;
   margin-top: -200px;
-  margin-left: -190px;
+  margin-left: -200px;
   /* margin-top: 200px; */
 }
 
@@ -51,16 +51,31 @@
   background-color: #ff4e54 !important;
 }
 
+#form button.social {
+
+}
+
+#form button.social-google {
+  background-color: #ffffff !important;
+  /* color: #ffffff; */
+  margin-top: 20px;
+}
+
 #form button.social-facebook {
   background-color: #4267B2 !important;
   color: #ffffff;
-  margin-top: 20px;
-  /* margin-bottom: 20px; */
+}
+
+#form .logo-google {
+  width: 20px;
+  margin-right: 3px;
+  margin-bottom: 2px;
 }
 
 #form .icon-social {
-  font-size: 20px !important;
+  font-size: 23px !important;
   margin-right: 3px;
+  margin-bottom: 2px;
 }
 
 
@@ -76,10 +91,6 @@
 
 .input-form {
   margin-bottom: 5px!important;
-}
-
-#form button.social-facebook {
-  margin-top: 10px;
 }
 
 #form .form-agree {
