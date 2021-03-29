@@ -135,6 +135,11 @@
         catch (err) { console.log(err.response.data.message); }
       }
 
+      // gnb menu active reset
+      if (this.$route.path == '/') {
+        this.list.category.key = 0;
+      }
+
       // route list forDev
       this.$router.options.routes.forEach(route => {
         this.routeItems.push({
