@@ -1,7 +1,7 @@
 <template>
   <div class="pc" data-app>
     <DialogCity/>
-    <nuxt-link class="item lft logo" to="/">동네친구</nuxt-link>
+    <nuxt-link class="item lft logo" to="/">WeHobby</nuxt-link>
     <span v-if="city != null"  v-on:click="toggleCityDialog()" class="item lft span-a-tag">{{ city }}</span>
     <span v-if="city == null" v-on:click="toggleCityDialog()" class="item lft span-a-tag">도시 선택</span>
 
