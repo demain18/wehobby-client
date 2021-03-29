@@ -201,37 +201,8 @@
       // post read
       this.postRead();
 
-      // post count
+      // post count increase
       this.postViewCount();
-
-      // genre name read
-      try {
-        const filterRes = await axios.get('/api/info/category');
-        let filterItems = filterRes.data.data;
-        if (this.data.header.categoryDetail != 0) {
-          let genreObj = filterItems.find(obj => obj.key == this.data.header.category).detail;
-          this.header.genre = genreObj.find(obj => obj.key == this.data.header.categoryDetail).name;
-        }
-      }
-      catch (err) { console.log(err); }
-
-      // area, subway name read
-      try {
-        const cityRes = await axios.get('/api/info/citys/detail', {
-          params: {
-            city: this.data.header.city
-          }
-        });
-
-        let cityItems = cityRes.data.data;
-        if (this.data.header.districtRegion != 0) {
-          this.header.area = cityItems.area.find(obj => obj.key == this.data.header.districtRegion).name;
-        }
-        if (this.data.header.subway != 0) {
-          this.header.subway = cityItems.subways.find(obj => obj.key == this.data.header.subway).name+'역';
-        }
-      }
-      catch (err) { console.log(err); }
 
       // user key read
       if (this.$cookies.isKey('user')) {
@@ -240,9 +211,6 @@
       } else {
         this.userKey = null;
       }
-
-      // breadcrumb update
-      this.breadCrumbUpdate();
     },
     methods: {
       async postRead() {
@@ -260,7 +228,8 @@
           let contactsArr = postRes.data.data.header.contacts;
           if (contactsArr.length==0 || (postRes.data.data.header.contacts[0].desc==null && postRes.data.data.header.contacts[1].desc==null)) {
             this.contactsIsEmpty = true;
-          } else {
+          } 
+          else {
             let mailObj = contactsArr.filter(item => {
               return item.type == 'mail';
             });
@@ -284,6 +253,15 @@
             this.select.commentEdit.push(false);
           }
 
+          // genre read
+          this.genreRead();
+          
+          // area&subway read
+          this.areaAndSubwayRead();
+
+          // breadcrumb update
+          this.breadCrumbUpdate();
+
           if (postRes.data.result == false) {
             alert('존재하지 않는 게시물입니다.');
             this.$router.push('/');
@@ -294,15 +272,50 @@
           console.log(err);
         }
       },
+      async genreRead() {
+        try {
+          const filterRes = await axios.get('/api/info/category');
+          let filterItems = filterRes.data.data;
+          if (this.data.header.categoryDetail != 0) {
+            let genreObj = filterItems.find(obj => obj.key == this.data.header.category).detail;
+            this.header.genre = genreObj.find(obj => obj.key == this.data.header.categoryDetail).name;
+          }
+        }
+        catch (err) { console.log(err); }
+      },
+      async areaAndSubwayRead() {
+        try {
+          const cityRes = await axios.get('/api/info/citys/detail', {
+            params: {
+              city: this.data.header.city
+            }
+          });
+
+          if (this.data.header.districtRegion != 0) {
+            this.header.area = cityRes.data.data.area.find(obj => obj.key == this.data.header.districtRegion).name;
+          }
+          if (this.data.header.subway != 0) {
+            this.header.subway = cityRes.data.data.subways.find(obj => obj.key == this.data.header.subway).name+'역';
+          }
+        }
+        catch (err) { console.log(err); }
+      },
       async postViewCount() {
         try {
           const ipRes = await axios.get('https://api.ipify.org?format=json');
+          let token = null;
+          if (this.$cookies.isKey('token')) {
+            token = this.$cookies.get('token');
+          } else {
+            token = null;
+          }
+
           await axios.get('/api/post/view', {
             params: {
               tableId: this.param,
               action: 'view',
               ip: ipRes.data.ip,
-              token: this.$cookies.get('token'),
+              token: token,
             }
           });
         }
