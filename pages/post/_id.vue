@@ -219,7 +219,7 @@
       try {
         const cityRes = await axios.get('/api/info/citys/detail', {
           params: {
-            city: parseInt(this.$cookies.get('city'))
+            city: this.data.header.city
           }
         });
 

@@ -72,7 +72,11 @@ export default {
       return desc;
     },
     thousandComma(content) {
-      return content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      if (Number.isInteger(content)) {
+        return content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      } else {
+        return content;
+      }
     }
   }
 }

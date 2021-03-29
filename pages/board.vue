@@ -61,11 +61,16 @@
               <nuxt-link :to="'/post/'+item.key" style="height: 80px;"><img src="~assets/img/placeholder1.jpg" class="img-repre"></nuxt-link>
               <div class="content">
                 <p class="title"><nuxt-link :to="'/post/'+item.key">{{ item.title }}</nuxt-link></p>
-                <p class="info">
+                <p class="info" v-if="cityKey!=0">
                   <span v-if="item.options[0] != ''" class="bold" v-text="thousandComma(item.options[0])"></span><span v-if="item.options[0] != '' && item.options[1] != ''"> · </span>
                   <span v-if="item.options[1] != ''">{{ item.options[1] }}</span><span v-if="item.options[2] != ''"> · </span>
                   <span v-if="item.options[2] != ''">{{ item.options[2] }}</span><span v-if="item.options[3] != ''"> · </span>
                   <span v-if="item.options[3] != ''">{{ item.options[3] }}</span>
+                </p>
+                <p class="info" v-else>
+                  <span v-if="item.options[0] != ''" v-text="thousandComma(item.options[0])"></span><span v-if="item.options[0] != '' && item.options[1] != ''"> · </span>
+                  <span v-if="item.options[1] != ''">{{ item.options[1] }}</span><span v-if="item.options[2] != ''"> · </span>
+                  <span v-if="item.options[2] != ''">{{ item.options[2] }}</span>
                 </p>
                 <p class="txt" v-html="markupReplace(item.desc)"></p>
                 <span class="time" v-text="agoCalc(item.date, item.time)+' 전'"></span>
@@ -212,7 +217,9 @@
 
           // area into options
           for (let i=0; i<this.postItems.length; i++) {
-            this.postItems[i].options.unshift(this.findAreaName(i));
+            if (this.cityKey!=0) {
+              this.postItems[i].options.unshift(this.findAreaName(i));
+            }
             // options sort by category
             if (this.param.category == 2) {
               this.postItems[i].options = {
