@@ -136,9 +136,15 @@
       }
 
       // gnb menu active reset
-      if (this.$route.path == '/') {
-        this.list.category.key = 0;
-      }
+      // if (this.$route.path == '/') {
+      //   this.list.category.key = 0;
+      // }
+      this.$store.commit('urls/setList', {
+        category: { key: undefined, name: undefined},
+        city: { key: undefined, name: undefined},
+        area: { key: undefined, name: undefined},
+        post: { key: undefined, name: undefined}
+      });
 
       // route list forDev
       this.$router.options.routes.forEach(route => {
