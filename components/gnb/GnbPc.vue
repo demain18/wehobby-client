@@ -23,7 +23,14 @@
       </v-list>
     </v-menu>
 
-    <span class="item mid">
+    <span class="item mid" v-if="path=='/'">
+      <a @click="pageLink(1)">회원 모집</a>
+      <a @click="pageLink(2)">중고 물품</a>
+      <a @click="pageLink(3)">아르바이트</a>
+      <a @click="pageLink(4)">재능교환/판매</a>
+      <a @click="pageLink(5)">이벤트</a>
+    </span>
+    <span class="item mid" v-else>
       <a @click="pageLink(1)" v-bind:class="{active: list.category.key==1}">회원 모집</a>
       <a @click="pageLink(2)" v-bind:class="{active: list.category.key==2}">중고 물품</a>
       <a @click="pageLink(3)" v-bind:class="{active: list.category.key==3}">아르바이트</a>
@@ -85,9 +92,6 @@
       // menu update
       this.routeList[this.list.category.key] = true;
 
-      // gnb menu disactive
-      this.list.category.key = 0;
-
       // guest block page
       if (this.$cookies.isKey('user')!=true && this.routeAccessDisabledList.find(ele => ele==(this.$route.name.split('-'))[0]) ) {
         alert('접근할 수 없는 페이지입니다.');
@@ -116,7 +120,7 @@
         'edit',
         'setting'
       ],
-      menuList: []
+      path: null
     }),
     async mounted() {
       // token verify
@@ -125,7 +129,8 @@
       // user token read
       this.user = this.$cookies.get('user');
 
-      // gnb menu disable
+      // path read
+      this.path = this.$router.currentRoute.path;
 
       // city list read
       if (this.$cookies.get('city') != null) {
