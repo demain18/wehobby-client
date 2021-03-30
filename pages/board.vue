@@ -68,7 +68,7 @@
                   <span v-if="item.options[3] != ''">{{ item.options[3] }}</span>
                 </p>
                 <p class="info" v-else>
-                  <span v-if="item.options[0] != ''" v-text="thousandComma(item.options[0])"></span><span v-if="item.options[0] != '' && item.options[1] != ''"> · </span>
+                  <span v-if="item.options[0] != ''">{{ item.options[0] }}</span><span v-if="item.options[0] != '' && item.options[1] != ''"> · </span>
                   <span v-if="item.options[1] != ''">{{ item.options[1] }}</span><span v-if="item.options[2] != ''"> · </span>
                   <span v-if="item.options[2] != ''">{{ item.options[2] }}</span>
                 </p>
@@ -145,8 +145,6 @@
         }
         catch (err) { console.log(err); }
       }
-
-      // console.log(this.cityKey)
 
       // post list read
       this.postListRead();

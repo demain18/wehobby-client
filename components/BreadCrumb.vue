@@ -42,7 +42,7 @@
 
     }),
     async mounted() {
-
+      // console.log(this.list.category.name)
     },
     methods: {
       pageLink(url) {

@@ -17,7 +17,7 @@
       </nuxt-link>
       <v-btn depressed rounded large class="social social-google">
         <img src="~/assets/img/static/logo-google.png" class="logo-google">
-        구글으로 시작하기
+        구글로 시작하기
       </v-btn>
       <v-btn depressed rounded large class="social social-facebook">
         <v-icon class="icon-social">

@@ -85,6 +85,10 @@
       // menu update
       this.routeList[this.list.category.key] = true;
 
+      // gnb menu disactive
+      this.list.category.key = 0;
+
+      // guest block page
       if (this.$cookies.isKey('user')!=true && this.routeAccessDisabledList.find(ele => ele==(this.$route.name.split('-'))[0]) ) {
         alert('접근할 수 없는 페이지입니다.');
         this.$router.push('/');
@@ -112,14 +116,16 @@
         'edit',
         'setting'
       ],
-      // list: {}
+      menuList: []
     }),
     async mounted() {
-      // user update
+      // token verify
+      this.isVerify();
+
+      // user token read
       this.user = this.$cookies.get('user');
 
-      // token verify
-      this.isVerify()
+      // gnb menu disable
 
       // city list read
       if (this.$cookies.get('city') != null) {
@@ -135,18 +141,7 @@
         catch (err) { console.log(err.response.data.message); }
       }
 
-      // gnb menu active reset
-      // if (this.$route.path == '/') {
-      //   this.list.category.key = 0;
-      // }
-      this.$store.commit('urls/setList', {
-        category: { key: undefined, name: undefined},
-        city: { key: undefined, name: undefined},
-        area: { key: undefined, name: undefined},
-        post: { key: undefined, name: undefined}
-      });
-
-      // route list forDev
+      // route list read
       this.$router.options.routes.forEach(route => {
         this.routeItems.push({
           title: route.name,
@@ -154,9 +149,6 @@
         })
       })
     },
-    // beforeMount() {
-    //   this.list = this.$store.state.urls.list;
-    // },
     methods: { 
       toggleCityDialog() {
         this.$store.commit('dialog/toggleCityDialogActive');
@@ -164,12 +156,6 @@
       pageLink(route) {
         this.$router.push("/board?category="+route);
       },
-      // logout() {
-      //   this.$cookies.remove('token');
-      //   this.$cookies.remove('user');
-      //   window.location.href = "/";
-      // },
-      
     }
   }
 
