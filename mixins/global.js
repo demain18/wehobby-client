@@ -64,7 +64,11 @@ export default {
         '<ul>',
         '</ul>',
         '<ol>',
-        '</ol>'
+        '</ol>',
+        '<em>',
+        '</em>',
+        '<u>',
+        '</u>'
       ]
       for (let i = 0; i < list.length; i++) {
         desc = desc.split(list[i]).join('');
