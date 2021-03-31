@@ -72,7 +72,7 @@
                   <span v-if="item.options[1] != ''">{{ item.options[1] }}</span><span v-if="item.options[2] != ''"> · </span>
                   <span v-if="item.options[2] != ''">{{ item.options[2] }}</span>
                 </p>
-                <p class="txt" v-html="markupReplace(item.desc)"></p>
+                <p class="txt" v-text="markupReplace(item.desc)"></p>
                 <span class="time" v-text="agoCalc(item.date, item.time)+' 전'"></span>
               </div>
             </div>
