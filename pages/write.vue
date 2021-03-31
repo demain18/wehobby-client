@@ -316,7 +316,6 @@
                 token: this.$cookies.get('token'),
               }}
             );
-            console.log(res);
             this.$router.push('/post/'+res.data.data.postIdKey);
           }
           catch (err) { console.log(err); }

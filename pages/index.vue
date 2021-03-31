@@ -186,7 +186,7 @@
         });
         this.content.latest = latestRes.data.data;
         this.content.latest.forEach((item, index) => {
-          this.content.latest[index].title = item.title.substr(0, 24);
+          this.content.latest[index].title = item.title.substr(0, 22);
           this.content.latest[index].desc = this.markupReplace(item.desc).substr(0, 30);
         });
 
