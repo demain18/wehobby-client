@@ -15,7 +15,7 @@
         </div>
         <div class="content">
           같은 취미를 가진 사람들을 만나고<br />
-          함께 즐겨보세요
+          함께 즐겨보세요.
         </div>
       </div>
     </div>
