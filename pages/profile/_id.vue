@@ -111,7 +111,7 @@
     async mounted() {
       // filter read
       try {
-        const filterRes = await axios.get('/api/info/filter', {
+        const filterRes = await axios.get('https://api.wehobby.kr/1.0/api/info/filter', {
           params: {
             city: this.$cookies.get('city'),
             category: this.param.category
@@ -123,7 +123,7 @@
 
       // profile read
       try {
-        let res = await axios.get('/api/profile/read', {
+        let res = await axios.get('https://api.wehobby.kr/1.0/api/profile/read', {
           params: {
             id: this.param.key
           }
@@ -156,7 +156,7 @@
     methods: {
       async postListRead() {
         try {
-          const postListRes = await axios.get('/api/board/read', {
+          const postListRes = await axios.get('https://api.wehobby.kr/1.0/api/board/read', {
             params: {
               page: this.param.page,
               uploader: this.param.key

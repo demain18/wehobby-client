@@ -215,7 +215,7 @@
     methods: {
       async postRead() {
         try {
-          const postRes = await axios.get('/api/post/read', {
+          const postRes = await axios.get('https://api.wehobby.kr/1.0/api/post/read', {
             params: {
               id: this.param
             }
@@ -274,7 +274,7 @@
       },
       async genreRead() {
         try {
-          const filterRes = await axios.get('/api/info/category');
+          const filterRes = await axios.get('https://api.wehobby.kr/1.0/api/info/category');
           let filterItems = filterRes.data.data;
           if (this.data.header.categoryDetail != 0) {
             let genreObj = filterItems.find(obj => obj.key == this.data.header.category).detail;
@@ -285,7 +285,7 @@
       },
       async areaAndSubwayRead() {
         try {
-          const cityRes = await axios.get('/api/info/citys/detail', {
+          const cityRes = await axios.get('https://api.wehobby.kr/1.0/api/info/citys/detail', {
             params: {
               city: this.data.header.city
             }
@@ -310,7 +310,7 @@
             token = null;
           }
 
-          await axios.get('/api/post/view', {
+          await axios.get('https://api.wehobby.kr/1.0/api/post/view', {
             params: {
               tableId: this.param,
               action: 'view',
@@ -325,7 +325,7 @@
       },
       async recruitQuit() {
         try {
-          await axios.post('/api/post/terminate/recruit', {
+          await axios.post('https://api.wehobby.kr/1.0/api/post/terminate/recruit', {
             id: this.param
           },
           {headers: {token: this.$cookies.get('token')}});
@@ -341,7 +341,7 @@
         let confirmRes = confirm('정말 게시물을 삭제하시겠습니까?');
         if (confirmRes == true) {
           try {
-            await axios.post('/api/post/delete', {
+            await axios.post('https://api.wehobby.kr/1.0/api/post/delete', {
               id: this.param
             },
             {headers: {token: this.$cookies.get('token')}});
@@ -364,7 +364,7 @@
         }
         else {
           try {
-            await axios.post('/api/comment/insert', {
+            await axios.post('https://api.wehobby.kr/1.0/api/comment/insert', {
               id: this.param,
               desc: this.select.comment.desc
             },
@@ -382,7 +382,7 @@
       },    
       async commentEdit(index) {
         try {
-          await axios.post('/api/comment/update', {
+          await axios.post('https://api.wehobby.kr/1.0/api/comment/update', {
             id: this.data.comments[index].key,
             desc: this.select.comment.descEdit
           },
@@ -394,7 +394,7 @@
       },
       async commentDel(commentKey) {
         try {
-          await axios.post('/api/comment/delete', {
+          await axios.post('https://api.wehobby.kr/1.0/api/comment/delete', {
             id: commentKey
           },
           {headers: {token: this.$cookies.get('token')}});
@@ -407,7 +407,7 @@
         let cityName=null; 
 
         // category name read
-        const categoryRes = await axios.get('/api/info/category');
+        const categoryRes = await axios.get('https://api.wehobby.kr/1.0/api/info/category');
         categoryName = categoryRes.data.data.find(ele => ele.key == this.data.header.category).name;
 
         // city name read
@@ -415,7 +415,7 @@
           cityName = '전국';
         } 
         else {
-          const citysRes = await axios.get('/api/info/citys');
+          const citysRes = await axios.get('https://api.wehobby.kr/1.0/api/info/citys');
           cityName = citysRes.data.data.citys.find(ele => ele.key == this.data.header.city).name;
         }
 

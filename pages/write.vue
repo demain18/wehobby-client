@@ -236,14 +236,14 @@
     async mounted() {
       // city read
       try {
-        const cityRes = await axios.get('/api/info/citys');
+        const cityRes = await axios.get('https://api.wehobby.kr/1.0/api/info/citys');
         this.list.city = cityRes.data.data.citys;
       }
       catch (err) { console.log(err); }
 
       // category read
       try {
-        const categoryRes = await axios.get('/api/info/category');
+        const categoryRes = await axios.get('https://api.wehobby.kr/1.0/api/info/category');
         this.list.category = categoryRes.data.data;
       }
       catch (err) { console.log(err); }
@@ -282,7 +282,7 @@
     methods: {
       async cityDataRead() {
         try {
-          const res = await axios.get('/api/info/citys/detail', {params: { city: this.select.city }});
+          const res = await axios.get('https://api.wehobby.kr/1.0/api/info/citys/detail', {params: { city: this.select.city }});
           this.list.area = res.data.data.area;
           this.list.subway = res.data.data.subways;
         }
@@ -299,7 +299,7 @@
       async postWriteSubmit() {
         if (this.select.submitAble == true) {
           try {
-            const res = await axios.post('/api/post/insert',
+            const res = await axios.post('https://api.wehobby.kr/1.0/api/post/insert',
               {
                 city: this.select.city,
                 district_region: this.select.area,

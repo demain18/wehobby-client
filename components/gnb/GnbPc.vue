@@ -135,7 +135,7 @@
       // city list read
       if (this.$cookies.get('city') != null) {
         try {
-          const res = await axios.get('/api/info/citys');
+          const res = await axios.get('https://api.wehobby.kr/1.0/api/info/citys');
           this.cityItems = res.data.data.citys;
           this.cityItems.unshift({
             key: 0,

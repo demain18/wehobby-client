@@ -122,7 +122,7 @@
     methods: {
       async authRead() {
         try {
-          const res = await axios.post('/api/auth/read', {}, {headers: {token: this.$cookies.get('token')}});
+          const res = await axios.post('https://api.wehobby.kr/1.0/api/auth/read', {}, {headers: {token: this.$cookies.get('token')}});
           this.select = {
             email: res.data.data.email,
             id: res.data.data.user_id,
@@ -137,7 +137,7 @@
       },
       async authEditSend() {
         try {
-          await axios.post('/api/auth/update', {
+          await axios.post('https://api.wehobby.kr/1.0/api/auth/update', {
             email: this.select.email,
             pw: this.select.pw,
             pwc: this.select.pwc,
@@ -158,7 +158,7 @@
           if (confirm('정말로 계정을 삭제하겠습니까? 삭제된 계정 정보는 다시 복구할 수 없습니다.')) {
             confirm('계정이 삭제되었습니다.');
             try {
-              await axios.post('/api/auth/delete', {}, {
+              await axios.post('https://api.wehobby.kr/1.0/api/auth/delete', {}, {
                 headers: {
                   token: this.$cookies.get('token'),
                 }}

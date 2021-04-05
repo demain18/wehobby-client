@@ -15,7 +15,7 @@
         </div>
         <div class="content">
           같은 취미를 가진 사람들을 만나고<br />
-          함께 즐겨보세요.
+          함께 즐겨보세요
         </div>
       </div>
     </div>
@@ -154,7 +154,7 @@
       // city name read
       if (this.$cookies.isKey('city')==true) {
         try {
-          const res = await axios.get('/api/info/citys');
+          const res = await axios.get('https://api.wehobby.kr/1.0/api/info/citys');
           let cityList = res.data.data.citys;
           cityList.unshift({
             key: 0,
@@ -170,7 +170,7 @@
       // content list read 
       let cityKey = this.$cookies.get('city');
       try {
-        const latestGoodsRes = await axios.get('/api/content/read', {
+        const latestGoodsRes = await axios.get('https://api.wehobby.kr/1.0/api/content/read', {
           params: {
             city: cityKey,
             type: 'latestGoods',
@@ -178,7 +178,7 @@
         });
         this.content.latestGoods = latestGoodsRes.data.data;
 
-        const latestRes = await axios.get('/api/content/read', {
+        const latestRes = await axios.get('https://api.wehobby.kr/1.0/api/content/read', {
           params: {
             city: cityKey,
             type: 'latest',
@@ -190,7 +190,7 @@
           this.content.latest[index].desc = this.markupReplace(item.desc).substr(0, 30);
         });
 
-        const famousRes = await axios.get('/api/content/read', {
+        const famousRes = await axios.get('https://api.wehobby.kr/1.0/api/content/read', {
           params: {
             city: cityKey,
             type: 'famous',
@@ -206,7 +206,7 @@
 
       // category list read
       try {
-        const res = await axios.get('/api/info/category');
+        const res = await axios.get('https://api.wehobby.kr/1.0/api/info/category');
         this.category = res.data.data;
       }
       catch (err) { console.log(err.response.data.message); }
@@ -214,7 +214,7 @@
       // category count
       for (let i = 0; i < this.category.length; i++) {
         try {
-          const filterRes = await axios.get('/api/info/filter', {
+          const filterRes = await axios.get('https://api.wehobby.kr/1.0/api/info/filter', {
             params: {
               city: this.$cookies.get('city'),
               category: this.category[i].key
@@ -228,7 +228,7 @@
       // category count(city unselect)
       if (this.$cookies.get('city')==0 || this.$cookies.isKey('city')!=true) {
         try {
-          const countRes = await axios.get('/api/info/count');
+          const countRes = await axios.get('https://api.wehobby.kr/1.0/api/info/count');
           this.categoryCount = countRes.data.data;
         }
         catch (err) { console.log(err); }
@@ -236,7 +236,7 @@
 
       // notice list read
       try {
-        const res = await axios.get('/api/notice/list/read');
+        const res = await axios.get('https://api.wehobby.kr/1.0/api/notice/list/read');
         this.noticeList = res.data.data;
       }
       catch (err) { console.log(err.response.data.message); }
@@ -244,7 +244,7 @@
     watch: {
       'select.keywordCategory'(to, from) {
         if (this.select.keywordCategory==1) {
-          this.select.keywordPlaceholder = '함께하고 싶은 취미를 알려주세요';
+          this.select.keywordPlaceholder = '함께하고싶은 취미를 알려주세요';
         }
         else if (this.select.keywordCategory==2) {
           this.select.keywordPlaceholder = '사거나 팔고싶은 물건을 알려주세요';

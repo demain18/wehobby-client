@@ -56,7 +56,7 @@
     // async mounted() {
     //   try {
     //     const res = await axios.get(
-    //       '/api/info/category'
+    //       'https://api.wehobby.kr/1.0/api/info/category'
     //     );
     //     console.log(res.data.result); // reqest result
     //     console.log(res.data.data); // request data
@@ -71,7 +71,7 @@
             alert('개인정보 처리방침 및 이용약관에 동의해주세요.');
             return; // stop async method
           }
-          const res = await axios.post('/api/auth/register', {
+          const res = await axios.post('https://api.wehobby.kr/1.0/api/auth/register', {
             "email": this.form.email,
             "name": null,
             "nickname": this.form.nickname,
@@ -90,7 +90,7 @@
             this.$cookies.set('token', this.token, '30d');
           }
 
-          const profileRes = await axios.post('/api/profile/read', 
+          const profileRes = await axios.post('https://api.wehobby.kr/1.0/api/profile/read', 
           {}, 
           {
             headers: {

@@ -72,7 +72,7 @@
         } 
         else {
           try {
-            const res = await axios.post('/api/info/report', {
+            const res = await axios.post('https://api.wehobby.kr/1.0/api/info/report', {
               tableName: this.tableName,
               tableId: this.tableId,
               type: this.select.type,

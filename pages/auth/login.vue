@@ -42,7 +42,7 @@
             return;
           }
 
-          const res = await axios.post('/api/auth/login', {
+          const res = await axios.post('https://api.wehobby.kr/1.0/api/auth/login', {
             "id": this.form.id,
             "pw": this.form.pw
           });
@@ -55,7 +55,7 @@
             this.$cookies.set('token', this.token, '30d');
           }
 
-          const profileRes = await axios.post('/api/profile/read', 
+          const profileRes = await axios.post('https://api.wehobby.kr/1.0/api/profile/read', 
           {}, 
           {
             headers: {
