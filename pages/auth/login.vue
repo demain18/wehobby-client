@@ -7,7 +7,7 @@
 
       <div class="forms">
         <v-text-field v-model="form.id" v-on:keyup.enter="formSubmit()" placeholder="아이디" hide-details="" class="input-form" solo flat></v-text-field>
-        <v-text-field v-model="form.pw" v-on:keyup.enter="formSubmit()" placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field type="password" v-model="form.pw" v-on:keyup.enter="formSubmit()" placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
       </div>
 
       <v-btn v-on:click="formSubmit()" depressed rounded large class="login">
