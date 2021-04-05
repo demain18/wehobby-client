@@ -5,7 +5,7 @@
     <span v-if="city != null"  v-on:click="toggleCityDialog()" class="item lft span-a-tag">{{ city }}</span>
     <span v-if="city == null" v-on:click="toggleCityDialog()" class="item lft span-a-tag">도시 선택</span>
 
-    <v-menu open-on-hover middle offset-y>
+    <!-- <v-menu open-on-hover middle offset-y>
       <template v-slot:activator="{ on, attrs }">
         <v-btn depressed class="item lft" style="margin-top: 5px;" v-bind="attrs" v-on="on">
           바로가기
@@ -21,7 +21,7 @@
           </nuxt-link>
         </v-list-item>
       </v-list>
-    </v-menu>
+    </v-menu> -->
 
     <span class="item mid" v-if="path=='/'">
       <a @click="pageLink(1)">회원 모집</a>

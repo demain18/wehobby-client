@@ -2,7 +2,7 @@
   <div>
     <div class="back"></div>
     <div id="form">
-      <h1>동네친구</h1>
+      <h1>WeHobby</h1>
       <p class="sub">함께 즐기는 취미</p>
 
       <div class="forms">
@@ -27,8 +27,8 @@
     data: () => ({
       token: null,
       form: {
-        id: 'guest',
-        pw: 'guest',
+        id: null,
+        pw: null,
       }
     }),
     mounted() {

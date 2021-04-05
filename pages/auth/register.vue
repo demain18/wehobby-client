@@ -3,7 +3,7 @@
     <div class="back"></div>
 
     <div id="form">
-      <h1>동네친구</h1>
+      <h1>WeHobby</h1>
       <p class="sub">함께 즐기는 취미</p>
 
       <div class="forms">
@@ -44,11 +44,11 @@
   export default {
     data: () => ({
       form: {
-        nickname: 'clientGuest1',
-        id: 'guest',
-        pw: 'guest',
-        pwc: 'guest',
-        email: 'test@gmail.com',
+        nickname: null,
+        id: null,
+        pw: null,
+        pwc: null,
+        email: null,
         check: false
       },
       list: null
