@@ -7,7 +7,7 @@
       <div class="banner-img"></div>
       <div class="wrap">
         <div class="form">
-          <h1>WeHobby</h1>
+          <!-- <h1>WeHobby</h1> -->
           <div class="form-input">
             <v-select :items="category" item-text="name" item-value="key" v-model="select.keywordCategory" solo label="카테고리" class="filter"></v-select>
             <v-text-field v-model="keyword" v-on:keyup.enter="keywordSearch()" solo :label="select.keywordPlaceholder" append-icon="mdi-magnify"></v-text-field>
