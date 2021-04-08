@@ -1,7 +1,10 @@
 <template>
   <div class="pc" data-app>
     <DialogCity/>
-    <nuxt-link class="item lft logo" to="/">WeHobby</nuxt-link>
+    <!-- <nuxt-link class="item lft logo" to="/">WeHobby</nuxt-link> -->
+    <nuxt-link class="item lft logo" to="/">
+      <img src="~assets/img/logo-img.png" style="width:100px; position:relative; top:4px;">
+    </nuxt-link>
     <span v-if="city != null"  v-on:click="toggleCityDialog()" class="item lft span-a-tag">{{ city }}</span>
     <span v-if="city == null" v-on:click="toggleCityDialog()" class="item lft span-a-tag">도시 선택</span>
 
@@ -135,7 +138,7 @@
       // city list read
       if (this.$cookies.get('city') != null) {
         try {
-          const res = await axios.get('https://api.wehobby.kr/1.0/api/info/citys');
+          const res = await axios.get('/api/info/citys');
           this.cityItems = res.data.data.citys;
           this.cityItems.unshift({
             key: 0,
@@ -143,7 +146,7 @@
           });
           this.city = this.cityItems.find(obj => obj.key == this.$cookies.get('city')).name;
         }
-        catch (err) { console.log(err.response.data.message); }
+        catch (err) { console.log(err); }
       }
 
       // route list read

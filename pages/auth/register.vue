@@ -24,12 +24,12 @@
       <v-btn v-on:click="formSubmit" depressed rounded large class="submit" dark>
         계정 생성
       </v-btn>
-      <v-btn depressed rounded large class="social social-facebook">
+      <!-- <v-btn depressed rounded large class="social social-facebook">
         <v-icon class="icon-social">
           mdi-facebook
         </v-icon>
         페이스북으로 계속하기
-      </v-btn>
+      </v-btn> -->
     </div>
 
   </div>
@@ -38,6 +38,7 @@
 <script>
   import Vue from 'vue';
   import axios from 'axios';
+  import qs from 'qs';
   import Vuecookies from 'vue-cookies';
   Vue.use(Vuecookies);
 
@@ -53,17 +54,14 @@
       },
       list: null
     }),
-    // async mounted() {
-    //   try {
-    //     const res = await axios.get(
-    //       'https://api.wehobby.kr/1.0/api/info/category'
-    //     );
-    //     console.log(res.data.result); // reqest result
-    //     console.log(res.data.data); // request data
-    //     this.list = res.data.data;
-    //   }
-    //   catch (err) { console.log(err.response.data.message); }
-    // },
+    async mounted() {
+      // let name = {
+      //   name: 'dylan'
+      // }
+      // console.log(name);
+      // qs.stringify(name);
+      // console.log(name);
+    },
     methods: {
       async formSubmit() {
         try {
@@ -71,7 +69,8 @@
             alert('개인정보 처리방침 및 이용약관에 동의해주세요.');
             return; // stop async method
           }
-          const res = await axios.post('https://api.wehobby.kr/1.0/api/auth/register', {
+
+          const res = await axios.post('/api/auth/register', {
             "email": this.form.email,
             "name": null,
             "nickname": this.form.nickname,
@@ -79,8 +78,7 @@
             "pw": this.form.pw,
             "pwc": this.form.pwc,
             "oauth": null
-          }
-          );
+          });
 
           this.token = res.data.data.token; // generated token
           if (this.$cookies.isKey('token')) {
@@ -90,7 +88,7 @@
             this.$cookies.set('token', this.token, '30d');
           }
 
-          const profileRes = await axios.post('https://api.wehobby.kr/1.0/api/profile/read', 
+          const profileRes = await axios.post('/api/profile/read', 
           {}, 
           {
             headers: {

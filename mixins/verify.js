@@ -11,7 +11,7 @@ export default {
     async isVerify() {
       if (this.$cookies.isKey('token')) {
         try {
-          const res = await axios.post('https://api.wehobby.kr/1.0/api/auth/verify',{},{
+          const res = await axios.post('/api/auth/verify', {}, {
             headers: {
               token: this.$cookies.get('token'),
             }
@@ -31,7 +31,7 @@ export default {
     },
     async logout() {
       try {
-        await axios.post('https://api.wehobby.kr/1.0/api/auth/logout', {}, {
+        await axios.post('/api/auth/logout', {}, {
           headers: {
             token: this.$cookies.get('token')
           }}

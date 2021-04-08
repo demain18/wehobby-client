@@ -54,7 +54,7 @@
     async mounted() {
       // citys read
       try {
-        const res = await axios.get('https://api.wehobby.kr/1.0/api/info/citys');
+        const res = await axios.get('/api/info/citys');
         this.items = res.data.data.citys;
         this.items.unshift({
           key: 0,

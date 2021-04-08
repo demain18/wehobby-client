@@ -33,8 +33,9 @@ export default {
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
-    '@nuxtjs/vuetify',
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
+    '@nuxtjs/vuetify',
     'moment',
     'vue-social-sharing/nuxt'
   ],
@@ -51,24 +52,20 @@ export default {
   build: {
   },
 
-  // Axios Custom
-  // axios: {
-  //   baseURL: 'http://112.150.218.99:8888/1.0/api',
-  //   proxyHeaders: false,
-  //   credentials: false
-  // },
-
   axios: {
-    // proxy: true,
-    // https: true,
+    proxy: true,
     // baseURL: 'https://api.wehobby.kr/1.0'
   },
 
-  // proxy: {
-  //   '/api/': {
-  //     target: 'https://api.wehobby.kr/1.0',
-  //   },
-  // },
+  proxy: {
+    '/api/': {
+      target: 'https://api.wehobby.kr/1.0',
+    },
+    // '/api/': {
+    //   target: 'http//localhost:8888',
+    // },
+    // '/api': 'https://api.wehobby.kr/1.0'
+  },
 
   // Vuetify theme color custom
   vuetify: {

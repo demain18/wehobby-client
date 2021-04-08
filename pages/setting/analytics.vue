@@ -64,7 +64,7 @@
     async mounted() {
       try {
         for (let x=1; x<100; x++) {
-          const res = await axios.get('https://api.wehobby.kr/1.0/api/board/read', {
+          const res = await axios.get('/api/board/read', {
             params: {
               page: x,
               uploader: (this.$cookies.get('user')).key
@@ -74,7 +74,7 @@
           if (res.data.data.postItems.length > 0) {
             for (let i=0; i<res.data.data.postItems.length; i++) {
 
-              const postRes = await axios.get('https://api.wehobby.kr/1.0/api/post/read', {
+              const postRes = await axios.get('/api/post/read', {
                 params: {
                   id: res.data.data.postItems[i].key
                 }

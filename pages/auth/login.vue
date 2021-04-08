@@ -21,6 +21,7 @@
   import Vue from 'vue';
   import axios from 'axios';
   import Vuecookies from 'vue-cookies';
+  import qs from 'qs';
   Vue.use(Vuecookies);
 
   export default {
@@ -32,7 +33,7 @@
       }
     }),
     mounted() {
-      // console.log('Token: '+this.$cookies.get('Token'));
+      // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
     },
     methods: {
       async formSubmit() {
@@ -42,7 +43,8 @@
             return;
           }
 
-          const res = await axios.post('https://api.wehobby.kr/1.0/api/auth/login', {
+          const res = await axios.post('/api/auth/login', 
+          {
             "id": this.form.id,
             "pw": this.form.pw
           });
@@ -55,8 +57,8 @@
             this.$cookies.set('token', this.token, '30d');
           }
 
-          const profileRes = await axios.post('https://api.wehobby.kr/1.0/api/profile/read', 
-          {}, 
+          const profileRes = await axios.post('/api/profile/read', 
+          {},
           {
             headers: {
               token: this.$cookies.get('token'),
@@ -75,7 +77,8 @@
           }
           window.location.href = "/";
         } catch (err) {
-          alert(err.response.data.message); // can not find data나오면 err만 출력
+          console.log(err)
+          // alert(err.response.data.message);
         }
 
       }

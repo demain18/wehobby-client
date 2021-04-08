@@ -97,6 +97,7 @@
 <script>
   import Vue from 'vue';
   import axios from 'axios';
+  import qs from 'qs';
   import Vuecookies from 'vue-cookies';
   // import moment from 'moment';
   import articleMixin from '~/mixins/global.js';
@@ -140,7 +141,7 @@
         this.cityName = '전국';
       } else {
         try {
-          const citysRes = await axios.get('https://api.wehobby.kr/1.0/api/info/citys');
+          const citysRes = await axios.get('/api/info/citys');
           this.cityName = citysRes.data.data.citys.find(ele => ele.key == this.cityKey).name;
         }
         catch (err) { console.log(err); }
@@ -173,7 +174,7 @@
     methods: {
       async breadCrumbUpdate() {
         try {
-          const res = await axios.get('https://api.wehobby.kr/1.0/api/info/category');
+          const res = await axios.get('/api/info/category');
           this.categoryName = res.data.data.find(ele => ele.key == this.param.category).name;
 
           this.$store.commit('urls/setList', {
@@ -187,7 +188,7 @@
       },
       async filterRead() {
         try {
-          const filterRes = await axios.get('https://api.wehobby.kr/1.0/api/info/filter', {
+          const filterRes = await axios.get('/api/info/filter', {
             params: {
               city: this.cityKey,
               category: this.param.category
@@ -199,7 +200,7 @@
       },
       async postListRead() {
         try {
-          const postListRes = await axios.get('https://api.wehobby.kr/1.0/api/board/read', {
+          const postListRes = await axios.get('/api/board/read', {
             params: {
               category: this.param.category, // static
               city: this.cityKey, // static
@@ -209,7 +210,7 @@
               keyword: this.param.keyword,
               page: this.param.page
             }
-          });
+          }); console.log('postListRead CORS');
           this.keywordCount = postListRes.data.data.count;
           this.postItems = postListRes.data.data.postItems;
 

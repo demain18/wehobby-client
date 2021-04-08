@@ -67,7 +67,7 @@
       // page last read
       // this.lastPageRead();
       // try {
-      //   const filterRes = await axios.get('/api/board/read', {
+      //   const filterRes = await axios.get('https://api.wehobby.kr/api/board/read', {
       //     params: {
       //       category: this.param.category,
       //       city: this.$cookies.get('city'),

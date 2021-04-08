@@ -11,7 +11,7 @@ $ npm run dev
 
 # build for production and launch server
 $ npm run build
-$ npm run start
+$ npm run start - 이걸로 build된 프로젝트 실행
 
 # generate static project
 $ npm run generate

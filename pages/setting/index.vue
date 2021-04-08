@@ -90,6 +90,7 @@
   import Vue from 'vue';
   import axios from 'axios';
   import Vuecookies from 'vue-cookies';
+  import qs from 'qs'
   Vue.use(Vuecookies);
 
   export default {
