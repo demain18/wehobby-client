@@ -30,7 +30,9 @@
         <div class="list">
 
           <div class="item" v-for="(item, index) in content.latestGoods" v-bind:key="index">
-            <img src="~assets/img/placeholder1.jpg" class="img">
+            <nuxt-link :to="'/post/'+item.key">
+              <img src="~assets/img/placeholder1.jpg" class="img">
+            </nuxt-link>
             <p>{{ item.title }} · <span v-text="agoCalc(item.date, item.time)"></span></p>
           </div>
 

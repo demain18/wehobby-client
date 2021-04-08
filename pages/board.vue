@@ -210,7 +210,7 @@
               keyword: this.param.keyword,
               page: this.param.page
             }
-          }); console.log('postListRead CORS');
+          });
           this.keywordCount = postListRes.data.data.count;
           this.postItems = postListRes.data.data.postItems;
 
