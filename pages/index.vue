@@ -86,7 +86,7 @@
               <img src="~assets/img/placeholder1.jpg" class="img">
               <div class="content">
                 <nuxt-link :to="'/post/'+item.key" class="title">{{ item.title }}</nuxt-link>
-                <p class="txt">{{ item.desc }}</p>
+                <p class="txt" v-text="markupReplace(item.desc)"></p>
               </div>
             </div>
 

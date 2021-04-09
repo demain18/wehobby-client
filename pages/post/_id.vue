@@ -225,8 +225,8 @@
           this.uploader = this.data.header.uploader;
           this.postUploaderKey = postRes.data.data.header.uploader.key;
 
-          // contacts remap
-          let contactsArr = postRes.data.data.header.contacts; console.log(postRes.data.data.header)
+          // contact isable check
+          let contactsArr = postRes.data.data.header.contacts;
           if (contactsArr.length==0 || contactsArr==false || (postRes.data.data.header.contacts[0].desc==null && postRes.data.data.header.contacts[1].desc==null)) {
             this.contactsIsEmpty = true;
           } 

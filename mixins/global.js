@@ -49,31 +49,35 @@ export default {
       return gap.format("DD일/HH시간/mm분");
     },
     markupReplace(content) {
-      let desc = String(content);
-      let list = [
-        '<p>',
-        '</p>',
-        '<strong>',
-        '</strong>',
-        '<i>',
-        '</i>',
-        '<stricke>',
-        '</strike>',
-        '<li>',
-        '</li>',
-        '<ul>',
-        '</ul>',
-        '<ol>',
-        '</ol>',
-        '<em>',
-        '</em>',
-        '<u>',
-        '</u>'
-      ]
-      for (let i = 0; i < list.length; i++) {
-        desc = desc.split(list[i]).join('');
+      if (content==false) {
+        return null;
+      } else {
+        let desc = String(content);
+        let list = [
+          '<p>',
+          '</p>',
+          '<strong>',
+          '</strong>',
+          '<i>',
+          '</i>',
+          '<stricke>',
+          '</strike>',
+          '<li>',
+          '</li>',
+          '<ul>',
+          '</ul>',
+          '<ol>',
+          '</ol>',
+          '<em>',
+          '</em>',
+          '<u>',
+          '</u>'
+        ]
+        for (let i = 0; i < list.length; i++) {
+          desc = desc.split(list[i]).join('');
+        }
+        return desc;
       }
-      return desc;
     },
     thousandComma(content) {
       return content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
