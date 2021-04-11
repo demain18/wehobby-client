@@ -356,7 +356,7 @@
       },
       async commentSend() {
         if (this.$cookies.isKey('user') != true || this.userKey == null) {
-          alert('댓글 작성 기능은 로그인 후 사용 가능합니다.');
+          alert('댓글 작성 기능은 로그인 후 이용할 수 있습니다.');
           return;
         }
 
@@ -432,7 +432,7 @@
       },
       toggleDialogReport(contentName, contentId) {
         if (this.$cookies.isKey('user') != true && this.userKey == null) {
-          alert('신고하기 기능은 로그인 후 사용 가능합니다.');
+          alert('신고하기 기능은 로그인 후 이용할 수 있습니다.');
           return;
         }
 
@@ -444,7 +444,7 @@
       },
       toggleDialogContact() {
         if (this.$cookies.isKey('user') != true || this.userKey == null) {
-          alert('작성자에게 연락하기 기능은 로그인 후 사용 가능합니다.');
+          alert('작성자에게 연락하기 기능은 로그인 후 이용할 수 있습니다.');
           return;
         }
 
@@ -461,15 +461,22 @@
           return content;
         }
       },
-      // thousandComma(content) {
-      //   return content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      // },
       standardTerm(content, index) {
         if (index==1) {
-          return content+'일/월';
-        } else if(index==2) {
-          return content+'시간/일';
-        } else {
+          if (content=='') {
+            return '-';
+          } else {
+            return content+'일/월';
+          }
+        } 
+        else if(index==2) {
+          if (content=='') {
+            return '-';
+          } else {
+            return content+'시간/일';
+          }
+        } 
+        else {
           return content;
         }
       },

@@ -50,7 +50,7 @@ export default {
     },
     markupReplace(content) {
       if (content==false) {
-        return null;
+        return '';
       } else {
         let desc = String(content);
         let list = [
