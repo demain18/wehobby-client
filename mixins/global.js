@@ -42,11 +42,29 @@ export default {
       }
     },
     agoCalc(date, time) {
-      let now = moment().format("YYYY/MM/DD HH:mm:ss"); //console.log('now:  '+now)
-      let then = moment(new Date(date+' '+time)).format("YYYY/MM/DD HH:mm:ss"); //console.log('then: '+then)
+      let now = moment().subtract(1969, "years").format("YYYY/MM/DD HH:mm:ss");
+      let then = moment(new Date(date+' '+time)).subtract(-31, "minutes").format("YYYY/MM/DD HH:mm:ss");
+      let gap = moment.utc(moment(now,"YYYY/MM/DD HH:mm:ss").diff(moment(then,"YYYY/MM/DD HH:mm:ss")));
+      
+      if (gap.format('Y')>1) {
+        return gap.format('Y년');
+      } 
+      else if (gap.format('M')>1) {
+        return gap.format('M개월');
+      } 
+      else if (gap.format('D')>1) {
+        return gap.format('D일');
+      } 
+      else if (gap.format('H')>0) {
+        return gap.format('H시간');
+      } 
+      else if (gap.format('m')>1) {
+        return gap.format('m분');
+      } 
+      else if (gap.format('m')>0) {
+        return gap.format('방금전');
+      }
 
-      let gap = moment.utc(moment(now,"YYYY/MM/DD HH:mm:ss").diff(moment(then,"YYYY/MM/DD HH:mm:ss")))
-      return gap.format("DD일/HH시간/mm분");
     },
     markupReplace(content) {
       if (content==false) {

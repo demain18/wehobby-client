@@ -175,7 +175,7 @@
         }
       },
       ageCalc() {
-        if (this.data.age == null) {
+        if (this.data.age=='') {
           return '-';
         } else {
           return moment().format('yyyy')-this.data.age+'살';
