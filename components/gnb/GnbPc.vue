@@ -41,6 +41,8 @@
       <a @click="pageLink(5)" v-bind:class="{active: list.category.key==5}">이벤트</a>
     </span>
 
+    <v-btn data-width="150" data-onsuccess="onSignIn" id="google-signin-btn" style="display:none;"></v-btn>
+    
     <v-menu v-if="token.verify == true" left offset-y>
       <template v-slot:activator="{ on, attrs }">
         <v-avatar class="item rgt user-icon" v-bind="attrs" v-on="on">
@@ -153,6 +155,11 @@
         catch (err) { console.log(err); }
       }
 
+      // oauth load
+      gapi.signin2.render("google-signin-btn", {
+        onsuccess: this.onSignIn
+      });
+
       // route list read
       this.$router.options.routes.forEach(route => {
         this.routeItems.push({
@@ -167,6 +174,9 @@
       },
       pageLink(route) {
         this.$router.push("/board?category="+route);
+      },
+      onSignIn(googleUser) {
+        // console.log(googleUser.Rs);
       },
     }
   }

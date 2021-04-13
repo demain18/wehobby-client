@@ -19,12 +19,12 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="select.pw" type="password" label="비밀번호 변경 확인"></v-text-field>
+            <v-text-field v-model="select.pw" type="password" :disabled="select.social==true" label="비밀번호 변경 확인"></v-text-field>
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="select.pwc" type="password" label="비밀번호 변경 재확인"></v-text-field>
+            <v-text-field v-model="select.pwc" type="password" :disabled="select.social==true" label="비밀번호 변경 재확인"></v-text-field>
           </v-col>
         </v-row>
         <v-row>
@@ -37,9 +37,14 @@
           <v-col class="form">
             <p class="label">연동된 소셜 앱</p>
             <div class="content">
-              <v-avatar size="36" class="avator-facebook">
-                <v-icon dark>mdi-facebook</v-icon>
-              </v-avatar>
+              
+              <div class="avator-facebook" v-if="select.social==true">
+                <img src="~assets/img/static/logo-google.png" width="100%">
+              </div>
+              <div v-else style="color:#8d8d8d; font-size:14px;">
+                연동된 소셜앱이 없습니다
+              </div>
+
             </div>
           </v-col>
         </v-row>
@@ -127,12 +132,22 @@
           this.select = {
             email: res.data.data.email,
             id: res.data.data.user_id,
+            pw: null,
+            pwc: null,
+            lang: null,
             lang: res.data.data.lang_set,
+            social: null,
             alert: {
               mail: res.data.data.mail_notify_set,
               channel: res.data.data.kakao_notify_set
             }
           }
+          // console.log(res.data.data.social)
+          if (res.data.data.social=='google') {
+            console.log('isgoogle')
+            this.select.social = true;
+          }
+          // this.select.social = res.data.data.oauth;
         }
         catch (err) { console.log(err); }
       },

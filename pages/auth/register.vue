@@ -21,9 +21,14 @@
         </p>
       </div>
 
-      <v-btn v-on:click="formSubmit" depressed rounded large class="submit" dark>
+      <v-btn v-on:click="registerSend()" depressed rounded large class="submit" dark>
         계정 생성
       </v-btn>
+      <v-btn depressed rounded large class="social-google" data-width="150" data-onsuccess="onSignIn" id="google-signin-btn">
+      </v-btn>
+      <!-- <v-btn depressed rounded large class="social-google" @click="googleSignOut()">
+        Google 로그아웃
+      </v-btn> -->
       <!-- <v-btn depressed rounded large class="social social-facebook">
         <v-icon class="icon-social">
           mdi-facebook
@@ -39,10 +44,12 @@
   import Vue from 'vue';
   import axios from 'axios';
   import qs from 'qs';
+  import verifyMixin from '~/mixins/verify.js';
   import Vuecookies from 'vue-cookies';
   Vue.use(Vuecookies);
 
   export default {
+    mixins: [verifyMixin],
     data: () => ({
       form: {
         nickname: null,
@@ -50,20 +57,18 @@
         pw: null,
         pwc: null,
         email: null,
-        check: false
+        check: false,
+        // oauth field
+        name: null,
+        oauth: null,
       },
       list: null
     }),
     async mounted() {
-      // let name = {
-      //   name: 'dylan'
-      // }
-      // console.log(name);
-      // qs.stringify(name);
-      // console.log(name);
+
     },
     methods: {
-      async formSubmit() {
+      async registerSend() {
         try {
           if (this.form.check != true) {
             alert('개인정보 처리방침 및 이용약관에 동의해주세요.');
@@ -71,16 +76,17 @@
           }
 
           const res = await axios.post('/api/auth/register', {
-            "email": this.form.email,
-            "name": null,
-            "nickname": this.form.nickname,
-            "id": this.form.id,
-            "pw": this.form.pw,
-            "pwc": this.form.pwc,
-            "oauth": null
+            email: this.form.email,
+            nickname: this.form.nickname,
+            id: this.form.id,
+            pw: this.form.pw,
+            pwc: this.form.pwc,
+            name: this.form.name,
+            oauth: this.form.oauth
           });
 
-          this.token = res.data.data.token; // generated token
+          // token gen
+          this.token = res.data.data.token;
           if (this.$cookies.isKey('token')) {
             this.$cookies.remove('token');
             this.$cookies.set('token', this.token, '30d');
@@ -100,6 +106,8 @@
             nickname: profileRes.data.data.nickname,
             image: profileRes.data.data.imgRepre,
           }
+
+          // userData gen
           if (this.$cookies.isKey('user')) {
             this.$cookies.remove('user');
             this.$cookies.set('user', userData, '30d');
@@ -107,12 +115,27 @@
             this.$cookies.set('user', userData, '30d');
           }
 
-          window.location.href = "/";
+          // window.location.href = "/";
         }
         catch (err) {
           alert(err.response.data.message);
         }
-      }
+      },
+      onSignIn(googleUser) {
+        // console.log(googleUser.Rs);
+        let userData = googleUser.Rs;
+        this.form = {
+          nickname: userData.Se,
+          id: userData.RR,
+          pw: userData.RR,
+          pwc: userData.RR,
+          email: userData.At,
+          name: userData.Se,
+          oauth: 'google',
+          check: true,
+        }
+        this.registerSend();
+      },
     }
   }
 

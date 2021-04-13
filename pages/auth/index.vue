@@ -12,20 +12,10 @@
         </v-btn>
       </nuxt-link>
       <nuxt-link to="/auth/login">
-        <v-btn depressed rounded large class="login">
+        <v-btn depressed rounded large class="login" >
           로그인
         </v-btn>
       </nuxt-link>
-      <v-btn depressed rounded large class="social social-google">
-        <img src="~/assets/img/static/logo-google.png" class="logo-google">
-        구글로 시작하기
-      </v-btn>
-      <v-btn depressed rounded large class="social social-facebook">
-        <v-icon class="icon-social">
-          mdi-facebook
-        </v-icon>
-        페이스북으로 시작하기
-      </v-btn>
     </div>
 
   </div>
@@ -33,8 +23,8 @@
 
 <script>
   export default {}
-
 </script>
+
 
 <style scoped lang="scss">
   @import '~assets/css/auth.css';

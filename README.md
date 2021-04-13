@@ -19,5 +19,11 @@ $ npm run generate
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
-## Axios 사용법
-register.vue에 에제 작성해놨으니 그거 보고 개발하면 됨
+# Control
+
+## Google Console
+없음
+
+## Google Adsense(happysugar180@gmail.com)
+<script data-ad-client="ca-pub-7099403550820594" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+: Code
