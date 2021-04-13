@@ -102,7 +102,7 @@
           <div class="content">
             <ul>
               <li v-for="(noticeItem, index) in noticeList" v-bind:key="index">
-                <nuxt-link :to="'/notice/'+noticeItem.id">{{ noticeItem.title }}</nuxt-link>
+                <nuxt-link :to="'/notice/'+noticeItem.uniqueId">{{ noticeItem.title }}</nuxt-link>
               </li>
               <!-- <li>
                 <nuxt-link to="">이 글은 공지사항입니다.</nuxt-link>

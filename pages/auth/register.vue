@@ -16,8 +16,8 @@
       <div class="form-agree">
         <v-checkbox v-model="form.check"></v-checkbox>
         <p>
-          <nuxt-link to="/notice/1" target="_blank" class="highlight">개인정보 처리방침</nuxt-link> 및
-          <nuxt-link to="/notice/2" target="_blank" class="highlight">이용약관</nuxt-link>를 숙지했으며 이에 동의합니다
+          <nuxt-link to="/notice/personal-information-policy" target="_blank" class="highlight">개인정보 처리방침</nuxt-link> 및
+          <nuxt-link to="/notice/term-and-conditions" target="_blank" class="highlight">이용약관</nuxt-link>를 숙지했으며 이에 동의합니다
         </p>
       </div>
 

@@ -44,7 +44,7 @@
       try {
         const res = await axios.get('/api/notice/read', {
           params: {
-            id: this.param
+            uniqueId: this.param
           }
         });
         this.content = res.data.data;
