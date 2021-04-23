@@ -28,15 +28,15 @@
         <v-row>
           <v-col class="form">
             <p class="label">본인 인증</p>
-            <v-btn depressed v-if="select.userVerify == false" @click="toggleDialogContact()">
+            <v-btn depressed disabled v-if="select.userVerify == false" @click="toggleDialogContact()">
               전화번호로 인증
             </v-btn>
-            <v-chip v-else class="icon-vertify" color="blue lighten-5" text-color="blue lighten-1">
+            <!-- <v-chip v-else class="icon-vertify" color="blue lighten-5" text-color="blue lighten-1">
               <v-avatar left>
                 <v-icon>mdi-checkbox-marked-circle</v-icon>
               </v-avatar>
               인증됨
-            </v-chip>
+            </v-chip> -->
           </v-col>
         </v-row>
 

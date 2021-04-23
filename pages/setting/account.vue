@@ -54,8 +54,8 @@
             <p class="label">알림 설정</p>
             <div class="content" style="margin-top: 10px;">
               <v-container fluid class="switch">
-                <v-switch v-model="select.alert.mail" inset :label="'이메일로 알림을 받기'" class="switch-btn"></v-switch>
-                <v-switch v-model="select.alert.channel" inset :label="'카카오톡 채널로 알림을 받기'" class="switch-btn"></v-switch>
+                <v-switch inset disabled v-model="select.alert.mail" :label="'이메일로 알림을 받기'" class="switch-btn"></v-switch>
+                <v-switch inset disabled v-model="select.alert.channel" :label="'카카오톡 채널로 알림을 받기'" class="switch-btn"></v-switch>
               </v-container>
             </div>
           </v-col>

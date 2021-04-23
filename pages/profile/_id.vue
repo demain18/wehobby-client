@@ -31,7 +31,7 @@
               <span v-else v-text="nullCheck(data.sex)"></span>
             </div>
           </div>
-          <div class="table">
+          <!-- <div class="table">
             <div class="header">본인인증</div>
             <div class="content">
               <v-chip v-if="data.verify" class="icon-vertify" color="blue lighten-5" text-color="blue lighten-1">
@@ -42,7 +42,7 @@
               </v-chip>
               <span v-else>미 인증</span>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="posts-wrap">
@@ -178,7 +178,8 @@
         if (this.data.age=='') {
           return '-';
         } else {
-          return moment().format('yyyy')-this.data.age+'살';
+          let age = moment().format('yyyy')-this.data.age;
+          return (age+1)+'살';
         }
       },
       // // board list module
