@@ -11,7 +11,7 @@
         <v-text-field type="password" v-model="form.pw" v-on:keyup.enter="loginSend()" placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
       </div>
 
-      <v-btn v-on:click="loginSend()" depressed rounded large class="login">
+      <v-btn v-on:click="loginSend()" depressed rounded large :loading="sendLoading" class="login">
         로그인
       </v-btn>
       <v-btn depressed rounded large class="social-google" data-width="150" data-onsuccess="onSignIn" id="google-signin-btn">
@@ -35,7 +35,8 @@
       form: {
         id: null,
         pw: null,
-      }
+      },
+      sendLoading: false
     }),
     mounted() {
       // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
@@ -47,6 +48,7 @@
             alert('아이디와 비밀번호를 모두 입력해주세요.');
             return;
           }
+          this.sendLoading = true;
 
           const res = await axios.post('/api/auth/login', 
           {
@@ -83,6 +85,7 @@
           window.location.href = "/";
         } catch (err) {
           // console.log(err)
+          this.sendLoading = false;
           alert(err.response.data.message);
         }
       },

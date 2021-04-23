@@ -21,7 +21,7 @@
         </p>
       </div>
 
-      <v-btn v-on:click="registerSend()" depressed rounded large class="submit" dark>
+      <v-btn v-on:click="registerSend()" depressed rounded large dark :loading="sendLoading" class="submit">
         계정 생성
       </v-btn>
       <v-btn depressed rounded large class="social-google" data-width="150" data-onsuccess="onSignIn" id="google-signin-btn">
@@ -62,7 +62,8 @@
         name: null,
         oauth: null,
       },
-      list: null
+      list: null,
+      sendLoading: false
     }),
     async mounted() {
 
@@ -74,6 +75,7 @@
             alert('개인정보 처리방침 및 이용약관에 동의해주세요.');
             return; // stop async method
           }
+          this.sendLoading = true;
 
           const res = await axios.post('/api/auth/register', {
             email: this.form.email,
@@ -114,11 +116,11 @@
           } else {
             this.$cookies.set('user', userData, '30d');
           }
-
-          // window.location.href = "/";
+          window.location.href = "/";
         }
         catch (err) {
-          alert(err.response.data.message);
+          this.sendLoading = false;
+          alert(err);
         }
       },
       onSignIn(googleUser) {
