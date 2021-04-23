@@ -1,7 +1,7 @@
 <template>
   <div>
     <Gnb />
-    <!-- <DialogSlide/> -->
+    <DialogSlide/>
     <DialogShare/>
     <DialogReport/>
     <DialogContact/>
@@ -12,13 +12,17 @@
         <h1 class="title">
           {{ data.content.title }}
         </h1>
-        <div class="images">
-          <div class="img-wrap">
-            <img src="~assets/img/placeholder1.jpg">
+
+        <div class="img-grid">
+          <div class="img-wrap" style="height: 0px;" v-if="data.images.length==0">
+            <!-- <img src="~assets/img/placeholder1.jpg"> -->
+          </div>
+          <div class="img-wrap" v-for="(item, index) in data.images" :key="index" @click="toggleDialogSlide(index)" v-else>
+            <img :src="item">
           </div>
         </div>
-        <div class="content" v-html="data.content.desc">
-          <!-- {{ data.content.desc }} -->
+
+        <div class="content" v-html="data.content.desc" :class="{ contentMargin: data.images.length!=0}">
         </div>
 
         <div class="comment-wrap">
@@ -77,7 +81,7 @@
               <v-icon small class="icon">mdi-delete</v-icon>삭제하기
             </a>
             <span v-if="contactsIsEmpty == true"></span>
-              <a v-else-if="data.header.contacts == false" @click="recruitQuit()" class="btn">
+              <a v-else-if="data.header.recruitable == false" @click="recruitQuit()" class="btn">
                 <v-icon small class="icon">mdi-reload</v-icon>모집 재개하기
               </a>
               <a v-else @click="recruitQuit()" class="btn">
@@ -90,11 +94,8 @@
 
       <div class="profile-wrap">
         <p class="info">
-          <!-- 2020년 9월 7일 14:35 -->
           {{ data.header.date }}
           {{ data.header.time }}
-          <!-- <span v-if="data.header" v-text="data.header.date"></span>
-          <span v-if="data.header" v-text="data.header.time"></span> -->
         </p>
         <p class="info" v-if="data.header">조회수 : {{ data.header.view }}</p>
         <div class="table">
@@ -127,7 +128,7 @@
         <v-btn v-if="contactsIsEmpty == true" disabled>
           게시물 작성자가 아직 연락처를<br/> 추가하지 않았습니다
         </v-btn>
-        <v-btn v-else-if="data.header.contacts == false" disabled>
+        <v-btn v-else-if="data.header.recruitable == false" disabled>
           모집 종료된 게시물입니다
         </v-btn>
         <v-btn v-else depressed class="btn-main-color" @click="toggleDialogContact()">
@@ -227,7 +228,13 @@
 
           // contact isable check
           let contactsArr = postRes.data.data.header.contacts;
-          if (contactsArr.length==0 || contactsArr==false || (postRes.data.data.header.contacts[0].desc==null && postRes.data.data.header.contacts[1].desc==null)) {
+          if (
+            contactsArr.length==0 || // 등록된 contact이 없거나
+            // contactsArr==false || // recruitable이 false거나
+            (postRes.data.data.header.contacts[0].desc==null 
+            && postRes.data.data.header.contacts[1].desc==null)
+          )
+          {
             this.contactsIsEmpty = true;
           } 
           else {
@@ -303,6 +310,7 @@
       },
       async postViewCount() {
         try {
+          // read ip now
           const ipRes = await axios.get('https://api.ipify.org?format=json');
           let token = null;
           if (this.$cookies.isKey('token')) {
@@ -330,10 +338,10 @@
             id: this.param
           },
           {headers: {token: this.$cookies.get('token')}});
-          if (this.data.header.contacts == false) {
-            this.data.header.contacts = true;
+          if (this.data.header.recruitable == false) {
+            this.data.header.recruitable = true;
           } else {
-            this.data.header.contacts = false;
+            this.data.header.recruitable = false;
           }
         }
         catch (err) { console.log(err); }
@@ -372,7 +380,7 @@
             {headers: {token: this.$cookies.get('token')}});
             this.postRead();
             this.select.comment.desc = null;
-            console.log('comment commit')
+            // console.log('comment commit');
           }
           catch (err) { console.log(err); }
         }
@@ -429,6 +437,11 @@
       },
       toggleDialog(dialogName) {
         this.$store.commit('dialog/toggle'+dialogName+'DialogActive');
+      },
+      toggleDialogSlide(index) {
+        this.$store.commit('dialog/setDataSlideList', this.data.images);
+        this.$store.commit('dialog/setDataSlideIndex', index);
+        this.$store.commit('dialog/toggleSlideDialogActive');
       },
       toggleDialogReport(contentName, contentId) {
         if (this.$cookies.isKey('user') != true && this.userKey == null) {

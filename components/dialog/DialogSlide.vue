@@ -1,36 +1,36 @@
 <template>
   <div class="text-center">
-    <v-dialog v-model="dialog" width="800">
-      <!-- <v-card> -->
-        <!-- <template> -->
-          <v-carousel height="600">
-            <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src"></v-carousel-item>
-          </v-carousel>
-        <!-- </template> -->
-      <!-- </v-card> -->
+    <v-dialog v-model="dialog" @click:outside="toggleDialog()" width="800">
+
+      <v-carousel v-model="index" height="600">
+        <v-carousel-item v-for="(item, index) in slide" :key="index" :src="item"></v-carousel-item>
+      </v-carousel>
+
     </v-dialog>
   </div>
 </template>
 
 <script>
   export default {
+    computed: {
+      dialog() {
+        return this.$store.state.dialog.slideDialogActive;
+      },
+      slide() {
+        return this.$store.state.dialog.data.slide.list;
+      },
+      index() {
+        return this.$store.state.dialog.data.slide.index;
+      },
+    },
     data: () => ({
-      dialog: true,
-      items: [
-        {
-          src: 'https://sparklejunserver.web.app/upload/hosting/dummy/1.jpg',
-        },
-        {
-          src: 'https://sparklejunserver.web.app/upload/hosting/dummy/2.jpg',
-        },
-        {
-          src: 'https://sparklejunserver.web.app/upload/hosting/dummy/3.jpg',
-        },
-        {
-          src: 'https://sparklejunserver.web.app/upload/hosting/dummy/4.jpg',
-        },
-      ]
+      // dialog: false,
     }),
+    methods: {
+      toggleDialog() {
+        this.$store.commit('dialog/toggleSlideDialogActive');
+      }
+    }
   }
 
 </script>
@@ -40,11 +40,18 @@
 
   .v-window__next {
     right: 0px;
-    // top: calc(50% - 20px);
   }
 
   .v-carousel__controls {
     background: rgba(0, 0, 0, 0);
+  }
+  
+  .v-dialog {
+    background-color: rgba(0, 0, 0, 0.411);
+  }
+
+  .v-image__image--cover {
+    background-size: contain!important;
   }
 
 </style>

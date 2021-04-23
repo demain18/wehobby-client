@@ -19,12 +19,12 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="select.pw" type="password" :disabled="select.social==true" label="비밀번호 변경 확인"></v-text-field>
+            <v-text-field v-model="select.pw" type="password" :disabled="select.social==true" label="변경할 비밀번호 입력"></v-text-field>
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="select.pwc" type="password" :disabled="select.social==true" label="비밀번호 변경 재확인"></v-text-field>
+            <v-text-field v-model="select.pwc" type="password" :disabled="select.social==true" label="변경할 비밀번호 재입력"></v-text-field>
           </v-col>
         </v-row>
         <v-row>

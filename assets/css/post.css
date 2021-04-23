@@ -19,44 +19,41 @@
 
 #wrap .content-wrap .title {
     margin-top: 15px;
-    /* font-size: 22px!important; */
+    font-weight: bold;
 }
 
-#wrap .content-wrap .images {
+#wrap .content-wrap .img-grid {
     width: 100%;
-    min-height: 100px;
-/*    border: 1px solid blue;*/
-    display: flex;
-    flex-wrap: wrap;
     margin-top: 10px;
 }
 
 #wrap .content-wrap .img-wrap {
-    width: 33.3%;
+    width: 33%;
     height: 150px;
-/*    background-color: #eaeaea;*/
     padding: 3px;
-    box-sizing: border-box;
+    float: left;
+    display: block;
 }
 
 #wrap .content-wrap .img-wrap img {
     width: 100%;
     height: 100%;
-
-    /* background-size: cover;
-    background-position: center; */
     object-fit: cover;
-
     border: 1px solid #ececec;
     border-radius: 5px;
     cursor: pointer;
 }
 
 #wrap .content-wrap .content {
-    margin-top: 15px;
-    margin-bottom: 30px;
+    /* padding-top: 10px; */
+    margin-bottom: 20px;
     width: 100%;
     white-space: pre-wrap!important;
+    clear: both;
+}
+
+#wrap .content-wrap .contentMargin {
+    padding-top: 10px;
 }
 
 #wrap .content-wrap .comment-wrap {
