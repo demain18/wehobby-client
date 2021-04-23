@@ -58,7 +58,7 @@
           <div class="article-wrap">
 
             <div class="article" v-for="(item, index) in postItems" v-bind:key="index">
-              <nuxt-link :to="'/post/'+item.key" style="height: 80px;"><img src="~assets/img/placeholder1.jpg" class="img-repre"></nuxt-link>
+              <nuxt-link :to="'/post/'+item.key" style="height: 80px;"><img src="~assets/img/placeholder.png" class="img-repre"></nuxt-link>
               <div class="content">
                 <p class="title"><nuxt-link :to="'/post/'+item.key">{{ item.title }}</nuxt-link></p>
                 <p class="info" v-if="cityKey!=0">

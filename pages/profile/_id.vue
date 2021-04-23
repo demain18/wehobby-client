@@ -5,7 +5,7 @@
       <div class="info-wrap">
         <!-- <div class="img-profile"></div> -->
         <v-avatar class="img-profile">
-          <img src="~assets/img/placeholder1.jpg" class="present">
+          <img src="~assets/img/placeholder.png" class="present">
         </v-avatar>
         <div class="table-wrap">
           <div class="table">
@@ -54,7 +54,7 @@
         <div class="article-wrap">
           
           <div class="article" v-for="(item, index) in postData.items" v-bind:key="index">
-            <nuxt-link :to="'/post/'+item.key" style="height: 80px;"><img src="~assets/img/placeholder1.jpg" class="img-repre"></nuxt-link>
+            <nuxt-link :to="'/post/'+item.key" style="height: 80px;"><img src="~assets/img/placeholder.png" class="img-repre"></nuxt-link>
             <div class="content">
               <p class="title"><nuxt-link :to="'/post/'+item.key">{{ item.title }}</nuxt-link></p>
               <!-- <p class="info">
