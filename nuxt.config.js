@@ -12,11 +12,11 @@ export default {
       { name: 'google-signin-client_id', content: '616505649106-lli8nqfqdv9acjae00bve7cdtb4gfhhu.apps.googleusercontent.com' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/logo.ico' },
     ],
     script: [
       { hid: 'stripe', src: 'https://apis.google.com/js/platform.js', sync: true, defer: true },
-      { hid: 'stripe', 'data-ad-client': 'ca-pub-7099403550820594', src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', sync: true }
+      // { hid: 'stripe', 'data-ad-client': 'ca-pub-7099403550820594', src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', sync: true }
     ]
   },
 

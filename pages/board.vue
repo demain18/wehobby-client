@@ -62,7 +62,7 @@
               <div class="content">
                 <p class="title"><nuxt-link :to="'/post/'+item.key">{{ item.title }}</nuxt-link></p>
                 <p class="info" v-if="cityKey!=0">
-                  <span v-if="item.options[0] != ''" class="bold" v-text="thousandComma(item.options[0])"></span><span v-if="item.options[0] != '' && item.options[1] != ''"> · </span>
+                  <span v-if="item.options[0] != ''" class="bold" v-text="thousandComma(item.options[0], null)"></span><span v-if="item.options[0] != '' && item.options[1] != ''"> · </span>
                   <span v-if="item.options[1] != ''">{{ item.options[1] }}</span><span v-if="item.options[2] != ''"> · </span>
                   <span v-if="item.options[2] != ''">{{ item.options[2] }}</span><span v-if="item.options[3] != ''"> · </span>
                   <span v-if="item.options[3] != ''">{{ item.options[3] }}</span>

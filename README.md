@@ -19,11 +19,17 @@ $ npm run generate
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
-# Control
+# Running/Edit
+
+## Monitoring
+https://grafana.wehobby.kr
 
 ## Google Console
 없음
 
 ## Google Adsense(happysugar180@gmail.com)
 <script data-ad-client="ca-pub-7099403550820594" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-: Code
+: Code - 아직 업데이트 안됨
+
+## Gabia Message
+https://my.gabia.com

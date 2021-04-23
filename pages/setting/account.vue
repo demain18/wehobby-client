@@ -9,7 +9,7 @@
 
         <v-row>
           <v-col>
-            <v-text-field v-model="select.email" label="이메일"></v-text-field>
+            <v-text-field v-model="select.email" label="이메일" :disabled="select.social==true"></v-text-field>
           </v-col>
         </v-row>
         <v-row>

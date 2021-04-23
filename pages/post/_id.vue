@@ -119,7 +119,7 @@
           <div class="header">
             {{ item.header }}
           </div>
-          <div v-if="data.header.category == 2" v-text="optionContentRead(thousandComma(item.content))" class="content"></div>
+          <div v-if="data.header.category == 2" v-text="optionContentRead(thousandComma(item.content, index))" class="content"></div>
           <div v-else-if="data.header.category == 3 || data.header.category == 4 || data.header.category == 5" v-text="optionContentRead(standardTerm(item.content, index))" class="content"></div>
           <div v-else v-text="optionContentRead(item.content)" class="content"></div>
         </div>

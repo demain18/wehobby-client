@@ -136,7 +136,9 @@
       this.isVerify();
 
       // user token read
-      this.user = this.$cookies.get('user');
+      if (this.$cookies.isKey('user')) {
+        this.user = this.$cookies.get('user');
+      }
 
       // path read
       this.path = this.$router.currentRoute.path;

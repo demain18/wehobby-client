@@ -3,7 +3,7 @@ import moment from 'moment';
 export default {
   inheritAttrs: false,
   data: () => ({
-
+    globalVal: true,
   }),
   methods: {
     findKey(filterItem, index) {
@@ -97,7 +97,10 @@ export default {
         return desc;
       }
     },
-    thousandComma(content) {
+    thousandComma(content, index) {
+      if (index==0) {
+        return content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원';
+      }
       return content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   }
