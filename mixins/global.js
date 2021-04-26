@@ -62,7 +62,7 @@ export default {
         return gap.format('m분');
       } 
       else if (gap.format('m')>0) {
-        return gap.format('방금전');
+        return gap.format('방금');
       }
 
     },

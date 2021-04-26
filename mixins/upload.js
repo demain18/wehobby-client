@@ -7,6 +7,7 @@ export default {
   data: () => ({
     upload: [],
     uploadFormData: [],
+    isImageChange: false,
   }),
   mounted(){
     // code
@@ -14,23 +15,30 @@ export default {
   methods: {
     async imageUploadSend(id, target, type) {
       try {
-        await axios.post('/api/info/image/upload',
-        this.uploadFormData,
-        {
-          headers: {
-            token: this.$cookies.get('token'),
-            id: id,
-            target: target,
-            type: type
-          },
-          // onUploadProgress: uploadEvent => {
-          //   console.log('Upload Progress: '+Math.round(uploadEvent.loaded / uploadEvent.total*100))
-          // }
-        });
+        if (this.isImageChange) {
+          await axios.post('/api/info/image/upload',
+          this.uploadFormData,
+          {
+            headers: {
+              token: this.$cookies.get('token'),
+              id: id,
+              target: target,
+              type: type
+            },
+            onUploadProgress: uploadEvent => {
+              let progress = Math.round(uploadEvent.loaded / uploadEvent.total*100);
+              console.log('Upload Progress: '+progress)
+              // while (progress==100) {
+                
+              // }
+            }
+          });
+        }
       }
-      catch (err) { console.log(err) }
+      catch (err) { alert(err.data.data.message) }
     },
     handleFiles(e) {
+      this.isImageChange = true;
       try {
         const fileData = new FormData();
         let fileList = e;

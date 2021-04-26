@@ -43,7 +43,7 @@
 
         <v-row>
           <v-col>
-            <v-file-input type="file" @change="handleFiles($event)" small-chips multiple hint="jpg, jpeg png 형식이며 파일 크기가 5mb를 넘지 않는 이미지만 업로드 가능합니다" persistent-hint placeholder="이미지 업로드" prepend-icon="mdi-image-multiple"></v-file-input>
+            <v-file-input type="file" @change="handleFiles($event)" small-chips multiple hint="jpg, jpeg png 형식이며 파일 크기가 5mb를 넘지 않는 이미지만 업로드 가능합니다" persistent-hint placeholder="기존 이미지를 대체할 이미지 업로드" prepend-icon="mdi-image-multiple"></v-file-input>
           </v-col>
         </v-row>
         <div class="preview-grid">
@@ -74,8 +74,17 @@
   export default {
     components: { VueEditor },
     mixins: [imageUpload],
-    created() {
+    async created() {
       this.param = this.$route.params.id;
+      // image chips
+      // const res = await axios.get('/api/post/read', {
+      //   params: {
+      //     id: this.param
+      //   }
+      // });
+      // res.data.data.images.forEach((item, index) => {
+      //   this.select.upload[index] = { name: item }
+      // });
     },
     data: () => ({
       param: null,
@@ -101,7 +110,7 @@
           null,
           null
         ],
-        upload: null,
+        upload: [],
         desc: null,
         submitAble: false,
       },
@@ -257,6 +266,7 @@
         ];
         this.select.title = data.content.title;
         this.select.desc = data.content.desc;
+        this.select.upload = data.images;
       }
       catch (err) { console.log(err); }
     },
@@ -291,7 +301,7 @@
             this.select.submitAble = true;
           } else {
             this.select.submitAble = false;
-        }
+          }
         }
       }
     },
