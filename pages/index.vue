@@ -1,7 +1,6 @@
 <template>
   <div>
     <Gnb />
-    <!-- <DialogCity/> --> <!-- 전페이지 공통이라 GnbPc에 들어가있음 -->
 
     <div id="banner">
       <div class="banner-img"></div>
@@ -31,7 +30,7 @@
 
           <div class="item" v-for="(item, index) in content.latestGoods" v-bind:key="index">
             <nuxt-link :to="'/post/'+item.key">
-              <img src="~assets/img/placeholder.png" class="img">
+              <img :src="repreImageRead(item.imageRepre)" class="img">
             </nuxt-link>
             <p>{{ item.title }} · <span v-text="agoCalc(item.date, item.time)"></span></p>
           </div>
@@ -65,7 +64,7 @@
 
                 <p class="empty-message" v-if="content.famous.length==0">오늘 작성된 게시물이 없습니다</p>
                 <div class="smlist" v-else v-for="(item, index) in content.famous" v-bind:key="index">
-                  <img src="~assets/img/placeholder.png" class="img">
+                  <img :src="repreImageRead(item.imageRepre)" class="img">
                   <div class="content">
                     <nuxt-link :to="'/post/'+item.key" class="title">{{ item.title }}</nuxt-link>
                     <p class="txt" v-text="markupReplace(item.desc)"></p>
@@ -83,7 +82,7 @@
           <div class="article-new">
 
             <div class="smlist" v-for="(item, index) in content.latest" v-bind:key="index">
-              <img src="~assets/img/placeholder.png" class="img">
+              <img :src="repreImageRead(item.imageRepre)" class="img">
               <div class="content">
                 <nuxt-link :to="'/post/'+item.key" class="title">{{ item.title }}</nuxt-link>
                 <p class="txt" v-text="markupReplace(item.desc)"></p>
