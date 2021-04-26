@@ -43,18 +43,10 @@
 
         <v-row>
           <v-col>
-            <v-file-input v-model="select.upload" small-chips multiple hint="jpg, png 형식이며 파일 크기가 5mb를 넘지 않는 이미지만 업로드 가능합니다" persistent-hint placeholder="이미지 업로드"></v-file-input>
+            <v-file-input type="file" @change="handleFiles($event)" small-chips multiple hint="jpg, jpeg png 형식이며 파일 크기가 5mb를 넘지 않는 이미지만 업로드 가능합니다" persistent-hint placeholder="이미지 업로드" prepend-icon="mdi-image-multiple"></v-file-input>
           </v-col>
         </v-row>
         <div class="preview-grid">
-          <!-- <div class="preview">
-            <img src="~assets/img/dummy/1.jpg">
-            <v-btn fab x-small class="btn-close">
-              <v-icon>
-                mdi-close
-              </v-icon>
-            </v-btn>
-          </div> -->
         </div>
         <div style="clear: both;"></div>
 
@@ -76,10 +68,12 @@
   import qs from 'qs';
   import Vuecookies from 'vue-cookies';
   import { VueEditor } from "vue2-editor";
+  import imageUpload from '~/mixins/upload.js';
   Vue.use(Vuecookies);
 
   export default {
     components: { VueEditor },
+    mixins: [imageUpload],
     created() {
       this.param = this.$route.params.id;
     },
@@ -343,7 +337,11 @@
                 token: this.$cookies.get('token'),
               }}
             );
-            // console.log(res);
+
+            // image upload
+            this.imageUploadSend(this.param, 'post', 'upload');
+
+            // locate post
             this.$router.push('/post/'+this.param);
           }
           catch (err) { console.log(err); }

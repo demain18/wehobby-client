@@ -15,7 +15,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/logo.ico' },
     ],
     script: [
-      { hid: 'stripe', src: 'https://apis.google.com/js/platform.js', sync: true, defer: true },
+      { hid: 'stripe', src: 'https://apis.google.com/js/platform.js', sync: true, defer: true }, // google social login
       // { hid: 'stripe', 'data-ad-client': 'ca-pub-7099403550820594', src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', sync: true }
     ]
   },

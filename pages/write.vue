@@ -41,24 +41,16 @@
           </v-col>
         </v-row>
 
-        <!-- <v-text-field v-model="select.title" :rules="[rules.required]" label="제목*"></v-text-field> -->
-
         <v-row>
           <v-col>
-            <v-file-input v-model="select.upload" small-chips multiple hint="jpg, png 형식이며 파일 크기가 5mb를 넘지 않는 이미지만 업로드 가능합니다" persistent-hint placeholder="이미지 업로드"></v-file-input>
+            <v-file-input type="file" @change="handleFiles($event)" small-chips multiple hint="jpg, jpeg png 형식이며 파일 크기가 5mb를 넘지 않는 이미지만 업로드 가능합니다" persistent-hint placeholder="이미지 업로드" prepend-icon="mdi-image-multiple"></v-file-input>
           </v-col>
         </v-row>
-
-        <div class="preview-grid">
-          <!-- <div class="preview">
-            <img src="~assets/img/dummy/1.jpg">
-            <v-btn fab x-small class="btn-close">
-              <v-icon>
-                mdi-close
-              </v-icon>
-            </v-btn>
-          </div> -->
-        </div>
+        <!-- <div class="preview-grid">
+          <div class="preview">
+            <img src="~assets/img/placeholder.png">
+          </div>
+        </div> -->
         <div style="clear: both;"></div>
 
         <vue-editor v-model="select.desc" :editor-toolbar="customToolbar" class="textarea" />
@@ -82,10 +74,12 @@
   import Vuecookies from 'vue-cookies';
   import { VueEditor } from "vue2-editor";
   import qs from 'qs';
+  import imageUpload from '~/mixins/upload.js';
   Vue.use(Vuecookies);
 
   export default {
     components: { VueEditor },
+    mixins: [imageUpload],
     created() {},
     data: () => ({
       customToolbar: [
@@ -110,17 +104,12 @@
           null,
           null
         ],
-        upload: null,
+        upload: [],
         desc: null,
         submitAble: false,
       },
       rules: {
         required: value => !!value || '비워둘 수 없는 항목입니다.',
-        // required(value) {
-        //   if (value == null) {
-        //     return '비워둘 수 없는 항목입니다';
-        //   }
-        // }
       },
       list: {
         city: [],
@@ -235,14 +224,14 @@
       }
     }),
     async mounted() {
-      // city read
+      // city list read
       try {
         const cityRes = await axios.get('/api/info/citys');
         this.list.city = cityRes.data.data.citys;
       }
       catch (err) { console.log(err); }
 
-      // category read
+      // category list read
       try {
         const categoryRes = await axios.get('/api/info/category');
         this.list.category = categoryRes.data.data;
@@ -276,7 +265,7 @@
             this.select.submitAble = true;
           } else {
             this.select.submitAble = false;
-        }
+          }
         }
       }
     },
@@ -317,6 +306,11 @@
                 token: this.$cookies.get('token'),
               }}
             );
+            
+            // image upload
+            this.imageUploadSend(res.data.data.postIdKey, 'post', 'upload');
+
+            // locate post
             this.$router.push('/post/'+res.data.data.postIdKey);
           }
           catch (err) { console.log(err); }
