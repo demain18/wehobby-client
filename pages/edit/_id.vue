@@ -350,9 +350,6 @@
 
             // image upload
             this.imageUploadSend(this.param, 'post', 'upload');
-
-            // locate post
-            this.$router.push('/post/'+this.param);
           }
           catch (err) { console.log(err); }
         }

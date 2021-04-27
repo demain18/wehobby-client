@@ -27,10 +27,9 @@ export default {
             },
             onUploadProgress: uploadEvent => {
               let progress = Math.round(uploadEvent.loaded / uploadEvent.total*100);
-              console.log('Upload Progress: '+progress)
-              // while (progress==100) {
-                
-              // }
+              if (progress==100) {
+                this.$router.push('/post/'+this.param);
+              }
             }
           });
         }

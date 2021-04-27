@@ -162,6 +162,16 @@
     color: #535353!important;
 }
 
+#wrap .content-wrap .comment-wrap .comment-write-wrap {
+    display: flex;
+}
+
+#wrap .content-wrap .comment-wrap .comment-write-wrap .submit {
+    position: relative;
+    top: 7px;
+    margin-left: 10px;
+}
+
 #wrap .content-wrap .addition-wrap {
     /* display: flex; */
     float: left;

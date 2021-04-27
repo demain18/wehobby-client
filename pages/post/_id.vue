@@ -31,6 +31,7 @@
               <span class="title">댓글 {{ data.comments.length }}개</span>
             </div>
             <div class="list-header-line"></div>
+            
             <p v-if="data.comments.length == 0" class="placeholder-comment">아직 작성된 댓글이 없습니다, 가장 먼저 댓글을 작성해보세요.</p>
 
             <div class="item" v-for="(item, index) in data.comments" :key="index">
@@ -40,7 +41,7 @@
               <div class="main">
                 <p>
                   <nuxt-link :to="'/profile/'+item.uploader.key"><strong>{{ item.uploader.nickname }}</strong></nuxt-link>
-                  <!-- <span class="time">15분 전</span> -->
+                  <span class="time" v-text="agoCalc(item.date, item.time)+' 전'"></span>
                 </p>
                 <p v-if="select.commentEdit[index] == true">
                   <v-text-field v-model="select.comment.descEdit" v-on:keyup.enter="commentEdit(index)" solo dense label="" clearable></v-text-field>
@@ -61,9 +62,12 @@
                 </v-menu>
               </div>
             </div>
-            
           </div>
-          <v-text-field v-model="select.comment.desc" v-on:keyup.enter="commentSend()" solo label="댓글을 입력하세요" clearable></v-text-field>
+
+          <div class="comment-write-wrap">
+            <v-text-field v-model="select.comment.desc" solo label="댓글을 작성하세요" clearable></v-text-field>
+            <v-btn @click="commentSend()" depressed class="submit">댓글 작성</v-btn>
+          </div>
         </div>
 
         <div class="addition-wrap">
@@ -188,6 +192,7 @@
       },
       select: {
         comment: {
+          submitStack: 0,
           desc: null,
           descEdit: null
         },
@@ -362,28 +367,30 @@
           return;
         }
       },
+      commentEnter() {
+        this.commentSend();
+        console.log('enter work.');
+      },
       async commentSend() {
         if (this.$cookies.isKey('user') != true || this.userKey == null) {
           alert('댓글 작성 기능은 로그인 후 이용할 수 있습니다.');
           return;
         }
-
         if (this.select.comment.desc == null) {
           alert('댓글은 한 글자 이상 작성해주세요.');
+          return;
         }
-        else {
-          try {
-            await axios.post('/api/comment/insert', {
-              id: this.param,
-              desc: this.select.comment.desc
-            },
-            {headers: {token: this.$cookies.get('token')}});
-            this.postRead();
-            this.select.comment.desc = null;
-            // console.log('comment commit');
-          }
-          catch (err) { console.log(err); }
+        try {
+          await axios.post('/api/comment/insert', {
+            id: this.param,
+            desc: this.select.comment.desc
+          },
+          {headers: {token: this.$cookies.get('token')}});
+          // this.select.comment.submitStack++;
+          this.postRead();
+          this.select.comment.desc = null;
         }
+        catch (err) { console.log(err); }
       },
       commentEditable(index) {
         Vue.set(this.select.commentEdit, index, !this.select.commentEdit[index]);

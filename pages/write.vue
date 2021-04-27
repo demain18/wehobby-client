@@ -309,9 +309,6 @@
             
             // image upload
             this.imageUploadSend(res.data.data.postIdKey, 'post', 'upload');
-
-            // locate post
-            this.$router.push('/post/'+res.data.data.postIdKey);
           }
           catch (err) { console.log(err); }
         }
