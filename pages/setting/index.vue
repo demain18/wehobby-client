@@ -10,11 +10,13 @@
 
         <div class="form form-profile">
           <p class="label">대표 이미지</p>
-          <img src="~assets/img/repre_1.jpg" class="img-profile">
+          <img v-if="repreImageChanged==false" :src="repreImageRead(select.repreImage)" class="img-profile">
+          <div v-else class="img-profile placeholder">대표 이미지가 <br/> 변경되었습니다</div>
         </div>
-        <v-btn depressed style="margin-top: -10px; margin-bottom: 15px;">
+        <v-btn @click="fileUploadSend()" depressed style="margin-top: -10px; margin-bottom: 15px;">
           대표 이미지 변경
         </v-btn>
+        <v-file-input type="file" id="fileUpload" @change="handleFiles($event)" style="display: none;" multiple></v-file-input>
 
         <v-row>
           <v-col>
@@ -90,16 +92,23 @@
   import Vue from 'vue';
   import axios from 'axios';
   import Vuecookies from 'vue-cookies';
+  import globalMethods from '~/mixins/global.js';
+  import imageUpload from '~/mixins/upload.js';
   import qs from 'qs'
   Vue.use(Vuecookies);
 
   export default {
+    mixins: [
+      globalMethods,
+      imageUpload
+    ],
     created() {},
     data: () => ({
       submitAble: false,
       submitStack: 0,
       select: {
-        image: null,
+        key: null,
+        repreImage: null,
         nick: null,
         name: null,
         userVerify: true,
@@ -119,7 +128,8 @@
           '비공개'
         ],
         age: []
-      }
+      },
+      repreImageChanged: false
     }),
     async mounted() {
       // birth list calc
@@ -142,14 +152,21 @@
             this.submitAble = true;
           }
         }
-      }
+      },
+      'uploadFormData'(to, from) {
+        this.submitStack++;
+        if (this.submitStack>1) {
+          this.submitAble = true;
+        }
+      },
     },
     methods: {
       async profileRead() {
         try {
           const res = await axios.post('/api/profile/read', {}, {headers: {token: this.$cookies.get('token')}});
           this.select = {
-            image: null,
+            key: res.data.data.key,
+            repreImage: res.data.data.repreImage,
             nick: res.data.data.nickname,
             name: res.data.data.name,
             userVerify: res.data.data.vertify,
@@ -168,7 +185,6 @@
       async profileEditSend() {
         try {
           await axios.post('/api/profile/update', {
-            img_repre: null,
             nickname: this.select.nick,
             vertify: this.select.userVerify,
             bio: this.select.bio,
@@ -179,14 +195,20 @@
             contact_kakao: this.select.contact.kakaoTalk
           }, 
           {headers: {token: this.$cookies.get('token')}});
+
+          this.imageUploadSend(this.select.key, 'auth', 'repre');
+
           this.profileRead();
           this.submitStack = 0;
           this.submitAble = false;
         }
-        catch (err) { alert(err.response.data.message); }
+        catch (err) { alert(err) }
       },
       toggleDialogContact() {
         this.$store.commit('dialog/toggleVerifyDialogActive');
+      },
+      fileUploadSend() {
+        document.getElementById("fileUpload").click();
       }
     }
   }

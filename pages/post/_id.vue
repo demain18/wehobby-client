@@ -36,7 +36,7 @@
 
             <div class="item" v-for="(item, index) in data.comments" :key="index">
               <v-avatar class="header">
-                <img src="~assets/img/repre_1.jpg" class="present">
+                <img :src="repreImageRead(item.uploader.repreImage)" class="present">
               </v-avatar>
               <div class="main">
                 <p>
@@ -142,7 +142,7 @@
         <div class="profile">
           <!-- <div class="header"></div> -->
           <v-avatar rounded class="header">
-            <img src="~assets/img/repre_1.jpg" class="present">
+            <img :src="repreImageRead(uploader.repreImage)" class="present">
           </v-avatar>
           <div class="content">
             <nuxt-link :to="'/profile/'+postUploaderKey">

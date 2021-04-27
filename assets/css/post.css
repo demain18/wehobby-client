@@ -117,7 +117,7 @@
 }
 
 #wrap .content-wrap .comment-wrap .list .item .header img.present {
-    object-fit: contain;
+    object-fit: cover;
 }
 
 #wrap .content-wrap .comment-wrap .list .item .main {
@@ -232,7 +232,7 @@
 }
 
 #wrap .profile-wrap .profile .header .present {
-    object-fit: contain;
+    object-fit: cover;
     /* border-radius: 100%; */
 }
 

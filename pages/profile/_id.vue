@@ -5,7 +5,8 @@
       <div class="info-wrap">
         <!-- <div class="img-profile"></div> -->
         <v-avatar class="img-profile">
-          <img src="~assets/img/placeholder.png" class="present">
+          <img :src="repreImageRead(data.repreImage)" class="present">
+          <!-- <img src="~assets/img/placeholder.png" class="present"> -->
         </v-avatar>
         <div class="table-wrap">
           <div class="table">
@@ -48,21 +49,14 @@
       <div class="posts-wrap">
         <div class="list-header">
           <span class="title">작성한 게시물({{ postData.count }})</span>
-          <!-- <span class="btn-more">더보기</span> -->
         </div>
         <div class="list-header-line"></div>
         <div class="article-wrap">
           
           <div class="article" v-for="(item, index) in postData.items" v-bind:key="index">
-            <nuxt-link :to="'/post/'+item.key" style="height: 80px;"><img src="~assets/img/placeholder.png" class="img-repre"></nuxt-link>
+            <nuxt-link :to="'/post/'+item.key" style="height: 80px;"><img :src="repreImageRead(item.imageRepre)" class="img-repre"></nuxt-link>
             <div class="content">
               <p class="title"><nuxt-link :to="'/post/'+item.key">{{ item.title }}</nuxt-link></p>
-              <!-- <p class="info">
-                <span v-if="item.options[0] != ''" class="bold" v-text="thousandComma(item.options[0])"></span><span v-if="item.options[0] != '' && item.options[1] != ''"> · </span>
-                <span v-if="item.options[1] != ''">{{ item.options[1] }}</span><span v-if="item.options[2] != ''"> · </span>
-                <span v-if="item.options[2] != ''">{{ item.options[2] }}</span><span v-if="item.options[3] != ''"> · </span>
-                <span v-if="item.options[3] != ''">{{ item.options[3] }}</span>
-              </p> -->
               <p class="txt" v-html="markupReplace(item.desc)"></p>
               <span class="time" v-text="agoCalc(item.date, item.time)+' 전'"></span>
             </div>
@@ -129,6 +123,7 @@
           }
         });
         this.data = {
+          repreImage: res.data.data.imgRepre,
           nick: res.data.data.nickname,
           bio: res.data.data.bio,
           age: res.data.data.birth,

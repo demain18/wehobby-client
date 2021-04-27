@@ -28,7 +28,14 @@ export default {
             onUploadProgress: uploadEvent => {
               let progress = Math.round(uploadEvent.loaded / uploadEvent.total*100);
               if (progress==100) {
-                this.$router.push('/post/'+this.param);
+                if (target=='post') 
+                {
+                  this.$router.push('/post/'+this.param);
+                }
+                else if (target=='auth') 
+                {
+                  this.repreImageChanged = true;
+                }
               }
             }
           });
@@ -49,5 +56,19 @@ export default {
       }
       catch (err) { console.log(err) }
     },
+    handleFile(e) {
+      // this.isImageChange = true;
+      // this.repreImageChanged = true;
+      // try {
+      //   const fileData = new FormData();
+      //   let fileList = e;
+      //   fileList.forEach((item, index) => {
+      //     this.upload[index] = fileList[index];
+      //     fileData.append('upload', this.upload[index], this.upload[index].name);
+      //   });
+      //   this.uploadFormData = fileData;
+      // }
+      // catch (err) { console.log(err) }
+    }
   }
 }

@@ -28,8 +28,16 @@
 #wrap .content-wrap .form .img-profile {
     width: 120px;
     height: 120px;
+    object-fit: cover;
     background-color: #ececec;
     border-radius: 10%;
+}
+
+#wrap .content-wrap .form .placeholder {
+    color: rgb(88, 88, 88);
+    text-align: center;
+    padding-top: 35px;
+    margin-bottom: 22px;
 }
 
 #wrap .textarea {
