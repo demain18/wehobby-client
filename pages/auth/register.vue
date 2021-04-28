@@ -4,7 +4,7 @@
 
     <div id="form">
       <img src="~assets/img/logo-img.png" style="width:200px;">
-      <p class="sub">함께 즐기는 취미</p>
+      <p class="sub">인연과 취미를 만나는 공간</p>
 
       <div class="forms">
         <v-text-field v-model="form.nickname" placeholder="닉네임" hide-details="" class="input-form" solo flat></v-text-field>
@@ -26,7 +26,7 @@
       </v-btn>
       <v-btn @click="googleRegister()" depressed rounded large class="social social-google">
         <img src="~assets/img/static/logo-google.png" class="logo-google">
-        구글 계정으로 회원가입하기
+        Google으로 계정 생성하기
       </v-btn>
       <v-btn id="google-signin-btn" depressed rounded large class="social-google" data-width="150" data-onsuccess="onSignIn" style="display:none;"></v-btn>
     </div>
