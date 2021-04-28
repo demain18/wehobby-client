@@ -104,7 +104,7 @@ export default {
       return content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     repreImageRead(image) {
-      if (image==null || image.length==0) {
+      if (image==null || image.length==0 || image[0]==null) {
         return 'https://wehobby-real.s3.us-east-2.amazonaws.com/static/placeholder.png';
       } else {
         return image[0];

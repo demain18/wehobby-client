@@ -68,13 +68,13 @@
 
 #form .logo-google {
   width: 20px;
-  margin-right: 3px;
+  margin-right: 8px;
   margin-bottom: 2px;
 }
 
 #form .icon-social {
-  font-size: 23px !important;
-  margin-right: 3px;
+  font-size: 23px;
+  margin-right: 8px;
   margin-bottom: 2px;
 }
 

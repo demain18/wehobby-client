@@ -46,7 +46,7 @@
     <v-menu v-if="token.verify == true" left offset-y>
       <template v-slot:activator="{ on, attrs }">
         <v-avatar class="item rgt user-icon" v-bind="attrs" v-on="on">
-          <img src="~assets/img/repre_1.jpg" class="">
+          <img :src="repreImageRead(user.image)" class="repre">
         </v-avatar>
       </template>
       <v-list dense>
@@ -84,10 +84,11 @@
   import axios from 'axios';
   import Vuecookies from 'vue-cookies';
   import verifyMixin from '~/mixins/verify.js';
+  import globalMixin from '~/mixins/global.js';
   Vue.use(Vuecookies);
 
   export default {
-    mixins: [verifyMixin],
+    mixins: [verifyMixin, globalMixin],
     computed: {
       list() {
         return this.$store.state.urls.list;
@@ -135,9 +136,18 @@
       // token verify
       this.isVerify();
 
-      // user token read
+      // user data read
       if (this.$cookies.isKey('user')) {
         this.user = this.$cookies.get('user');
+        try {
+          const res = await axios.get('/api/profile/read', {
+            params: {
+              id: this.user.key
+            }
+          });
+          this.user.image = res.data.data.imgRepre;
+        } 
+        catch (err) {console.log(err)}
       }
 
       // path read

@@ -14,7 +14,7 @@
           <div v-else class="img-profile placeholder">대표 이미지가 <br/> 변경되었습니다</div>
         </div>
         <v-btn @click="fileUploadSend()" depressed style="margin-top: -10px; margin-bottom: 15px;">
-          대표 이미지 변경
+          대표 이미지 업로드
         </v-btn>
         <v-file-input type="file" id="fileUpload" @change="handleFiles($event)" style="display: none;" multiple></v-file-input>
 

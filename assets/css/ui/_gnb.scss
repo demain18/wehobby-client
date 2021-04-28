@@ -90,6 +90,9 @@
   cursor: pointer;
 }
 
+#gnb .wrap .user-icon img.repre {
+  object-fit: cover;
+}
 
 // Relative
 @media (max-width: 769px) {

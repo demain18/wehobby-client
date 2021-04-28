@@ -24,17 +24,11 @@
       <v-btn v-on:click="registerSend()" depressed rounded large dark :loading="sendLoading" class="submit">
         계정 생성
       </v-btn>
-      <v-btn depressed rounded large class="social-google" data-width="150" data-onsuccess="onSignIn" id="google-signin-btn">
+      <v-btn @click="googleRegister()" depressed rounded large class="social social-google">
+        <img src="~assets/img/static/logo-google.png" class="logo-google">
+        구글 계정으로 회원가입하기
       </v-btn>
-      <!-- <v-btn depressed rounded large class="social-google" @click="googleSignOut()">
-        Google 로그아웃
-      </v-btn> -->
-      <!-- <v-btn depressed rounded large class="social social-facebook">
-        <v-icon class="icon-social">
-          mdi-facebook
-        </v-icon>
-        페이스북으로 계속하기
-      </v-btn> -->
+      <v-btn id="google-signin-btn" depressed rounded large class="social-google" data-width="150" data-onsuccess="onSignIn" style="display:none;"></v-btn>
     </div>
 
   </div>
@@ -120,19 +114,22 @@
         }
         catch (err) {
           this.sendLoading = false;
-          alert(err);
+          alert(err.response.data.message);
         }
       },
+      googleRegister() {
+        document.getElementsByClassName('abcRioButton')[0].click();
+      },
       onSignIn(googleUser) {
-        // console.log(googleUser.Rs);
-        let userData = googleUser.Rs;
+        console.log(googleUser);
+        let userData = googleUser.gt;
         this.form = {
-          nickname: userData.Se,
-          id: userData.RR,
-          pw: userData.RR,
-          pwc: userData.RR,
-          email: userData.At,
-          name: userData.Se,
+          nickname: userData.rU,
+          id: userData.GS,
+          pw: userData.GS,
+          pwc: userData.GS,
+          email: userData.Rt,
+          name: userData.rU,
           oauth: 'google',
           check: true,
         }

@@ -7,15 +7,18 @@
       <p class="sub">함께 즐기는 취미</p>
 
       <div class="forms">
-        <v-text-field v-model="form.id" v-on:keyup.enter="loginSend()" placeholder="아이디" hide-details="" class="input-form" solo flat></v-text-field>
-        <v-text-field type="password" v-model="form.pw" v-on:keyup.enter="loginSend()" placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-model="form.id" @keyup.enter="loginSend()" placeholder="아이디" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field type="password" v-model="form.pw" @keyup.enter="loginSend()" placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
       </div>
 
-      <v-btn v-on:click="loginSend()" depressed rounded large :loading="sendLoading" class="login">
+      <v-btn @click="loginSend()" :loading="sendLoading" depressed rounded large class="login">
         로그인
       </v-btn>
-      <v-btn depressed rounded large class="social-google" data-width="150" data-onsuccess="onSignIn" id="google-signin-btn">
+      <v-btn @click="googleLogin()" depressed rounded large class="social social-google">
+        <img src="~assets/img/static/logo-google.png" class="logo-google">
+        구글 계정으로 로그인하기
       </v-btn>
+      <v-btn id="google-signin-btn" depressed rounded large class="social-google" data-width="150" data-onsuccess="onSignIn" style="display:none;"></v-btn>
     </div>
   </div>
 </template>
@@ -89,12 +92,16 @@
           alert(err.response.data.message);
         }
       },
+      googleLogin() {
+        document.getElementsByClassName('abcRioButton')[0].click();
+      },
+      // 로그인 상태인 google 계정이 있으면 자동실행
       onSignIn(googleUser) {
-        // console.log(googleUser.Rs);
-        let userData = googleUser.Rs;
+        // console.log(googleUser);
+        let userData = googleUser.gt;
         this.form = {
-          id: userData.RR,
-          pw: userData.RR,
+          id: userData.GS,
+          pw: userData.GS,
         }
         this.loginSend();
       },
