@@ -61,7 +61,7 @@
           name: '선택안함(전국)'
         })
       }
-      catch (err) { console.log(err.response.data.message); }
+      catch (err) { console.log(err) }
       // city key read
       this.select = parseInt(this.$cookies.get('city'));
     },

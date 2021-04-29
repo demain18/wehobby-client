@@ -152,10 +152,12 @@
       cityName: null
     }),
     async mounted() {
+      
       // city name read
       if (this.$cookies.isKey('city')==true) {
         try {
-          const res = await axios.get('/api/info/citys');
+          // const res1 = await this.$axios.$get('/api/info/citys'); console.log(res1)
+          const res = await axios.get('/api/info/citys'); console.log(res)
           let cityList = res.data.data.citys;
           cityList.unshift({
             key: 0,
@@ -203,14 +205,14 @@
           this.content.famous[index].desc = this.markupReplace(item.desc).substr(0, 23);
         });
       }
-      catch (err) { console.log(err); }
+      catch (err) { console.log(err) }
 
       // category list read
       try {
         const res = await axios.get('/api/info/category');
         this.category = res.data.data;
       }
-      catch (err) { console.log(err.response.data.message); }
+      catch (err) { console.log(err) }
 
       // category count
       for (let i = 0; i < this.category.length; i++) {
@@ -223,7 +225,7 @@
           });
           this.categoryCount[i] = filterRes.data.data.countAll;
         }
-        catch (err) { console.log(err); }
+        catch (err) { console.log(err) }
       }
 
       // category count(city unselect)
@@ -240,7 +242,7 @@
         const res = await axios.get('/api/notice/list/read');
         this.noticeList = res.data.data;
       }
-      catch (err) { console.log(err.response.data.message); }
+      catch (err) { console.log(err) }
     },
     watch: {
       'select.keywordCategory'(to, from) {

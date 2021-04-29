@@ -2,6 +2,13 @@ export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false, // false -> SPA
 
+  dotenv: { 
+    filename: 
+      process.env.NODE_ENV === 'development' 
+      ? '.env.development' 
+      : '.env.development'
+  },
+
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     titleTemplate: '%s',
@@ -55,18 +62,14 @@ export default {
   },
 
   axios: {
-    proxy: true,
-    // baseURL: 'https://api.wehobby.kr/1.0'
+    // proxy: true,
+    baseURL: process.env.API_URL
   },
 
   proxy: {
     '/api/': {
-      target: 'https://api.wehobby.kr/1.0',
-    },
-    // '/api/': {
-    //   target: 'http//localhost:8888',
-    // },
-    // '/api': 'https://api.wehobby.kr/1.0'
+      target: process.env.API_URL,
+    }
   },
 
   // Vuetify theme color custom
