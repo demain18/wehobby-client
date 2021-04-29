@@ -39,6 +39,8 @@ export default {
               }
             }
           });
+        } else if (this.isImageChange!=true && target=='post') {
+          this.$router.push('/post/'+this.param);
         }
       }
       catch (err) { alert(err.data.data.message) }
@@ -53,22 +55,20 @@ export default {
           fileData.append('upload['+index+']', this.upload[index], this.upload[index].name);
         });
         this.uploadFormData = fileData;
+        console.log(this.upload)
       }
       catch (err) { console.log(err) }
     },
     handleFile(e) {
-      // this.isImageChange = true;
-      // this.repreImageChanged = true;
-      // try {
-      //   const fileData = new FormData();
-      //   let fileList = e;
-      //   fileList.forEach((item, index) => {
-      //     this.upload[index] = fileList[index];
-      //     fileData.append('upload', this.upload[index], this.upload[index].name);
-      //   });
-      //   this.uploadFormData = fileData;
-      // }
-      // catch (err) { console.log(err) }
+      this.isImageChange = true;
+      try {
+        const fileData = new FormData();
+        let fileList = e;
+        this.upload[0] = fileList;
+        fileData.append('upload[0]', this.upload[0], this.upload[0].name);
+        this.uploadFormData = fileData;
+      }
+      catch (err) { console.log(err) }
     }
   }
 }

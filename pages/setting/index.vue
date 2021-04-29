@@ -16,7 +16,7 @@
         <v-btn @click="fileUploadSend()" depressed style="margin-top: -10px; margin-bottom: 15px;">
           대표 이미지 업로드
         </v-btn>
-        <v-file-input type="file" id="fileUpload" @change="handleFiles($event)" style="display: none;" multiple></v-file-input>
+        <v-file-input type="file" id="fileUpload" @change="handleFile($event)" style="display: none;"></v-file-input>
 
         <v-row>
           <v-col>
