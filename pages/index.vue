@@ -156,9 +156,9 @@
       // city name read
       if (this.$cookies.isKey('city')==true) {
         try {
-          // const res1 = await this.$axios.$get('/api/info/citys'); console.log(res1)
-          const res = await axios.get('/api/info/citys'); console.log(res)
-          let cityList = res.data.data.citys;
+          // const res1 = await this.$this.$axios.$$get('/api/info/citys'); console.log(res1)
+          const res = await this.$axios.$get('/api/info/citys'); console.log(res)
+          let cityList = res.data.citys;
           cityList.unshift({
             key: 0,
             name: '전국'
@@ -173,33 +173,33 @@
       // content list read 
       let cityKey = this.$cookies.get('city');
       try {
-        const latestGoodsRes = await axios.get('/api/content/read', {
+        const latestGoodsRes = await this.$axios.$get('/api/content/read', {
           params: {
             city: cityKey,
             type: 'latestGoods',
           }
         });
-        this.content.latestGoods = latestGoodsRes.data.data;
+        this.content.latestGoods = latestGoodsRes.data;
 
-        const latestRes = await axios.get('/api/content/read', {
+        const latestRes = await this.$axios.$get('/api/content/read', {
           params: {
             city: cityKey,
             type: 'latest',
           }
         });
-        this.content.latest = latestRes.data.data;
+        this.content.latest = latestRes.data;
         this.content.latest.forEach((item, index) => {
           this.content.latest[index].title = item.title.substr(0, 22);
           this.content.latest[index].desc = this.markupReplace(item.desc).substr(0, 30);
         });
 
-        const famousRes = await axios.get('/api/content/read', {
+        const famousRes = await this.$axios.$get('/api/content/read', {
           params: {
             city: cityKey,
             type: 'famous',
           }
         });
-        this.content.famous = famousRes.data.data;
+        this.content.famous = famousRes.data;
         this.content.famous.forEach((item, index) => {
           this.content.famous[index].title = item.title.substr(0, 16);
           this.content.famous[index].desc = this.markupReplace(item.desc).substr(0, 23);
@@ -209,21 +209,21 @@
 
       // category list read
       try {
-        const res = await axios.get('/api/info/category');
-        this.category = res.data.data;
+        const res = await this.$axios.$get('/api/info/category');
+        this.category = res.data;
       }
       catch (err) { console.log(err) }
 
       // category count
       for (let i = 0; i < this.category.length; i++) {
         try {
-          const filterRes = await axios.get('/api/info/filter', {
+          const filterRes = await this.$axios.$get('/api/info/filter', {
             params: {
               city: this.$cookies.get('city'),
               category: this.category[i].key
             }
           });
-          this.categoryCount[i] = filterRes.data.data.countAll;
+          this.categoryCount[i] = filterRes.data.countAll;
         }
         catch (err) { console.log(err) }
       }
@@ -231,16 +231,16 @@
       // category count(city unselect)
       if (this.$cookies.get('city')==0 || this.$cookies.isKey('city')!=true) {
         try {
-          const countRes = await axios.get('/api/info/count');
-          this.categoryCount = countRes.data.data;
+          const countRes = await this.$axios.$get('/api/info/count');
+          this.categoryCount = countRes.data;
         }
         catch (err) { console.log(err); }
       }
 
       // notice list read
       try {
-        const res = await axios.get('/api/notice/list/read');
-        this.noticeList = res.data.data;
+        const res = await this.$axios.$get('/api/notice/list/read');
+        this.noticeList = res.data;
       }
       catch (err) { console.log(err) }
     },

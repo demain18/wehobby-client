@@ -1,13 +1,6 @@
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
-  ssr: false, // false -> SPA
-
-  dotenv: { 
-    filename: 
-      process.env.NODE_ENV === 'development' 
-      ? '.env.development' 
-      : '.env.development'
-  },
+  ssr: false, // false => SPA
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -61,9 +54,25 @@ export default {
   build: {
   },
 
+  /**
+   * 이 파일에서 axios설정이 먹히는건 $axios(nuxt/axios 문서)뿐이다.
+   * development(로컬)에서는 proxy 키고(proxy:true) 
+   * production(실서버)에서는 proxy 끄고 baseurl 사용(proxy:true, baeURL:env.url)
+   * 코드 자동교체는 process.env.NODE_ENV 값을 사용한 조건문으로 구현
+   */
   axios: {
+    /* development */
     // proxy: true,
-    baseURL: process.env.API_URL
+
+    /* Production */
+    // proxy: false,
+
+    proxy: 
+      process.env.NODE_ENV === 'development' 
+      ? true 
+      : false
+    ,
+    baseURL: process.env.API_URL,
   },
 
   proxy: {

@@ -142,12 +142,10 @@
               channel: res.data.data.kakao_notify_set
             }
           }
-          // console.log(res.data.data.social)
           if (res.data.data.social=='google') {
             console.log('isgoogle')
             this.select.social = true;
           }
-          // this.select.social = res.data.data.oauth;
         }
         catch (err) { console.log(err); }
       },
