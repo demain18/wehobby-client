@@ -141,8 +141,8 @@
         this.cityName = '전국';
       } else {
         try {
-          const citysRes = await axios.get('/api/info/citys');
-          this.cityName = citysRes.data.data.citys.find(ele => ele.key == this.cityKey).name;
+          const citysRes = await this.$axios.$get('/api/info/citys');
+          this.cityName = citysRes.data.citys.find(ele => ele.key == this.cityKey).name;
         }
         catch (err) { console.log(err); }
       }
@@ -174,8 +174,8 @@
     methods: {
       async breadCrumbUpdate() {
         try {
-          const res = await axios.get('/api/info/category');
-          this.categoryName = res.data.data.find(ele => ele.key == this.param.category).name;
+          const res = await this.$axios.$get('/api/info/category');
+          this.categoryName = res.data.find(ele => ele.key == this.param.category).name;
 
           this.$store.commit('urls/setList', {
             category: { key: this.param.category, name: this.categoryName},
@@ -188,19 +188,19 @@
       },
       async filterRead() {
         try {
-          const filterRes = await axios.get('/api/info/filter', {
+          const filterRes = await this.$axios.$get('/api/info/filter', {
             params: {
               city: this.cityKey,
               category: this.param.category
             }
           });
-          this.filterItems = filterRes.data.data;
+          this.filterItems = filterRes.data;
         }
         catch (err) { console.log(err.response.data.message); }
       },
       async postListRead() {
         try {
-          const postListRes = await axios.get('/api/board/read', {
+          const postListRes = await this.$axios.$get('/api/board/read', {
             params: {
               category: this.param.category, // static
               city: this.cityKey, // static
@@ -211,8 +211,8 @@
               page: this.param.page
             }
           });
-          this.keywordCount = postListRes.data.data.count;
-          this.postItems = postListRes.data.data.postItems;
+          this.keywordCount = postListRes.data.count;
+          this.postItems = postListRes.data.postItems;
 
           // area into options
           for (let i=0; i<this.postItems.length; i++) {

@@ -163,20 +163,20 @@
     methods: {
       async profileRead() {
         try {
-          const res = await axios.post('/api/profile/read', {}, {headers: {token: this.$cookies.get('token')}});
+          const res = await this.$axios.$post('/api/profile/read', {}, {headers: {token: this.$cookies.get('token')}});
           this.select = {
-            key: res.data.data.key,
-            repreImage: res.data.data.repreImage,
-            nick: res.data.data.nickname,
-            name: res.data.data.name,
-            userVerify: res.data.data.vertify,
-            bio: res.data.data.bio,
-            birth: parseInt(res.data.data.birth),
-            job: res.data.data.job,
-            sex: res.data.data.sex,
+            key: res.data.key,
+            repreImage: res.data.repreImage,
+            nick: res.data.nickname,
+            name: res.data.name,
+            userVerify: res.data.vertify,
+            bio: res.data.bio,
+            birth: parseInt(res.data.birth),
+            job: res.data.job,
+            sex: res.data.sex,
             contact: {
-              email: res.data.data.contactMail,
-              kakaoTalk: res.data.data.contactKakao
+              email: res.data.contactMail,
+              kakaoTalk: res.data.contactKakao
             }
           }
         }
@@ -184,7 +184,7 @@
       },
       async profileEditSend() {
         try {
-          await axios.post('/api/profile/update', {
+          await this.$axios.$post('/api/profile/update', {
             nickname: this.select.nick,
             vertify: this.select.userVerify,
             bio: this.select.bio,

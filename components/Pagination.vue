@@ -37,7 +37,7 @@
       }
 
       try {
-        const pageRes = await axios.get('/api/board/read', {
+        const pageRes = await this.$axios.$get('/api/board/read', {
           params: {
             category: this.param.category,
             city: this.$cookies.get('city'),
@@ -48,7 +48,7 @@
             page: this.param.page
           }
         });
-        this.paging.pageBase.last = (Math.ceil(pageRes.data.data.count/10));
+        this.paging.pageBase.last = (Math.ceil(pageRes.data.count/10));
         // console.log(this.paging.pageBase.last)
       }
       catch (err) { console.log(err); }
@@ -78,7 +78,7 @@
       // page last read
       // this.lastPageRead();
       // try {
-      //   const filterRes = await axios.get('https://api.wehobby.kr/api/board/read', {
+      //   const filterRes = await this.$axios.$get('https://api.wehobby.kr/api/board/read', {
       //     params: {
       //       category: this.param.category,
       //       city: this.$cookies.get('city'),
@@ -89,7 +89,7 @@
       //       page: this.param.page
       //     }
       //   });
-      //   this.paging.pageBase.last = Math.ceil(filterRes.data.data.count/10);
+      //   this.paging.pageBase.last = Math.ceil(filterRes.data.count/10);
       // }
       // catch (err) { console.log(err); }
 
@@ -198,7 +198,7 @@
 
         this.paging.pages = [];
         try {
-          const pageRes = await axios.get('/api/board/read', {
+          const pageRes = await this.$axios.$get('/api/board/read', {
             params: {
               category: this.param.category,
               city: this.$cookies.get('city'),
@@ -209,7 +209,7 @@
               page: this.param.page
             }
           });
-          this.paging.pageBase.last = (Math.ceil(pageRes.data.data.count/10));
+          this.paging.pageBase.last = (Math.ceil(pageRes.data.count/10));
         }
         catch (err) { console.log(err); }
 

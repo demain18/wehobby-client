@@ -226,15 +226,15 @@
     async mounted() {
       // city list read
       try {
-        const cityRes = await axios.get('/api/info/citys');
-        this.list.city = cityRes.data.data.citys;
+        const cityRes = await this.$axios.$get('/api/info/citys');
+        this.list.city = cityRes.data.citys;
       }
       catch (err) { console.log(err); }
 
       // category list read
       try {
-        const categoryRes = await axios.get('/api/info/category');
-        this.list.category = categoryRes.data.data;
+        const categoryRes = await this.$axios.$get('/api/info/category');
+        this.list.category = categoryRes.data;
       }
       catch (err) { console.log(err); }
     },
@@ -272,9 +272,9 @@
     methods: {
       async cityDataRead() {
         try {
-          const res = await axios.get('/api/info/citys/detail', {params: { city: this.select.city }});
-          this.list.area = res.data.data.area;
-          this.list.subway = res.data.data.subways;
+          const res = await this.$axios.$get('/api/info/citys/detail', {params: { city: this.select.city }});
+          this.list.area = res.data.area;
+          this.list.subway = res.data.subways;
         }
         catch (err) { console.log(err); }
       },
@@ -289,7 +289,7 @@
       async postWriteSubmit() {
         if (this.select.submitAble == true) {
           try {
-            const res = await axios.post('/api/post/insert',
+            const res = await this.$axios.$post('/api/post/insert',
               {
                 city: this.select.city,
                 district_region: this.select.area,
@@ -308,7 +308,7 @@
             );
             
             // image upload
-            this.imageUploadSend(res.data.data.postIdKey, 'post', 'upload');
+            this.imageUploadSend(res.data.postIdKey, 'post', 'upload');
           }
           catch (err) { console.log(err); }
         }

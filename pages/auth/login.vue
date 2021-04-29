@@ -42,7 +42,7 @@
       sendLoading: false
     }),
     mounted() {
-      // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+      // this.$axios.$defaults.headers.common['Access-Control-Allow-Origin'] = '*';
     },
     methods: {
       async loginSend() {
@@ -53,12 +53,12 @@
           }
           this.sendLoading = true;
 
-          const res = await axios.post('/api/auth/login', 
+          const res = await this.$axios.$post('/api/auth/login', 
           {
             "id": this.form.id,
             "pw": this.form.pw
           });
-          this.token = res.data.data.token;
+          this.token = res.data.token;
 
           if (this.$cookies.isKey('token')) {
             this.$cookies.remove('token');
@@ -67,7 +67,7 @@
             this.$cookies.set('token', this.token, '30d');
           }
 
-          const profileRes = await axios.post('/api/profile/read', 
+          const profileRes = await this.$axios.$post('/api/profile/read', 
           {},
           {
             headers: {
@@ -75,9 +75,9 @@
             }
           });
           let userData = {
-            key: parseInt(profileRes.data.data.key),
-            nickname: profileRes.data.data.nickname,
-            image: profileRes.data.data.imgRepre,
+            key: parseInt(profileRes.data.key),
+            nickname: profileRes.data.nickname,
+            image: profileRes.data.imgRepre,
           }
           if (this.$cookies.isKey('user')) {
             this.$cookies.remove('user');

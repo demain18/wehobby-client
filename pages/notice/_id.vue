@@ -42,12 +42,12 @@
     }),
     async mounted() {
       try {
-        const res = await axios.get('/api/notice/read', {
+        const res = await this.$axios.$get('/api/notice/read', {
           params: {
             uniqueId: this.param
           }
         });
-        this.content = res.data.data;
+        this.content = res.data;
       }
       catch (err) { console.log(err); }
     }

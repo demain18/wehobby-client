@@ -16,7 +16,7 @@ export default {
     async imageUploadSend(id, target, type) {
       try {
         if (this.isImageChange) {
-          await axios.post('/api/info/image/upload',
+          await this.$axios.$post('/api/info/image/upload',
           this.uploadFormData,
           {
             headers: {
@@ -43,7 +43,7 @@ export default {
           this.$router.push('/post/'+this.param);
         }
       }
-      catch (err) { alert(err.data.data.message) }
+      catch (err) { alert(err.response.data.message) }
     },
     handleFiles(e) {
       this.isImageChange = true;
@@ -67,6 +67,7 @@ export default {
         this.upload[0] = fileList;
         fileData.append('upload[0]', this.upload[0], this.upload[0].name);
         this.uploadFormData = fileData;
+
       }
       catch (err) { console.log(err) }
     }

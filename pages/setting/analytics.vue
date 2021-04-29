@@ -64,28 +64,28 @@
     async mounted() {
       try {
         for (let x=1; x<100; x++) {
-          const res = await axios.get('/api/board/read', {
+          const res = await this.$axios.$get('/api/board/read', {
             params: {
               page: x,
               uploader: (this.$cookies.get('user')).key
             }
           });
 
-          if (res.data.data.postItems.length > 0) {
-            for (let i=0; i<res.data.data.postItems.length; i++) {
+          if (res.data.postItems.length > 0) {
+            for (let i=0; i<res.data.postItems.length; i++) {
 
-              const postRes = await axios.get('/api/post/read', {
+              const postRes = await this.$axios.$get('/api/post/read', {
                 params: {
-                  id: res.data.data.postItems[i].key
+                  id: res.data.postItems[i].key
                 }
               });
 
               this.postData.push({
-                key: res.data.data.postItems[i].key,
-                title: res.data.data.postItems[i].title,
+                key: res.data.postItems[i].key,
+                title: res.data.postItems[i].title,
                 count: {
-                  view: postRes.data.data.header.view,
-                  comment: this.undefinedConv(postRes.data.data.comments)
+                  view: postRes.data.header.view,
+                  comment: this.undefinedConv(postRes.data.comments)
                 }
               })
 

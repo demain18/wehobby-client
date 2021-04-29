@@ -140,12 +140,12 @@
       if (this.$cookies.isKey('user')) {
         this.user = this.$cookies.get('user');
         try {
-          const res = await axios.get('/api/profile/read', {
+          const res = await this.$axios.$get('/api/profile/read', {
             params: {
               id: this.user.key
             }
           });
-          this.user.image = res.data.data.imgRepre;
+          this.user.image = res.data.imgRepre;
         } 
         catch (err) {console.log(err)}
       }
@@ -156,8 +156,8 @@
       // city list read
       if (this.$cookies.get('city') != null) {
         try {
-          const res = await axios.get('/api/info/citys');
-          this.cityItems = res.data.data.citys;
+          const res = await this.$axios.$get('/api/info/citys');
+          this.cityItems = res.data.citys;
           this.cityItems.unshift({
             key: 0,
             name: '선택안함(전국)'

@@ -105,31 +105,31 @@
     async mounted() {
       // filter read
       try {
-        const filterRes = await axios.get('/api/info/filter', {
+        const filterRes = await this.$axios.$get('/api/info/filter', {
           params: {
             city: this.$cookies.get('city'),
             category: this.param.category
           }
         });
-        this.filterItems = filterRes.data.data;
+        this.filterItems = filterRes.data;
       }
       catch (err) { console.log(err.response.data.message); }
 
       // profile read
       try {
-        let res = await axios.get('/api/profile/read', {
+        let res = await this.$axios.$get('/api/profile/read', {
           params: {
             id: this.param.key
           }
         });
         this.data = {
-          repreImage: res.data.data.imgRepre,
-          nick: res.data.data.nickname,
-          bio: res.data.data.bio,
-          age: res.data.data.birth,
-          job: res.data.data.job,
-          sex: res.data.data.sex,
-          verify: res.data.data.vertify,       
+          repreImage: res.data.imgRepre,
+          nick: res.data.nickname,
+          bio: res.data.bio,
+          age: res.data.birth,
+          job: res.data.job,
+          sex: res.data.sex,
+          verify: res.data.vertify,       
         }
       } 
       catch (err) {console.log(err)}
@@ -151,14 +151,14 @@
     methods: {
       async postListRead() {
         try {
-          const postListRes = await axios.get('/api/board/read', {
+          const postListRes = await this.$axios.$get('/api/board/read', {
             params: {
               page: this.param.page,
               uploader: this.param.key
             }
           });
-          this.postData.count = postListRes.data.data.count;
-          this.postData.items = postListRes.data.data.postItems;
+          this.postData.count = postListRes.data.count;
+          this.postData.items = postListRes.data.postItems;
         }
         catch (err) { console.log(err); }
       },

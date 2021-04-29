@@ -71,7 +71,7 @@
           }
           this.sendLoading = true;
 
-          const res = await axios.post('/api/auth/register', {
+          const res = await this.$axios.$post('/api/auth/register', {
             email: this.form.email,
             nickname: this.form.nickname,
             id: this.form.id,
@@ -82,7 +82,7 @@
           });
 
           // token gen
-          this.token = res.data.data.token;
+          this.token = res.data.token;
           if (this.$cookies.isKey('token')) {
             this.$cookies.remove('token');
             this.$cookies.set('token', this.token, '30d');
@@ -90,7 +90,7 @@
             this.$cookies.set('token', this.token, '30d');
           }
 
-          const profileRes = await axios.post('/api/profile/read', 
+          const profileRes = await this.$axios.$post('/api/profile/read', 
           {}, 
           {
             headers: {
@@ -98,9 +98,9 @@
             }
           });
           let userData = {
-            key: parseInt(profileRes.data.data.key),
-            nickname: profileRes.data.data.nickname,
-            image: profileRes.data.data.imgRepre,
+            key: parseInt(profileRes.data.key),
+            nickname: profileRes.data.nickname,
+            image: profileRes.data.imgRepre,
           }
 
           // userData gen

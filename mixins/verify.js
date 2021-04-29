@@ -16,16 +16,17 @@ export default {
     async isVerify() {
       if (this.$cookies.isKey('token')) {
         try {
-          const res = await axios.post('/api/auth/verify', {}, {
+          const res = await this.$axios.$post('/api/auth/verify', {}, {
             headers: {
               token: this.$cookies.get('token'),
             }
           });
-          if (res.data.result) {
+          if (res.result) {
             this.token.verify = true;
           }
         }
         catch (err) { 
+          // console.log(err)
           this.logout();
           this.token.verify = false;
         }
@@ -36,7 +37,7 @@ export default {
     },
     async logout() {
       try {
-        await axios.post('/api/auth/logout', {}, {
+        await this.$axios.$post('/api/auth/logout', {}, {
           headers: {
             token: this.$cookies.get('token')
           }}

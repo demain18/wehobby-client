@@ -222,22 +222,22 @@
     methods: {
       async postRead() {
         try {
-          const postRes = await axios.get('/api/post/read', {
+          const postRes = await this.$axios.$get('/api/post/read', {
             params: {
               id: this.param
             }
           });
-          this.data = postRes.data.data;
+          this.data = postRes.data;
           this.uploader = this.data.header.uploader;
-          this.postUploaderKey = postRes.data.data.header.uploader.key;
+          this.postUploaderKey = postRes.data.header.uploader.key;
 
           // contact isable check
-          let contactsArr = postRes.data.data.header.contacts;
+          let contactsArr = postRes.data.header.contacts;
           if (
             contactsArr.length==0 || // 등록된 contact이 없거나
             // contactsArr==false || // recruitable이 false거나
-            (postRes.data.data.header.contacts[0].desc==null 
-            && postRes.data.data.header.contacts[1].desc==null)
+            (postRes.data.header.contacts[0].desc==null 
+            && postRes.data.header.contacts[1].desc==null)
           )
           {
             this.contactsIsEmpty = true;
@@ -287,8 +287,8 @@
       },
       async genreRead() {
         try {
-          const filterRes = await axios.get('/api/info/category');
-          let filterItems = filterRes.data.data;
+          const filterRes = await this.$axios.$get('/api/info/category');
+          let filterItems = filterRes.data;
           if (this.data.header.categoryDetail != 0) {
             let genreObj = filterItems.find(obj => obj.key == this.data.header.category).detail;
             this.header.genre = genreObj.find(obj => obj.key == this.data.header.categoryDetail).name;
@@ -298,17 +298,17 @@
       },
       async areaAndSubwayRead() {
         try {
-          const cityRes = await axios.get('/api/info/citys/detail', {
+          const cityRes = await this.$axios.$get('/api/info/citys/detail', {
             params: {
               city: this.data.header.city
             }
           });
 
           if (this.data.header.districtRegion != 0) {
-            this.header.area = cityRes.data.data.area.find(obj => obj.key == this.data.header.districtRegion).name;
+            this.header.area = cityRes.data.area.find(obj => obj.key == this.data.header.districtRegion).name;
           }
           if (this.data.header.subway != 0) {
-            this.header.subway = cityRes.data.data.subways.find(obj => obj.key == this.data.header.subway).name+'역';
+            this.header.subway = cityRes.data.subways.find(obj => obj.key == this.data.header.subway).name+'역';
           }
         }
         catch (err) { console.log(err); }
@@ -324,7 +324,7 @@
             token = null;
           }
 
-          await axios.get('/api/post/view', {
+          await this.$axios.$get('/api/post/view', {
             params: {
               tableId: this.param,
               action: 'view',
@@ -339,7 +339,7 @@
       },
       async recruitQuit() {
         try {
-          await axios.post('/api/post/terminate/recruit', {
+          await this.$axios.$post('/api/post/terminate/recruit', {
             id: this.param
           },
           {headers: {token: this.$cookies.get('token')}});
@@ -355,7 +355,7 @@
         let confirmRes = confirm('정말 게시물을 삭제하시겠습니까?');
         if (confirmRes == true) {
           try {
-            await axios.post('/api/post/delete', {
+            await this.$axios.$post('/api/post/delete', {
               id: this.param
             },
             {headers: {token: this.$cookies.get('token')}});
@@ -381,7 +381,7 @@
           return;
         }
         try {
-          await axios.post('/api/comment/insert', {
+          await this.$axios.$post('/api/comment/insert', {
             id: this.param,
             desc: this.select.comment.desc
           },
@@ -398,7 +398,7 @@
       },    
       async commentEdit(index) {
         try {
-          await axios.post('/api/comment/update', {
+          await this.$axios.$post('/api/comment/update', {
             id: this.data.comments[index].key,
             desc: this.select.comment.descEdit
           },
@@ -410,7 +410,7 @@
       },
       async commentDel(commentKey) {
         try {
-          await axios.post('/api/comment/delete', {
+          await this.$axios.$post('/api/comment/delete', {
             id: commentKey
           },
           {headers: {token: this.$cookies.get('token')}});
@@ -423,16 +423,16 @@
         let cityName=null; 
 
         // category name read
-        const categoryRes = await axios.get('/api/info/category');
-        categoryName = categoryRes.data.data.find(ele => ele.key == this.data.header.category).name;
+        const categoryRes = await this.$axios.$get('/api/info/category');
+        categoryName = categoryRes.data.find(ele => ele.key == this.data.header.category).name;
 
         // city name read
         if (this.$cookies.isKey('city')!=true || this.$cookies.get('city')==0) {
           cityName = '전국';
         } 
         else {
-          const citysRes = await axios.get('/api/info/citys');
-          cityName = citysRes.data.data.citys.find(ele => ele.key == this.data.header.city).name;
+          const citysRes = await this.$axios.$get('/api/info/citys');
+          cityName = citysRes.data.citys.find(ele => ele.key == this.data.header.city).name;
         }
 
         this.$store.commit('urls/setList', {

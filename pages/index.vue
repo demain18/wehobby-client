@@ -157,7 +157,7 @@
       if (this.$cookies.isKey('city')==true) {
         try {
           // const res1 = await this.$this.$axios.$$get('/api/info/citys'); console.log(res1)
-          const res = await this.$axios.$get('/api/info/citys'); console.log(res)
+          const res = await this.$axios.$get('/api/info/citys');
           let cityList = res.data.citys;
           cityList.unshift({
             key: 0,

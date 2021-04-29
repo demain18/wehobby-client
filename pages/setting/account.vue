@@ -128,21 +128,21 @@
     methods: {
       async authRead() {
         try {
-          const res = await axios.post('/api/auth/read', {}, {headers: {token: this.$cookies.get('token')}});
+          const res = await this.$axios.$post('/api/auth/read', {}, {headers: {token: this.$cookies.get('token')}});
           this.select = {
-            email: res.data.data.email,
-            id: res.data.data.user_id,
+            email: res.data.email,
+            id: res.data.user_id,
             pw: null,
             pwc: null,
             lang: null,
-            lang: res.data.data.lang_set,
+            lang: res.data.lang_set,
             social: null,
             alert: {
-              mail: res.data.data.mail_notify_set,
-              channel: res.data.data.kakao_notify_set
+              mail: res.data.mail_notify_set,
+              channel: res.data.kakao_notify_set
             }
           }
-          if (res.data.data.social=='google') {
+          if (res.data.social=='google') {
             console.log('isgoogle')
             this.select.social = true;
           }
@@ -151,7 +151,7 @@
       },
       async authEditSend() {
         try {
-          await axios.post('/api/auth/update', {
+          await this.$axios.$post('/api/auth/update', {
             email: this.select.email,
             pw: this.select.pw,
             pwc: this.select.pwc,
@@ -173,7 +173,7 @@
             confirm('계정이 삭제되었습니다.');
             try {
 
-              await axios.post('/api/auth/delete', {}, {
+              await this.$axios.$post('/api/auth/delete', {}, {
                 headers: {
                   token: this.$cookies.get('token'),
                 }}

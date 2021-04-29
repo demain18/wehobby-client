@@ -54,8 +54,8 @@
     async mounted() {
       // citys read
       try {
-        const res = await axios.get('/api/info/citys');
-        this.items = res.data.data.citys;
+        const res = await this.$axios.$get('/api/info/citys');
+        this.items = res.data.citys;
         this.items.unshift({
           key: 0,
           name: '선택안함(전국)'

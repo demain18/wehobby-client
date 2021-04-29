@@ -73,7 +73,7 @@
         } 
         else {
           try {
-            const res = await axios.post('/api/info/report', {
+            const res = await this.$axios.$post('/api/info/report', {
               tableName: this.tableName,
               tableId: this.tableId,
               type: this.select.type,

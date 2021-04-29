@@ -77,12 +77,12 @@
     async created() {
       this.param = this.$route.params.id;
       // image chips
-      // const res = await axios.get('/api/post/read', {
+      // const res = await this.$axios.$get('/api/post/read', {
       //   params: {
       //     id: this.param
       //   }
       // });
-      // res.data.data.images.forEach((item, index) => {
+      // res.data.images.forEach((item, index) => {
       //   this.select.upload[index] = { name: item }
       // });
     },
@@ -233,27 +233,27 @@
     async mounted() {
       // city read
       try {
-        const cityRes = await axios.get('/api/info/citys');
-        this.list.city = cityRes.data.data.citys;
+        const cityRes = await this.$axios.$get('/api/info/citys');
+        this.list.city = cityRes.data.citys;
       }
       catch (err) { console.log(err); }
 
       // category read
       try {
-        const categoryRes = await axios.get('/api/info/category');
-        this.list.category = categoryRes.data.data;
+        const categoryRes = await this.$axios.$get('/api/info/category');
+        this.list.category = categoryRes.data;
       }
       catch (err) { console.log(err); }
 
       // post raed
       try {
-        const postRes = await axios.get('/api/post/read', {
+        const postRes = await this.$axios.$get('/api/post/read', {
           params: {
             id: this.param
           }
         });
-        // console.log(postRes.data.data)
-        let data = postRes.data.data;
+        // console.log(postRes.data)
+        let data = postRes.data;
         this.select.city = data.header.city,
         this.select.area = data.header.districtRegion;
         this.select.subway = data.header.subway;
@@ -308,9 +308,9 @@
     methods: {
       async cityDataRead() {
         try {
-          const res = await axios.get('/api/info/citys/detail', {params: { city: this.select.city }});
-          this.list.area = res.data.data.area;
-          this.list.subway = res.data.data.subways;
+          const res = await this.$axios.$get('/api/info/citys/detail', {params: { city: this.select.city }});
+          this.list.area = res.data.area;
+          this.list.subway = res.data.subways;
         }
         catch (err) { console.log(err); }
       },
@@ -329,7 +329,7 @@
       async postEditSubmit() {
         if (this.select.submitAble == true) {
           try {
-            await axios.post('/api/post/update',
+            await this.$axios.$post('/api/post/update',
               {
                 id: this.param,
                 city: this.select.city,
