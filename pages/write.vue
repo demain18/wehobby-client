@@ -87,6 +87,7 @@
         [{ list: "ordered" }, { list: "bullet" }],
         // ["image", "code-block"]
       ],
+      param: null,
       select: {
         city: null,
         area: null,
@@ -306,9 +307,10 @@
                 token: this.$cookies.get('token'),
               }}
             );
+            this.param = res.data.postIdKey;
             
             // image upload
-            this.imageUploadSend(res.data.postIdKey, 'post', 'upload');
+            this.imageUploadSend(this.param, 'post', 'upload');
           }
           catch (err) { console.log(err); }
         }
