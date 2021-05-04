@@ -53,10 +53,9 @@
           }
           this.sendLoading = true;
 
-          const res = await this.$axios.$post('/api/auth/login', 
-          {
-            "id": this.form.id,
-            "pw": this.form.pw
+          const res = await this.$axios.$post('/api/auth/login', {
+            id: this.form.id,
+            pw: this.form.pw
           });
           this.token = res.data.token;
 
@@ -67,13 +66,9 @@
             this.$cookies.set('token', this.token, '30d');
           }
 
-          const profileRes = await this.$axios.$post('/api/profile/read', 
-          {},
-          {
-            headers: {
-              token: this.$cookies.get('token'),
-            }
-          });
+          const profileRes = await this.$axios.$post('/api/profile/read', {},
+          {headers: {token: this.$cookies.get('token'),}});
+
           let userData = {
             key: parseInt(profileRes.data.key),
             nickname: profileRes.data.nickname,
