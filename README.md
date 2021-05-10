@@ -33,3 +33,14 @@ https://grafana.wehobby.kr
 
 ## Gabia Message
 https://my.gabia.com
+
+## Dinamic Routing
+dist폴더에 .htaccess파일 추가하고 아래 코드 삽입
+<!-- <ifModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule (.*) index.html [QSA,L]
+</ifModule> -->
+<!-- Header add Access-Control-Allow-Origin "*"
+Header add Access-Control-Allow-Methods: "GET,POST,OPTIONS,DELETE,PUT" -->

@@ -194,7 +194,7 @@
               category: this.param.category
             }
           });
-          this.filterItems = filterRes.data;
+          this.filterItems = filterRes.data; // 3
         }
         catch (err) { console.log(err.response.data.message); }
       },
