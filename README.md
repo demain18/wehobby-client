@@ -1,46 +1,18 @@
-# WeHobby
+# 🧩WeHobby
 
-## Build Setup
+<p align="center"><image src="assets/img/logo-img.png" width="300"/></p>
 
-```bash
-# install dependencies
-$ npm install
+> 같은 취미를 가진 사람들을 만나고 함께 즐겨보세요
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+# 소개
+<p align="center"><image src="assets/img/mainpage.png"/></p>
 
-# build for production and launch server
-$ npm run build
-$ npm run start - 이걸로 build된 프로젝트 실행
+[웹사이트](https://www.wehobby.kr)
 
-# generate static project
-$ npm run generate
-```
+<p>
+    위하비는 주변에 사는 사람들과 좋아하는 취미를 함께 즐길 수 있다면 어떨까, 라는 아이디어로부터 시작된 O2O기반의 웹 서비스 입니다. <br/>지하철 역과 지역구를 중심으로 회원을 모집할 수 있으며 같은 취미를 가진 사람을 모집하거나 사용하지 않는 중고 물품을 거래할 수 있습니다. 단순히 이성 상대를 찾기위한 서비스가 아닌 취미를 공유하고 이벤트를 개최하며 자체적인 생태계가 조성될 수 있도록 기획했습니다.
+</p>
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
-
-# Running/Edit
-
-## Monitoring
-https://grafana.wehobby.kr
-
-## Google Console
-없음
-
-## Google Adsense(happysugar180@gmail.com)
-<script data-ad-client="ca-pub-7099403550820594" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-: Code - 아직 업데이트 안됨
-
-## Gabia Message
-https://my.gabia.com
-
-## Dinamic Routing
-dist폴더에 .htaccess파일 추가하고 아래 코드 삽입
-<!-- <ifModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule (.*) index.html [QSA,L]
-</ifModule> -->
-<!-- Header add Access-Control-Allow-Origin "*"
-Header add Access-Control-Allow-Methods: "GET,POST,OPTIONS,DELETE,PUT" -->
+# 패치노트
+## 1.0.0
+- 최초 기능이 포함된 첫 배포 릴리즈입니다.
