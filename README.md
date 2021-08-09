@@ -15,7 +15,7 @@
     단순히 이성 상대를 찾기위한 서비스가 아닌 취미를 공유하고 이벤트를 개최하며 자체적인 생태계가 조성될 수 있도록 기획했습니다.
 </p>
 
-# Tech Stack
+# Dev Environment
 ## Front-end
 - HTML, CSS, Sass, Javascript ES6
 - Vue.js, Nuxt.js
