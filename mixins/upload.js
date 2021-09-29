@@ -14,6 +14,7 @@ export default {
   },
   methods: {
     async imageUploadSend(id, target, type) {
+      // console.log(this.param)
       try {
         if (this.isImageChange) {
           await this.$axios.$post('/api/info/image/upload',
@@ -30,7 +31,7 @@ export default {
               if (progress==100) {
                 if (target=='post') 
                 {
-                  this.$router.push('/post/'+this.param);
+                  this.$router.push('/post/'+id);
                 }
                 else if (target=='auth') 
                 {
@@ -40,10 +41,13 @@ export default {
             }
           });
         } else if (this.isImageChange!=true && target=='post') {
-          this.$router.push('/post/'+this.param);
+          this.$router.push('/post/'+id);
         }
       }
-      catch (err) { alert(err.response.data.message) }
+      catch (err) { 
+        // return false;
+        alert(err.response.data.message);
+      }
     },
     handleFiles(e) {
       this.isImageChange = true;
@@ -55,7 +59,7 @@ export default {
           fileData.append('upload['+index+']', this.upload[index], this.upload[index].name);
         });
         this.uploadFormData = fileData;
-        console.log(this.upload)
+        // console.log(this.upload)
       }
       catch (err) { console.log(err) }
     },
@@ -67,7 +71,6 @@ export default {
         this.upload[0] = fileList;
         fileData.append('upload[0]', this.upload[0], this.upload[0].name);
         this.uploadFormData = fileData;
-
       }
       catch (err) { console.log(err) }
     }

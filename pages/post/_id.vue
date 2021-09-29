@@ -78,7 +78,7 @@
             <v-icon small class="icon">mdi-bell</v-icon>신고하기
           </a>
           <span v-if="userKey == postUploaderKey">
-            <nuxt-link v-if="userKey == postUploaderKey" :to="'/edit/'+param" class="btn">
+            <nuxt-link v-if="userKey == postUploaderKey" :to="'/editor?page='+param" class="btn">
               <v-icon small class="icon">mdi-pencil</v-icon>수정하기
             </nuxt-link>
             <a @click="postDel(param)" class="btn">

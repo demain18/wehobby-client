@@ -72,6 +72,7 @@
           let userData = {
             key: parseInt(profileRes.data.key),
             nickname: profileRes.data.nickname,
+            id: profileRes.data.user_id,
             image: profileRes.data.imgRepre,
           }
           if (this.$cookies.isKey('user')) {
