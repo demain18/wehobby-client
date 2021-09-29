@@ -9,7 +9,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'WeHobby' },
       { name: 'google-signin-client_id', content: '616505649106-lli8nqfqdv9acjae00bve7cdtb4gfhhu.apps.googleusercontent.com' }
     ],
     link: [

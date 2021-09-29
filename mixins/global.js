@@ -89,7 +89,9 @@ export default {
           '<em>',
           '</em>',
           '<u>',
-          '</u>'
+          '</u>',
+          '<br>',
+          '</br>'
         ]
         for (let i = 0; i < list.length; i++) {
           desc = desc.split(list[i]).join('');
