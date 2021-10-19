@@ -56,7 +56,33 @@
         <vue-editor v-model="select.desc" :editor-toolbar="customToolbar" class="textarea" />
         <!-- <v-textarea v-model="select.desc" solo label="이곳에 본문을 작성해주세요" rows="7" class="textarea"></v-textarea> -->
 
-        <v-btn :disabled="select.submitAble == false" @click="(Object.keys(param).length>0) ? postEditSubmit() : postWriteSubmit()" depressed class="btn-main-color">
+        <!-- <v-btn 
+          :disabled="select.submitAble == false" 
+          @click="(Object.keys(param).length>0) ? postEditSubmit() : postWriteSubmit()"
+          
+          depressed 
+          class="btn-main-color"
+        >
+          등록
+        </v-btn> -->
+        <v-btn 
+          :disabled="select.submitAble==false" 
+          :loading="select.submitIsLoading"
+          @click="postEditSubmit(); select.submitIsLoading=true;"
+          v-if="(Object.keys(param).length>0)"
+          depressed 
+          class="btn-main-color"
+        >
+          수정
+        </v-btn>
+        <v-btn 
+          :disabled="select.submitAble==false"
+          :loading="select.submitIsLoading"
+          @click="postWriteSubmit(); select.submitIsLoading=true;"
+          v-else
+          depressed 
+          class="btn-main-color"
+        >
           등록
         </v-btn>
         <!-- <v-btn depressed>
@@ -110,6 +136,7 @@
         upload: [],
         desc: null,
         submitAble: false,
+        submitIsLoading: false,
       },
       // postUploader: {},
       rules: {
