@@ -5,7 +5,8 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s',
+    // titleTemplate: '%s',
+    title: '위하비 - 사람과 취미를 만나는 곳',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -17,7 +18,7 @@ export default {
     ],
     script: [
       { hid: 'stripe', src: 'https://apis.google.com/js/platform.js', sync: true, defer: true }, // google social login
-      { hid: 'stripe', src: 'https://www.googletagmanager.com/gtag/js?id=G-4899MQZJJT', sync: true }
+      { hid: 'stripe', src: 'https://www.googletagmanager.com/gtag/js?id=G-4899MQZJJT', sync: true } // google tag manager
     ]
   },
 

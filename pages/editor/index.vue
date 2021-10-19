@@ -66,9 +66,9 @@
           등록
         </v-btn> -->
         <v-btn 
-          :disabled="select.submitAble==false" 
-          :loading="select.submitIsLoading"
-          @click="postEditSubmit(); select.submitIsLoading=true;"
+          :disabled="submitAble==false" 
+          :loading="submitIsLoading"
+          @click="postEditSubmit(); submitIsLoading=true;"
           v-if="(Object.keys(param).length>0)"
           depressed 
           class="btn-main-color"
@@ -76,9 +76,9 @@
           수정
         </v-btn>
         <v-btn 
-          :disabled="select.submitAble==false"
-          :loading="select.submitIsLoading"
-          @click="postWriteSubmit(); select.submitIsLoading=true;"
+          :disabled="submitAble==false"
+          :loading="submitIsLoading"
+          @click="postWriteSubmit(); submitIsLoading=true;"
           v-else
           depressed 
           class="btn-main-color"
@@ -135,9 +135,10 @@
         ],
         upload: [],
         desc: null,
-        submitAble: false,
-        submitIsLoading: false,
       },
+      editAble: true,
+      submitAble: false,
+      submitIsLoading: false,
       // postUploader: {},
       rules: {
         required: value => !!value || '비워둘 수 없는 항목입니다.',
@@ -249,18 +250,15 @@
       // post read for edit
       if (Object.keys(this.param).length>0) {
         this.postDataRead();
-        // // isUploader check
-        // if (this.$cookies.get('user').key!=this.postUploader.key) {
-        //   alert('자신의 게시물만 수정할 수 있습니다.');
-        //   this.$router.push('/');
-        // }
       }
     },
     watch: {
       'select.city'(to, from) {
         this.cityDataRead();
-        this.select.area = null;
-        this.select.subway = null;
+        if (from!=null) {
+          this.select.area = null;
+          this.select.subway = null;
+        }
       },
       'select.category'(to, from) {
         this.list.categoryDetail = this.list.category[to-1].detail;
@@ -269,20 +267,22 @@
           this.list.options[this.select.category-1][1].name,
           this.list.options[this.select.category-1][2].name,
         ]
-        this.select.genre = null;
-        this.select.optionData = [
-          null,
-          null,
-          null
-        ];
+        if (from!=null) {
+          this.select.genre = null;
+          this.select.optionData = [
+            null,
+            null,
+            null
+          ];
+        }
       },
       select: {
         deep: true,
         handler() {
-          if (this.select.city != null && this.select.category != null && this.select.title != null && this.select.title != '') {
-            this.select.submitAble = true;
+          if (this.select.city!=null && this.select.category!=null && this.select.title!=null && this.select.title!='') {
+            this.submitAble = true;
           } else {
-            this.select.submitAble = false;
+            this.submitAble = false;
           }
         }
       }
@@ -318,15 +318,16 @@
           this.select.subway = data.header.subway;
           this.select.category = data.header.category;
           this.select.genre = data.header.categoryDetail;
-          this.select.optionData = [
-            data.header.options[0].content,
-            data.header.options[1].content,
-            data.header.options[2].content,
-          ];
+          this.select.optionData[0] = data.header.options[0].content;
+          this.select.optionData[1] = data.header.options[1].content;
+          this.select.optionData[2] = data.header.options[2].content;
           this.select.title = data.content.title;
           this.select.desc = data.content.desc;
           this.select.upload = data.images;
-          // this.postUploader = data.header.uploader;
+
+          // watch block once
+          // this.editAble = false;
+
           // isUploader check
           if (this.$cookies.get('user').key!=data.header.uploader.key) {
             alert('자신의 게시물만 수정할 수 있습니다.');
@@ -337,7 +338,7 @@
       },
       async postWriteSubmit() {
         // console.log('write')
-        if (this.select.submitAble == true) {
+        if (this.submitAble == true) {
           try {
             // post write
             const res = await this.$axios.$post('/api/post/insert',
@@ -366,7 +367,7 @@
         }
       },
       async postEditSubmit() {
-        if (this.select.submitAble == true) {
+        if (this.submitAble == true) {
           try {
             await this.$axios.$post('/api/post/update',
               {
