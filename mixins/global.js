@@ -6,7 +6,22 @@ export default {
     globalVal: true,
   }),
   methods: {
+    // findFilterKey(filterItem, index) {
+    //   if (filterItem=='area') 
+    //   {
+    //     return this.filterItems.citysArea[index].key;
+    //   } 
+    //   else if (filterItem=='subway') 
+    //   {
+    //     return this.filterItems.citysSubway[index].key;
+    //   } 
+    //   else if (filterItem=='genre') 
+    //   {
+    //     return this.filterItems.categoryDetail[index].key;
+    //   }
+    // },
     findKey(filterItem, index) {
+      // console.log(this.filterItems)
       if (index == undefined) {
         return index;
       } else {

@@ -4,7 +4,7 @@
     <div id="wrap">
       <div class="sel-filter">
         <BreadCrumb />
-        <h2 v-if="param.keyword != undefined">
+        <h2 v-if="param.keyword!=undefined && param.keyword!=''">
           "{{ param.keyword }}"의 검색결과({{ keywordCount }})
         </h2>
         <h2 v-else>
@@ -99,21 +99,20 @@
   import axios from 'axios';
   import qs from 'qs';
   import Vuecookies from 'vue-cookies';
-  // import moment from 'moment';
   import articleMixin from '~/mixins/global.js';
   Vue.use(Vuecookies);
 
   export default {
     mixins: [articleMixin],
     created() {
-      this.param = {
-        category: this.$route.query.category,
-        area: this.$route.query.area,
-        subway: this.$route.query.subway,
-        genre: this.$route.query.genre, // categoryDetail
-        keyword: this.$route.query.keyword,
-        page: this.$route.query.page,
-      }
+      // this.param = {
+      //   category: this.$route.query.category,
+      //   area: this.$route.query.area,
+      //   subway: this.$route.query.subway,
+      //   genre: this.$route.query.genre,
+      //   keyword: this.$route.query.keyword,
+      //   page: this.$route.query.page,
+      // }
     },
     data: () => ({
       cityKey: null,
@@ -133,9 +132,6 @@
         this.cityKey = this.$cookies.get('city');
       }
 
-      // filter read
-      this.filterRead();
-
       // city name read
       if (this.cityKey==0) {
         this.cityName = '전국';
@@ -147,14 +143,25 @@
         catch (err) { console.log(err); }
       }
 
-      // post list read
-      this.postListRead();
-      // breadcrumb update
+      // params read
+      this.paramsRead();
+      // breadcrumb read
       this.breadCrumbUpdate();
+      // content read
+      this.contentRead();
     },
     watch: {
       async $route(to, form) {
         // params update
+        this.paramsRead();
+        // breadcrumb update
+        this.breadCrumbUpdate();
+        // content read
+        this.contentRead();
+      }
+    },
+    methods: {
+      paramsRead() {
         this.param = {
           category: this.$route.query.category,
           area: this.$route.query.area,
@@ -163,15 +170,7 @@
           keyword: this.$route.query.keyword,
           page: this.$route.query.page,
         }
-        // breadcrumb update
-        this.breadCrumbUpdate();
-        // filter read
-        this.filterRead();
-        // postItems update
-        this.postListRead();
-      }
-    },
-    methods: {
+      },
       async breadCrumbUpdate() {
         try {
           const res = await this.$axios.$get('/api/info/category');
@@ -188,18 +187,28 @@
       },
       async filterRead() {
         try {
+          // console.log('filter read')
           const filterRes = await this.$axios.$get('/api/info/filter', {
             params: {
               city: this.cityKey,
               category: this.param.category
             }
           });
-          this.filterItems = filterRes.data; // 3
+          this.filterItems = filterRes.data;
+          // console.log(this.filterItems)
         }
-        catch (err) { console.log(err.response.data.message); }
+        catch (err) { console.log(err); }
       },
-      async postListRead() {
+      async contentRead() {
         try {
+          const filterRes = await this.$axios.$get('/api/info/filter', {
+            params: {
+              city: this.cityKey,
+              category: this.param.category
+            }
+          });
+          this.filterItems = filterRes.data;
+          
           const postListRes = await this.$axios.$get('/api/board/read', {
             params: {
               category: this.param.category, // static
@@ -219,15 +228,16 @@
             if (this.cityKey!=0) {
               this.postItems[i].options.unshift(this.findAreaName(i));
             }
-            // options sort by category
-            if (this.param.category == 2) {
+            // 카테고리 중고물품
+            if (this.param.category==2) {
               this.postItems[i].options = {
                 0: this.thousandComma(this.postItems[i].options[1]),
                 1: this.postItems[i].options[0],
                 2: this.postItems[i].options[2],
                 3: this.postItems[i].options[3],
               }
-            } else { // 1, 3, 4, 5
+            } 
+            else {
               this.postItems[i].options = {
                 0: this.postItems[i].options[0],
                 1: this.postItems[i].options[1],
@@ -239,6 +249,20 @@
         }
         catch (err) { console.log(err); }
       },
+      // filterFindKey(param, paramKey) {
+      //   if (paramKey==undefined) {
+      //     return paramKey;
+      //   } 
+      //   else {
+      //     if (param=='area') {
+      //       return this.filterItems.citysArea.find(ele => ele.key==this.param.area).key;
+      //     } else if (param=='subway') {
+      //       return this.filterItems.citysSubway.find(ele => ele.key==this.param.area).key;
+      //     } else if (param=='genre') {
+      //       return this.filterItems.categoryDetail.find(ele => ele.key==this.param.area).key;
+      //     }
+      //   }
+      // },
       async pageLink(ele, key) {
         this.param[ele] = key;
         if (key == null) {

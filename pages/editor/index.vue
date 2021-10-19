@@ -111,6 +111,7 @@
         desc: null,
         submitAble: false,
       },
+      // postUploader: {},
       rules: {
         required: value => !!value || '비워둘 수 없는 항목입니다.',
       },
@@ -221,6 +222,11 @@
       // post read for edit
       if (Object.keys(this.param).length>0) {
         this.postDataRead();
+        // // isUploader check
+        // if (this.$cookies.get('user').key!=this.postUploader.key) {
+        //   alert('자신의 게시물만 수정할 수 있습니다.');
+        //   this.$router.push('/');
+        // }
       }
     },
     watch: {
@@ -273,28 +279,34 @@
       },
       async postDataRead() {
         try {
-            const postRes = await this.$axios.$get('/api/post/read', {
-              params: {
-                id: this.param.page
-              }
-            });
-            // console.log(postRes.data)
-            let data = postRes.data;
-            this.select.city = data.header.city,
-            this.select.area = data.header.districtRegion;
-            this.select.subway = data.header.subway;
-            this.select.category = data.header.category;
-            this.select.genre = data.header.categoryDetail;
-            this.select.optionData = [
-              data.header.options[0].content,
-              data.header.options[1].content,
-              data.header.options[2].content,
-            ];
-            this.select.title = data.content.title;
-            this.select.desc = data.content.desc;
-            this.select.upload = data.images;
+          const postRes = await this.$axios.$get('/api/post/read', {
+            params: {
+              id: this.param.page
+            }
+          });
+          console.log(postRes.data)
+          let data = postRes.data;
+          this.select.city = data.header.city,
+          this.select.area = data.header.districtRegion;
+          this.select.subway = data.header.subway;
+          this.select.category = data.header.category;
+          this.select.genre = data.header.categoryDetail;
+          this.select.optionData = [
+            data.header.options[0].content,
+            data.header.options[1].content,
+            data.header.options[2].content,
+          ];
+          this.select.title = data.content.title;
+          this.select.desc = data.content.desc;
+          this.select.upload = data.images;
+          // this.postUploader = data.header.uploader;
+          // isUploader check
+          if (this.$cookies.get('user').key!=data.header.uploader.key) {
+            alert('자신의 게시물만 수정할 수 있습니다.');
+            this.$router.push('/');
           }
-          catch (err) { console.log(err); }
+        }
+        catch (err) { console.log(err); }
       },
       async postWriteSubmit() {
         // console.log('write')
