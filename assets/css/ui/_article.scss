@@ -20,6 +20,10 @@
   border-radius: 5px;
 }
 
+.article .img-repre-grayscale {
+  filter: opacity(50%);
+}
+
 .article .content {
   width: 100%;
   margin-left: 10px;
@@ -27,6 +31,18 @@
   // white-space: nowrap;
   // overflow: hidden;
   // text-overflow: ellipsis;
+}
+
+.article .content-recruit-disable p {
+  color: #cecece!important;
+}
+
+.article .content-recruit-disable p a {
+  color: #cecece!important;
+}
+
+.article .content-recruit-disable p span.bold {
+  color: #cecece!important;
 }
 
 .article .content .title {

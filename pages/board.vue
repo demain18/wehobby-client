@@ -58,8 +58,8 @@
           <div class="article-wrap">
 
             <div class="article" v-for="(item, index) in postItems" v-bind:key="index">
-              <nuxt-link :to="'/post/'+item.key" style="height: 80px;"><img :src="repreImageRead(item.imageRepre)" class="img-repre"></nuxt-link>
-              <div class="content">
+              <nuxt-link :to="'/post/'+item.key" style="height: 80px;"><img :src="repreImageRead(item.imageRepre)" class="img-repre" :class="{'img-repre-grayscale':item.recruit=='0'}"></nuxt-link>
+              <div class="content" :class="{'content-recruit-disable':item.recruit=='0'}">
                 <p class="title"><nuxt-link :to="'/post/'+item.key">{{ item.title }}</nuxt-link></p>
                 <p class="info" v-if="cityKey!=0">
                   <span v-if="item.options[0] != ''" class="bold" v-text="thousandComma(item.options[0], null)"></span><span v-if="item.options[0] != '' && item.options[1] != ''"> · </span>
