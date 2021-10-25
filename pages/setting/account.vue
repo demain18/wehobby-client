@@ -188,7 +188,7 @@
           }
         }
         else if (idConfirm == null) {
-          confirm('취소되었습니다.');
+          confirm('회원탈퇴가 취소되었습니다.');
         }
         else if (idConfirm != this.select.id) {
           confirm('아이디를 정확히 입력해주세요.');

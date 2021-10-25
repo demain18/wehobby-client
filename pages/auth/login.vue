@@ -39,6 +39,7 @@
         id: null,
         pw: null,
       },
+      oauthForm: {},
       sendLoading: false
     }),
     mounted() {
@@ -49,7 +50,7 @@
         try {
           if (this.form.id=='' || this.form.pw=='') {
             alert('아이디와 비밀번호를 모두 입력해주세요.');
-            return;
+            throw {};
           }
           this.sendLoading = true;
 
@@ -93,12 +94,16 @@
       },
       // 로그인 상태인 google 계정이 있으면 자동실행
       onSignIn(googleUser) {
-        // console.log(googleUser);
-        let userData = googleUser.gt;
-        this.form = {
-          id: userData.GS,
-          pw: userData.GS,
-        }
+        this.oauthForm = googleUser;
+        console.log(googleUser)
+        // let userData = googleUser.nt;
+        // this.form = {
+        //   id: userData.ut,
+        //   pw: userData.ut,
+        // }
+        this.form.id = googleUser.wa;
+        this.form.pw = googleUser.wa;
+        console.log(this.form)
         this.loginSend();
       },
     }

@@ -67,7 +67,7 @@
         try {
           if (this.form.check != true) {
             alert('개인정보 처리방침 및 이용약관에 동의해주세요.');
-            return; // stop async method
+            throw {}; // stop async method
           }
           this.sendLoading = true;
 
@@ -121,18 +121,19 @@
         document.getElementsByClassName('abcRioButton')[0].click();
       },
       onSignIn(googleUser) {
-        console.log(googleUser);
-        let userData = googleUser.gt;
+        console.log(googleUser)
+        let userData = googleUser.nt;
         this.form = {
-          nickname: userData.rU,
-          id: userData.GS,
-          pw: userData.GS,
-          pwc: userData.GS,
-          email: userData.Rt,
-          name: userData.rU,
+          nickname: userData.Re,
+          id: userData.uT,
+          pw: userData.uT,
+          pwc: userData.uT,
+          email: userData.Yt,
+          name: userData.Re,
           oauth: 'google',
           check: true,
         }
+        console.log(this.form)
         this.registerSend();
       },
     }
