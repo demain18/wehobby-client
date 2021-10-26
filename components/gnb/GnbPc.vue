@@ -1,30 +1,13 @@
 <template>
   <div class="pc" data-app>
     <DialogCity/>
-    <!-- <nuxt-link class="item lft logo" to="/">WeHobby</nuxt-link> -->
+    <v-btn data-width="150" data-onsuccess="onSignIn" id="google-signin-btn" style="display:none;"></v-btn>
+    
     <nuxt-link class="item lft logo" to="/">
       <img src="~assets/img/logo-img.png" style="width:100px; position:relative; top:4px;">
     </nuxt-link>
     <span v-if="city != null"  v-on:click="toggleCityDialog()" class="item lft span-a-tag">{{ city }}</span>
     <span v-if="city == null" v-on:click="toggleCityDialog()" class="item lft span-a-tag">도시 선택</span>
-
-    <!-- <v-menu open-on-hover middle offset-y>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn depressed class="item lft" style="margin-top: 5px;" v-bind="attrs" v-on="on">
-          바로가기
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-item v-for="(item, index) in routeItems" :key="index">
-          <nuxt-link :to="item.url">
-            {{ item.title }}
-            (
-            {{ item.url }}
-            )
-          </nuxt-link>
-        </v-list-item>
-      </v-list>
-    </v-menu> -->
 
     <span class="item mid" v-if="path=='/'">
       <a @click="pageLink(1)">회원 모집</a>
@@ -40,8 +23,6 @@
       <a @click="pageLink(4)" v-bind:class="{active: list.category.key==4}">재능교환/판매</a>
       <a @click="pageLink(5)" v-bind:class="{active: list.category.key==5}">이벤트</a>
     </span>
-
-    <v-btn data-width="150" data-onsuccess="onSignIn" id="google-signin-btn" style="display:none;"></v-btn>
     
     <v-menu v-if="token.verify == true" left offset-y>
       <template v-slot:activator="{ on, attrs }">
@@ -133,10 +114,16 @@
       path: null
     }),
     async mounted() {
+
       // token verify
       this.isVerify();
 
-      // user data read
+      // google oauth load
+      gapi.signin2.render("google-signin-btn", {
+        onsuccess: this.onSignIn
+      });
+
+      // user info read
       if (this.$cookies.isKey('user')) {
         this.user = this.$cookies.get('user');
         try {
@@ -166,11 +153,6 @@
         }
         catch (err) { console.log(err); }
       }
-
-      // oauth load
-      gapi.signin2.render("google-signin-btn", {
-        onsuccess: this.onSignIn
-      });
 
       // route list read
       this.$router.options.routes.forEach(route => {

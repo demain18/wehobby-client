@@ -17,8 +17,9 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/logo.ico' },
     ],
     script: [
-      { hid: 'stripe', src: 'https://apis.google.com/js/platform.js', sync: true, defer: true }, // google social login
-      { hid: 'stripe', src: 'https://www.googletagmanager.com/gtag/js?id=G-4899MQZJJT', sync: true } // google tag manager
+      { hid: 'stripe', src: 'https://apis.google.com/js/platform.js', sync: true, defer: true }, // google oauth sdk
+      { hid: 'stripe', src: 'https://www.googletagmanager.com/gtag/js?id=G-4899MQZJJT', sync: true }, // google tag manager
+      { hid: 'stripe', src: 'https://developers.kakao.com/sdk/js/kakao.js', sync: true, defer: true } // kakao oatuh sdk
     ]
   },
 
