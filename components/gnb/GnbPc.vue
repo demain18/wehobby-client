@@ -4,7 +4,7 @@
     <v-btn data-width="150" data-onsuccess="onSignIn" id="google-signin-btn" style="display:none;"></v-btn>
     
     <nuxt-link class="item lft logo" to="/">
-      <img src="~assets/img/logo-img.png" style="width:100px; position:relative; top:4px;">
+      <img src="~assets/img/logo.png" style="width:100px; position:relative; top:4px;">
     </nuxt-link>
     <span v-if="city != null"  v-on:click="toggleCityDialog()" class="item lft span-a-tag">{{ city }}</span>
     <span v-if="city == null" v-on:click="toggleCityDialog()" class="item lft span-a-tag">도시 선택</span>
@@ -122,6 +122,9 @@
       gapi.signin2.render("google-signin-btn", {
         onsuccess: this.onSignIn
       });
+
+      // kakao oauth load
+      // window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
 
       // user info read
       if (this.$cookies.isKey('user')) {

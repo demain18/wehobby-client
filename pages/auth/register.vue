@@ -27,21 +27,14 @@
 
       <div class="w-btn" @click="googleRegister()">
         <img src="~assets/img/static/logo-google.png" class="logo-social">
-        Google으로 계정 생성하기
+        Google으로 시작하기
       </div>
       <v-btn id="google-signin-btn" depressed rounded large class="social-google" data-width="150" data-onsuccess="onSignIn" style="display:none;"></v-btn>
 
       <div class="w-btn btn-kakao" @click="kakaoRegister()">
         <img src="~assets/img/static/logo-kakao-long.png" class="logo-social">
-        카카오로 계정 생성하기
+        카카오계정으로 시작하기
       </div>
-      <!-- <a id="custom-login-btn" href="javascript:loginWithKakao()">
-        <img
-          src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
-          width="222"
-        />
-      </a>
-      <p id="token-result"></p> -->
     </div>
 
   </div>
@@ -52,11 +45,12 @@
   import axios from 'axios';
   import qs from 'qs';
   import verifyMixin from '~/mixins/verify.js';
+  import oauthMixin from '~/mixins/oauth.js';
   import Vuecookies from 'vue-cookies';
   Vue.use(Vuecookies);
 
   export default {
-    mixins: [verifyMixin],
+    mixins: [verifyMixin, oauthMixin],
     data: () => ({
       form: {
         nickname: null,
@@ -65,79 +59,20 @@
         pwc: null,
         email: null,
         check: false,
-        // oauth field
         name: null,
         oauth: null,
       },
       list: null,
       sendLoading: false,
-      oauth: {
-        kakao: {}
-      },
-      redirectUri: {
-        dev: 'http://localhost:3000/auth/register',
-        deploy: null
-      }
+      // oauth
     }),
     async mounted() {
-      window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
+      // window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
 
-      // kakao oauth
-      let bodyQueryString = {
-        'grant_type': 'authorization_code',
-        'client_id': '8b57101aea076db519cf1d2e77e54a30',
-        'redirect_uri': this.redirectUri.dev,
-        'code': this.$route.query.code,
-        'client_secret': 'l25wcjyHChkjNsuSVFxMKPqh4svBMeuD'
-      }
-      let bodyString = 'https://kauth.kakao.com/oauth/token/?';
-
-      for (const[key, value] of Object.entries(bodyQueryString)) {
-        bodyString += `${key}=${value}&`;
-      }
-      bodyString = bodyString.slice(0, -1);
-      console.log(bodyString)
-
-
-      if (this.$route.query.code!=undefined) {
-        try {
-          const res = await this.$axios.$post(bodyString, 
-            {
-              
-            },
-            {
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
-              }
-            }
-          );
-        } 
-        catch (err) {
-          console.log(err)
-        }
-
-        // Kakao.Auth.setAccessToken(this.$route.query.code);
-
-        // this.oauth.kakao = Kakao.API.request({
-        //     url: '/v2/user/me',
-        //     data: {
-        //       property_keys: ["kakao_account.email","kakao_account.gender"]
-        //     },
-        //     success: function(res) {
-        //       console.log(res);
-        //     },
-        //     fail: function(err) {
-        //       console.log(err);
-        //     }
-        // });
-        // console.log(this.oauth)
-      }
+      // kakao code in oauthMixin
     },
     methods: {
-      // google oauth
-      googleRegister() {
-        document.getElementsByClassName('abcRioButton')[0].click();
-      },
+      // google userInfo load
       onSignIn(googleUser) {
         console.log(googleUser)
         let userData = googleUser.nt;
@@ -154,17 +89,11 @@
         console.log(this.form)
         this.registerSend();
       },
-      // kakao oauth
-      kakaoRegister() {
-        Kakao.Auth.authorize({
-          redirectUri: this.redirectUri.dev
-        });
-      },
       async registerSend() {
         try {
-          if (this.form.check != true) {
+          if (this.form.check!=true) {
             alert('개인정보 처리방침 및 이용약관에 동의해주세요.');
-            throw {}; // stop async method
+            throw {}; // stop try/catch
           }
           this.sendLoading = true;
 
@@ -178,7 +107,7 @@
             oauth: this.form.oauth
           });
 
-          // token gen
+          // token cookie
           this.token = res.data.token;
           if (this.$cookies.isKey('token')) {
             this.$cookies.remove('token');
@@ -187,6 +116,7 @@
             this.$cookies.set('token', this.token, '30d');
           }
 
+          // user cookie
           const profileRes = await this.$axios.$post('/api/profile/read', 
           {}, 
           {
@@ -199,8 +129,6 @@
             nickname: profileRes.data.nickname,
             image: profileRes.data.imgRepre,
           }
-
-          // userData gen
           if (this.$cookies.isKey('user')) {
             this.$cookies.remove('user');
             this.$cookies.set('user', userData, '30d');
@@ -220,7 +148,6 @@
 </script>
 
 <style scoped lang="scss">
-  // @import '~assets/css/common.scss';
   @import '~assets/css/auth.css';
   @import '~assets/css/mobile/auth.css';
 

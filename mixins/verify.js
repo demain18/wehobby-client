@@ -43,8 +43,17 @@ export default {
           }}
         );
 
-        // oauth signout
+        // google oauth signout
         this.googleSignOut();
+
+        // kakao oauth signout
+        window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
+        if (!Kakao.Auth.getAccessToken()) {
+          console.log('kakao oauth has not logged in.');
+        }
+        Kakao.Auth.logout(function() {
+          console.log(Kakao.Auth.getAccessToken());
+        });
 
         // remove cookie
         this.$cookies.remove('token');

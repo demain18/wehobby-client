@@ -1,8 +1,8 @@
 <template>
   <div class="text-center">
-    <v-dialog v-model="dialog" @click:outside="toggleDialog()" width="800">
+    <v-dialog v-model="dialog" @click:outside="toggleDialog()" width="1000">
 
-      <v-carousel v-model="index" height="600">
+      <v-carousel v-model="index" height="700">
         <v-carousel-item v-for="(item, index) in slide" :key="index" :src="item"></v-carousel-item>
       </v-carousel>
 

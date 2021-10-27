@@ -3,7 +3,7 @@
     <v-app-bar-nav-icon class="icon-left-menu" @click.stop="toggle()"></v-app-bar-nav-icon>
     <!-- <nuxt-link class="item mid logo" to="/">동네친구</nuxt-link> -->
     <nuxt-link class="item mid logo" to="/">
-      <img src="~assets/img/logo-img.png" style="width:100px; position:relative; top:4px;">
+      <img src="~assets/img/logo.png" style="width:100px; position:relative; top:4px;">
     </nuxt-link>
   </div>
 </template>
