@@ -10,13 +10,17 @@ export default {
         login: 'http://localhost:3000/auth',
         register: 'http://localhost:3000/auth/register',
       },
-      // deploy: 'https://wehobby.kr/auth/register'
+      deploy: {
+        login: '',
+        register: ''
+      }
     },
   }),
   async mounted(){
     // kakaoRegister() active
     if (this.$route.query.code!=undefined) {
       try {
+        this.formDisplay = false;
         window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
         let bodyRedirectUri = '';
         if(this.$route.name=='auth') {
@@ -54,16 +58,16 @@ export default {
         });
         await userInfo; // promise -> object
 
+        // 로그인 실행
         if(this.$route.name=='auth') {
-          // 로그인 실행
           this.form = {
             id: userInfo._result.id,
             pw: userInfo._result.id,
           }
           this.loginSend();
         }
+        // 회원가입 실행
         else if (this.$route.name=='auth-register') {
-          // 회원가입 실행
           this.form = {
             nickname: userInfo._result.kakao_account.profile.nickname,
             id: userInfo._result.id,

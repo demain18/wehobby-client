@@ -7,11 +7,16 @@
       <p class="sub">인연과 취미를 만나는 공간</p>
 
       <div class="forms">
-        <v-text-field v-model="form.nickname" placeholder="닉네임" hide-details="" class="input-form" solo flat></v-text-field>
-        <v-text-field v-model="form.id" placeholder="아이디" hide-details="" class="input-form" solo flat></v-text-field>
-        <v-text-field v-model="form.pw" placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
-        <v-text-field v-model="form.pwc" placeholder="비밀번호 확인" hide-details="" class="input-form" solo flat></v-text-field>
-        <v-text-field v-model="form.email" placeholder="이메일" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-if="formDisplay" v-model="form.nickname" placeholder="닉네임" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-else placeholder="닉네임" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-if="formDisplay" v-model="form.id" placeholder="아이디" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-else placeholder="아이디" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-if="formDisplay" v-model="form.pw" placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-else placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-if="formDisplay" v-model="form.pwc" placeholder="비밀번호 확인" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-else placeholder="비밀번호 확인" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-if="formDisplay" v-model="form.email" placeholder="이메일" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-else placeholder="이메일" hide-details="" class="input-form" solo flat></v-text-field>
       </div>
       <div class="form-agree">
         <v-checkbox v-model="form.check"></v-checkbox>
@@ -62,6 +67,7 @@
         name: null,
         oauth: null,
       },
+      formDisplay: false,
       list: null,
       sendLoading: false,
       // oauth

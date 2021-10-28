@@ -7,8 +7,10 @@
       <p class="sub">인연과 취미를 만나는 공간</p>
 
       <div class="forms">
-        <v-text-field v-model="form.id" @keyup.enter="loginSend()" placeholder="아이디" hide-details="" class="input-form" solo flat></v-text-field>
-        <v-text-field type="password" v-model="form.pw" @keyup.enter="loginSend()" placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-if="formDisplay" v-model="form.id" @keyup.enter="loginSend()" placeholder="아이디" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-else placeholder="아이디" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-if="formDisplay" v-model="form.pw" @keyup.enter="loginSend()" type="password" placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-else placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
       </div>
 
       <v-btn @click="loginSend()" :loading="sendLoading" depressed rounded large class="login">
@@ -50,13 +52,15 @@
         id: null,
         pw: null,
       },
+      formDisplay: true,
       sendLoading: false
     }),
     mounted() {
-      // window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
+      
     },
     methods: {
       onSignIn(googleUser) {
+        this.formDisplay = false;
         console.log(googleUser)
         this.form = {
           id: googleUser.wa,
