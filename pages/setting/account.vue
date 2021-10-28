@@ -38,8 +38,11 @@
             <p class="label">연동된 소셜 앱</p>
             <div class="content">
               
-              <div class="avator-facebook" v-if="select.social==true">
+              <div v-if="select.social=='google'" class="avator-google">
                 <img src="~assets/img/static/logo-google.png" width="100%">
+              </div>
+              <div v-else-if="select.social=='kakao'" class="avator-kakao">
+                <img src="~assets/img/static/logo-kakao.png" width="100%">
               </div>
               <div v-else style="color:#8d8d8d; font-size:14px;">
                 연동된 소셜앱이 없습니다
@@ -129,6 +132,7 @@
       async authRead() {
         try {
           const res = await this.$axios.$post('/api/auth/read', {}, {headers: {token: this.$cookies.get('token')}});
+          console.log(res)
           this.select = {
             email: res.data.email,
             id: res.data.user_id,
@@ -136,7 +140,7 @@
             pwc: null,
             lang: null,
             lang: res.data.lang_set,
-            social: null,
+            social: res.data.social,
             alert: {
               mail: res.data.mail_notify_set,
               channel: res.data.kakao_notify_set

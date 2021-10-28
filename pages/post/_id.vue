@@ -65,8 +65,8 @@
           </div>
 
           <div class="comment-write-wrap">
-            <v-text-field v-model="select.comment.desc" solo label="댓글을 작성하세요" clearable></v-text-field>
-            <v-btn @click="commentSend()" depressed class="submit">댓글 작성</v-btn>
+            <v-text-field v-model="select.comment.desc" solo label="이곳에 댓글을 작성해주세요" clearable></v-text-field>
+            <v-btn @click="commentSend()" depressed class="submit">등록</v-btn>
           </div>
         </div>
 

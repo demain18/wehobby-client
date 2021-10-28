@@ -94,14 +94,14 @@ export default {
     },
     // kakao login
     kakaoLogin() {
-      // window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
+      window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
       Kakao.Auth.authorize({
         redirectUri: this.redirectUri.dev.login
       });
     },
     // kakao register
     kakaoRegister() {
-      // window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
+      window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
       Kakao.Auth.authorize({
         redirectUri: this.redirectUri.dev.register
       });
