@@ -23,6 +23,36 @@
       <a @click="pageLink(4)" v-bind:class="{active: list.category.key==4}">재능교환/판매</a>
       <a @click="pageLink(5)" v-bind:class="{active: list.category.key==5}">이벤트</a>
     </span>
+
+    <!-- <div class="btn-alert">
+      <v-icon class="icon">mdi-bell</v-icon>
+    </div> -->
+
+    <v-menu v-if="token.verify == true" left offset-y>
+      <template v-slot:activator="{ on, attrs }">
+        <div class="btn-alert" v-bind="attrs" v-on="on">
+          <v-icon class="bel-icon">mdi-bell</v-icon>
+          <div v-if="alermList.length>0" class="alert-icon"></div>
+        </div>
+      </template>
+      <v-list dense class="dropdown-list">
+        <v-list-item>
+          <v-list-item-title class="title">알림</v-list-item-title>
+        </v-list-item>
+        <v-list-item-group color="primary">
+
+          <v-list-item @click="alermClear(item, false)" v-for="(item,i) in alermList" :key="i">
+            <v-list-item-title class="content">
+              {{ item.uploaderNick }}님이 회원물의 게시물에 "{{ item.commentDesc }}"라고 댓글을 남겼습니다.<span v-text="'('+agoCalc(item.date, item.time)+' 전)'"></span>
+              </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item @click="alermClear(null, true)">
+            <v-list-item-title style="color: #ff4e54; text-align: center!important;">모두 읽음</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-menu>
     
     <v-menu v-if="token.verify == true" left offset-y>
       <template v-slot:activator="{ on, attrs }">
@@ -31,12 +61,12 @@
         </v-avatar>
       </template>
       <v-list dense>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="title">{{ user.nickname }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item-group color="primary">
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title class="title">{{ user.nickname }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
           <v-list-item :to="'/profile/'+user.key">
             <v-list-item-content>
               <v-list-item-title>내 프로필 보기</v-list-item-title>
@@ -111,7 +141,8 @@
         'edit',
         'setting'
       ],
-      path: null
+      path: null,
+      alermList: []
     }),
     async mounted() {
 
@@ -137,6 +168,18 @@
           });
           this.user.image = res.data.imgRepre;
         } 
+        catch (err) {console.log(err)}
+      }
+
+      // alerm list read
+      if (this.$cookies.isKey('user')) {
+        try {
+          const res = await this.$axios.$post('/api/alerm/list/read', {}, {
+            headers: {token: this.$cookies.get('token')}
+          });
+          // console.log(res)
+          this.alermList = res.data;
+        }
         catch (err) {console.log(err)}
       }
 
@@ -175,6 +218,34 @@
       onSignIn(googleUser) {
         // console.log(googleUser.Rs);
       },
+      async alermClear(item, clearAll) {
+        try {
+          let data = {};
+          if (clearAll) {
+            data = {
+              authId: this.$cookies.get('user').key,
+              alermId: null,
+            }
+          } else {
+            data = {
+              authId: this.$cookies.get('user').key,
+              alermId: item.id,
+            }
+          }
+
+          const res = await this.$axios.$post('/api/alerm/update', data, 
+          {
+            headers: {token: this.$cookies.get('token')}
+          });
+
+          if (clearAll) {
+            window.location.href = '/';
+          } else {
+            window.location.href = `/post/${item.postIdKey}`;
+          }
+        }
+        catch (err) {console.log(err)}
+      }
     }
   }
 

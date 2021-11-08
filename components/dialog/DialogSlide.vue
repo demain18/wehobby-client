@@ -1,11 +1,13 @@
 <template>
   <div class="text-center">
-    <v-dialog v-model="dialog" @click:outside="toggleDialog()" width="1000">
-
+    <v-dialog 
+      v-model="dialog" 
+      @click:outside="toggleDialog()" 
+      width="1000"
+    >
       <v-carousel v-model="index" height="700">
         <v-carousel-item v-for="(item, index) in slide" :key="index" :src="item"></v-carousel-item>
       </v-carousel>
-
     </v-dialog>
   </div>
 </template>
@@ -26,9 +28,24 @@
     data: () => ({
       // dialog: false,
     }),
+    mounted() {
+      window.addEventListener('keydown', (e) => {
+        // console.log(e.key);
+        if (e.key=='ArrowLeft') {
+          console.log('[left]')
+          document.getElementsByClassName("v-btn--round").click();
+        } 
+        else if (e.key=='ArrowRight') {
+          console.log('right')
+        } 
+      });
+    },
     methods: {
       toggleDialog() {
         this.$store.commit('dialog/toggleSlideDialogActive');
+      },
+      btnPrev() {
+        console.log('prev clicked')
       }
     }
   }

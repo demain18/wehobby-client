@@ -22,8 +22,7 @@
           </div>
         </div>
 
-        <div class="content" v-html="data.content.desc" :class="{ contentMargin: data.images.length!=0}">
-        </div>
+        <div class="content" v-html="data.content.desc" :class="{contentMargin: data.images.length>0}"></div>
 
         <div class="comment-wrap">
           <div class="list">
@@ -275,10 +274,10 @@
           // breadcrumb update
           this.breadCrumbUpdate();
 
-          if (postRes.data.result == false) {
+          if (postRes.data.result==false) {
             alert('존재하지 않는 게시물입니다.');
             this.$router.push('/');
-            return;
+            // return;
           }
         }
         catch (err) { 
@@ -337,6 +336,9 @@
           console.log(err);
         }
       },
+      postContentConvert() {
+
+      },
       async recruitQuit() {
         try {
           await this.$axios.$post('/api/post/terminate/recruit', {
@@ -369,7 +371,7 @@
       },
       commentEnter() {
         this.commentSend();
-        console.log('enter work.');
+        // console.log('enter work.');
       },
       async commentSend() {
         if (this.$cookies.isKey('user') != true || this.userKey == null) {

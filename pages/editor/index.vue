@@ -106,10 +106,8 @@
 
 <script>
   import Vue from 'vue';
-  import axios from 'axios';
   import Vuecookies from 'vue-cookies';
   import { VueEditor } from "vue2-editor";
-  import qs from 'qs';
   import mixinUpload from '~/mixins/upload.js';
   Vue.use(Vuecookies);
 
@@ -121,9 +119,11 @@
     },
     data: () => ({
       customToolbar: [
+        // [{ 'header': [false, 1, 2, 3] }],
         ["bold", "italic", "underline"],
+        [{'align': ''}, {'align': 'center'}, {'align': 'right'}, {'align': 'justify'}],
         [{ list: "ordered" }, { list: "bullet" }],
-        // ["image", "code-block"]
+        // ['link'],
       ],
       param: {},
       select: {
@@ -239,8 +239,7 @@
       }
     }),
     async mounted() {
-      // post uploader only allow to edit
-      console.log(this.$cookies.get('user'))
+      // console.log(this.$cookies.get('user'))
 
       // city list read
       try {
@@ -321,7 +320,7 @@
               id: this.param.page
             }
           });
-          console.log(postRes.data)
+          // console.log(postRes.data)
           let data = postRes.data;
           this.select.city = data.header.city,
           this.select.area = data.header.districtRegion;
