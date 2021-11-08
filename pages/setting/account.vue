@@ -20,6 +20,11 @@
         </v-row>
         <v-row>
           <v-col>
+            <v-text-field v-model="select.pwRegacy" type="password" :disabled="updateAble==false" label="기존 비밀번호 입력"></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
             <v-text-field v-model="select.pw" type="password" :disabled="updateAble==false" label="변경할 비밀번호 입력"></v-text-field>
           </v-col>
         </v-row>
@@ -100,6 +105,7 @@
       select: {
         email: null,
         id: null,
+        pwRegacy: null,
         pw: null,
         pwc: null,
         lang: null,
@@ -138,6 +144,7 @@
           this.select = {
             email: res.data.email,
             id: res.data.user_id,
+            pwRegacy: null,
             pw: null,
             pwc: null,
             lang: null,
@@ -158,6 +165,7 @@
         try {
           await this.$axios.$post('/api/auth/update', {
             email: this.select.email,
+            pwRegacy: this.select.pwRegacy,
             pw: this.select.pw,
             pwc: this.select.pwc,
             lang: this.select.lang,
