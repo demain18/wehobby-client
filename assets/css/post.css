@@ -52,6 +52,10 @@
     clear: both;
 }
 
+#wrap .content-wrap .content a.content-link {
+    color: blue!important;
+}
+
 #wrap .content-wrap .contentMargin {
     padding-top: 10px;
 }

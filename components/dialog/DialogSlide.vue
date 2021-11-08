@@ -29,16 +29,7 @@
       // dialog: false,
     }),
     mounted() {
-      window.addEventListener('keydown', (e) => {
-        // console.log(e.key);
-        if (e.key=='ArrowLeft') {
-          console.log('[left]')
-          document.getElementsByClassName("v-btn--round").click();
-        } 
-        else if (e.key=='ArrowRight') {
-          console.log('right')
-        } 
-      });
+      
     },
     methods: {
       toggleDialog() {

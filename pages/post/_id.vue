@@ -22,7 +22,7 @@
           </div>
         </div>
 
-        <div class="content" v-html="data.content.desc" :class="{contentMargin: data.images.length>0}"></div>
+        <div class="content" v-html="postContentConvert(data.content.desc)" :class="{contentMargin: data.images.length>0}"></div>
 
         <div class="comment-wrap">
           <div class="list">
@@ -220,6 +220,7 @@
     },
     methods: {
       async postRead() {
+        // console.log('post read')
         try {
           const postRes = await this.$axios.$get('/api/post/read', {
             params: {
@@ -336,8 +337,14 @@
           console.log(err);
         }
       },
-      postContentConvert() {
-
+      postContentConvert(content) {
+        if (content!=undefined) {
+          let myRe = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm;
+          let contentConv = content.replace(myRe, '<a style="color: #ff4e54!important; text-decoration: underline;" href="$&" target="_blank">$&</a>');
+          // console.log(contentConv);
+          return contentConv;
+        }
+        // let contentConv = '';
       },
       async recruitQuit() {
         try {

@@ -239,6 +239,7 @@
           });
 
           if (clearAll) {
+            // this.alertList = [];
             window.location.href = '/';
           } else {
             window.location.href = `/post/${item.postIdKey}`;
