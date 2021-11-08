@@ -31,6 +31,9 @@
       <nuxt-link to="/auth/register">
         <p class="link-to-register">위하비 계정 만들기</p>
       </nuxt-link>
+      <!-- <a href="/auth/register">
+        <p class="link-to-register">위하비 계정 만들기</p>
+      </a> -->
     </div>
   </div>
 </template>
