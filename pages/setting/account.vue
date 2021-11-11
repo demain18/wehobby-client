@@ -140,7 +140,7 @@
       async authRead() {
         try {
           const res = await this.$axios.$post('/api/auth/read', {}, {headers: {token: this.$cookies.get('token')}});
-          console.log(res)
+          // console.log(res)
           this.select = {
             email: res.data.email,
             id: res.data.user_id,

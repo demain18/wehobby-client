@@ -11,12 +11,17 @@ export default {
         register: 'http://localhost:3000/auth/register',
       },
       deploy: {
-        login: '',
-        register: ''
-      }
+        login: 'https://wehobby.kr/auth',
+        register: 'https://wehobby.kr/auth/register'
+      },
+      envNow: ''
     },
   }),
   async mounted(){
+    this.envNow = process.env.NODE_ENV;
+    
+
+
     // kakaoRegister() active
     if (this.$route.query.code!=undefined) {
       try {
@@ -24,10 +29,10 @@ export default {
         window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
         let bodyRedirectUri = '';
         if(this.$route.name=='auth') {
-          bodyRedirectUri = this.redirectUri.dev.login;
+          bodyRedirectUri = this.envNow==='development' ?  this.redirectUri.dev.login : this.redirectUri.deploy.login
         }
         else if (this.$route.name=='auth-register') {
-          bodyRedirectUri = this.redirectUri.dev.register;
+          bodyRedirectUri = this.envNow==='development' ?  this.redirectUri.dev.register : this.redirectUri.deploy.register;
         }
 
         let bodyQueryString = {
