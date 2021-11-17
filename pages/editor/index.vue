@@ -45,10 +45,10 @@
           <v-col>
             <v-file-input 
               type="file" 
-              @change="handleFiles($event)" 
+              @change="handleFiles($event)"
               small-chips 
               multiple 
-              hint="jpg, jpeg png 형식이며 파일 크기가 5mb를 넘지 않는 이미지만 업로드 가능합니다" 
+              hint="포맷이 jpeg, jpg, png이며 파일 크기가 5mb를 넘지 않는 이미지만 업로드 가능합니다" 
               persistent-hint 
               :placeholder="(Object.keys(param).length>0) ? '기존 이미지를 대체할 이미지 업로드' : '이미지 업로드'" 
               prepend-icon="mdi-image-multiple"
@@ -149,7 +149,7 @@
       editAble: true,
       submitAble: false,
       submitIsLoading: false,
-      // postUploader: {},
+      // postUploder: {},
       rules: {
         required: value => !!value || '비워둘 수 없는 항목입니다.',
       },

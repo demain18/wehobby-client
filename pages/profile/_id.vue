@@ -9,10 +9,11 @@
           <!-- <img src="~assets/img/placeholder.png" class="present"> -->
         </v-avatar>
         <div class="table-wrap">
-          <div class="table">
+          <p class="table-title" v-text="nullCheck(data.nick)"></p>
+          <!-- <div class="table">
             <div class="header">닉네임</div>
             <div class="content" v-text="nullCheck(data.nick)"></div>
-          </div>
+          </div> -->
           <div class="table">
             <div class="header">소개</div>
             <div class="content" v-text="nullCheck(data.bio)"></div>

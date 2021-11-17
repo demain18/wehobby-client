@@ -110,6 +110,7 @@
       this.routeList[this.list.category.key] = true;
 
       // guest block page
+      // console.log(this.$cookies.isKey('user'))
       if (this.$cookies.isKey('user')!=true && this.routeAccessDisabledList.find(ele => ele==(this.$route.name.split('-'))[0]) ) {
         if ((this.$route.name.split('-'))[0]=='write') {
           alert('글 작성하기 기능은 로그인 후 이용할 수 있습니다.');
@@ -117,7 +118,7 @@
           alert('접근할 수 없는 페이지입니다.');
         }
         this.$router.push('/');
-        return;
+        // return;
       }
     },
     data: () => ({
@@ -137,8 +138,7 @@
         false,
       ],
       routeAccessDisabledList: [
-        'write',
-        'edit',
+        'editor',
         'setting'
       ],
       path: null,

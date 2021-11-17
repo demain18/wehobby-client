@@ -8,32 +8,32 @@
 /* Info */
 
 #wrap .info-wrap {
-    max-width: 650px;
+    max-width: 600px;
     margin: 0 auto;
-    /*    border: 1px solid blue;*/
+    /* border: 1px solid blue; */
     display: flex;
 }
 
 #wrap .info-wrap .img-profile {
     min-width: 180px!important;
     height: 180px!important;
-    /* background-color: #ececec; */
-    /* border: 5px solid #ff7b7f; */
     border-radius: 10%;
-    /* box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); */
+    margin-right: 25px;
 }
 
 #wrap .info-wrap .img-profile .present {
-    /* object-fit: contain; */
     object-fit: cover;
     width: 100%;
-    /* border: 1px solid blue; */
 }
 
 #wrap .info-wrap .table-wrap {
     width: 100%;
-    /*    border: 1px solid blue;*/
-    padding-left: 30px;
+}
+
+#wrap .info-wrap .table-wrap .table-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px!important;
 }
 
 #wrap .info-wrap .table-wrap .table {
@@ -42,8 +42,9 @@
 }
 
 #wrap .info-wrap .table-wrap .table .header {
-    min-width: 70px;
-    margin-right: 25px;
+    min-width: 30px;
+    /* margin-right: 25px; */
+    margin: 0px 25px 0px 0px;
     font-weight: bold;
     text-align: right;
 }

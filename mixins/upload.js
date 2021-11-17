@@ -8,9 +8,15 @@ export default {
     upload: [],
     uploadFormData: [],
     isImageChange: false,
+    fileTypeAllowed: [
+      'image/jpeg',
+      'image/jpg',
+      'image/png'
+    ],
+    formList: []
   }),
   mounted(){
-    // code
+    // console.log(document.getElementsByClassName('mdi-close'))
   },
   methods: {
     async imageUploadSend(id, target, type) {
@@ -49,6 +55,19 @@ export default {
         alert(err.response.data.message);
       }
     },
+    async imageDeleteSend(id, target, type) {
+      try {
+        if (this.isImageChange) {
+          
+        } 
+        else if (this.isImageChange!=true && target=='post') {
+          this.$router.push('/post/'+id);
+        }
+      }
+      catch (err) { 
+        alert(err.response.data.message);
+      }
+    },
     handleFiles(e) {
       this.isImageChange = true;
       try {
@@ -59,7 +78,20 @@ export default {
           fileData.append('upload['+index+']', this.upload[index], this.upload[index].name);
         });
         this.uploadFormData = fileData;
+
         // console.log(this.upload)
+        this.upload.forEach((item, index) => {
+          if (item.size>5242880) {
+            alert('이미지가 5mb 이상입니다.');
+            this.isImageChange = false;
+            // this.$refs.fileUploadRef.value = null;
+          } 
+          else if (this.fileTypeAllowed.includes(item.type)==false) {
+            alert('이미지 포맷이 맞지 않습니다.');
+            this.isImageChange = false;
+            // this.$refs.fileUploadRef.value = null;
+          }
+        });
       }
       catch (err) { console.log(err) }
     },
