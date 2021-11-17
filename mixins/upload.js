@@ -41,7 +41,7 @@ export default {
                 }
                 else if (target=='auth') 
                 {
-                  this.repreImageChanged = true;
+                  this.repreImageChanged = false;
                 }
               }
             }

@@ -11,9 +11,9 @@
         <div class="form form-profile">
           <p class="label">대표 이미지</p>
           <img v-if="repreImageChanged==false" :src="repreImageRead(select.repreImage)" class="img-profile">
-          <div v-else class="img-profile placeholder">대표 이미지가 <br/> 변경되었습니다</div>
+          <div v-else class="img-profile placeholder">변경을 눌러 대표 이미지 변경을 적용해주세요</div>
         </div>
-        <v-btn @click="fileUploadSend()" depressed style="margin-top: -10px; margin-bottom: 15px;">
+        <v-btn @click="fileUploadSend(); repreImageChanged=true;" depressed style="margin-top: -10px; margin-bottom: 15px;">
           대표 이미지 업로드
         </v-btn>
         <v-file-input type="file" id="fileUpload" @change="handleFile($event)" style="display: none;"></v-file-input>
@@ -51,19 +51,19 @@
         <v-row>
           <v-col>
             <!-- <v-text-field v-model="select.birth" placeholder="비공개" label="출생년도"></v-text-field> -->
-            <v-select v-model="select.birth" :items="list.age" attach label="출생년도"></v-select>
+            <v-select v-model="select.birth" :items="list.age" attach clearable label="출생년도" placeholder="비공개"></v-select>
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-text-field v-model="select.job" placeholder="비공개" label="직업"></v-text-field>
+            <v-text-field v-model="select.job" label="직업" placeholder="비공개" ></v-text-field>
             <!-- <v-select :items="list." filled label="Filled style"></v-select> -->
           </v-col>
         </v-row>
 
         <v-row class="ele-last">
           <v-col>
-            <v-select v-model="select.sex" :items="list.sex" attach label="성별"></v-select>
+            <v-select v-model="select.sex" :items="list.sex" attach clearable label="성별" placeholder="비공개"></v-select>
           </v-col>
         </v-row>
 
@@ -125,7 +125,7 @@
         sex: [
           '남성',
           '여성',
-          '비공개'
+          // '비공개'
         ],
         age: []
       },
@@ -133,11 +133,10 @@
     }),
     async mounted() {
       // birth list calc
-      let age = 0;
       for (let i = 1950; i <= 2020; i++) {
-        this.list.age[age] = i;
-        age++;
+        this.list.age.push(i)
       }
+      // this.list.age[this.list.age.length] = '비공개';
       this.list.age.reverse();
 
       // profile read
@@ -202,7 +201,7 @@
           this.submitStack = 0;
           this.submitAble = false;
         }
-        catch (err) { alert(err) }
+        catch (err) { alert(err.response.data.message) }
       },
       toggleDialogContact() {
         this.$store.commit('dialog/toggleVerifyDialogActive');
