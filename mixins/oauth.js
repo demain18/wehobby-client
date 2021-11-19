@@ -11,15 +11,16 @@ export default {
         register: 'http://localhost:3000/auth/register',
       },
       deploy: {
-        login: 'https://wehobby.kr/auth',
-        register: 'https://wehobby.kr/auth/register'
+        login: 'https://www.wehobby.kr/auth',
+        register: 'https://www.wehobby.kr/auth/register'
       },
       envNow: ''
     },
   }),
   async mounted(){
     this.envNow = process.env.NODE_ENV;
-    console.log(this.envNow)  
+    // console.log(this.envNow)  
+    // this.envNow = 'product'
   
     // kakaoRegister() active
     if (this.$route.query.code!=undefined) {
