@@ -19,9 +19,8 @@ export default {
   }),
   async mounted(){
     this.envNow = process.env.NODE_ENV;
-    
-
-
+    console.log(this.envNow)  
+  
     // kakaoRegister() active
     if (this.$route.query.code!=undefined) {
       try {
@@ -29,10 +28,10 @@ export default {
         window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
         let bodyRedirectUri = '';
         if(this.$route.name=='auth') {
-          bodyRedirectUri = this.envNow==='development' ?  this.redirectUri.dev.login : this.redirectUri.deploy.login
+          bodyRedirectUri = (this.envNow==='development' ?  this.redirectUri.dev.login : this.redirectUri.deploy.login);
         }
         else if (this.$route.name=='auth-register') {
-          bodyRedirectUri = this.envNow==='development' ?  this.redirectUri.dev.register : this.redirectUri.deploy.register;
+          bodyRedirectUri = (this.envNow==='development' ?  this.redirectUri.dev.register : this.redirectUri.deploy.register);
         }
 
         let bodyQueryString = {
@@ -105,14 +104,14 @@ export default {
     kakaoLogin() {
       window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
       Kakao.Auth.authorize({
-        redirectUri: this.redirectUri.dev.login
+        redirectUri: (this.envNow==='development' ?  this.redirectUri.dev.login : this.redirectUri.deploy.login)
       });
     },
     // kakao register
     kakaoRegister() {
       window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
       Kakao.Auth.authorize({
-        redirectUri: this.redirectUri.dev.register
+        redirectUri: (this.envNow==='development' ?  this.redirectUri.dev.reigster : this.redirectUri.deploy.register)
       });
     },
   }
