@@ -16,12 +16,12 @@
       <v-btn @click="loginSend()" :loading="sendLoading" depressed rounded large class="login">
         로그인
       </v-btn>
-
+<!-- 
       <div class="w-btn" @click="googleLogin()">
         <img src="~assets/img/static/logo-google.png" class="logo-social">
         Google으로 로그인하기
       </div>
-      <v-btn id="google-signin-btn" depressed rounded large class="social-google" data-width="150" data-onsuccess="onSignIn" style="display:none;"></v-btn>
+      <v-btn id="google-signin-btn" depressed rounded large class="social-google" data-width="150" data-onsuccess="onSignIn" style="display:none;"></v-btn> -->
 
       <div class="w-btn btn-kakao" @click="kakaoLogin()">
         <img src="~assets/img/static/logo-kakao-long.png" class="logo-social">
@@ -65,11 +65,13 @@
       onSignIn(googleUser) {
         this.formDisplay = false;
         console.log(googleUser)
+        console.log(Object.keys(googleUser))
         this.form = {
-          id: googleUser.wa,
-          pw: googleUser.wa
+          id: googleUser.Ba,
+          pw: googleUser.Ba
         }
-        console.log(this.form)
+        // console.log(this.form)
+
         this.loginSend();
       },
       async loginSend() {

@@ -29,12 +29,12 @@
       <v-btn v-on:click="registerSend()" depressed rounded large dark :loading="sendLoading" class="submit">
         계정 생성
       </v-btn>
-
+<!-- 
       <div class="w-btn" @click="googleRegister()">
         <img src="~assets/img/static/logo-google.png" class="logo-social">
         Google으로 시작하기
       </div>
-      <v-btn id="google-signin-btn" depressed rounded large class="social-google" data-width="150" data-onsuccess="onSignIn" style="display:none;"></v-btn>
+      <v-btn id="google-signin-btn" depressed rounded large class="social-google" data-width="150" data-onsuccess="onSignIn" style="display:none;"></v-btn> -->
 
       <div class="w-btn btn-kakao" @click="kakaoRegister()">
         <img src="~assets/img/static/logo-kakao-long.png" class="logo-social">
