@@ -4,10 +4,10 @@
       <div class="drawer">
         <div v-if="token.verify == true" class="content">
           <v-avatar>
-            <img src="~assets/img/placeholder1.jpg" alt="John">
+            <img :src="repreImageRead(user.image)" style="object-fit: cover;">
           </v-avatar>
           <span class="title">
-            백산
+            {{ user.nickname }}
           </span>
         </div>
         <p v-else-if="token.verify == false" style="padding: 15px 0px 11px 20px;">
@@ -82,6 +82,7 @@
 
 <script>
   import verifyMixin from '~/mixins/verify.js';
+  import globalMixin from '~/mixins/global.js';
 
   import {
     mapGetters
@@ -89,7 +90,7 @@
 
   export default {
     name: "GnbDrawer",
-    mixins: [verifyMixin],
+    mixins: [verifyMixin, globalMixin],
     computed: {
       ...mapGetters({
         isActive: 'gnb/getToggleDrawer'
@@ -129,9 +130,22 @@
         },
       ]
     }),
-    mounted() {
+    async mounted() {
       this.isVerify();
-      this.user = this.$cookies.get('user');
+      // this.user = this.$cookies.get('user');
+      // user info read
+      if (this.$cookies.isKey('user')) {
+        this.user = this.$cookies.get('user');
+        try {
+          const res = await this.$axios.$get('/api/profile/read', {
+            params: {
+              id: this.user.key
+            }
+          });
+          this.user.image = res.data.imgRepre;
+        } 
+        catch (err) {console.log(err)}
+      }
     },
     methods: {
       toggle() {

@@ -340,7 +340,7 @@
       postContentConvert(content) {
         if (content!=undefined) {
           let myRe = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm;
-          let contentConv = content.replace(myRe, '<a style="color: #ff4e54!important; text-decoration: underline;" href="$&" target="_blank">$&</a>');
+          let contentConv = content.replace(myRe, '<a style="color: #ff4e54!important; text-decoration: underline; word-break: break-word;" href="$&" target="_blank">$&</a>');
           // console.log(contentConv);
           return contentConv;
         }
