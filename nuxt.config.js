@@ -18,6 +18,7 @@ export default {
     ],
     script: [
       { hid: 'stripe', src: 'https://www.googletagmanager.com/gtag/js?id=G-4899MQZJJT', sync: true }, // google analytics/tagmanager
+      { hid: 'stripe', src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8498450951456643', sync: true, defe: true }, // google adsence
       { hid: 'stripe', src: 'https://apis.google.com/js/platform.js', sync: true, defer: true }, // google oauth sdk
       { hid: 'stripe', src: 'https://developers.kakao.com/sdk/js/kakao.js', sync: true, defer: true } // kakao oatuh sdk
     ]

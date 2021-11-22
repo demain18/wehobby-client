@@ -26,7 +26,8 @@ export default {
           }
         }
         catch (err) { 
-          // console.log(err)
+          console.log(err)
+          alert(err.response.data.message);
           this.logout();
           this.token.verify = false;
         }
