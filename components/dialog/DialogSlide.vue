@@ -26,11 +26,8 @@
       },
     },
     data: () => ({
-      // dialog: false,
+
     }),
-    mounted() {
-      
-    },
     methods: {
       toggleDialog() {
         this.$store.commit('dialog/toggleSlideDialogActive');
@@ -60,6 +57,18 @@
 
   .v-image__image--cover {
     background-size: contain!important;
+  }
+
+  @media (max-width: 769px) {
+    .v-dialog {
+      margin: 10px!important;
+    }
+    .v-carousel {
+      height: 350px!important;
+    }
+    .v-responsive {
+      height: 350px!important;
+    }
   }
 
 </style>
