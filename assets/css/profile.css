@@ -15,9 +15,10 @@
 }
 
 #wrap .info-wrap .img-profile {
+    /* flex-basis: 180px; */
     min-width: 180px!important;
     height: 180px!important;
-    border-radius: 10%;
+    border-radius: 15px;
     margin-right: 25px;
 }
 

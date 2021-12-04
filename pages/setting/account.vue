@@ -192,7 +192,6 @@
           if (confirm('정말로 계정을 삭제하겠습니까? 삭제된 계정 정보는 다시 복구할 수 없습니다.')) {
             confirm('계정이 삭제되었습니다.');
             try {
-
               await this.$axios.$post('/api/auth/delete', {}, {
                 headers: {
                   token: this.$cookies.get('token'),
