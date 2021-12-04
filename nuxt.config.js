@@ -11,7 +11,8 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'WeHobby' },
-      { name: 'google-signin-client_id', content: '616505649106-lli8nqfqdv9acjae00bve7cdtb4gfhhu.apps.googleusercontent.com' }
+      { name: 'google-signin-client_id', content: '616505649106-lli8nqfqdv9acjae00bve7cdtb4gfhhu.apps.googleusercontent.com' },
+      { name: 'google-site-verification', content: 'GezTf5rfTGOonkGiFFe1-LyT2w19gVgTRebMrK_-Ogc' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/logo.ico' },
