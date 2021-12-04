@@ -4,7 +4,7 @@
     <v-btn data-width="150" data-onsuccess="onSignIn" id="google-signin-btn" style="display:none;"></v-btn>
     
     <nuxt-link class="item lft logo" to="/">
-      <img src="~assets/img/logo.png" style="width:100px; position:relative; top:4px;">
+      <img src="~assets/img/beta-logo.png" style="width:120px; position:relative; top:3px;">
     </nuxt-link>
     <span v-if="city != null"  v-on:click="toggleCityDialog()" class="item lft span-a-tag">{{ city }}</span>
     <span v-if="city == null" v-on:click="toggleCityDialog()" class="item lft span-a-tag">도시 선택</span>
