@@ -67,7 +67,7 @@
         name: null,
         oauth: null,
       },
-      formDisplay: false,
+      formDisplay: true,
       list: null,
       sendLoading: false,
       // oauth
