@@ -1,7 +1,8 @@
 #wrap .snb {
-  min-width: 240px;
+  min-width: 260px;
   // height: 370px;
   // margin-left: 18px;
+  padding-left: 20px;
 }
 
 @media (max-width: 769px) {
@@ -10,6 +11,7 @@
     // padding: 0px 10px;
     margin-left: 0px!important;
     // margin-bottom: 0px;
+    padding-left: 0;
   }
 
   #wrap .snb .ad {
