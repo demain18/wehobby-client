@@ -1,11 +1,13 @@
 <template>
   <div class="text-center">
-    <v-dialog v-model="dialog" @click:outside="toggleDialog()" width="800">
-
-      <v-carousel v-model="index" height="600">
+    <v-dialog 
+      v-model="dialog" 
+      @click:outside="toggleDialog()" 
+      width="1000"
+    >
+      <v-carousel v-model="index" height="700">
         <v-carousel-item v-for="(item, index) in slide" :key="index" :src="item"></v-carousel-item>
       </v-carousel>
-
     </v-dialog>
   </div>
 </template>
@@ -24,11 +26,14 @@
       },
     },
     data: () => ({
-      // dialog: false,
+
     }),
     methods: {
       toggleDialog() {
         this.$store.commit('dialog/toggleSlideDialogActive');
+      },
+      btnPrev() {
+        console.log('prev clicked')
       }
     }
   }
@@ -52,6 +57,18 @@
 
   .v-image__image--cover {
     background-size: contain!important;
+  }
+
+  @media (max-width: 769px) {
+    .v-dialog {
+      margin: 10px!important;
+    }
+    .v-carousel {
+      height: 350px!important;
+    }
+    .v-responsive {
+      height: 350px!important;
+    }
   }
 
 </style>

@@ -7,11 +7,16 @@
       <p class="sub">인연과 취미를 만나는 공간</p>
 
       <div class="forms">
-        <v-text-field v-model="form.nickname" placeholder="닉네임" hide-details="" class="input-form" solo flat></v-text-field>
-        <v-text-field v-model="form.id" placeholder="아이디" hide-details="" class="input-form" solo flat></v-text-field>
-        <v-text-field v-model="form.pw" placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
-        <v-text-field v-model="form.pwc" placeholder="비밀번호 확인" hide-details="" class="input-form" solo flat></v-text-field>
-        <v-text-field v-model="form.email" placeholder="이메일" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-if="formDisplay" v-model="form.nickname" placeholder="닉네임" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-else placeholder="닉네임" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-if="formDisplay" v-model="form.id" placeholder="아이디" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-else placeholder="아이디" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-if="formDisplay" v-model="form.pw" placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-else placeholder="비밀번호" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-if="formDisplay" v-model="form.pwc" placeholder="비밀번호 확인" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-else placeholder="비밀번호 확인" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-if="formDisplay" v-model="form.email" placeholder="이메일" hide-details="" class="input-form" solo flat></v-text-field>
+        <v-text-field v-else placeholder="이메일" hide-details="" class="input-form" solo flat></v-text-field>
       </div>
       <div class="form-agree">
         <v-checkbox v-model="form.check"></v-checkbox>
@@ -24,11 +29,17 @@
       <v-btn v-on:click="registerSend()" depressed rounded large dark :loading="sendLoading" class="submit">
         계정 생성
       </v-btn>
-      <v-btn @click="googleRegister()" depressed rounded large class="social social-google">
-        <img src="~assets/img/static/logo-google.png" class="logo-google">
-        Google으로 계정 생성하기
-      </v-btn>
-      <v-btn id="google-signin-btn" depressed rounded large class="social-google" data-width="150" data-onsuccess="onSignIn" style="display:none;"></v-btn>
+<!-- 
+      <div class="w-btn" @click="googleRegister()">
+        <img src="~assets/img/static/logo-google.png" class="logo-social">
+        Google으로 시작하기
+      </div>
+      <v-btn id="google-signin-btn" depressed rounded large class="social-google" data-width="150" data-onsuccess="onSignIn" style="display:none;"></v-btn> -->
+
+      <div class="w-btn btn-kakao" @click="kakaoRegister()">
+        <img src="~assets/img/static/logo-kakao-long.png" class="logo-social">
+        카카오계정으로 시작하기
+      </div>
     </div>
 
   </div>
@@ -39,11 +50,12 @@
   import axios from 'axios';
   import qs from 'qs';
   import verifyMixin from '~/mixins/verify.js';
+  import oauthMixin from '~/mixins/oauth.js';
   import Vuecookies from 'vue-cookies';
   Vue.use(Vuecookies);
 
   export default {
-    mixins: [verifyMixin],
+    mixins: [verifyMixin, oauthMixin],
     data: () => ({
       form: {
         nickname: null,
@@ -52,22 +64,42 @@
         pwc: null,
         email: null,
         check: false,
-        // oauth field
         name: null,
         oauth: null,
       },
+      formDisplay: true,
       list: null,
-      sendLoading: false
+      sendLoading: false,
+      // oauth
     }),
     async mounted() {
+      // window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
 
+      // kakao code in oauthMixin
     },
     methods: {
+      // google userInfo load
+      onSignIn(googleUser) {
+        console.log(googleUser)
+        let userData = googleUser.nt;
+        this.form = {
+          nickname: userData.Re,
+          id: userData.uT,
+          pw: userData.uT,
+          pwc: userData.uT,
+          email: userData.Yt,
+          name: userData.Re,
+          oauth: 'google',
+          check: true,
+        }
+        console.log(this.form)
+        this.registerSend();
+      },
       async registerSend() {
         try {
-          if (this.form.check != true) {
+          if (this.form.check!=true) {
             alert('개인정보 처리방침 및 이용약관에 동의해주세요.');
-            return; // stop async method
+            throw {}; // stop try/catch
           }
           this.sendLoading = true;
 
@@ -81,7 +113,7 @@
             oauth: this.form.oauth
           });
 
-          // token gen
+          // token cookie
           this.token = res.data.token;
           if (this.$cookies.isKey('token')) {
             this.$cookies.remove('token');
@@ -90,6 +122,7 @@
             this.$cookies.set('token', this.token, '30d');
           }
 
+          // user cookie
           const profileRes = await this.$axios.$post('/api/profile/read', 
           {}, 
           {
@@ -102,8 +135,6 @@
             nickname: profileRes.data.nickname,
             image: profileRes.data.imgRepre,
           }
-
-          // userData gen
           if (this.$cookies.isKey('user')) {
             this.$cookies.remove('user');
             this.$cookies.set('user', userData, '30d');
@@ -117,31 +148,12 @@
           alert(err.response.data.message);
         }
       },
-      googleRegister() {
-        document.getElementsByClassName('abcRioButton')[0].click();
-      },
-      onSignIn(googleUser) {
-        console.log(googleUser);
-        let userData = googleUser.gt;
-        this.form = {
-          nickname: userData.rU,
-          id: userData.GS,
-          pw: userData.GS,
-          pwc: userData.GS,
-          email: userData.Rt,
-          name: userData.rU,
-          oauth: 'google',
-          check: true,
-        }
-        this.registerSend();
-      },
     }
   }
 
 </script>
 
 <style scoped lang="scss">
-  // @import '~assets/css/common.scss';
   @import '~assets/css/auth.css';
   @import '~assets/css/mobile/auth.css';
 

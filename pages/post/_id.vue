@@ -22,8 +22,7 @@
           </div>
         </div>
 
-        <div class="content" v-html="data.content.desc" :class="{ contentMargin: data.images.length!=0}">
-        </div>
+        <div class="content" v-html="postContentConvert(data.content.desc)" :class="{contentMargin: data.images.length>0}"></div>
 
         <div class="comment-wrap">
           <div class="list">
@@ -65,8 +64,8 @@
           </div>
 
           <div class="comment-write-wrap">
-            <v-text-field v-model="select.comment.desc" solo label="댓글을 작성하세요" clearable></v-text-field>
-            <v-btn @click="commentSend()" depressed class="submit">댓글 작성</v-btn>
+            <v-text-field v-model="select.comment.desc" solo label="이곳에 댓글을 작성해주세요" clearable></v-text-field>
+            <v-btn @click="commentSend()" depressed class="submit">등록</v-btn>
           </div>
         </div>
 
@@ -78,7 +77,7 @@
             <v-icon small class="icon">mdi-bell</v-icon>신고하기
           </a>
           <span v-if="userKey == postUploaderKey">
-            <nuxt-link v-if="userKey == postUploaderKey" :to="'/edit/'+param" class="btn">
+            <nuxt-link v-if="userKey == postUploaderKey" :to="'/editor?page='+param" class="btn">
               <v-icon small class="icon">mdi-pencil</v-icon>수정하기
             </nuxt-link>
             <a @click="postDel(param)" class="btn">
@@ -221,6 +220,7 @@
     },
     methods: {
       async postRead() {
+        // console.log('post read')
         try {
           const postRes = await this.$axios.$get('/api/post/read', {
             params: {
@@ -275,10 +275,10 @@
           // breadcrumb update
           this.breadCrumbUpdate();
 
-          if (postRes.data.result == false) {
+          if (postRes.data.result==false) {
             alert('존재하지 않는 게시물입니다.');
             this.$router.push('/');
-            return;
+            // return;
           }
         }
         catch (err) { 
@@ -337,6 +337,15 @@
           console.log(err);
         }
       },
+      postContentConvert(content) {
+        if (content!=undefined) {
+          let myRe = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm;
+          let contentConv = content.replace(myRe, '<a style="color: #ff4e54!important; text-decoration: underline; word-break: break-word;" href="$&" target="_blank">$&</a>');
+          // console.log(contentConv);
+          return contentConv;
+        }
+        // let contentConv = '';
+      },
       async recruitQuit() {
         try {
           await this.$axios.$post('/api/post/terminate/recruit', {
@@ -369,7 +378,7 @@
       },
       commentEnter() {
         this.commentSend();
-        console.log('enter work.');
+        // console.log('enter work.');
       },
       async commentSend() {
         if (this.$cookies.isKey('user') != true || this.userKey == null) {

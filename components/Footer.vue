@@ -5,9 +5,9 @@
         홈
       </v-btn>
       <v-btn text rounded @click="link('https://sparklejunserver.web.app/')">
-        회사 정보
+        회사 홈페이지
       </v-btn>
-      <v-btn text rounded @click="link('https://www.instagram.com/100___mountain/')">
+      <v-btn text rounded @click="link('https://www.instagram.com/baeksan01/')">
         연락하기
       </v-btn>
     </div>

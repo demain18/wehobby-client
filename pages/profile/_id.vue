@@ -9,10 +9,11 @@
           <!-- <img src="~assets/img/placeholder.png" class="present"> -->
         </v-avatar>
         <div class="table-wrap">
-          <div class="table">
+          <p class="table-title" v-text="nullCheck(data.nick)"></p>
+          <!-- <div class="table">
             <div class="header">닉네임</div>
             <div class="content" v-text="nullCheck(data.nick)"></div>
-          </div>
+          </div> -->
           <div class="table">
             <div class="header">소개</div>
             <div class="content" v-text="nullCheck(data.bio)"></div>
@@ -169,12 +170,12 @@
           return content;
         }
       },
-      ageCalc() {
-        if (this.data.age=='' || this.data.age==null) {
+      ageCalc(age) {
+        if (age=='-' || age=='' || age==null || age==undefined) {
           return '-';
         } else {
-          let age = moment().format('yyyy')-this.data.age;
-          return (age+1)+'살';
+          let ageRes = moment().format('yyyy')-age;
+          return (ageRes+1)+'살';
         }
       },
     }

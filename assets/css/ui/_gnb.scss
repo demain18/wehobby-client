@@ -80,6 +80,36 @@
   margin-right: 0px;
 }
 
+
+#gnb .wrap .btn-alert {
+  position: absolute;
+  top: 13px;
+  right: 70px;
+  cursor: pointer;
+}
+
+#gnb .wrap .btn-alert .bell-icon {
+  // color: blue;
+}
+
+#gnb .wrap .btn-alert .alert-icon {
+  width: 10px;
+  height: 10px;
+  background-color: $main;
+  border-radius: 100%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+#gnb .wrap .dropdown-list {
+
+}
+
+#gnb .wrap .btn-clear {
+  color: blue!important;
+}
+
 #gnb .wrap .user-icon {
   width: 30px!important;
   height: 30px!important;
@@ -109,8 +139,9 @@
   }
 
   #gnb .wrap .mid {
-    margin-left: -70px;
+    margin-left: -50px;
     line-height: 50px;
+    // border: 1px solid blue;
   }
 
   #gnb .wrap .icon-left-menu {

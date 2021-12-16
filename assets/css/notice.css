@@ -30,12 +30,12 @@ body {
 
 #wrap .article-wrap .banner .icon {
   color: #ffffff;
+  margin-right: 7px;
 }
 
 #wrap .article-wrap .banner p {
   line-height: 50px;
   font-size: 20px;
-  margin-left: 5px;
 }
 
 #wrap .article-wrap .header {

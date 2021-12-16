@@ -1,30 +1,13 @@
 <template>
   <div class="pc" data-app>
     <DialogCity/>
-    <!-- <nuxt-link class="item lft logo" to="/">WeHobby</nuxt-link> -->
+    <v-btn data-width="150" data-onsuccess="onSignIn" id="google-signin-btn" style="display:none;"></v-btn>
+    
     <nuxt-link class="item lft logo" to="/">
-      <img src="~assets/img/logo-img.png" style="width:100px; position:relative; top:4px;">
+      <img src="~assets/img/beta-logo.png" style="width:120px; position:relative; top:3px;">
     </nuxt-link>
     <span v-if="city != null"  v-on:click="toggleCityDialog()" class="item lft span-a-tag">{{ city }}</span>
     <span v-if="city == null" v-on:click="toggleCityDialog()" class="item lft span-a-tag">도시 선택</span>
-
-    <!-- <v-menu open-on-hover middle offset-y>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn depressed class="item lft" style="margin-top: 5px;" v-bind="attrs" v-on="on">
-          바로가기
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-item v-for="(item, index) in routeItems" :key="index">
-          <nuxt-link :to="item.url">
-            {{ item.title }}
-            (
-            {{ item.url }}
-            )
-          </nuxt-link>
-        </v-list-item>
-      </v-list>
-    </v-menu> -->
 
     <span class="item mid" v-if="path=='/'">
       <a @click="pageLink(1)">회원 모집</a>
@@ -41,7 +24,35 @@
       <a @click="pageLink(5)" v-bind:class="{active: list.category.key==5}">이벤트</a>
     </span>
 
-    <v-btn data-width="150" data-onsuccess="onSignIn" id="google-signin-btn" style="display:none;"></v-btn>
+    <!-- <div class="btn-alert">
+      <v-icon class="icon">mdi-bell</v-icon>
+    </div> -->
+
+    <v-menu v-if="token.verify == true" left offset-y>
+      <template v-slot:activator="{ on, attrs }">
+        <div class="btn-alert" v-bind="attrs" v-on="on">
+          <v-icon class="bel-icon">mdi-bell</v-icon>
+          <div v-if="alermList.length>0" class="alert-icon"></div>
+        </div>
+      </template>
+      <v-list dense class="dropdown-list">
+        <v-list-item>
+          <v-list-item-title class="title">알림</v-list-item-title>
+        </v-list-item>
+        <v-list-item-group color="primary">
+
+          <v-list-item @click="alermClear(item, false)" v-for="(item,i) in alermList" :key="i">
+            <v-list-item-title class="content">
+              {{ item.uploaderNick }}님이 회원물의 게시물에 "{{ item.commentDesc }}"라고 댓글을 남겼습니다.<span v-text="'('+agoCalc(item.date, item.time)+' 전)'"></span>
+              </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item @click="alermClear(null, true)">
+            <v-list-item-title style="color: #ff4e54; text-align: center!important;">모두 읽음</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-menu>
     
     <v-menu v-if="token.verify == true" left offset-y>
       <template v-slot:activator="{ on, attrs }">
@@ -50,12 +61,12 @@
         </v-avatar>
       </template>
       <v-list dense>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="title">{{ user.nickname }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item-group color="primary">
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title class="title">{{ user.nickname }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
           <v-list-item :to="'/profile/'+user.key">
             <v-list-item-content>
               <v-list-item-title>내 프로필 보기</v-list-item-title>
@@ -99,6 +110,7 @@
       this.routeList[this.list.category.key] = true;
 
       // guest block page
+      // console.log(this.$cookies.isKey('user'))
       if (this.$cookies.isKey('user')!=true && this.routeAccessDisabledList.find(ele => ele==(this.$route.name.split('-'))[0]) ) {
         if ((this.$route.name.split('-'))[0]=='write') {
           alert('글 작성하기 기능은 로그인 후 이용할 수 있습니다.');
@@ -106,7 +118,7 @@
           alert('접근할 수 없는 페이지입니다.');
         }
         this.$router.push('/');
-        return;
+        // return;
       }
     },
     data: () => ({
@@ -126,17 +138,26 @@
         false,
       ],
       routeAccessDisabledList: [
-        'write',
-        'edit',
+        'editor',
         'setting'
       ],
-      path: null
+      path: null,
+      alermList: []
     }),
     async mounted() {
+
       // token verify
       this.isVerify();
 
-      // user data read
+      // google oauth load
+      gapi.signin2.render("google-signin-btn", {
+        onsuccess: this.onSignIn
+      });
+
+      // kakao oauth load
+      // window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
+
+      // user info read
       if (this.$cookies.isKey('user')) {
         this.user = this.$cookies.get('user');
         try {
@@ -147,6 +168,18 @@
           });
           this.user.image = res.data.imgRepre;
         } 
+        catch (err) {console.log(err)}
+      }
+
+      // alerm list read
+      if (this.$cookies.isKey('user')) {
+        try {
+          const res = await this.$axios.$post('/api/alerm/list/read', {}, {
+            headers: {token: this.$cookies.get('token')}
+          });
+          // console.log(res)
+          this.alermList = res.data;
+        }
         catch (err) {console.log(err)}
       }
 
@@ -167,11 +200,6 @@
         catch (err) { console.log(err); }
       }
 
-      // oauth load
-      gapi.signin2.render("google-signin-btn", {
-        onsuccess: this.onSignIn
-      });
-
       // route list read
       this.$router.options.routes.forEach(route => {
         this.routeItems.push({
@@ -190,6 +218,35 @@
       onSignIn(googleUser) {
         // console.log(googleUser.Rs);
       },
+      async alermClear(item, clearAll) {
+        try {
+          let data = {};
+          if (clearAll) {
+            data = {
+              authId: this.$cookies.get('user').key,
+              alermId: null,
+            }
+          } else {
+            data = {
+              authId: this.$cookies.get('user').key,
+              alermId: item.id,
+            }
+          }
+
+          const res = await this.$axios.$post('/api/alerm/update', data, 
+          {
+            headers: {token: this.$cookies.get('token')}
+          });
+
+          if (clearAll) {
+            this.alermList = [];
+            // window.location.href = '/';
+          } else {
+            window.location.href = `/post/${item.postIdKey}`;
+          }
+        }
+        catch (err) {console.log(err)}
+      }
     }
   }
 

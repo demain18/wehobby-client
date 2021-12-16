@@ -6,7 +6,22 @@ export default {
     globalVal: true,
   }),
   methods: {
+    // findFilterKey(filterItem, index) {
+    //   if (filterItem=='area') 
+    //   {
+    //     return this.filterItems.citysArea[index].key;
+    //   } 
+    //   else if (filterItem=='subway') 
+    //   {
+    //     return this.filterItems.citysSubway[index].key;
+    //   } 
+    //   else if (filterItem=='genre') 
+    //   {
+    //     return this.filterItems.categoryDetail[index].key;
+    //   }
+    // },
     findKey(filterItem, index) {
+      // console.log(this.filterItems)
       if (index == undefined) {
         return index;
       } else {
@@ -42,9 +57,9 @@ export default {
       }
     },
     agoCalc(date, time) {
-      let now = moment().subtract(1969, "years").format("YYYY/MM/DD HH:mm:ss");
-      let then = moment(new Date(date+' '+time)).subtract(-31, "minutes").format("YYYY/MM/DD HH:mm:ss");
-      let gap = moment.utc(moment(now,"YYYY/MM/DD HH:mm:ss").diff(moment(then,"YYYY/MM/DD HH:mm:ss")));
+      let now = moment().subtract(1969, "years").format("YYYY-MM-DDTHH:mm:ss");
+      let then = moment(new Date(date+' '+time)).subtract(-31, "minutes").format("YYYY-MM-DDTHH:mm:ss");
+      let gap = moment.utc(moment(now,"YYYY-MM-DDTHH:mm:ss").diff(moment(then,"YYYY-MM-DDTHH:mm:ss")));
       
       if (gap.format('Y')>1) {
         return gap.format('Y년');
@@ -89,7 +104,9 @@ export default {
           '<em>',
           '</em>',
           '<u>',
-          '</u>'
+          '</u>',
+          '<br>',
+          '</br>'
         ]
         for (let i = 0; i < list.length; i++) {
           desc = desc.split(list[i]).join('');

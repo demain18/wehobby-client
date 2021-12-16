@@ -91,7 +91,7 @@
       }
     },
     created() {
-      this.urlNow = 'https://aroundfriend.com'+this.$route.fullPath;
+      this.urlNow = 'https://wehobby.kr'+this.$route.fullPath;
     },
     data: () => ({
       urlNow: null

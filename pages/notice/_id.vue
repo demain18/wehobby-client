@@ -4,7 +4,7 @@
     <div id="wrap">
       <div class="article-wrap">
         <div class="banner">
-          <v-icon class="icon">mdi-bell</v-icon>
+          <v-icon class="icon">mdi-book-alert</v-icon>
           <p>{{ content.type }}</p>
         </div>
         <div class="header">

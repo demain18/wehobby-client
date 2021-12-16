@@ -5,19 +5,23 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s',
+    // titleTemplate: '%s',
+    title: '위하비 - 사람과 취미를 만나는 곳',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'google-signin-client_id', content: '616505649106-lli8nqfqdv9acjae00bve7cdtb4gfhhu.apps.googleusercontent.com' }
+      { hid: 'description', name: 'description', content: 'WeHobby' },
+      { name: 'google-signin-client_id', content: '616505649106-lli8nqfqdv9acjae00bve7cdtb4gfhhu.apps.googleusercontent.com' },
+      { name: 'google-site-verification', content: 'GezTf5rfTGOonkGiFFe1-LyT2w19gVgTRebMrK_-Ogc' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/logo.ico' },
     ],
     script: [
-      { hid: 'stripe', src: 'https://apis.google.com/js/platform.js', sync: true, defer: true }, // google social login
-      // { hid: 'stripe', 'data-ad-client': 'ca-pub-7099403550820594', src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', sync: true }
+      { hid: 'stripe', src: 'https://www.googletagmanager.com/gtag/js?id=G-4899MQZJJT', sync: true }, // google analytics/tagmanager
+      { hid: 'stripe', src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8498450951456643', sync: true, defe: true }, // google adsence
+      { hid: 'stripe', src: 'https://apis.google.com/js/platform.js', sync: true, defer: true }, // google oauth sdk
+      { hid: 'stripe', src: 'https://developers.kakao.com/sdk/js/kakao.js', sync: true, defer: true } // kakao oatuh sdk
     ]
   },
 

@@ -26,7 +26,8 @@ export default {
           }
         }
         catch (err) { 
-          // console.log(err)
+          console.log(err)
+          alert(err.response.data.message);
           this.logout();
           this.token.verify = false;
         }
@@ -43,8 +44,11 @@ export default {
           }}
         );
 
-        // oauth signout
+        // google oauth signout
         this.googleSignOut();
+
+        // kakao oauth signout
+        this.kakaoSignOut();
 
         // remove cookie
         this.$cookies.remove('token');
@@ -59,5 +63,16 @@ export default {
         // console.log('User signed out.');
       });
     },
+    kakaoSignOut() {
+      window.Kakao.init("f8173b3459bbb7bbaf86bf7cf15df728");
+      if (!Kakao.Auth.getAccessToken()) {
+        console.log('kakao oauth has not logged in.');
+      }
+      else {
+        Kakao.Auth.logout(function() {
+          console.log(Kakao.Auth.getAccessToken());
+        });
+      }
+    }
   }
 }
